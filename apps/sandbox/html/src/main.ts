@@ -1,11 +1,15 @@
 // Consumers import exactly one stylesheet (CLAUDE.md §4) …
 import '@aranghat/tokens/aranghat.css';
 // … and register only the elements they use.
+import { defineCustomElement as defineButton } from '@aranghat/base/button';
 import { defineCustomElement as defineHello } from '@aranghat/base/hello';
+import { defineCustomElement as defineIcon } from '@aranghat/base/icon';
 import { defineCustomElement as defineHelloOverlay } from '@aranghat/modals/hello-overlay';
 import './sandbox.css';
 
+defineButton();
 defineHello();
+defineIcon();
 defineHelloOverlay();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the

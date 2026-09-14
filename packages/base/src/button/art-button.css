@@ -1,0 +1,17 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Nothing on the host reacts while disabled or loading (a click must never reach consumers). */
+:host([disabled]),
+:host([loading]) {
+  pointer-events: none;
+}
+/* Slotted icons never intercept clicks and keep their size. */
+::slotted(*) {
+  pointer-events: none;
+  flex-shrink: 0;
+}

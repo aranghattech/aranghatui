@@ -1,3 +1,4 @@
 body { margin: 0; padding: var(--art-space-8); background: var(--art-color-bg-canvas); color: var(--art-color-fg-default); font-family: var(--art-font-family-sans); }
 section { margin-block-end: var(--art-space-8); }
 h2 { font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); font-weight: var(--art-font-weight-medium); margin: 0 0 var(--art-space-3); }
+section > :not(h2), section form { display: inline-flex; flex-wrap: wrap; gap: var(--art-space-3); align-items: center; }

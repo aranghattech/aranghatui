@@ -1,27 +1,67 @@
 {
   "radius": {
     "$type": "dimension",
-    "sm": { "$value": "calc({radius.base} - 4px)", "$description": "Derived from the single base radius. Change --art-radius to restyle everything." },
-    "md": { "$value": "calc({radius.base} - 2px)" },
-    "lg": { "$value": "{radius.base}" },
-    "xl": { "$value": "calc({radius.base} + 4px)" }
+    "sm": {
+      "$value": "calc({radius.base} - 4px)",
+      "$description": "Derived from the single base radius. Change --art-radius to restyle everything."
+    },
+    "md": {
+      "$value": "calc({radius.base} - 2px)"
+    },
+    "lg": {
+      "$value": "{radius.base}"
+    },
+    "xl": {
+      "$value": "calc({radius.base} + 4px)"
+    }
   },
   "ring": {
-    "width": { "$type": "dimension", "$value": "3px" },
-    "offset": { "$type": "dimension", "$value": "0px" }
+    "width": {
+      "$type": "dimension",
+      "$value": "3px"
+    },
+    "offset": {
+      "$type": "dimension",
+      "$value": "0px"
+    }
   },
   "control": {
     "height": {
       "$type": "dimension",
-      "sm": { "$value": "{size.control.sm}" },
-      "md": { "$value": "{size.control.md}" },
-      "lg": { "$value": "{size.control.lg}" }
+      "sm": {
+        "$value": "{size.control.sm}"
+      },
+      "md": {
+        "$value": "{size.control.md}"
+      },
+      "lg": {
+        "$value": "{size.control.lg}"
+      }
     },
     "padding-x": {
       "$type": "dimension",
-      "sm": { "$value": "{space.3}" },
-      "md": { "$value": "{space.4}" },
-      "lg": { "$value": "{space.6}" }
+      "sm": {
+        "$value": "{space.3}"
+      },
+      "md": {
+        "$value": "{space.4}"
+      },
+      "lg": {
+        "$value": "{space.6}"
+      }
+    },
+    "padding-x-icon": {
+      "$type": "dimension",
+      "$description": "Inline padding on the side that carries an icon (optical alignment).",
+      "sm": {
+        "$value": "{space.2-5}"
+      },
+      "md": {
+        "$value": "{space.3}"
+      },
+      "lg": {
+        "$value": "{space.4}"
+      }
     }
   }
 }

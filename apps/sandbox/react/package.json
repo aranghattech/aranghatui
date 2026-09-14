@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aranghat/base-react": "workspace:*",
+    "@aranghat/icons": "workspace:*",
     "@aranghat/modals-react": "workspace:*",
     "@aranghat/tokens": "workspace:*",
     "react": "19.3.0",

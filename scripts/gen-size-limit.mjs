@@ -38,10 +38,9 @@ for (const [tier, def] of Object.entries(catalog.tiers)) {
 if (existsSync(join(repo, 'packages/primitives/dist/index.js'))) {
   entries.push({ name: 'primitives: all modules (incl. @floating-ui/dom)', path: 'packages/primitives/dist/index.js', import: '*', limit: '13 kB', gzip: true });
 }
-// Reference apps (CLAUDE.md §7). Until widgets exist, the HTML sandbox stands in for the landing page.
-const htmlAssets = join(repo, 'apps/sandbox/html/dist/assets');
-if (existsSync(htmlAssets)) {
-  entries.push({ name: 'reference: landing page (html sandbox js+css)', path: ['apps/sandbox/html/dist/assets/*.js', 'apps/sandbox/html/dist/assets/*.css'], limit: '15 kB', gzip: true });
+// Reference apps (CLAUDE.md §7): real entry modules under tooling/size import what each page needs.
+for (const [name, file, limit] of [['landing page (tokens + runtime + button + icon)', 'landing.mjs', '15 kB']]) {
+  if (existsSync(join(repo, 'tooling/size', file))) entries.push({ name: `reference: ${name}`, path: `tooling/size/${file}`, limit, gzip: true });
 }
 writeFileSync(join(repo, '.size-limit.json'), JSON.stringify(entries, null, 2) + '\n');
 console.log(`✔ .size-limit.json: ${entries.length} entries`);

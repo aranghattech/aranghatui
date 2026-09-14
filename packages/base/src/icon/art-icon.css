@@ -7,3 +7,21 @@
 :host([hidden]) {
   display: none;
 }
+/* Slotted raw SVG takes the same size scale as icon data. */
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+:host([size='sm']) ::slotted(svg) {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+}
+:host([size='lg']) ::slotted(svg) {
+  width: var(--art-size-icon-lg);
+  height: var(--art-size-icon-lg);
+}

@@ -6,35 +6,152 @@
       "title": "Base",
       "budgetKb": 3,
       "components": [
-        { "tag": "art-hello", "name": "Hello", "status": "in-progress", "phase0": true },
-        { "tag": "art-button", "name": "Button", "status": "planned" },
-        { "tag": "art-label", "name": "Label", "status": "planned" },
-        { "tag": "art-input", "name": "Input", "status": "planned" },
-        { "tag": "art-textarea", "name": "Textarea", "status": "planned" },
-        { "tag": "art-checkbox", "name": "Checkbox", "status": "planned" },
-        { "tag": "art-radio-group", "name": "Radio Group", "status": "planned" },
-        { "tag": "art-switch", "name": "Switch", "status": "planned" },
-        { "tag": "art-native-select", "name": "Native Select", "status": "planned" },
-        { "tag": "art-slider", "name": "Slider", "status": "planned" },
-        { "tag": "art-toggle", "name": "Toggle", "status": "planned" },
-        { "tag": "art-toggle-group", "name": "Toggle Group", "status": "planned" },
-        { "tag": "art-button-group", "name": "Button Group", "status": "planned" },
-        { "tag": "art-input-group", "name": "Input Group", "status": "planned" },
-        { "tag": "art-field", "name": "Field", "status": "planned" },
-        { "tag": "art-input-otp", "name": "Input OTP", "status": "planned" },
-        { "tag": "art-badge", "name": "Badge", "status": "planned" },
-        { "tag": "art-kbd", "name": "Kbd", "status": "planned" },
-        { "tag": "art-separator", "name": "Separator", "status": "planned" },
-        { "tag": "art-skeleton", "name": "Skeleton", "status": "planned" },
-        { "tag": "art-spinner", "name": "Spinner", "status": "planned" },
-        { "tag": "art-progress", "name": "Progress", "status": "planned" },
-        { "tag": "art-aspect-ratio", "name": "Aspect Ratio", "status": "planned" },
-        { "tag": "art-card", "name": "Card", "status": "planned" },
-        { "tag": "art-item", "name": "Item", "status": "planned" },
-        { "tag": "art-empty", "name": "Empty", "status": "planned" },
-        { "tag": "art-table", "name": "Table", "status": "planned" },
-        { "tag": "art-typography", "name": "Typography", "status": "planned" },
-        { "tag": "art-marker", "name": "Marker", "status": "planned" }
+        {
+          "tag": "art-hello",
+          "name": "Hello",
+          "status": "in-progress",
+          "phase0": true
+        },
+        {
+          "tag": "art-button",
+          "name": "Button",
+          "status": "done"
+        },
+        {
+          "tag": "art-label",
+          "name": "Label",
+          "status": "planned"
+        },
+        {
+          "tag": "art-input",
+          "name": "Input",
+          "status": "planned"
+        },
+        {
+          "tag": "art-textarea",
+          "name": "Textarea",
+          "status": "planned"
+        },
+        {
+          "tag": "art-checkbox",
+          "name": "Checkbox",
+          "status": "planned"
+        },
+        {
+          "tag": "art-radio-group",
+          "name": "Radio Group",
+          "status": "planned"
+        },
+        {
+          "tag": "art-switch",
+          "name": "Switch",
+          "status": "planned"
+        },
+        {
+          "tag": "art-native-select",
+          "name": "Native Select",
+          "status": "planned"
+        },
+        {
+          "tag": "art-slider",
+          "name": "Slider",
+          "status": "planned"
+        },
+        {
+          "tag": "art-toggle",
+          "name": "Toggle",
+          "status": "planned"
+        },
+        {
+          "tag": "art-toggle-group",
+          "name": "Toggle Group",
+          "status": "planned"
+        },
+        {
+          "tag": "art-button-group",
+          "name": "Button Group",
+          "status": "planned"
+        },
+        {
+          "tag": "art-input-group",
+          "name": "Input Group",
+          "status": "planned"
+        },
+        {
+          "tag": "art-field",
+          "name": "Field",
+          "status": "planned"
+        },
+        {
+          "tag": "art-input-otp",
+          "name": "Input OTP",
+          "status": "planned"
+        },
+        {
+          "tag": "art-badge",
+          "name": "Badge",
+          "status": "planned"
+        },
+        {
+          "tag": "art-kbd",
+          "name": "Kbd",
+          "status": "planned"
+        },
+        {
+          "tag": "art-separator",
+          "name": "Separator",
+          "status": "planned"
+        },
+        {
+          "tag": "art-skeleton",
+          "name": "Skeleton",
+          "status": "planned"
+        },
+        {
+          "tag": "art-spinner",
+          "name": "Spinner",
+          "status": "planned"
+        },
+        {
+          "tag": "art-progress",
+          "name": "Progress",
+          "status": "planned"
+        },
+        {
+          "tag": "art-aspect-ratio",
+          "name": "Aspect Ratio",
+          "status": "planned"
+        },
+        {
+          "tag": "art-card",
+          "name": "Card",
+          "status": "planned"
+        },
+        {
+          "tag": "art-item",
+          "name": "Item",
+          "status": "planned"
+        },
+        {
+          "tag": "art-empty",
+          "name": "Empty",
+          "status": "planned"
+        },
+        {
+          "tag": "art-table",
+          "name": "Table",
+          "status": "planned"
+        },
+        {
+          "tag": "art-typography",
+          "name": "Typography",
+          "status": "planned"
+        },
+        {
+          "tag": "art-marker",
+          "name": "Marker",
+          "status": "planned"
+        }
       ]
     },
     "components": {
@@ -42,29 +159,125 @@
       "title": "Components",
       "budgetKb": 8,
       "components": [
-        { "tag": "art-popover", "name": "Popover", "status": "planned" },
-        { "tag": "art-tooltip", "name": "Tooltip", "status": "planned" },
-        { "tag": "art-hover-card", "name": "Hover Card", "status": "planned" },
-        { "tag": "art-collapsible", "name": "Collapsible", "status": "planned" },
-        { "tag": "art-accordion", "name": "Accordion", "status": "planned" },
-        { "tag": "art-tabs", "name": "Tabs", "status": "planned" },
-        { "tag": "art-alert", "name": "Alert", "status": "planned" },
-        { "tag": "art-avatar", "name": "Avatar", "status": "planned" },
-        { "tag": "art-scroll-area", "name": "Scroll Area", "status": "planned" },
-        { "tag": "art-toast", "name": "Toast", "status": "planned" },
-        { "tag": "art-select", "name": "Select", "status": "planned" },
-        { "tag": "art-command", "name": "Command", "status": "planned", "budgetKb": 15 },
-        { "tag": "art-combobox", "name": "Combobox", "status": "planned" },
-        { "tag": "art-calendar", "name": "Calendar", "status": "planned", "budgetKb": 15 },
-        { "tag": "art-date-picker", "name": "Date Picker", "status": "planned" },
-        { "tag": "art-resizable", "name": "Resizable", "status": "planned" },
-        { "tag": "art-carousel", "name": "Carousel", "status": "planned" },
-        { "tag": "data-table", "name": "Data Table", "status": "planned", "recipe": true, "budgetKb": 15 },
-        { "tag": "art-bubble", "name": "Bubble", "status": "planned" },
-        { "tag": "art-message", "name": "Message", "status": "planned" },
-        { "tag": "art-message-scroller", "name": "Message Scroller", "status": "planned" },
-        { "tag": "art-attachment", "name": "Attachment", "status": "planned" },
-        { "tag": "art-questionnaire", "name": "Questionnaire", "status": "planned" }
+        {
+          "tag": "art-popover",
+          "name": "Popover",
+          "status": "planned"
+        },
+        {
+          "tag": "art-tooltip",
+          "name": "Tooltip",
+          "status": "planned"
+        },
+        {
+          "tag": "art-hover-card",
+          "name": "Hover Card",
+          "status": "planned"
+        },
+        {
+          "tag": "art-collapsible",
+          "name": "Collapsible",
+          "status": "planned"
+        },
+        {
+          "tag": "art-accordion",
+          "name": "Accordion",
+          "status": "planned"
+        },
+        {
+          "tag": "art-tabs",
+          "name": "Tabs",
+          "status": "planned"
+        },
+        {
+          "tag": "art-alert",
+          "name": "Alert",
+          "status": "planned"
+        },
+        {
+          "tag": "art-avatar",
+          "name": "Avatar",
+          "status": "planned"
+        },
+        {
+          "tag": "art-scroll-area",
+          "name": "Scroll Area",
+          "status": "planned"
+        },
+        {
+          "tag": "art-toast",
+          "name": "Toast",
+          "status": "planned"
+        },
+        {
+          "tag": "art-select",
+          "name": "Select",
+          "status": "planned"
+        },
+        {
+          "tag": "art-command",
+          "name": "Command",
+          "status": "planned",
+          "budgetKb": 15
+        },
+        {
+          "tag": "art-combobox",
+          "name": "Combobox",
+          "status": "planned"
+        },
+        {
+          "tag": "art-calendar",
+          "name": "Calendar",
+          "status": "planned",
+          "budgetKb": 15
+        },
+        {
+          "tag": "art-date-picker",
+          "name": "Date Picker",
+          "status": "planned"
+        },
+        {
+          "tag": "art-resizable",
+          "name": "Resizable",
+          "status": "planned"
+        },
+        {
+          "tag": "art-carousel",
+          "name": "Carousel",
+          "status": "planned"
+        },
+        {
+          "tag": "data-table",
+          "name": "Data Table",
+          "status": "planned",
+          "recipe": true,
+          "budgetKb": 15
+        },
+        {
+          "tag": "art-bubble",
+          "name": "Bubble",
+          "status": "planned"
+        },
+        {
+          "tag": "art-message",
+          "name": "Message",
+          "status": "planned"
+        },
+        {
+          "tag": "art-message-scroller",
+          "name": "Message Scroller",
+          "status": "planned"
+        },
+        {
+          "tag": "art-attachment",
+          "name": "Attachment",
+          "status": "planned"
+        },
+        {
+          "tag": "art-questionnaire",
+          "name": "Questionnaire",
+          "status": "planned"
+        }
       ]
     },
     "navigation": {
@@ -72,15 +285,51 @@
       "title": "Navigation",
       "budgetKb": 8,
       "components": [
-        { "tag": "art-breadcrumb", "name": "Breadcrumb", "status": "planned" },
-        { "tag": "art-pagination", "name": "Pagination", "status": "planned" },
-        { "tag": "art-dropdown-menu", "name": "Dropdown Menu", "status": "planned" },
-        { "tag": "art-context-menu", "name": "Context Menu", "status": "planned" },
-        { "tag": "art-menubar", "name": "Menubar", "status": "planned" },
-        { "tag": "art-navigation-menu", "name": "Navigation Menu", "status": "planned" },
-        { "tag": "art-sidebar", "name": "Sidebar", "status": "planned" },
-        { "tag": "art-top-nav", "name": "TopNav", "status": "planned" },
-        { "tag": "art-tree-view", "name": "Tree View", "status": "planned" }
+        {
+          "tag": "art-breadcrumb",
+          "name": "Breadcrumb",
+          "status": "planned"
+        },
+        {
+          "tag": "art-pagination",
+          "name": "Pagination",
+          "status": "planned"
+        },
+        {
+          "tag": "art-dropdown-menu",
+          "name": "Dropdown Menu",
+          "status": "planned"
+        },
+        {
+          "tag": "art-context-menu",
+          "name": "Context Menu",
+          "status": "planned"
+        },
+        {
+          "tag": "art-menubar",
+          "name": "Menubar",
+          "status": "planned"
+        },
+        {
+          "tag": "art-navigation-menu",
+          "name": "Navigation Menu",
+          "status": "planned"
+        },
+        {
+          "tag": "art-sidebar",
+          "name": "Sidebar",
+          "status": "planned"
+        },
+        {
+          "tag": "art-top-nav",
+          "name": "TopNav",
+          "status": "planned"
+        },
+        {
+          "tag": "art-tree-view",
+          "name": "Tree View",
+          "status": "planned"
+        }
       ]
     },
     "modals": {
@@ -88,12 +337,38 @@
       "title": "Modals",
       "budgetKb": 8,
       "components": [
-        { "tag": "art-hello-overlay", "name": "Hello Overlay", "status": "in-progress", "phase0": true },
-        { "tag": "art-dialog", "name": "Dialog", "status": "planned" },
-        { "tag": "art-alert-dialog", "name": "Alert Dialog", "status": "planned" },
-        { "tag": "art-sheet", "name": "Sheet", "status": "planned" },
-        { "tag": "art-drawer", "name": "Drawer", "status": "planned" },
-        { "tag": "common-dialogs", "name": "Common Dialogs", "status": "planned", "imperative": true }
+        {
+          "tag": "art-hello-overlay",
+          "name": "Hello Overlay",
+          "status": "in-progress",
+          "phase0": true
+        },
+        {
+          "tag": "art-dialog",
+          "name": "Dialog",
+          "status": "planned"
+        },
+        {
+          "tag": "art-alert-dialog",
+          "name": "Alert Dialog",
+          "status": "planned"
+        },
+        {
+          "tag": "art-sheet",
+          "name": "Sheet",
+          "status": "planned"
+        },
+        {
+          "tag": "art-drawer",
+          "name": "Drawer",
+          "status": "planned"
+        },
+        {
+          "tag": "common-dialogs",
+          "name": "Common Dialogs",
+          "status": "planned",
+          "imperative": true
+        }
       ]
     },
     "widgets": {
@@ -101,15 +376,51 @@
       "title": "Widgets",
       "budgetKb": 8,
       "components": [
-        { "tag": "art-app-shell", "name": "App Shell", "status": "planned" },
-        { "tag": "art-login", "name": "Login", "status": "planned" },
-        { "tag": "art-signup", "name": "Signup", "status": "planned" },
-        { "tag": "art-forgot-password", "name": "Forgot Password", "status": "planned" },
-        { "tag": "art-settings-page", "name": "Settings Page", "status": "planned" },
-        { "tag": "art-data-table-page", "name": "Data Table Page", "status": "planned" },
-        { "tag": "art-state-page", "name": "Empty / 404 / 500 States", "status": "planned" },
-        { "tag": "art-onboarding-wizard", "name": "Onboarding Wizard", "status": "planned" },
-        { "tag": "art-notification-centre", "name": "Notification Centre", "status": "planned" }
+        {
+          "tag": "art-app-shell",
+          "name": "App Shell",
+          "status": "planned"
+        },
+        {
+          "tag": "art-login",
+          "name": "Login",
+          "status": "planned"
+        },
+        {
+          "tag": "art-signup",
+          "name": "Signup",
+          "status": "planned"
+        },
+        {
+          "tag": "art-forgot-password",
+          "name": "Forgot Password",
+          "status": "planned"
+        },
+        {
+          "tag": "art-settings-page",
+          "name": "Settings Page",
+          "status": "planned"
+        },
+        {
+          "tag": "art-data-table-page",
+          "name": "Data Table Page",
+          "status": "planned"
+        },
+        {
+          "tag": "art-state-page",
+          "name": "Empty / 404 / 500 States",
+          "status": "planned"
+        },
+        {
+          "tag": "art-onboarding-wizard",
+          "name": "Onboarding Wizard",
+          "status": "planned"
+        },
+        {
+          "tag": "art-notification-centre",
+          "name": "Notification Centre",
+          "status": "planned"
+        }
       ]
     }
   }
