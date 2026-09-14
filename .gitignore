@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+www/
+.stencil/
+.turbo/
+*.tsbuildinfo
+apps/docs/.vitepress/cache/
+apps/docs/.vitepress/dist/
+
+# test output (baselines ARE committed; results are not)
+test-results/
+playwright-report/
+tests/**/__diff_output__/
+coverage/
+
+# generated wrappers are build artefacts (regenerated from Stencil)
+packages/react/*/src/components/
+packages/vue/*/src/components/
+packages/angular/*/src/directives/
+
+# env / editors / os
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+*.log
