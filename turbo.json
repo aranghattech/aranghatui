@@ -1,21 +1,41 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "stream",
+  "globalPassThroughEnv": [
+    "PLAYWRIGHT_BROWSERS_PATH",
+    "CI",
+    "GITHUB_ACTIONS",
+    "ARTUI_*",
+    "ARTUI_BUNDLE_PEERS",
+    "ARTUI_EXTERNAL_RUNTIME"
+  ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "www/**", "src/components/**", "src/directives/**", ".vitepress/dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        "www/**",
+        "src/components/**",
+        "src/directives/**",
+        ".vitepress/dist/**"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "test:unit": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "outputs": []
     },
     "test:e2e": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "outputs": []
     }
   }
