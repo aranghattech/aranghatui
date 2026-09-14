@@ -1,0 +1,25 @@
+{
+  "name": "@artui/sandbox-react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4002",
+    "build": "vite build",
+    "preview": "vite preview --port 4002 --strictPort"
+  },
+  "dependencies": {
+    "@aranghat/base-react": "workspace:*",
+    "@aranghat/modals-react": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "6.0.3",
+    "vite": "8.3.0"
+  }
+}

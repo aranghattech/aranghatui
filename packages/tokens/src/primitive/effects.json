@@ -1,0 +1,32 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "base": { "$value": "0.625rem" },
+    "none": { "$value": "0rem" },
+    "full": { "$value": "9999px" }
+  },
+  "border": {
+    "$type": "dimension",
+    "width": { "$value": "1px" }
+  },
+  "duration": {
+    "$type": "duration",
+    "fast": { "$value": "120ms" },
+    "base": { "$value": "180ms" },
+    "slow": { "$value": "240ms" }
+  },
+  "ease": {
+    "$type": "cubicBezier",
+    "out": { "$value": [0.16, 1, 0.3, 1] },
+    "in-out": { "$value": [0.65, 0, 0.35, 1] },
+    "linear": { "$value": [0, 0, 1, 1] }
+  },
+  "z": {
+    "$type": "number",
+    "dropdown": { "$value": 50 },
+    "sticky": { "$value": 100 },
+    "overlay": { "$value": 200 },
+    "modal": { "$value": 300 },
+    "toast": { "$value": 400 }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@artui/stencil-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Stencil config factory — one config for all five tiers (ADR-0009).",
+  "exports": { ".": "./index.mjs" },
+  "dependencies": {
+    "@artui/stencil-tailwind": "workspace:*",
+    "@stencil/angular-output-target": "1.5.0",
+    "@stencil/react-output-target": "1.6.2",
+    "@stencil/vue-output-target": "0.14.3"
+  }
+}

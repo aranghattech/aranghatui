@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify (build · lint · unit · e2e · size · visual · a11y · smoke)
+    runs-on: ubuntu-24.04
+    # Same image as scripts/pw-docker.sh → byte-identical screenshots (ADR-0018).
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+      options: --ipc=host
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - name: Generated files must be committed
+        run: git diff --exit-code -- packages/*/package.json packages/*/src/**/readme.md
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-output
+          path: |
+            tests/test-results
+            tests/playwright-report
+            packages/*/test-results
+          retention-days: 7
+
+  release:
+    name: release (disabled until 1.0)
+    if: false
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "ADR-0016 — enable after Phase 8"

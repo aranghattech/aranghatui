@@ -1,0 +1,44 @@
+{
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": { "$value": ["ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"] },
+      "mono": { "$value": ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", "monospace"] }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "normal": { "$value": 400 },
+      "medium": { "$value": 500 },
+      "semibold": { "$value": 600 },
+      "bold": { "$value": 700 }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": { "$value": "0.75rem" },
+      "sm": { "$value": "0.875rem" },
+      "md": { "$value": "1rem" },
+      "lg": { "$value": "1.125rem" },
+      "xl": { "$value": "1.25rem" },
+      "2xl": { "$value": "1.5rem" },
+      "3xl": { "$value": "1.875rem" },
+      "4xl": { "$value": "2.25rem" }
+    },
+    "line-height": {
+      "$type": "number",
+      "xs": { "$value": 1.3333 },
+      "sm": { "$value": 1.4286 },
+      "md": { "$value": 1.5 },
+      "lg": { "$value": 1.5556 },
+      "xl": { "$value": 1.4 },
+      "2xl": { "$value": 1.3333 },
+      "3xl": { "$value": 1.2 },
+      "4xl": { "$value": 1.1111 }
+    },
+    "tracking": {
+      "$type": "dimension",
+      "tight": { "$value": "-0.025em" },
+      "normal": { "$value": "0em" },
+      "wide": { "$value": "0.025em" }
+    }
+  }
+}

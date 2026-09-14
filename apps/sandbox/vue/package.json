@@ -1,0 +1,22 @@
+{
+  "name": "@artui/sandbox-vue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4003",
+    "build": "vite build",
+    "preview": "vite preview --port 4003 --strictPort"
+  },
+  "dependencies": {
+    "@aranghat/base-vue": "workspace:*",
+    "@aranghat/modals-vue": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "vue": "3.5.42"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.9",
+    "typescript": "6.0.3",
+    "vite": "8.3.0"
+  }
+}

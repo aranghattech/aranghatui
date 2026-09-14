@@ -29,3 +29,6 @@ packages/angular/*/src/directives/
 .vscode/
 .DS_Store
 *.log
+
+# angular cli cache
+.angular/

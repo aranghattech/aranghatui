@@ -1,0 +1,7 @@
+<button type="button" id="open-overlay">Open overlay</button>
+<art-hello-overlay name="artui"></art-hello-overlay>
+<script type="module">
+  const overlay = document.querySelector('art-hello-overlay');
+  document.getElementById('open-overlay').addEventListener('click', () => (overlay.open = true));
+  overlay.addEventListener('open-change', (e) => console.log('open-change', e.detail));
+</script>
