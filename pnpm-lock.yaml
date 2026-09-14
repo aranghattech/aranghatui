@@ -94,6 +94,9 @@ importers:
       '@aranghat/base-angular':
         specifier: workspace:*
         version: link:../../../packages/angular/base
+      '@aranghat/icons':
+        specifier: workspace:*
+        version: link:../../../packages/icons
       '@aranghat/modals-angular':
         specifier: workspace:*
         version: link:../../../packages/angular/modals
@@ -125,6 +128,9 @@ importers:
       '@aranghat/base':
         specifier: workspace:*
         version: link:../../../packages/base
+      '@aranghat/icons':
+        specifier: workspace:*
+        version: link:../../../packages/icons
       '@aranghat/modals':
         specifier: workspace:*
         version: link:../../../packages/modals
@@ -144,6 +150,9 @@ importers:
       '@aranghat/base-react':
         specifier: workspace:*
         version: link:../../../packages/react/base
+      '@aranghat/icons':
+        specifier: workspace:*
+        version: link:../../../packages/icons
       '@aranghat/modals-react':
         specifier: workspace:*
         version: link:../../../packages/react/modals
@@ -178,6 +187,9 @@ importers:
       '@aranghat/base-vue':
         specifier: workspace:*
         version: link:../../../packages/vue/base
+      '@aranghat/icons':
+        specifier: workspace:*
+        version: link:../../../packages/icons
       '@aranghat/modals-vue':
         specifier: workspace:*
         version: link:../../../packages/vue/modals
@@ -499,6 +511,15 @@ importers:
       '@stencil/playwright':
         specifier: '*'
         version: 0.5.1(@playwright/test@1.63.0)(@stencil/core@4.45.0)
+
+  tooling/size:
+    devDependencies:
+      '@aranghat/base':
+        specifier: workspace:*
+        version: link:../../packages/base
+      '@aranghat/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
 
   tooling/stencil-config:
     dependencies:

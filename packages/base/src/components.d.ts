@@ -9,6 +9,60 @@ import { IconData } from "@aranghat/icons";
 export { IconData } from "@aranghat/icons";
 export namespace Components {
     /**
+     * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
+     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
+     */
+    interface ArtButton {
+        /**
+          * Disabled: no interaction, no events.
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
+         */
+        "hostAriaLabel"?: string | null;
+        /**
+          * Render as a link.
+         */
+        "href"?: string;
+        /**
+          * Square icon-only button. Provide an accessible name via `aria-label` on the host.
+          * @default false
+         */
+        "icon": boolean;
+        /**
+          * Loading: shows a spinner in place of `start`, sets `aria-busy`, blocks activation.
+          * @default false
+         */
+        "loading": boolean;
+        /**
+          * Link rel (only with `href`).
+         */
+        "rel"?: string;
+        /**
+          * Control size; aligns with Input, Select and Combobox.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * Link target (only with `href`).
+         */
+        "target"?: string;
+        /**
+          * Native button type. `submit` / `reset` act on the surrounding `<form>`.
+          * @default 'button'
+         */
+        "type": 'button' | 'submit' | 'reset';
+        /**
+          * Visual variant.
+          * @default 'default'
+         */
+        "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
+    }
+    /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
      * recipe, a native `click` passing through and a kebab-case custom event.
      * Removed when Button lands.
@@ -55,6 +109,18 @@ export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
     target: HTMLArtHelloElement;
 }
 declare global {
+    /**
+     * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
+     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
+     */
+    interface HTMLArtButtonElement extends Components.ArtButton, HTMLStencilElement {
+    }
+    var HTMLArtButtonElement: {
+        prototype: HTMLArtButtonElement;
+        new (): HTMLArtButtonElement;
+    };
     interface HTMLArtHelloElementEventMap {
         "greet": { name: string };
     }
@@ -88,11 +154,74 @@ declare global {
         new (): HTMLArtIconElement;
     };
     interface HTMLElementTagNameMap {
+        "art-button": HTMLArtButtonElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
     }
 }
 declare namespace LocalJSX {
+    /**
+     * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
+     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
+     */
+    interface ArtButton {
+        /**
+          * Disabled: no interaction, no events.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
+         */
+        "hostAriaLabel"?: string | null;
+        /**
+          * Render as a link.
+         */
+        "href"?: string;
+        /**
+          * Square icon-only button. Provide an accessible name via `aria-label` on the host.
+          * @default false
+         */
+        "icon"?: boolean;
+        /**
+          * Loading: shows a spinner in place of `start`, sets `aria-busy`, blocks activation.
+          * @default false
+         */
+        "loading"?: boolean;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
+        /**
+          * Link rel (only with `href`).
+         */
+        "rel"?: string;
+        /**
+          * Control size; aligns with Input, Select and Combobox.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * Link target (only with `href`).
+         */
+        "target"?: string;
+        /**
+          * Native button type. `submit` / `reset` act on the surrounding `<form>`.
+          * @default 'button'
+         */
+        "type"?: 'button' | 'submit' | 'reset';
+        /**
+          * Visual variant.
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
+    }
     /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
      * recipe, a native `click` passing through and a kebab-case custom event.
@@ -139,6 +268,18 @@ declare namespace LocalJSX {
         "size"?: 'sm' | 'md' | 'lg';
     }
 
+    interface ArtButtonAttributes {
+        "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
+        "size": 'sm' | 'md' | 'lg';
+        "icon": boolean;
+        "disabled": boolean;
+        "loading": boolean;
+        "type": 'button' | 'submit' | 'reset';
+        "href": string;
+        "target": string;
+        "rel": string;
+        "hostAriaLabel": string | null;
+    }
     interface ArtHelloAttributes {
         "name": string;
         "variant": 'default' | 'outline';
@@ -150,6 +291,7 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
     }
@@ -158,6 +300,13 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
+             * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
+             * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+             * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
+             */
+            "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;
             /**
              * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
              * recipe, a native `click` passing through and a kebab-case custom event.

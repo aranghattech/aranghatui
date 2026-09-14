@@ -1,11 +1,10 @@
 import { NgComponentOutlet } from '@angular/common';
 import { Component } from '@angular/core';
-import { HelloBasic, HelloOutline, HelloOverlayBasic, SAMPLES } from './samples';
+import { SAMPLES, SAMPLE_COMPONENTS } from './samples';
 
 @Component({
   selector: 'app-root',
-  // Angular needs a statically analysable imports array (NG1010); list every sample class here.
-  imports: [NgComponentOutlet, HelloBasic, HelloOutline, HelloOverlayBasic],
+  imports: [NgComponentOutlet, ...SAMPLE_COMPONENTS],
   template: `
     <main>
       @for (s of samples; track s.id) {

@@ -1,0 +1,11 @@
+{
+  "name": "@artui/size",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference-app entry modules measured by size-limit (CLAUDE.md §7). Each file imports exactly what that page would.",
+  "devDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/tokens": "workspace:*"
+  }
+}

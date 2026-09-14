@@ -23,6 +23,10 @@
       "import": "./dist/components/index.js"
     },
     "./dist/components/*": "./dist/components/*",
+    "./button": {
+      "types": "./dist/components/art-button.d.ts",
+      "import": "./dist/components/art-button.js"
+    },
     "./hello": {
       "types": "./dist/components/art-hello.d.ts",
       "import": "./dist/components/art-hello.js"

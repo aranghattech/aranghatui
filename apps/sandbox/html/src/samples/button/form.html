@@ -1,0 +1,11 @@
+<form id="subscribe">
+  <input name="email" type="email" required placeholder="you@example.com" />
+  <art-button type="submit">Subscribe</art-button>
+  <art-button type="reset" variant="ghost">Reset</art-button>
+</form>
+<script type="module">
+  document.getElementById('subscribe').addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('submitted', Object.fromEntries(new FormData(e.target)));
+  });
+</script>

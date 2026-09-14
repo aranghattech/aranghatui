@@ -3,7 +3,7 @@ import type { ComponentStories, StoryState } from '@artui/stories';
 import { THEMES, VIEWPORTS, loadStories, storyUrl } from '../stories';
 
 /**
- * VRT matrix (CLAUDE.md §9): themes × viewports × states × variants × sizes (+ RTL).
+ * VRT matrix (CLAUDE.md §9): themes × viewports × states × variants × sizes (+ RTL pass in the default state).
  * Screenshots are element shots of #stage. Baselines: tests/visual/__screenshots__/<tag>/…
  */
 const stories = await loadStories();
@@ -25,12 +25,29 @@ async function applyState(page: Page, s: ComponentStories, state: StoryState) {
 
 for (const s of stories) {
   test.describe(s.tag, () => {
+    // Examples pass: every documented example, light + dark, desktop width — catches layout
+    // regressions the variant × state matrix cannot see (icons, groups, forms).
+    for (const [key, example] of Object.entries(s.examples)) {
+      for (const theme of THEMES) {
+        test(`example-${key}-${theme}`, async ({ page }) => {
+          await page.setViewportSize({ width: 1280, height: 600 });
+          await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+          await page.goto(storyUrl(s, { example: key, theme }));
+          await page.locator('#stage[data-ready]').waitFor();
+          await page.evaluate(() => document.fonts.ready);
+          const shot = [s.tag, `example-${key}-${theme}.png`];
+          if (s.screenshot === 'viewport') await expect(page).toHaveScreenshot(shot);
+          else await expect(page.locator('#stage')).toHaveScreenshot(shot);
+        });
+      }
+    }
     for (const theme of THEMES) {
       for (const width of VIEWPORTS) {
         for (const variant of s.variants.length ? s.variants : ['default']) {
           for (const size of s.sizes.length ? s.sizes : ['']) {
             for (const state of s.states) {
-              const dirs = s.directional ? (['ltr', 'rtl'] as const) : (['ltr'] as const);
+              // RTL pass (CLAUDE.md §9): directional components get a mirrored shot of every variant × size in the default state.
+              const dirs = s.directional && state === 'default' ? (['ltr', 'rtl'] as const) : (['ltr'] as const);
               for (const dir of dirs) {
                 const name = [theme, width, variant, size || null, state, dir === 'rtl' ? 'rtl' : null].filter(Boolean).join('-');
                 test(name, async ({ page }) => {

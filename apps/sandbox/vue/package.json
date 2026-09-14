@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aranghat/base-vue": "workspace:*",
+    "@aranghat/icons": "workspace:*",
     "@aranghat/modals-vue": "workspace:*",
     "@aranghat/tokens": "workspace:*",
     "vue": "3.5.42"
