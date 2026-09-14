@@ -1,0 +1,21 @@
+{
+  "color": {
+    "$type": "color",
+    "primary": {
+      "solid": {
+        "$value": "{color.blue.600}"
+      },
+      "hover": {
+        "$value": "{color.blue.700}"
+      }
+    },
+    "fg": {
+      "on-primary": {
+        "$value": "{color.white}"
+      },
+      "link": {
+        "$value": "{color.blue.300}"
+      }
+    }
+  }
+}

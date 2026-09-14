@@ -5,7 +5,8 @@ Status: decisions resolved 2026-09-14 (see §14 of `CLAUDE.md` and `.claude/adr/
 ## 1. Where we are
 
 - **Phase 0 done (2026-09-14, PR #1)** — `pnpm verify` green: 17 workspace projects build; `art-hello` (base) + `art-hello-overlay` (modals) render in html/react/vue/angular sandboxes (smoke 12/12); base-only install contains no modals and no `@stencil/*`; spec 12, e2e 5, VRT 66 baselines (Docker), axe 6/6; size: base runtime chunk 6.9 kB, `art-hello` 1.7 kB, landing-page proxy 13.8 kB (≤ 15 kB).
-- Phase 0 also landed most of the Phase 1 token pipeline (all six Style Dictionary platforms, light/dark, Tailwind mapping, recipes). Phase 1 proper adds: full semantic audit + contrast sweep, `themes/example` override, generated token docs.
+- **Phase 1 done (2026-09-14, PR #2)** — tokens: AA contrast sweep in `test:unit` (96 checks: text 4.5:1, UI fills 3:1, focus halo as rendered 3:1, brands may only override existing semantic tokens) which caught and fixed destructive-fg, border-strong and ring; brand themes scoped to `data-brand="<name>"` (mode stays `data-theme`), `themes/example` proves it; portable 8-digit-hex scrim for Compose/Swift; flat JSON export drives the generated Tokens page; Theming page has a live brand + mode switch (exit criterion).
+- CI fix from PR #1's failed run (browsers path in the container job) ships in PR #2.
 - Fresh repository. `origin` = `github.com/aranghattech/aranghatui` (empty). Nothing from the previous React/Radix incarnation is reused; it remains only as a reference for the six brand themes (ADR-0014).
 - Working agreement: branch per phase/component → PR with verify report → Claude self-merges on green (ADR-0015). No publishing before 1.0 (ADR-0016).
 - This run stops after Phase 2 and the Button component (Phase 3 first item) for review.

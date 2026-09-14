@@ -10,7 +10,7 @@
  */
 import StyleDictionary from 'style-dictionary';
 import { formattedVariables, fileHeader } from 'style-dictionary/utils';
-import { mkdirSync, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync, readdirSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -140,6 +140,19 @@ StyleDictionary.registerFormat({
   },
 });
 
+StyleDictionary.registerFormat({
+  name: 'json/artui-flat',
+  format: ({ dictionary }) => JSON.stringify(dictionary.allTokens.map((t) => ({
+    name: `--${t.name}`,
+    path: t.path.join('.'),
+    type: t.$type,
+    value: t.$value,
+    original: typeof t.original.$value === 'string' ? t.original.$value : t.$value,
+    tier: t.filePath.includes('/primitive/') ? 'primitive' : 'semantic',
+    description: t.$description ?? '',
+  })), null, 2),
+});
+
 // --- builds ------------------------------------------------------------------
 const primitive = ['src/primitive/**/*.json', 'src/semantic/shared/**/*.json'];
 const light = new StyleDictionary({
@@ -175,7 +188,7 @@ const light = new StyleDictionary({
     json: {
       transforms: cssTransforms,
       buildPath: 'dist/json/',
-      files: [{ destination: 'tokens.json', format: 'json/nested' }],
+      files: [{ destination: 'tokens.json', format: 'json/nested' }, { destination: 'tokens.flat.json', format: 'json/artui-flat' }],
     },
     compose: {
       transformGroup: 'compose',
@@ -219,33 +232,36 @@ const cssDir = join(dist, 'css');
 const stitched = readFileSync(join(cssDir, '_light.css'), 'utf8') + '\n' + readFileSync(join(cssDir, '_dark.css'), 'utf8');
 writeFileSync(join(cssDir, 'aranghat.css'), stitched);
 
-// Brand override sheets: themes/<name>/{light,dark}.json → dist/css/themes/<name>.css (semantic only).
+// Brand override sheets: themes/<name>/{light,dark}.json → dist/css/themes/<name>.css.
+// Scoped to [data-brand="<name>"] so several brands can coexist and a brand can apply
+// to a subtree. Mode still comes from data-theme / prefers-color-scheme (CLAUDE.md §4).
 const themesDir = join(root, 'themes');
 mkdirSync(join(cssDir, 'themes'), { recursive: true });
-if (existsSync(themesDir)) {
-  for (const name of readdirSync(themesDir)) {
-    const tdir = join(themesDir, name);
-    if (!existsSync(join(tdir, 'light.json'))) continue;
-    const mk = (mode) => new StyleDictionary({
-      source: [...primitive, `themes/${name}/${mode}.json`],
-      usesDtcg: true,
-      log: { verbosity: 'silent', warnings: 'disabled' },
-      platforms: { css: { transforms: cssTransforms, buildPath: `dist/css/themes/_${name}/`, files: [{ destination: `${mode}.css`, format: 'css/artui-theme-part', filter: (t) => t.filePath.includes(`themes/${name}/`) }] } },
-    });
-    StyleDictionary.registerFormat({
-      name: 'css/artui-theme-part',
-      format: ({ dictionary }) => formattedVariables({ format: 'css', dictionary, outputReferences: true, usesDtcg: true }),
-    });
-    await mk('light').buildAllPlatforms();
-    const hasDark = existsSync(join(tdir, 'dark.json'));
-    if (hasDark) await mk('dark').buildAllPlatforms();
-    const lightVars = readFileSync(join(cssDir, 'themes', `_${name}`, 'light.css'), 'utf8');
-    const darkVars = hasDark ? readFileSync(join(cssDir, 'themes', `_${name}`, 'dark.css'), 'utf8') : '';
-    let out = `/* artui brand theme "${name}" — semantic overrides only. Import AFTER aranghat.css. */\n:root, [data-theme="${name}"] {\n${lightVars}\n}\n`;
-    if (hasDark) {
-      out += `[data-theme="dark"] {\n${darkVars}\n}\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme="light"]) {\n${darkVars.replace(/^/gm, '  ')}\n  }\n}\n`;
-    }
-    writeFileSync(join(cssDir, 'themes', `${name}.css`), out);
+StyleDictionary.registerFormat({
+  name: 'css/artui-theme-part',
+  format: ({ dictionary }) => formattedVariables({ format: 'css', dictionary, outputReferences: true, usesDtcg: true }),
+});
+const themeNames = existsSync(themesDir) ? readdirSync(themesDir).filter((n) => existsSync(join(themesDir, n, 'light.json'))) : [];
+for (const name of themeNames) {
+  const tdir = join(themesDir, name);
+  const hasDark = existsSync(join(tdir, 'dark.json'));
+  const mk = (mode) => new StyleDictionary({
+    source: [...primitive, `themes/${name}/${mode}.json`],
+    usesDtcg: true,
+    log: { verbosity: 'silent', warnings: 'disabled' },
+    platforms: { css: { transforms: cssTransforms, buildPath: `dist/css/themes/_${name}/`, files: [{ destination: `${mode}.css`, format: 'css/artui-theme-part', filter: (t) => t.filePath.includes(`themes/${name}/`) }] } },
+  });
+  await mk('light').buildAllPlatforms();
+  if (hasDark) await mk('dark').buildAllPlatforms();
+  const lightVars = readFileSync(join(cssDir, 'themes', `_${name}`, 'light.css'), 'utf8');
+  const darkVars = hasDark ? readFileSync(join(cssDir, 'themes', `_${name}`, 'dark.css'), 'utf8') : '';
+  // Guard: a brand sheet may only override semantic tokens.
+  let out = `/* artui brand "${name}" — semantic overrides only. Import after aranghat.css; activate with data-brand="${name}" on <html> or any subtree. */\n[data-brand="${name}"] {\n${lightVars}\n}\n`;
+  if (hasDark) {
+    out += `[data-brand="${name}"][data-theme="dark"], [data-theme="dark"] [data-brand="${name}"] {\n${darkVars}\n}\n` +
+      `@media (prefers-color-scheme: dark) {\n  [data-brand="${name}"]:not([data-theme="light"]) {\n${darkVars.replace(/^/gm, '  ')}\n  }\n}\n`;
   }
+  writeFileSync(join(cssDir, 'themes', `${name}.css`), out);
+  rmSync(join(cssDir, 'themes', `_${name}`), { recursive: true, force: true });
 }
 console.log('✔ tokens built → dist/{css,scss,js,ts,json,compose,swift}');
