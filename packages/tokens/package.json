@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test:unit": "node --test scripts/build.test.mjs"
+    "test:unit": "node --test scripts/build.test.mjs && node scripts/contrast.mjs",
+    "check:contrast": "node scripts/contrast.mjs"
   },
   "devDependencies": {
     "style-dictionary": "5.5.3"

@@ -1,0 +1,28 @@
+{
+  "$description": "Example brand override \u2014 proves the mechanism (ADR-0014). Semantic tokens only.",
+  "color": {
+    "$type": "color",
+    "primary": {
+      "solid": {
+        "$value": "{color.blue.700}"
+      },
+      "hover": {
+        "$value": "{color.blue.900}"
+      }
+    },
+    "fg": {
+      "on-primary": {
+        "$value": "{color.white}"
+      },
+      "link": {
+        "$value": "{color.blue.700}"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "base": {
+      "$value": "0.375rem"
+    }
+  }
+}
