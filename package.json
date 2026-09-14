@@ -1,0 +1,35 @@
+{
+  "name": "artui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AranghatUI (artui) \u2014 framework-agnostic design system authored in Stencil, distributed to HTML, React, Vue and Angular.",
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test:unit": "turbo run test:unit",
+    "test:e2e": "turbo run test:e2e",
+    "test:visual": "scripts/pw-docker.sh npx playwright test --project=visual",
+    "test:a11y": "scripts/pw-docker.sh npx playwright test --project=a11y",
+    "smoke:frameworks": "scripts/pw-docker.sh npx playwright test --project=smoke",
+    "lint:tokens": "node tooling/token-lint/index.mjs",
+    "lint:pins": "node scripts/check-stencil-pin.mjs",
+    "size": "node scripts/gen-size-limit.mjs && size-limit",
+    "verify:docs-parity": "node apps/docs/scripts/verify-parity.mjs",
+    "verify:isolation": "node scripts/check-install-isolation.mjs",
+    "verify": "pnpm lint:pins && pnpm build && pnpm lint:tokens && pnpm test:unit && pnpm test:e2e && pnpm size && pnpm verify:docs-parity && pnpm verify:isolation && pnpm test:visual && pnpm test:a11y && pnpm smoke:frameworks",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.2",
+    "@size-limit/esbuild": "13.1.1",
+    "@size-limit/file": "13.1.1",
+    "size-limit": "13.1.1",
+    "turbo": "2.10.12",
+    "typescript": "6.0.3"
+  }
+}

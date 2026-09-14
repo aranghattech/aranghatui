@@ -204,7 +204,7 @@ Rule: if two components need the same behaviour, it moves into `primitives` befo
 
 Two levers: **tier packages** (don't install what you don't need) and **tree-shaking** (don't bundle what you don't import). Both must work; neither is a substitute for the other.
 
-- Output target: `dist-custom-elements` with `externalRuntime: true` and `customElementsExportBehavior: 'single-export-module'`, tree-shakable. The Stencil runtime is imported from `@stencil/core`, which every tier lists as a pinned `dependencies` entry (the one exception to the peer-only rule) so a consumer bundler dedupes it to a single copy across tiers (ADR-0002). A self-contained IIFE bundle per tier is provided for no-bundler HTML use only. Do **not** use the lazy-loader `dist` target as the primary consumer path.
+- Output target: `dist-custom-elements` with `externalRuntime: false` and `customElementsExportBehavior: 'single-export-module'`, tree-shakable. The Stencil runtime is inlined per tier because that is the only form Stencil tree-shakes by feature use (~7 kB gzip per tier vs ~25 kB for the shared external runtime — measured, ADR-0002). `@stencil/core` is a devDependency pinned to one exact version across tiers. Do **not** use the lazy-loader `dist` target as the primary consumer path.
 - Every component is independently importable within its tier: `import { Button } from '@aranghat/base-react/button'`.
 - Side-effect free. `"sideEffects": ["**/*.css"]` in every package.json.
 - **Budgets (gzip, per component, excluding shared primitives):**
@@ -382,7 +382,7 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Decision | Resolution | ADR |
 |---|---|---|
 | Custom event naming | Lowercase kebab-case on the DOM (`open-change`); output targets derive `onOpenChange` / `(openChange)` / `@open-change` | 0001 |
-| Stencil runtime sharing | `externalRuntime: true`; `@stencil/core` pinned as a `dependencies` entry in every tier; IIFE bundle for no-bundler HTML | 0002 |
+| Stencil runtime | Inlined per tier (`externalRuntime: false`) — measured 12 kB vs 25 kB for a base-only page; `@stencil/core` stays a pinned devDependency | 0002 |
 | Shadow vs `scoped` for widgets | Shadow DOM everywhere; a widget that needs global layout gets its own ADR | 0003 |
 | Token CSS distribution | One `aranghat.css` (default theme, light + dark); brand themes as separate override files | 0004 |
 | Carousel | `embla-carousel` (second approved runtime dep) | 0005 |

@@ -1,0 +1,22 @@
+{
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Static lengths: media queries cannot read custom properties.",
+    "sm": { "$value": "40rem" },
+    "md": { "$value": "48rem" },
+    "lg": { "$value": "64rem" },
+    "xl": { "$value": "80rem" },
+    "2xl": { "$value": "96rem" }
+  },
+  "container": {
+    "$type": "dimension",
+    "xs": { "$value": "20rem" },
+    "sm": { "$value": "24rem" },
+    "md": { "$value": "28rem" },
+    "lg": { "$value": "32rem" },
+    "xl": { "$value": "36rem" },
+    "2xl": { "$value": "42rem" },
+    "3xl": { "$value": "48rem" },
+    "4xl": { "$value": "56rem" }
+  }
+}

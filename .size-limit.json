@@ -1,0 +1,67 @@
+[
+  {
+    "name": "base: runtime chunk (index2.js)",
+    "path": "packages/base/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-hello",
+    "path": "packages/base/dist/components/art-hello.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base: whole tier",
+    "path": "packages/base/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "45 kB",
+    "gzip": true
+  },
+  {
+    "name": "modals/art-hello-overlay (+ inlined runtime: single-component tier)",
+    "path": "packages/modals/dist/components/art-hello-overlay.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "28 kB",
+    "gzip": true
+  },
+  {
+    "name": "modals: whole tier",
+    "path": "packages/modals/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "30 kB",
+    "gzip": true
+  },
+  {
+    "name": "reference: landing page (html sandbox js+css)",
+    "path": [
+      "apps/sandbox/html/dist/assets/*.js",
+      "apps/sandbox/html/dist/assets/*.css"
+    ],
+    "limit": "15 kB",
+    "gzip": true
+  }
+]

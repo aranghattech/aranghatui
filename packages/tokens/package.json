@@ -1,0 +1,33 @@
+{
+  "name": "@aranghat/tokens",
+  "version": "0.0.0",
+  "description": "artui design tokens — the only place a design value is born. Style Dictionary → css/scss/js/ts/json/compose/swift.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "themes"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/ts/index.d.ts",
+      "import": "./dist/js/index.js"
+    },
+    "./aranghat.css": "./dist/css/aranghat.css",
+    "./themes/*.css": "./dist/css/themes/*.css",
+    "./tailwind.css": "./dist/css/tailwind.css",
+    "./scss": "./dist/scss/_tokens.scss",
+    "./json": "./dist/json/tokens.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test:unit": "node --test scripts/build.test.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "5.5.3"
+  }
+}

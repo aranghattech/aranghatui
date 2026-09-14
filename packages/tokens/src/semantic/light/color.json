@@ -1,0 +1,61 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas":  { "$value": "{color.white}", "$description": "Page background." },
+      "surface": { "$value": "{color.white}", "$description": "Cards and panels." },
+      "popover": { "$value": "{color.white}", "$description": "Floating surfaces." },
+      "muted":   { "$value": "{color.neutral.100}", "$description": "Subdued fills: secondary buttons, skeletons, table headers." },
+      "accent":  { "$value": "{color.neutral.100}", "$description": "Hover / selected wash on interactive rows and items." },
+      "overlay": { "$value": "rgb(0 0 0 / 0.5)", "$description": "Modal scrim." }
+    },
+    "fg": {
+      "default": { "$value": "{color.neutral.950}" },
+      "muted":   { "$value": "{color.neutral.500}" },
+      "on-primary": { "$value": "{color.neutral.50}" },
+      "on-destructive": { "$value": "{color.white}" },
+      "link":    { "$value": "{color.neutral.950}" }
+    },
+    "primary": {
+      "solid": { "$value": "{color.neutral.900}" },
+      "hover": { "$value": "{color.neutral.800}" }
+    },
+    "secondary": {
+      "solid": { "$value": "{color.neutral.100}" },
+      "hover": { "$value": "{color.neutral.200}" },
+      "fg":    { "$value": "{color.neutral.900}" }
+    },
+    "destructive": {
+      "solid": { "$value": "{color.red.600}" },
+      "hover": { "$value": "{color.red.700}" },
+      "muted": { "$value": "{color.red.50}" },
+      "fg":    { "$value": "{color.red.600}" }
+    },
+    "success": {
+      "solid": { "$value": "{color.green.600}" },
+      "muted": { "$value": "{color.green.50}" },
+      "fg":    { "$value": "{color.green.700}" }
+    },
+    "warning": {
+      "solid": { "$value": "{color.amber.500}" },
+      "muted": { "$value": "{color.amber.50}" },
+      "fg":    { "$value": "{color.amber.700}" }
+    },
+    "info": {
+      "solid": { "$value": "{color.blue.600}" },
+      "muted": { "$value": "{color.blue.50}" },
+      "fg":    { "$value": "{color.blue.700}" }
+    },
+    "border": {
+      "default": { "$value": "{color.neutral.200}", "$description": "Every border. The only border colour." },
+      "strong":  { "$value": "{color.neutral.400}", "$description": "Focus / selected states only." }
+    },
+    "ring": { "$value": "{color.neutral.400}", "$description": "Focus ring colour (used at 50% alpha by the ring recipe)." }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised":  { "$value": { "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px", "color": "rgb(0 0 0 / 0.05)" } },
+    "overlay": { "$value": { "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "-2px", "color": "rgb(0 0 0 / 0.12)" } },
+    "popover": { "$value": { "offsetX": "0px", "offsetY": "8px", "blur": "24px", "spread": "-4px", "color": "rgb(0 0 0 / 0.16)" } }
+  }
+}

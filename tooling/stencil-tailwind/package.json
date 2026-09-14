@@ -1,0 +1,13 @@
+{
+  "name": "@artui/stencil-tailwind",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stencil CSS plugin: compiles Tailwind v4 per component into its shadow stylesheet, scanning only that component's TSX.",
+  "exports": { ".": "./index.mjs" },
+  "dependencies": {
+    "@tailwindcss/node": "4.3.3",
+    "@tailwindcss/oxide": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

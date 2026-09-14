@@ -1,0 +1,4 @@
+/* Docs chrome uses VitePress defaults; component previews use artui tokens. */
+:root { --vp-c-brand-1: var(--art-color-fg-default); --vp-c-brand-2: var(--art-color-fg-muted); --vp-c-brand-3: var(--art-color-fg-default); }
+.dark { color-scheme: dark; }
+/* VitePress toggles `.dark` on <html>; artui reads data-theme. Keep them in sync (see Preview.vue) */

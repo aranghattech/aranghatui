@@ -1,0 +1,9 @@
+{
+  "name": "@artui/wrapper-entries",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates unprefixed entry files + package.json subpath exports for the framework packages from a tier's dist/docs.json (CLAUDE.md §3a).",
+  "bin": { "artui-wrapper-entries": "./index.mjs" },
+  "exports": { ".": "./index.mjs" }
+}

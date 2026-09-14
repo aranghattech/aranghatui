@@ -1,0 +1,62 @@
+{
+  "name": "@aranghat/base",
+  "version": "0.0.0",
+  "description": "artui Tier 2 — base web components (native form controls and atoms).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/components/index.js",
+  "module": "./dist/components/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components/*": "./dist/components/*",
+    "./hello": {
+      "types": "./dist/components/art-hello.d.ts",
+      "import": "./dist/components/art-hello.js"
+    },
+    "./icon": {
+      "types": "./dist/components/art-icon.d.ts",
+      "import": "./dist/components/art-icon.js"
+    },
+    "./docs.json": "./dist/docs.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core base",
+    "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "peerDependencies": {
+    "@aranghat/icons": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@aranghat/icons": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@artui/e2e": "workspace:*",
+    "@artui/stencil-config": "workspace:*",
+    "@artui/stories": "workspace:*",
+    "@artui/wrapper-entries": "workspace:*",
+    "@playwright/test": "1.63.0",
+    "@stencil/core": "4.45.0",
+    "@stencil/playwright": "0.5.1",
+    "@stencil/vitest": "1.15.1",
+    "vitest": "4.1.11"
+  }
+}

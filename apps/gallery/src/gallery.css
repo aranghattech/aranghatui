@@ -1,0 +1,3 @@
+body { margin: 0; background: var(--art-color-bg-canvas); color: var(--art-color-fg-default); font-family: var(--art-font-family-sans); }
+#stage { display: inline-block; padding: var(--art-space-4); min-width: 0; }
+#index { padding: var(--art-space-8); }

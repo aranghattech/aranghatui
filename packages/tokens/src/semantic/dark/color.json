@@ -1,0 +1,61 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas":  { "$value": "{color.neutral.950}" },
+      "surface": { "$value": "{color.neutral.900}" },
+      "popover": { "$value": "{color.neutral.900}" },
+      "muted":   { "$value": "{color.neutral.800}" },
+      "accent":  { "$value": "{color.neutral.800}" },
+      "overlay": { "$value": "rgb(0 0 0 / 0.7)" }
+    },
+    "fg": {
+      "default": { "$value": "{color.neutral.50}" },
+      "muted":   { "$value": "{color.neutral.400}" },
+      "on-primary": { "$value": "{color.neutral.900}" },
+      "on-destructive": { "$value": "{color.white}" },
+      "link":    { "$value": "{color.neutral.50}" }
+    },
+    "primary": {
+      "solid": { "$value": "{color.neutral.200}" },
+      "hover": { "$value": "{color.neutral.300}" }
+    },
+    "secondary": {
+      "solid": { "$value": "{color.neutral.800}" },
+      "hover": { "$value": "{color.neutral.700}" },
+      "fg":    { "$value": "{color.neutral.50}" }
+    },
+    "destructive": {
+      "solid": { "$value": "{color.red.700}" },
+      "hover": { "$value": "{color.red.600}" },
+      "muted": { "$value": "{color.red.900}" },
+      "fg":    { "$value": "{color.red.300}" }
+    },
+    "success": {
+      "solid": { "$value": "{color.green.600}" },
+      "muted": { "$value": "{color.green.900}" },
+      "fg":    { "$value": "{color.green.100}" }
+    },
+    "warning": {
+      "solid": { "$value": "{color.amber.500}" },
+      "muted": { "$value": "{color.amber.900}" },
+      "fg":    { "$value": "{color.amber.100}" }
+    },
+    "info": {
+      "solid": { "$value": "{color.blue.600}" },
+      "muted": { "$value": "{color.blue.900}" },
+      "fg":    { "$value": "{color.blue.100}" }
+    },
+    "border": {
+      "default": { "$value": "{color.neutral.800}" },
+      "strong":  { "$value": "{color.neutral.600}" }
+    },
+    "ring": { "$value": "{color.neutral.600}" }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised":  { "$value": { "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px", "color": "rgb(0 0 0 / 0.4)" } },
+    "overlay": { "$value": { "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "-2px", "color": "rgb(0 0 0 / 0.5)" } },
+    "popover": { "$value": { "offsetX": "0px", "offsetY": "8px", "blur": "24px", "spread": "-4px", "color": "rgb(0 0 0 / 0.6)" } }
+  }
+}

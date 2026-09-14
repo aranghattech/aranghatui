@@ -1,0 +1,18 @@
+{
+  "name": "@artui/tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Visual regression, accessibility and cross-framework smoke suites (CLAUDE.md §9). Run through scripts/pw-docker.sh for identical rendering (ADR-0018).",
+  "scripts": {
+    "test:visual": "playwright test --project=visual",
+    "test:a11y": "playwright test --project=a11y",
+    "test:smoke": "playwright test --project=smoke"
+  },
+  "devDependencies": {
+    "@artui/stories": "workspace:*",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@artui/token-lint",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Token discipline lint (CLAUDE.md N6, §4): no literals, no local tokens, no !important, no arbitrary Tailwind values in component source.",
+  "bin": { "artui-token-lint": "./index.mjs" },
+  "exports": { ".": "./index.mjs" }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@artui/gallery",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Story gallery: renders any component story by URL. Drives the VRT matrix and the a11y sweep.",
+  "scripts": {
+    "dev": "vite --port 4100",
+    "build": "vite build",
+    "preview": "node ../../scripts/static-server.mjs dist 4100"
+  },
+  "dependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@artui/stories": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.3.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@aranghat/icons",
+  "version": "0.0.0",
+  "description": "artui icon set — a lucide subset, one ES module per icon so apps pay only for what they import.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./*": { "types": "./dist/icons/*.d.ts", "import": "./dist/icons/*.js" },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "build": "node scripts/generate.mjs && tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "lucide": "0.577.0",
+    "typescript": "6.0.3"
+  }
+}

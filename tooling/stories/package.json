@@ -1,0 +1,9 @@
+{
+  "name": "@artui/stories",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared `ComponentStories` contract — the single source that drives the VRT matrix, the a11y sweep and the docs Examples section (CLAUDE.md §10).",
+  "types": "./index.ts",
+  "exports": { ".": { "types": "./index.ts", "import": "./index.ts" } }
+}

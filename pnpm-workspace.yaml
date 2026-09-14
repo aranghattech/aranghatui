@@ -1,0 +1,23 @@
+packages:
+  - packages/*
+  - packages/react/*
+  - packages/vue/*
+  - packages/angular/*
+  - apps/*
+  - apps/sandbox/*
+  - tooling/*
+  - tests
+
+autoInstallPeers: true
+strictPeerDependencies: false
+
+# pnpm 11: dependency build scripts must be explicitly allowed here.
+allowBuilds:
+  esbuild: true
+  "@parcel/watcher": true
+  lmdb: true
+  msgpackr-extract: true
+  "@tailwindcss/oxide": true
+
+minimumReleaseAgeExclude:
+  - '@vitejs/plugin-vue@6.0.9'
