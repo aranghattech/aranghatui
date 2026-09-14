@@ -1,21 +1,70 @@
 {
   "name": "@aranghat/primitives",
   "version": "0.0.0",
-  "description": "artui headless primitives — shared behaviour for every tier (positioning, dismissal, focus, roving tabindex, portal, typeahead, ids, events).",
+  "description": "artui headless primitives \u2014 shared behaviour for every tier (positioning, dismissal, focus, roving tabindex, portal, typeahead, ids, events).",
   "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./define": { "types": "./dist/define/index.d.ts", "import": "./dist/define/index.js" },
-    "./id": { "types": "./dist/id/index.d.ts", "import": "./dist/id/index.js" },
-    "./events": { "types": "./dist/events/index.d.ts", "import": "./dist/events/index.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./define": {
+      "types": "./dist/define/index.d.ts",
+      "import": "./dist/define/index.js"
+    },
+    "./id": {
+      "types": "./dist/id/index.d.ts",
+      "import": "./dist/id/index.js"
+    },
+    "./events": {
+      "types": "./dist/events/index.d.ts",
+      "import": "./dist/events/index.js"
+    },
+    "./dom": {
+      "types": "./dist/dom/index.d.ts",
+      "import": "./dist/dom/index.js"
+    },
+    "./floating": {
+      "types": "./dist/floating/index.d.ts",
+      "import": "./dist/floating/index.js"
+    },
+    "./scroll-lock": {
+      "types": "./dist/scroll-lock/index.d.ts",
+      "import": "./dist/scroll-lock/index.js"
+    },
+    "./dismissable": {
+      "types": "./dist/dismissable/index.d.ts",
+      "import": "./dist/dismissable/index.js"
+    },
+    "./focus-trap": {
+      "types": "./dist/focus-trap/index.d.ts",
+      "import": "./dist/focus-trap/index.js"
+    },
+    "./roving-tabindex": {
+      "types": "./dist/roving-tabindex/index.d.ts",
+      "import": "./dist/roving-tabindex/index.js"
+    },
+    "./portal": {
+      "types": "./dist/portal/index.d.ts",
+      "import": "./dist/portal/index.js"
+    },
+    "./typeahead": {
+      "types": "./dist/typeahead/index.d.ts",
+      "import": "./dist/typeahead/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "1.8.0"
   },
   "peerDependencies": {
     "@aranghat/tokens": "workspace:*"
