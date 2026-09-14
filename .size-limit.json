@@ -56,6 +56,13 @@
     "gzip": true
   },
   {
+    "name": "primitives: all modules (incl. @floating-ui/dom)",
+    "path": "packages/primitives/dist/index.js",
+    "import": "*",
+    "limit": "13 kB",
+    "gzip": true
+  },
+  {
     "name": "reference: landing page (html sandbox js+css)",
     "path": [
       "apps/sandbox/html/dist/assets/*.js",

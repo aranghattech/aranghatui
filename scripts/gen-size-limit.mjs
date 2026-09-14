@@ -34,6 +34,10 @@ for (const [tier, def] of Object.entries(catalog.tiers)) {
   }
   entries.push({ name: `${tier}: whole tier`, path: `packages/${tier}/dist/components/index.js`, import: '*', ignore: ['@aranghat/*', '@floating-ui/dom', 'embla-carousel'], limit: `${TIER_BUDGET_KB[tier]} kB`, gzip: true });
 }
+// Primitives (all modules, including @floating-ui/dom): runtime + primitives ≤ 20 kB → primitives ≤ 13 kB.
+if (existsSync(join(repo, 'packages/primitives/dist/index.js'))) {
+  entries.push({ name: 'primitives: all modules (incl. @floating-ui/dom)', path: 'packages/primitives/dist/index.js', import: '*', limit: '13 kB', gzip: true });
+}
 // Reference apps (CLAUDE.md §7). Until widgets exist, the HTML sandbox stands in for the landing page.
 const htmlAssets = join(repo, 'apps/sandbox/html/dist/assets');
 if (existsSync(htmlAssets)) {
