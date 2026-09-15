@@ -90,7 +90,7 @@ StyleDictionary.registerFormat({
     add('--color-current', 'currentColor');
     add('--color-inherit', 'inherit');
     // shape
-    for (const k of ['sm', 'md', 'lg', 'xl']) add(`--radius-${k}`, v(`radius.${k}`));
+    for (const k of ['xs', 'sm', 'md', 'lg', 'xl']) add(`--radius-${k}`, v(`radius.${k}`));
     add('--radius-none', v('radius.none'));
     add('--radius-full', v('radius.full'));
     // spacing multiplier: p-4 => calc(var(--art-space-1) * 4)
@@ -143,6 +143,9 @@ StyleDictionary.registerFormat({
 @utility field-sm { height: ${v('control.height.sm')}; padding-inline: ${v('control.padding-x-field.sm')}; }
 @utility field-md { height: ${v('control.height.md')}; padding-inline: ${v('control.padding-x-field.md')}; }
 @utility field-lg { height: ${v('control.height.lg')}; padding-inline: ${v('control.padding-x-field.lg')}; }
+@utility textarea-sm { padding-inline: ${v('control.padding-x-field.sm')}; }
+@utility textarea-md { padding-inline: ${v('control.padding-x-field.md')}; }
+@utility textarea-lg { padding-inline: ${v('control.padding-x-field.lg')}; }
 @utility invalid-ring { border-color: ${v('color.destructive.solid')}; box-shadow: 0 0 0 ${v('ring.width')} color-mix(in oklab, ${v('color.destructive.solid')} 20%, transparent); }
 @utility control-icon-sm { height: ${v('control.height.sm')}; width: ${v('control.height.sm')}; padding: 0; }
 @utility control-icon-md { height: ${v('control.height.md')}; width: ${v('control.height.md')}; padding: 0; }

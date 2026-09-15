@@ -4,8 +4,8 @@ Displays a form input field or a component that looks like an input field. shadc
 
 ## Preview
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input type="email" placeholder="Email" aria-label="Email"></art-input></div>
+<Preview frame="stack">
+  <art-input type="email" placeholder="Email" aria-label="Email"></art-input>
 </Preview>
 
 ## Installation
@@ -44,8 +44,8 @@ pnpm add @aranghat/tokens @aranghat/base @aranghat/base-angular
 
 An input without a visible label needs `aria-label`; prefer a visible `art-label`.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input type="email" placeholder="Email" aria-label="Email"></art-input></div>
+<Preview frame="stack">
+  <art-input type="email" placeholder="Email" aria-label="Email"></art-input>
 </Preview>
 
 ::: code-group
@@ -59,8 +59,10 @@ An input without a visible label needs `aria-label`; prefer a visible `art-label
 
 Heights come from `--art-control-height-*`, so an input and a button of the same size line up pixel-perfectly.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input size="sm" placeholder="Small" aria-label="Small"></art-input><art-input placeholder="Medium" aria-label="Medium"></art-input><art-input size="lg" placeholder="Large" aria-label="Large"></art-input></div>
+<Preview frame="stack">
+  <art-input size="sm" placeholder="Small" aria-label="Small"></art-input>
+  <art-input placeholder="Medium" aria-label="Medium"></art-input>
+  <art-input size="lg" placeholder="Large" aria-label="Large"></art-input>
 </Preview>
 
 ::: code-group
@@ -74,8 +76,9 @@ Heights come from `--art-control-height-*`, so an input and a button of the same
 
 The label names the input across the shadow boundary — no extra ARIA needed.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-label for="email-1">Email</art-label><art-input id="email-1" type="email" placeholder="Email"></art-input></div>
+<Preview frame="stack">
+  <art-label for="email-1">Email</art-label>
+  <art-input id="email-1" type="email" placeholder="Email"></art-input>
 </Preview>
 
 ::: code-group
@@ -87,8 +90,9 @@ The label names the input across the shadow boundary — no extra ARIA needed.
 
 ### With button
 
-<Preview>
-  <div style="display:flex;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input type="email" placeholder="Email" aria-label="Email"></art-input><art-button type="submit">Subscribe</art-button></div>
+<Preview frame="inline">
+  <art-input type="email" placeholder="Email" aria-label="Email"></art-input>
+  <art-button type="submit">Subscribe</art-button>
 </Preview>
 
 ::: code-group
@@ -100,8 +104,8 @@ The label names the input across the shadow boundary — no extra ARIA needed.
 
 ### Disabled
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input placeholder="Email" aria-label="Email" disabled></art-input></div>
+<Preview frame="stack">
+  <art-input placeholder="Email" aria-label="Email" disabled></art-input>
 </Preview>
 
 ::: code-group
@@ -115,8 +119,10 @@ The label names the input across the shadow boundary — no extra ARIA needed.
 
 `invalid` sets `aria-invalid` and the destructive ring; the description is read through `aria-describedby`.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-label for="email-2">Email</art-label><art-input id="email-2" type="email" value="not-an-email" invalid aria-describedby="email-2-error"></art-input><p id="email-2-error" style="margin:0;font-size:var(--art-font-size-sm);color:var(--art-color-destructive-fg)">Enter a valid email address.</p></div>
+<Preview frame="stack">
+  <art-label for="email-2">Email</art-label>
+  <art-input id="email-2" type="email" value="not-an-email" invalid aria-describedby="email-2-error"></art-input>
+  <p id="email-2-error">Enter a valid email address.</p>
 </Preview>
 
 ::: code-group
@@ -128,8 +134,9 @@ The label names the input across the shadow boundary — no extra ARIA needed.
 
 ### File
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-label for="picture">Picture</art-label><art-input id="picture" type="file"></art-input></div>
+<Preview frame="stack">
+  <art-label for="picture">Picture</art-label>
+  <art-input id="picture" type="file"></art-input>
 </Preview>
 
 ::: code-group
@@ -143,8 +150,13 @@ The label names the input across the shadow boundary — no extra ARIA needed.
 
 Form-associated: the value is submitted under `name`, `required`/`minlength` participate in validation, and reset restores the initial value.
 
-<Preview>
-  <form onsubmit="event.preventDefault(); this.querySelector('output').value = JSON.stringify(Object.fromEntries(new FormData(this)))" style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-label for="username">Username</art-label><art-input id="username" name="username" placeholder="shadcn" required minlength="2"></art-input><div style="display:flex;gap:var(--art-space-2)"><art-button type="submit">Submit</art-button><art-button type="reset" variant="ghost">Reset</art-button></div><output style="font-size:var(--art-font-size-sm);color:var(--art-color-fg-muted)"></output></form>
+<Preview frame="stack">
+  <form onsubmit="event.preventDefault()">
+    <art-label for="username">Username</art-label>
+    <art-input id="username" name="username" placeholder="shadcn" required minlength="2"></art-input>
+    <art-button type="submit">Submit</art-button>
+    <art-button type="reset" variant="ghost">Reset</art-button>
+  </form>
 </Preview>
 
 ::: code-group

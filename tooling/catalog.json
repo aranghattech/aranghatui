@@ -36,12 +36,12 @@
         {
           "tag": "art-textarea",
           "name": "Textarea",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-checkbox",
           "name": "Checkbox",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-radio-group",
@@ -51,7 +51,7 @@
         {
           "tag": "art-switch",
           "name": "Switch",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-native-select",

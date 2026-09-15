@@ -1,7 +1,5 @@
 import type { ComponentStories } from '@artui/stories';
 
-const col = `style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"`;
-
 export const stories: ComponentStories = {
   tag: 'art-input',
   tier: 'base',
@@ -10,17 +8,18 @@ export const stories: ComponentStories = {
   // hover / active / loading do not apply (documented); invalid is a prop
   states: ['default', 'focus-visible', 'disabled', 'invalid'],
   directional: true,
+  frame: 'stack',
   examples: {
-    basic: { title: 'Basic', render: () => `<div ${col}><art-input type="email" placeholder="Email" aria-label="Email"></art-input></div>`, note: 'An input without a visible label needs `aria-label`; prefer a visible `art-label`.' },
-    sizes: { title: 'Sizes', render: () => `<div ${col}><art-input size="sm" placeholder="Small" aria-label="Small"></art-input><art-input placeholder="Medium" aria-label="Medium"></art-input><art-input size="lg" placeholder="Large" aria-label="Large"></art-input></div>`, note: 'Heights come from `--art-control-height-*`, so an input and a button of the same size line up pixel-perfectly.' },
-    'with-label': { title: 'With label', render: () => `<div ${col}><art-label for="email-1">Email</art-label><art-input id="email-1" type="email" placeholder="Email"></art-input></div>`, note: 'The label names the input across the shadow boundary — no extra ARIA needed.' },
-    'with-button': { title: 'With button', render: () => `<div style="display:flex;gap:var(--art-space-2);width:20rem;max-width:100%"><art-input type="email" placeholder="Email" aria-label="Email"></art-input><art-button type="submit">Subscribe</art-button></div>` },
-    disabled: { title: 'Disabled', render: () => `<div ${col}><art-input placeholder="Email" aria-label="Email" disabled></art-input></div>` },
-    invalid: { title: 'Invalid', render: () => `<div ${col}><art-label for="email-2">Email</art-label><art-input id="email-2" type="email" value="not-an-email" invalid aria-describedby="email-2-error"></art-input><p id="email-2-error" style="margin:0;font-size:var(--art-font-size-sm);color:var(--art-color-destructive-fg)">Enter a valid email address.</p></div>`, note: '`invalid` sets `aria-invalid` and the destructive ring; the description is read through `aria-describedby`.' },
-    file: { title: 'File', render: () => `<div ${col}><art-label for="picture">Picture</art-label><art-input id="picture" type="file"></art-input></div>` },
-    form: { title: 'In a form', manual: true, render: () => `<form onsubmit="event.preventDefault(); this.querySelector('output').value = JSON.stringify(Object.fromEntries(new FormData(this)))" ${col}><art-label for="username">Username</art-label><art-input id="username" name="username" placeholder="shadcn" required minlength="2"></art-input><div style="display:flex;gap:var(--art-space-2)"><art-button type="submit">Submit</art-button><art-button type="reset" variant="ghost">Reset</art-button></div><output style="font-size:var(--art-font-size-sm);color:var(--art-color-fg-muted)"></output></form>`, note: 'Form-associated: the value is submitted under `name`, `required`/`minlength` participate in validation, and reset restores the initial value.' },
+    basic: { title: 'Basic', render: () => `<art-input type="email" placeholder="Email" aria-label="Email"></art-input>`, note: 'An input without a visible label needs `aria-label`; prefer a visible `art-label`.' },
+    sizes: { title: 'Sizes', render: () => `<art-input size="sm" placeholder="Small" aria-label="Small"></art-input>\n<art-input placeholder="Medium" aria-label="Medium"></art-input>\n<art-input size="lg" placeholder="Large" aria-label="Large"></art-input>`, note: 'Heights come from `--art-control-height-*`, so an input and a button of the same size line up pixel-perfectly.' },
+    'with-label': { title: 'With label', render: () => `<art-label for="email-1">Email</art-label>\n<art-input id="email-1" type="email" placeholder="Email"></art-input>`, note: 'The label names the input across the shadow boundary — no extra ARIA needed.' },
+    'with-button': { title: 'With button', render: () => `<art-input type="email" placeholder="Email" aria-label="Email"></art-input>\n<art-button type="submit">Subscribe</art-button>`, frame: 'inline' },
+    disabled: { title: 'Disabled', render: () => `<art-input placeholder="Email" aria-label="Email" disabled></art-input>` },
+    invalid: { title: 'Invalid', render: () => `<art-label for="email-2">Email</art-label>\n<art-input id="email-2" type="email" value="not-an-email" invalid aria-describedby="email-2-error"></art-input>\n<p id="email-2-error">Enter a valid email address.</p>`, note: '`invalid` sets `aria-invalid` and the destructive ring; the description is read through `aria-describedby`.' },
+    file: { title: 'File', render: () => `<art-label for="picture">Picture</art-label>\n<art-input id="picture" type="file"></art-input>` },
+    form: { title: 'In a form', manual: true, render: () => `<form onsubmit="event.preventDefault()">\n  <art-label for="username">Username</art-label>\n  <art-input id="username" name="username" placeholder="shadcn" required minlength="2"></art-input>\n  <art-button type="submit">Submit</art-button>\n  <art-button type="reset" variant="ghost">Reset</art-button>\n</form>`, note: 'Form-associated: the value is submitted under `name`, `required`/`minlength` participate in validation, and reset restores the initial value.' },
   },
-  render: ({ size, state }) => `<div style="width:16rem"><art-input size="${size}" placeholder="Email" aria-label="Email"${state === 'disabled' ? ' disabled' : ''}${state === 'invalid' ? ' invalid value="not-an-email"' : ''}></art-input></div>`,
+  render: ({ size, state }) => `<art-input size="${size}" placeholder="Email" aria-label="Email"${state === 'disabled' ? ' disabled' : ''}${state === 'invalid' ? ' invalid value="not-an-email"' : ''}></art-input>`,
   focusTarget: 'art-input input',
   docs: {
     description: 'Displays a form input field or a component that looks like an input field. shadcn/ui parity, form-associated.',

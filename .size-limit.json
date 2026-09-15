@@ -71,6 +71,45 @@
     "gzip": true
   },
   {
+    "name": "base/art-textarea",
+    "path": "packages/base/dist/components/art-textarea.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-checkbox",
+    "path": "packages/base/dist/components/art-checkbox.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-switch",
+    "path": "packages/base/dist/components/art-switch.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base: whole tier",
     "path": "packages/base/dist/components/index.js",
     "import": "*",

@@ -3,6 +3,13 @@ export type StoryState = 'default' | 'hover' | 'focus-visible' | 'active' | 'dis
 export type StorySize = 'sm' | 'md' | 'lg';
 export type Theme = 'light' | 'dark';
 
+/**
+ * How the gallery / docs preview lays out an example. Layout lives in the frame so that
+ * sample code shows only the component(s) — never wrapper divs developers would copy.
+ * inline: row, wrapping, centred. stack: column at field width (label + control + text).
+ */
+export type StoryFrame = 'inline' | 'stack';
+
 export interface StoryContext {
   variant: string;
   size: StorySize | '';
@@ -18,6 +25,8 @@ export interface StoryExample {
   render: () => string;
   /** Paragraph shown under the example heading on the docs page. */
   note?: string;
+  /** Preview layout for this example (overrides the story-level frame). Samples never contain layout markup. */
+  frame?: StoryFrame;
   /** Framework samples are hand-written (events, v-model, scripts); the generator only emits the HTML sample. */
   manual?: boolean;
 }
@@ -62,5 +71,7 @@ export interface ComponentStories {
    * viewport — required for fixed/portaled components (dialogs, sheets, toasts, overlays).
    */
   screenshot?: 'stage' | 'viewport';
+  /** Default preview layout for the matrix and examples. @default 'inline' */
+  frame?: StoryFrame;
   docs?: StoryDocs;
 }

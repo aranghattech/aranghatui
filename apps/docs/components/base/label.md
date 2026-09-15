@@ -4,8 +4,9 @@ Renders an accessible label associated with a control. shadcn/ui parity.
 
 ## Preview
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2)"><art-label for="email">Your email address</art-label><input id="email" type="email" placeholder="you@example.com"  style="font:inherit;padding:var(--art-space-2);border:var(--art-border-width) solid var(--art-color-border-default);border-radius:var(--art-radius-md);background:transparent;color:inherit"></div>
+<Preview frame="stack">
+  <art-label for="email">Your email address</art-label>
+  <art-input id="email" type="email" placeholder="Email"></art-input>
 </Preview>
 
 ## Installation
@@ -36,16 +37,17 @@ pnpm add @aranghat/tokens @aranghat/base @aranghat/base-angular
 <<< ../../../sandbox/angular/src/app/samples/label/basic.ts [Angular]
 :::
 
-`for` works across shadow boundaries: the label resolves the id in its own tree, then the document, and focuses (or toggles) the control on click. Pair it with `art-field` for automatic wiring and error states.
+`for` works across shadow boundaries: the label resolves the id in its own tree, then the document, focuses (or toggles) the control on click and names it with `aria-labelledby`. Pair it with `art-field` for automatic wiring and error states.
 
 ## Examples
 
 ### Basic
 
-Clicking the label focuses the control with the matching `id`, even across shadow boundaries.
+Clicking the label focuses the control with the matching `id`, even across shadow boundaries, and names it for assistive technology.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2)"><art-label for="email">Your email address</art-label><input id="email" type="email" placeholder="you@example.com"  style="font:inherit;padding:var(--art-space-2);border:var(--art-border-width) solid var(--art-color-border-default);border-radius:var(--art-radius-md);background:transparent;color:inherit"></div>
+<Preview frame="stack">
+  <art-label for="email">Your email address</art-label>
+  <art-input id="email" type="email" placeholder="Email"></art-input>
 </Preview>
 
 ::: code-group
@@ -59,8 +61,9 @@ Clicking the label focuses the control with the matching `id`, even across shado
 
 Field sets `disabled` on the label automatically when its control is disabled.
 
-<Preview>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2)"><art-label for="email-off" disabled>Your email address</art-label><input id="email-off" type="email" placeholder="you@example.com" disabled style="font:inherit;padding:var(--art-space-2);border:var(--art-border-width) solid var(--art-color-border-default);border-radius:var(--art-radius-md);background:transparent;color:inherit"></div>
+<Preview frame="stack">
+  <art-label for="email-off" disabled>Your email address</art-label>
+  <art-input id="email-off" type="email" placeholder="Email" disabled></art-input>
 </Preview>
 
 ::: code-group
@@ -82,7 +85,7 @@ Field sets `disabled` on the label automatically when its control is disabled.
 
 Native `<label>` semantics inside the shadow root, plus `aria-labelledby` set on the `for` target pointing at the label host, so the control gets its accessible name across the shadow boundary (existing `aria-labelledby` is respected).
 
-States: `disabled` dims the label and disables pointer events. `hover`, `active`, `focus-visible`, `loading` and `invalid` do not apply — a label is not interactive on its own; the control carries those states.
+States: `disabled` switches the text to the muted foreground (kept AA-readable; opacity would fail contrast) and disables pointer events. `hover`, `active`, `focus-visible`, `loading` and `invalid` do not apply — a label is not interactive on its own; the control carries those states.
 
 ## Tokens used
 

@@ -20,7 +20,8 @@ Add the catalogue entry status `in-progress` in `tooling/catalog.json`. Angular 
 
 ## 2. Tokens
 - Every design value is a **semantic** token. Missing one? Add it in `packages/tokens` in its own commit (see `token-authoring`). Never a literal, never `px`, never `!important`, never arbitrary Tailwind values.
-- Use the recipes: `focus-ring`, `motion-fast|base`, `control-sm|md|lg`, `icon-*`.
+- Use the recipes: `focus-ring`, `motion-fast|base`, `control-sm|md|lg`, `field-*`, `icon-*`.
+- **Interpolated class names are invisible to the Tailwind scanner.** Any `` `x-${size}` `` must be accompanied by a comment listing every literal (`// safelist: field-sm field-md field-lg`), or the utility is silently missing (Input's sizes shipped without heights once).
 
 ## 3. Implement (Stencil)
 - `shadow: true`; document `::part()` and CSS custom property hooks in JSDoc (`@part`, `@slot`).

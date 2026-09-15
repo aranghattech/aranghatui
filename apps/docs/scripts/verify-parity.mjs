@@ -49,8 +49,9 @@ for (const [tier, def] of Object.entries(catalog.tiers)) {
       }
     }
     // every variant/size/state in the matrix appears on the page (by name)
-    for (const v of stories.variants) if (v !== 'default' && !new RegExp(`\\b${v}\\b`, 'i').test(md)) fail(`${c.tag}: variant "${v}" is in the VRT matrix but not documented`);
-    for (const s of stories.sizes) if (!new RegExp(`\\b${s}\\b`).test(md)) fail(`${c.tag}: size "${s}" is in the VRT matrix but not documented`);
+    const rendered = Object.values(stories.examples).map((e) => e.render()).join('\n');
+    for (const v of stories.variants) if (v !== 'default' && !rendered.includes(`variant="${v}"`) && !new RegExp(`\\b${v}\\b`, 'i').test(md)) fail(`${c.tag}: variant "${v}" is in the VRT matrix but not documented`);
+    for (const s of stories.sizes) if (s !== 'md' && !rendered.includes(`size="${s}"`) && !new RegExp(`\\b${s}\\b`).test(md)) fail(`${c.tag}: size "${s}" is in the VRT matrix but not documented`);
   }
 }
 if (errors) { console.error(`\n✖ docs parity: ${errors} problem(s)`); process.exit(1); }

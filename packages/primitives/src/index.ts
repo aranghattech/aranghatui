@@ -9,3 +9,4 @@ export * from './focus-trap/index.js';
 export * from './roving-tabindex/index.js';
 export * from './portal/index.js';
 export * from './typeahead/index.js';
+export * from './aria/index.js';

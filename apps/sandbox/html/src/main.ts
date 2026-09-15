@@ -7,6 +7,9 @@ import { defineCustomElement as defineIcon } from '@aranghat/base/icon';
 import { defineCustomElement as defineHelloOverlay } from '@aranghat/modals/hello-overlay';
 import { defineCustomElement as defineLabel } from '@aranghat/base/label';
 import { defineCustomElement as defineInput } from '@aranghat/base/input';
+import { defineCustomElement as defineTextarea } from '@aranghat/base/textarea';
+import { defineCustomElement as defineCheckbox } from '@aranghat/base/checkbox';
+import { defineCustomElement as defineSwitch } from '@aranghat/base/switch';
 import './sandbox.css';
 
 defineButton();
@@ -15,6 +18,9 @@ defineIcon();
 defineHelloOverlay();
 defineLabel();
 defineInput();
+defineTextarea();
+defineCheckbox();
+defineSwitch();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

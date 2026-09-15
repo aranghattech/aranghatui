@@ -17,6 +17,10 @@
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js"
     },
+    "./checkbox": {
+      "types": "./dist/checkbox.d.ts",
+      "import": "./dist/checkbox.js"
+    },
     "./hello": {
       "types": "./dist/hello.d.ts",
       "import": "./dist/hello.js"
@@ -32,6 +36,14 @@
     "./label": {
       "types": "./dist/label.d.ts",
       "import": "./dist/label.js"
+    },
+    "./switch": {
+      "types": "./dist/switch.d.ts",
+      "import": "./dist/switch.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea.d.ts",
+      "import": "./dist/textarea.js"
     },
     "./package.json": "./package.json"
   },

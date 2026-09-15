@@ -1,4 +1,5 @@
 import { AttachInternals, Component, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import { resolveAria } from '@aranghat/primitives/aria';
 import { uniqueId } from '@aranghat/primitives/id';
 
 /**
@@ -61,10 +62,9 @@ export class ArtInput {
       this.directLabel = this.hostAriaLabel; // a generic host must not keep aria-label (axe aria-prohibited-attr)
       this.host.removeAttribute('aria-label');
     }
-    const root = this.host.getRootNode() as Document | ShadowRoot;
-    const text = (ids?: string | null) => ids?.split(/\s+/).map((id) => (root.getElementById?.(id) ?? document.getElementById(id))?.textContent?.trim()).filter(Boolean).join(' ') || undefined;
-    this.ariaLabel = this.directLabel ?? text(this.hostAriaLabelledby);
-    this.ariaDescription = text(this.hostAriaDescribedby);
+    const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
+    this.ariaLabel = r.label;
+    this.ariaDescription = r.description;
   }
 
   @Watch('value')
@@ -118,6 +118,7 @@ export class ArtInput {
             'placeholder:text-fg-muted selection:bg-primary selection:text-primary-fg': true,
             'file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-fg': true,
             'disabled:pointer-events-none disabled:opacity-50 aria-invalid:invalid-ring': true,
+            // safelist for the scanner: field-sm field-md field-lg
             [`field-${this.size}`]: true,
           }}
           type={this.type}

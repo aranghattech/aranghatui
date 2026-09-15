@@ -63,6 +63,47 @@ export namespace Components {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
+     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
+     * form-associated (submits `value` when checked). `change` is emitted from the host with
+     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     */
+    interface ArtCheckbox {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Mixed state (e.g. "select all" with a partial selection). Cleared by the next toggle.
+          * @default false
+         */
+        "indeterminate": boolean;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * Submitted with the form when checked.
+          * @default 'on'
+         */
+        "value": string;
+    }
+    /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
      * recipe, a native `click` passing through and a kebab-case custom event.
      * Removed when Button lands.
@@ -183,6 +224,88 @@ export namespace Components {
          */
         "htmlFor"?: string;
     }
+    /**
+     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
+     * `change` is emitted from the host with `detail.checked`.
+     */
+    interface ArtSwitch {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default 'on'
+         */
+        "value": string;
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface ArtTextarea {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "maxlength"?: number;
+        "minlength"?: number;
+        "name"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Initial visible rows; the field still grows with content.
+         */
+        "rows"?: number;
+        "setFocus": () => Promise<void>;
+        /**
+          * Density; changes inline padding only (height follows content).
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+}
+export interface ArtCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCheckboxElement;
 }
 export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -191,6 +314,14 @@ export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
 export interface ArtInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtInputElement;
+}
+export interface ArtSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSwitchElement;
+}
+export interface ArtTextareaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTextareaElement;
 }
 declare global {
     /**
@@ -204,6 +335,28 @@ declare global {
     var HTMLArtButtonElement: {
         prototype: HTMLArtButtonElement;
         new (): HTMLArtButtonElement;
+    };
+    interface HTMLArtCheckboxElementEventMap {
+        "change": { checked: boolean };
+    }
+    /**
+     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
+     * form-associated (submits `value` when checked). `change` is emitted from the host with
+     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     */
+    interface HTMLArtCheckboxElement extends Components.ArtCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCheckboxElementEventMap>(type: K, listener: (this: HTMLArtCheckboxElement, ev: ArtCheckboxCustomEvent<HTMLArtCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCheckboxElementEventMap>(type: K, listener: (this: HTMLArtCheckboxElement, ev: ArtCheckboxCustomEvent<HTMLArtCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCheckboxElement: {
+        prototype: HTMLArtCheckboxElement;
+        new (): HTMLArtCheckboxElement;
     };
     interface HTMLArtHelloElementEventMap {
         "greet": { name: string };
@@ -272,12 +425,58 @@ declare global {
         prototype: HTMLArtLabelElement;
         new (): HTMLArtLabelElement;
     };
+    interface HTMLArtSwitchElementEventMap {
+        "change": { checked: boolean };
+    }
+    /**
+     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
+     * `change` is emitted from the host with `detail.checked`.
+     */
+    interface HTMLArtSwitchElement extends Components.ArtSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSwitchElementEventMap>(type: K, listener: (this: HTMLArtSwitchElement, ev: ArtSwitchCustomEvent<HTMLArtSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSwitchElementEventMap>(type: K, listener: (this: HTMLArtSwitchElement, ev: ArtSwitchCustomEvent<HTMLArtSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSwitchElement: {
+        prototype: HTMLArtSwitchElement;
+        new (): HTMLArtSwitchElement;
+    };
+    interface HTMLArtTextareaElementEventMap {
+        "input": { value: string };
+        "change": { value: string };
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface HTMLArtTextareaElement extends Components.ArtTextarea, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTextareaElementEventMap>(type: K, listener: (this: HTMLArtTextareaElement, ev: ArtTextareaCustomEvent<HTMLArtTextareaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTextareaElementEventMap>(type: K, listener: (this: HTMLArtTextareaElement, ev: ArtTextareaCustomEvent<HTMLArtTextareaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTextareaElement: {
+        prototype: HTMLArtTextareaElement;
+        new (): HTMLArtTextareaElement;
+    };
     interface HTMLElementTagNameMap {
         "art-button": HTMLArtButtonElement;
+        "art-checkbox": HTMLArtCheckboxElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
         "art-input": HTMLArtInputElement;
         "art-label": HTMLArtLabelElement;
+        "art-switch": HTMLArtSwitchElement;
+        "art-textarea": HTMLArtTextareaElement;
     }
 }
 declare namespace LocalJSX {
@@ -342,6 +541,55 @@ declare namespace LocalJSX {
           * @default 'default'
          */
         "variant"?: 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
+    }
+    /**
+     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
+     * form-associated (submits `value` when checked). `change` is emitted from the host with
+     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     */
+    interface ArtCheckbox {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Mixed state (e.g. "select all" with a partial selection). Cleared by the next toggle.
+          * @default false
+         */
+        "indeterminate"?: boolean;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user toggle; `detail.checked` mirrors `target.checked`.
+         */
+        "onChange"?: (event: ArtCheckboxCustomEvent<{ checked: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * Submitted with the form when checked.
+          * @default 'on'
+         */
+        "value"?: string;
     }
     /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
@@ -472,6 +720,97 @@ declare namespace LocalJSX {
          */
         "htmlFor"?: string;
     }
+    /**
+     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
+     * `change` is emitted from the host with `detail.checked`.
+     */
+    interface ArtSwitch {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user toggle; `detail.checked` mirrors `target.checked`.
+         */
+        "onChange"?: (event: ArtSwitchCustomEvent<{ checked: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default 'on'
+         */
+        "value"?: string;
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface ArtTextarea {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "maxlength"?: number;
+        "minlength"?: number;
+        "name"?: string;
+        "onChange"?: (event: ArtTextareaCustomEvent<{ value: string }>) => void;
+        "onInput"?: (event: ArtTextareaCustomEvent<{ value: string }>) => void;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Initial visible rows; the field still grows with content.
+         */
+        "rows"?: number;
+        /**
+          * Density; changes inline padding only (height follows content).
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
 
     interface ArtButtonAttributes {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -484,6 +823,19 @@ declare namespace LocalJSX {
         "target": string;
         "rel": string;
         "hostAriaLabel": string | null;
+    }
+    interface ArtCheckboxAttributes {
+        "checked": boolean;
+        "indeterminate": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
     }
     interface ArtHelloAttributes {
         "name": string;
@@ -520,13 +872,45 @@ declare namespace LocalJSX {
         "htmlFor": string;
         "disabled": boolean;
     }
+    interface ArtSwitchAttributes {
+        "checked": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtTextareaAttributes {
+        "value": string;
+        "size": 'sm' | 'md' | 'lg';
+        "placeholder": string;
+        "name": string;
+        "disabled": boolean;
+        "readonly": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "rows": number;
+        "minlength": number;
+        "maxlength": number;
+        "autocomplete": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
 
     interface IntrinsicElements {
         "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
+        "art-checkbox": Omit<ArtCheckbox, keyof ArtCheckboxAttributes> & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes]?: ArtCheckbox[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `attr:${K}`]?: ArtCheckboxAttributes[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `prop:${K}`]?: ArtCheckbox[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
         "art-input": Omit<ArtInput, keyof ArtInputAttributes> & { [K in keyof ArtInput & keyof ArtInputAttributes]?: ArtInput[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `attr:${K}`]?: ArtInputAttributes[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `prop:${K}`]?: ArtInput[K] };
         "art-label": Omit<ArtLabel, keyof ArtLabelAttributes> & { [K in keyof ArtLabel & keyof ArtLabelAttributes]?: ArtLabel[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `attr:${K}`]?: ArtLabelAttributes[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `prop:${K}`]?: ArtLabel[K] };
+        "art-switch": Omit<ArtSwitch, keyof ArtSwitchAttributes> & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes]?: ArtSwitch[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `attr:${K}`]?: ArtSwitchAttributes[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `prop:${K}`]?: ArtSwitch[K] };
+        "art-textarea": Omit<ArtTextarea, keyof ArtTextareaAttributes> & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes]?: ArtTextarea[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `attr:${K}`]?: ArtTextareaAttributes[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `prop:${K}`]?: ArtTextarea[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -540,6 +924,12 @@ declare module "@stencil/core" {
              * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
              */
             "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;
+            /**
+             * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
+             * form-associated (submits `value` when checked). `change` is emitted from the host with
+             * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+             */
+            "art-checkbox": LocalJSX.IntrinsicElements["art-checkbox"] & JSXBase.HTMLAttributes<HTMLArtCheckboxElement>;
             /**
              * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
              * recipe, a native `click` passing through and a kebab-case custom event.
@@ -564,6 +954,16 @@ declare module "@stencil/core" {
              * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
              */
             "art-label": LocalJSX.IntrinsicElements["art-label"] & JSXBase.HTMLAttributes<HTMLArtLabelElement>;
+            /**
+             * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
+             * `change` is emitted from the host with `detail.checked`.
+             */
+            "art-switch": LocalJSX.IntrinsicElements["art-switch"] & JSXBase.HTMLAttributes<HTMLArtSwitchElement>;
+            /**
+             * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+             * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+             */
+            "art-textarea": LocalJSX.IntrinsicElements["art-textarea"] & JSXBase.HTMLAttributes<HTMLArtTextareaElement>;
         }
     }
 }

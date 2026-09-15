@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Label } from '@aranghat/base-vue';
+import { Input, Label } from '@aranghat/base-vue';
 </script>
 
 <template>
-  <div style="display:flex;flex-direction:column;gap:var(--art-space-2)"><Label for="email">Your email address</Label><input id="email" type="email" placeholder="you@example.com"  style="font:inherit;padding:var(--art-space-2);border:var(--art-border-width) solid var(--art-color-border-default);border-radius:var(--art-radius-md);background:transparent;color:inherit"></div>
+  <Label for="email">Your email address</Label>
+  <Input id="email" type="email" placeholder="Email" />
 </template>

@@ -21,9 +21,26 @@ import { InputDisabled } from './input/disabled';
 import { InputInvalid } from './input/invalid';
 import { InputFile } from './input/file';
 import { InputForm } from './input/form';
+import { TextareaBasic } from './textarea/basic';
+import { TextareaWithLabel } from './textarea/with-label';
+import { TextareaWithText } from './textarea/with-text';
+import { TextareaDisabled } from './textarea/disabled';
+import { TextareaInvalid } from './textarea/invalid';
+import { TextareaWithButton } from './textarea/with-button';
+import { CheckboxBasic } from './checkbox/basic';
+import { CheckboxChecked } from './checkbox/checked';
+import { CheckboxIndeterminate } from './checkbox/indeterminate';
+import { CheckboxSizes } from './checkbox/sizes';
+import { CheckboxWithText } from './checkbox/with-text';
+import { CheckboxDisabled } from './checkbox/disabled';
+import { CheckboxInvalid } from './checkbox/invalid';
+import { SwitchBasic } from './switch/basic';
+import { SwitchChecked } from './switch/checked';
+import { SwitchSizes } from './switch/sizes';
+import { SwitchDisabled } from './switch/disabled';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -48,4 +65,21 @@ export const SAMPLES = [
   { id: 'input/invalid', component: InputInvalid },
   { id: 'input/file', component: InputFile },
   { id: 'input/form', component: InputForm },
+  { id: 'textarea/basic', component: TextareaBasic },
+  { id: 'textarea/with-label', component: TextareaWithLabel },
+  { id: 'textarea/with-text', component: TextareaWithText },
+  { id: 'textarea/disabled', component: TextareaDisabled },
+  { id: 'textarea/invalid', component: TextareaInvalid },
+  { id: 'textarea/with-button', component: TextareaWithButton },
+  { id: 'checkbox/basic', component: CheckboxBasic },
+  { id: 'checkbox/checked', component: CheckboxChecked },
+  { id: 'checkbox/indeterminate', component: CheckboxIndeterminate },
+  { id: 'checkbox/sizes', component: CheckboxSizes },
+  { id: 'checkbox/with-text', component: CheckboxWithText },
+  { id: 'checkbox/disabled', component: CheckboxDisabled },
+  { id: 'checkbox/invalid', component: CheckboxInvalid },
+  { id: 'switch/basic', component: SwitchBasic },
+  { id: 'switch/checked', component: SwitchChecked },
+  { id: 'switch/sizes', component: SwitchSizes },
+  { id: 'switch/disabled', component: SwitchDisabled },
 ];

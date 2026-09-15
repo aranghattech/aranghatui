@@ -37,9 +37,10 @@ function toReact(html) {
   out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter(Boolean).map((decl) => { const [k, ...v] = decl.split(':'); return `${camel(k.trim())}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
   // kebab-case props on wrapped components → camelCase (aria-/data- stay)
   out = out.replace(/<[A-Z][\w]*[^>]*>/g, (tagStr) => tagStr.replace(/\s(?!aria-|data-)([a-z]+(?:-[a-z]+)+)=/g, (_, k) => ` ${camel(k)}=`));
+  out = out.replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />'); // empty elements self-close
   return out.trim();
 }
-function toVue(html) { return html.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`).trim(); }
+function toVue(html) { return html.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`).replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />').trim(); }
 const indent = (s, n) => s.split('\n').map((l) => ' '.repeat(n) + l).join('\n');
 
 function imports(html, fw) {
@@ -109,7 +110,7 @@ ${d.description}
 
 ## Preview
 
-<Preview>
+<Preview frame="${stories.examples[firstKey].frame ?? stories.frame ?? 'inline'}">
 ${indent(stories.examples[firstKey].render(), 2)}
 </Preview>
 
@@ -140,7 +141,7 @@ ${d.usage ? `\n${d.usage}\n` : ''}
 ${Object.entries(stories.examples).map(([key, ex]) => `
 ### ${ex.title}
 ${ex.note ? `\n${ex.note}\n` : ''}
-<Preview>
+<Preview frame="${ex.frame ?? stories.frame ?? 'inline'}">
 ${indent(ex.render(), 2)}
 </Preview>
 

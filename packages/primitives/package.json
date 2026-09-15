@@ -57,7 +57,11 @@
       "types": "./dist/typeahead/index.d.ts",
       "import": "./dist/typeahead/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./aria": {
+      "types": "./dist/aria/index.d.ts",
+      "import": "./dist/aria/index.js"
+    }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
