@@ -5,8 +5,8 @@ A control that allows the user to toggle between checked and not checked. shadcn
 ## Preview
 
 <Preview frame="inline">
-  <art-checkbox id="terms"></art-checkbox>
-  <art-label for="terms">Accept terms and conditions</art-label>
+  <art-checkbox id="terms-preview"></art-checkbox>
+  <art-label for="terms-preview">Accept terms and conditions</art-label>
 </Preview>
 
 ## Installation

@@ -5,8 +5,8 @@ Renders an accessible label associated with a control. shadcn/ui parity.
 ## Preview
 
 <Preview frame="stack">
-  <art-label for="email">Your email address</art-label>
-  <art-input id="email" type="email" placeholder="Email"></art-input>
+  <art-label for="email-preview">Your email address</art-label>
+  <art-input id="email-preview" type="email" placeholder="Email"></art-input>
 </Preview>
 
 ## Installation

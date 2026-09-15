@@ -15,7 +15,8 @@ createServer(async (req, res) => {
     const s = await stat(file);
     if (s.isDirectory()) file = join(file, 'index.html');
   } catch {
-    file = join(root, 'index.html'); // SPA fallback
+    // clean URLs (VitePress `cleanUrls`): /docs/page → /docs/page.html, else SPA fallback
+    try { await stat(file + '.html'); file = file + '.html'; } catch { file = join(root, 'index.html'); }
   }
   try {
     const body = await readFile(file);

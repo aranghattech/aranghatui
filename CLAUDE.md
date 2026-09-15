@@ -280,7 +280,7 @@ pnpm verify           # all of the above — this is the gate
 `apps/docs`. Every component page uses the **identical** structure — no exceptions, no reordering:
 
 1. **Title + one-line description**
-2. **Preview** — live, interactive web component embed (light/dark toggle on the frame)
+2. **Preview** — live, interactive web component embed that follows the page's light/dark mode (RTL and brand toggles on the frame)
 3. **Installation** — the tier package this component lives in, plus the install + import line for each framework
 4. **Usage** — tabbed code blocks: `HTML | React | Vue | Angular`, all four always present, all four copy-pasteable and verified against the sandbox. Each tab uses that framework's idiomatic form per §3a (`onClick`, `@click`, `v-model`, `(click)`) — never the web-component form dressed up.
 5. **Examples** — one section per variation, each with live preview + 4-framework tabs. **Every documented variant, size and state must appear here.**

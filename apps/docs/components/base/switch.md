@@ -5,8 +5,8 @@ A control that allows the user to toggle between checked and not checked. shadcn
 ## Preview
 
 <Preview frame="inline">
-  <art-switch id="airplane"></art-switch>
-  <art-label for="airplane">Airplane Mode</art-label>
+  <art-switch id="airplane-preview"></art-switch>
+  <art-label for="airplane-preview">Airplane Mode</art-label>
 </Preview>
 
 ## Installation

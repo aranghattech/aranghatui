@@ -103,6 +103,9 @@ const cg = (key) => `::: code-group\n<<< ../../../sandbox/html/src/samples/${slu
 const pkgs = [tier, ...(d.requires ?? [])].map((t) => `@aranghat/${t}`);
 const install = (fw) => `pnpm add @aranghat/tokens ${pkgs.join(' ')}${fw ? ` @aranghat/${tier}-${fw}` : ''}`;
 const firstKey = Object.keys(stories.examples)[0];
+// The top Preview repeats the first example: suffix every id / idref so the two copies never collide
+// (a duplicate id would make `for` / aria-describedby resolve to the first, off-screen copy).
+const uniquify = (html, suffix) => html.replace(/\b(id|for|aria-describedby|aria-labelledby|aria-controls)="([^"]+)"/g, (_, attr, val) => `${attr}="${val.split(/\s+/).map((v) => `${v}-${suffix}`).join(' ')}"`);
 const table = (rows, h) => `| ${h[0]} | ${h[1]} |\n|---|---|\n${rows.map(([a, b]) => `| ${a} | ${b} |`).join('\n')}`;
 const md = `# ${name}
 
@@ -111,7 +114,7 @@ ${d.description}
 ## Preview
 
 <Preview frame="${stories.examples[firstKey].frame ?? stories.frame ?? 'inline'}">
-${indent(stories.examples[firstKey].render(), 2)}
+${indent(uniquify(stories.examples[firstKey].render(), 'preview'), 2)}
 </Preview>
 
 ## Installation
