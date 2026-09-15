@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { ArtAlertDialog } from '@aranghat/modals-angular';
+import { ArtButton } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-alert-dialog-basic',
+  imports: [ArtAlertDialog, ArtButton],
+  template: `
+    <art-alert-dialog>
+      <art-button slot="trigger" variant="outline">Show dialog</art-button>
+      <span slot="title">Are you absolutely sure?</span>
+      <span slot="description">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</span>
+      <art-button slot="cancel" variant="outline">Cancel</art-button>
+      <art-button slot="action">Continue</art-button>
+    </art-alert-dialog>
+  `,
+})
+export class AlertDialogBasic {}

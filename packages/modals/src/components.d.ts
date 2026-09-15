@@ -7,84 +7,288 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     /**
-     * Phase 0 proof overlay. Consumes `<art-hello>` from `@aranghat/base` to prove
-     * cross-tier composition: base is a peer dependency, never bundled (ADR-0002).
-     * Removed when Dialog lands.
+     * Alert Dialog — shadcn/ui parity on the native `<dialog>`: a `role="alertdialog"` that
+     * interrupts the user and expects a decision. No close button, no backdrop dismissal; Escape
+     * cancels. Focus starts on the `cancel` button and returns to the trigger on close.
      */
-    interface ArtHelloOverlay {
+    interface ArtAlertDialog {
         /**
-          * Passed through to the inner `<art-hello>`.
-          * @default 'World'
+          * Accessible name when there is no `title` slot.
          */
-        "name": string;
+        "label"?: string;
         /**
-          * Whether the overlay is shown.
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * `sm` is a narrower panel for a short question.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md';
+    }
+    /**
+     * Dialog — shadcn/ui parity on the native `<dialog>` (ADR-0020): a modal window over the page
+     * (top layer, page inert, document scroll locked) opened by the `trigger`, closed by Escape, a
+     * click on the backdrop, the close button, or any slotted element with the `dialog-close`
+     * attribute. Focus moves into the dialog and returns to the trigger on close.
+     */
+    interface ArtDialog {
+        /**
+          * @default 'Close'
+         */
+        "closeLabel": string;
+        /**
+          * Remove the close button in the corner.
+          * @default false
+         */
+        "hideClose": boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
           * @default false
          */
         "open": boolean;
     }
+    /**
+     * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
+     * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
+     * button / `dialog-close` elements close it, focus returns to the trigger. `left` and `right`
+     * are logical (mirrored in RTL) and share the motion of the Sidebar's off-canvas mode.
+     */
+    interface ArtSheet {
+        /**
+          * @default 'Close'
+         */
+        "closeLabel": string;
+        /**
+          * Remove the close button in the corner.
+          * @default false
+         */
+        "hideClose": boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Edge the sheet slides in from; `left` / `right` follow the writing direction.
+          * @default 'right'
+         */
+        "side": 'top' | 'right' | 'bottom' | 'left';
+    }
 }
-export interface ArtHelloOverlayCustomEvent<T> extends CustomEvent<T> {
+export interface ArtAlertDialogCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLArtHelloOverlayElement;
+    target: HTMLArtAlertDialogElement;
+}
+export interface ArtDialogCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtDialogElement;
+}
+export interface ArtSheetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSheetElement;
 }
 declare global {
-    interface HTMLArtHelloOverlayElementEventMap {
+    interface HTMLArtAlertDialogElementEventMap {
         "open-change": { open: boolean };
+        "action": void;
     }
     /**
-     * Phase 0 proof overlay. Consumes `<art-hello>` from `@aranghat/base` to prove
-     * cross-tier composition: base is a peer dependency, never bundled (ADR-0002).
-     * Removed when Dialog lands.
+     * Alert Dialog — shadcn/ui parity on the native `<dialog>`: a `role="alertdialog"` that
+     * interrupts the user and expects a decision. No close button, no backdrop dismissal; Escape
+     * cancels. Focus starts on the `cancel` button and returns to the trigger on close.
      */
-    interface HTMLArtHelloOverlayElement extends Components.ArtHelloOverlay, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLArtHelloOverlayElementEventMap>(type: K, listener: (this: HTMLArtHelloOverlayElement, ev: ArtHelloOverlayCustomEvent<HTMLArtHelloOverlayElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLArtAlertDialogElement extends Components.ArtAlertDialog, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtAlertDialogElementEventMap>(type: K, listener: (this: HTMLArtAlertDialogElement, ev: ArtAlertDialogCustomEvent<HTMLArtAlertDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLArtHelloOverlayElementEventMap>(type: K, listener: (this: HTMLArtHelloOverlayElement, ev: ArtHelloOverlayCustomEvent<HTMLArtHelloOverlayElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtAlertDialogElementEventMap>(type: K, listener: (this: HTMLArtAlertDialogElement, ev: ArtAlertDialogCustomEvent<HTMLArtAlertDialogElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLArtHelloOverlayElement: {
-        prototype: HTMLArtHelloOverlayElement;
-        new (): HTMLArtHelloOverlayElement;
+    var HTMLArtAlertDialogElement: {
+        prototype: HTMLArtAlertDialogElement;
+        new (): HTMLArtAlertDialogElement;
+    };
+    interface HTMLArtDialogElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Dialog — shadcn/ui parity on the native `<dialog>` (ADR-0020): a modal window over the page
+     * (top layer, page inert, document scroll locked) opened by the `trigger`, closed by Escape, a
+     * click on the backdrop, the close button, or any slotted element with the `dialog-close`
+     * attribute. Focus moves into the dialog and returns to the trigger on close.
+     */
+    interface HTMLArtDialogElement extends Components.ArtDialog, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtDialogElementEventMap>(type: K, listener: (this: HTMLArtDialogElement, ev: ArtDialogCustomEvent<HTMLArtDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtDialogElementEventMap>(type: K, listener: (this: HTMLArtDialogElement, ev: ArtDialogCustomEvent<HTMLArtDialogElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtDialogElement: {
+        prototype: HTMLArtDialogElement;
+        new (): HTMLArtDialogElement;
+    };
+    interface HTMLArtSheetElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
+     * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
+     * button / `dialog-close` elements close it, focus returns to the trigger. `left` and `right`
+     * are logical (mirrored in RTL) and share the motion of the Sidebar's off-canvas mode.
+     */
+    interface HTMLArtSheetElement extends Components.ArtSheet, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSheetElementEventMap>(type: K, listener: (this: HTMLArtSheetElement, ev: ArtSheetCustomEvent<HTMLArtSheetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSheetElementEventMap>(type: K, listener: (this: HTMLArtSheetElement, ev: ArtSheetCustomEvent<HTMLArtSheetElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSheetElement: {
+        prototype: HTMLArtSheetElement;
+        new (): HTMLArtSheetElement;
     };
     interface HTMLElementTagNameMap {
-        "art-hello-overlay": HTMLArtHelloOverlayElement;
+        "art-alert-dialog": HTMLArtAlertDialogElement;
+        "art-dialog": HTMLArtDialogElement;
+        "art-sheet": HTMLArtSheetElement;
     }
 }
 declare namespace LocalJSX {
     /**
-     * Phase 0 proof overlay. Consumes `<art-hello>` from `@aranghat/base` to prove
-     * cross-tier composition: base is a peer dependency, never bundled (ADR-0002).
-     * Removed when Dialog lands.
+     * Alert Dialog — shadcn/ui parity on the native `<dialog>`: a `role="alertdialog"` that
+     * interrupts the user and expects a decision. No close button, no backdrop dismissal; Escape
+     * cancels. Focus starts on the `cancel` button and returns to the trigger on close.
      */
-    interface ArtHelloOverlay {
+    interface ArtAlertDialog {
         /**
-          * Passed through to the inner `<art-hello>`.
-          * @default 'World'
+          * Accessible name when there is no `title` slot.
          */
-        "name"?: string;
+        "label"?: string;
         /**
-          * Emitted when `open` changes because of user interaction (Escape / close button).
+          * Emitted when the `action` button is pressed. Cancelable — `preventDefault()` keeps the dialog open (e.g. while saving).
          */
-        "onOpen-change"?: (event: ArtHelloOverlayCustomEvent<{ open: boolean }>) => void;
+        "onAction"?: (event: ArtAlertDialogCustomEvent<void>) => void;
         /**
-          * Whether the overlay is shown.
+          * Emitted when the user opens or closes the dialog; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtAlertDialogCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * `sm` is a narrower panel for a short question.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md';
+    }
+    /**
+     * Dialog — shadcn/ui parity on the native `<dialog>` (ADR-0020): a modal window over the page
+     * (top layer, page inert, document scroll locked) opened by the `trigger`, closed by Escape, a
+     * click on the backdrop, the close button, or any slotted element with the `dialog-close`
+     * attribute. Focus moves into the dialog and returns to the trigger on close.
+     */
+    interface ArtDialog {
+        /**
+          * @default 'Close'
+         */
+        "closeLabel"?: string;
+        /**
+          * Remove the close button in the corner.
+          * @default false
+         */
+        "hideClose"?: boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
+          * Emitted when the user opens or closes the dialog; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtDialogCustomEvent<{ open: boolean }>) => void;
+        /**
           * @default false
          */
         "open"?: boolean;
     }
+    /**
+     * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
+     * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
+     * button / `dialog-close` elements close it, focus returns to the trigger. `left` and `right`
+     * are logical (mirrored in RTL) and share the motion of the Sidebar's off-canvas mode.
+     */
+    interface ArtSheet {
+        /**
+          * @default 'Close'
+         */
+        "closeLabel"?: string;
+        /**
+          * Remove the close button in the corner.
+          * @default false
+         */
+        "hideClose"?: boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
+          * Emitted when the user opens or closes the sheet; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtSheetCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * Edge the sheet slides in from; `left` / `right` follow the writing direction.
+          * @default 'right'
+         */
+        "side"?: 'top' | 'right' | 'bottom' | 'left';
+    }
 
-    interface ArtHelloOverlayAttributes {
+    interface ArtAlertDialogAttributes {
         "open": boolean;
-        "name": string;
+        "label": string;
+        "size": 'sm' | 'md';
+    }
+    interface ArtDialogAttributes {
+        "open": boolean;
+        "label": string;
+        "hideClose": boolean;
+        "closeLabel": string;
+    }
+    interface ArtSheetAttributes {
+        "open": boolean;
+        "side": 'top' | 'right' | 'bottom' | 'left';
+        "label": string;
+        "hideClose": boolean;
+        "closeLabel": string;
     }
 
     interface IntrinsicElements {
-        "art-hello-overlay": Omit<ArtHelloOverlay, keyof ArtHelloOverlayAttributes> & { [K in keyof ArtHelloOverlay & keyof ArtHelloOverlayAttributes]?: ArtHelloOverlay[K] } & { [K in keyof ArtHelloOverlay & keyof ArtHelloOverlayAttributes as `attr:${K}`]?: ArtHelloOverlayAttributes[K] } & { [K in keyof ArtHelloOverlay & keyof ArtHelloOverlayAttributes as `prop:${K}`]?: ArtHelloOverlay[K] };
+        "art-alert-dialog": Omit<ArtAlertDialog, keyof ArtAlertDialogAttributes> & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes]?: ArtAlertDialog[K] } & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes as `attr:${K}`]?: ArtAlertDialogAttributes[K] } & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes as `prop:${K}`]?: ArtAlertDialog[K] };
+        "art-dialog": Omit<ArtDialog, keyof ArtDialogAttributes> & { [K in keyof ArtDialog & keyof ArtDialogAttributes]?: ArtDialog[K] } & { [K in keyof ArtDialog & keyof ArtDialogAttributes as `attr:${K}`]?: ArtDialogAttributes[K] } & { [K in keyof ArtDialog & keyof ArtDialogAttributes as `prop:${K}`]?: ArtDialog[K] };
+        "art-sheet": Omit<ArtSheet, keyof ArtSheetAttributes> & { [K in keyof ArtSheet & keyof ArtSheetAttributes]?: ArtSheet[K] } & { [K in keyof ArtSheet & keyof ArtSheetAttributes as `attr:${K}`]?: ArtSheetAttributes[K] } & { [K in keyof ArtSheet & keyof ArtSheetAttributes as `prop:${K}`]?: ArtSheet[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -92,11 +296,26 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             /**
-             * Phase 0 proof overlay. Consumes `<art-hello>` from `@aranghat/base` to prove
-             * cross-tier composition: base is a peer dependency, never bundled (ADR-0002).
-             * Removed when Dialog lands.
+             * Alert Dialog — shadcn/ui parity on the native `<dialog>`: a `role="alertdialog"` that
+             * interrupts the user and expects a decision. No close button, no backdrop dismissal; Escape
+             * cancels. Focus starts on the `cancel` button and returns to the trigger on close.
              */
-            "art-hello-overlay": LocalJSX.IntrinsicElements["art-hello-overlay"] & JSXBase.HTMLAttributes<HTMLArtHelloOverlayElement>;
+            "art-alert-dialog": LocalJSX.IntrinsicElements["art-alert-dialog"] & JSXBase.HTMLAttributes<HTMLArtAlertDialogElement>;
+            /**
+             * Dialog — shadcn/ui parity on the native `<dialog>` (ADR-0020): a modal window over the page
+             * (top layer, page inert, document scroll locked) opened by the `trigger`, closed by Escape, a
+             * click on the backdrop, the close button, or any slotted element with the `dialog-close`
+             * attribute. Focus moves into the dialog and returns to the trigger on close.
+             */
+            "art-dialog": LocalJSX.IntrinsicElements["art-dialog"] & JSXBase.HTMLAttributes<HTMLArtDialogElement>;
+            /**
+             * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+             * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
+             * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
+             * button / `dialog-close` elements close it, focus returns to the trigger. `left` and `right`
+             * are logical (mirrored in RTL) and share the motion of the Sidebar's off-canvas mode.
+             */
+            "art-sheet": LocalJSX.IntrinsicElements["art-sheet"] & JSXBase.HTMLAttributes<HTMLArtSheetElement>;
         }
     }
 }

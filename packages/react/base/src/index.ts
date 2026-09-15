@@ -10,7 +10,6 @@ export { ArtEmpty as Empty } from './components/art-empty.js';
 export { ArtField as Field } from './components/art-field.js';
 export { ArtFieldGroup as FieldGroup } from './components/art-field-group.js';
 export { ArtFieldSet as FieldSet } from './components/art-field-set.js';
-export { ArtHello as Hello } from './components/art-hello.js';
 export { ArtIcon as Icon } from './components/art-icon.js';
 export { ArtInput as Input } from './components/art-input.js';
 export { ArtInputGroup as InputGroup } from './components/art-input-group.js';

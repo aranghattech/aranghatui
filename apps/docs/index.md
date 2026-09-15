@@ -10,7 +10,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: Components
-      link: /components/base/hello
+      link: /components/base/button
 features:
   - title: Framework-agnostic
     details: Web components with idiomatic React, Vue and Angular bindings generated from one source.

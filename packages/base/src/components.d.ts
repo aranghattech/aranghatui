@@ -203,28 +203,6 @@ export namespace Components {
         "disabled": boolean;
     }
     /**
-     * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
-     * recipe, a native `click` passing through and a kebab-case custom event.
-     * Removed when Button lands.
-     */
-    interface ArtHello {
-        /**
-          * Disabled state.
-          * @default false
-         */
-        "disabled": boolean;
-        /**
-          * Who to greet.
-          * @default 'World'
-         */
-        "name": string;
-        /**
-          * Visual variant.
-          * @default 'default'
-         */
-        "variant": 'default' | 'outline';
-    }
-    /**
      * Renders an icon from `@aranghat/icons` (ADR-0007). Icons are never bundled
      * into components: import the icon module you need and pass it as `icon`.
      */
@@ -800,10 +778,6 @@ export interface ArtCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtCheckboxElement;
 }
-export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLArtHelloElement;
-}
 export interface ArtInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtInputElement;
@@ -970,28 +944,6 @@ declare global {
     var HTMLArtFieldSetElement: {
         prototype: HTMLArtFieldSetElement;
         new (): HTMLArtFieldSetElement;
-    };
-    interface HTMLArtHelloElementEventMap {
-        "greet": { name: string };
-    }
-    /**
-     * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
-     * recipe, a native `click` passing through and a kebab-case custom event.
-     * Removed when Button lands.
-     */
-    interface HTMLArtHelloElement extends Components.ArtHello, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLArtHelloElementEventMap>(type: K, listener: (this: HTMLArtHelloElement, ev: ArtHelloCustomEvent<HTMLArtHelloElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLArtHelloElementEventMap>(type: K, listener: (this: HTMLArtHelloElement, ev: ArtHelloCustomEvent<HTMLArtHelloElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLArtHelloElement: {
-        prototype: HTMLArtHelloElement;
-        new (): HTMLArtHelloElement;
     };
     /**
      * Renders an icon from `@aranghat/icons` (ADR-0007). Icons are never bundled
@@ -1370,7 +1322,6 @@ declare global {
         "art-field": HTMLArtFieldElement;
         "art-field-group": HTMLArtFieldGroupElement;
         "art-field-set": HTMLArtFieldSetElement;
-        "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
         "art-input": HTMLArtInputElement;
         "art-input-group": HTMLArtInputGroupElement;
@@ -1609,32 +1560,6 @@ declare namespace LocalJSX {
           * @default false
          */
         "disabled"?: boolean;
-    }
-    /**
-     * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
-     * recipe, a native `click` passing through and a kebab-case custom event.
-     * Removed when Button lands.
-     */
-    interface ArtHello {
-        /**
-          * Disabled state.
-          * @default false
-         */
-        "disabled"?: boolean;
-        /**
-          * Who to greet.
-          * @default 'World'
-         */
-        "name"?: string;
-        /**
-          * Emitted after the greet button is activated.
-         */
-        "onGreet"?: (event: ArtHelloCustomEvent<{ name: string }>) => void;
-        /**
-          * Visual variant.
-          * @default 'default'
-         */
-        "variant"?: 'default' | 'outline';
     }
     /**
      * Renders an icon from `@aranghat/icons` (ADR-0007). Icons are never bundled
@@ -2321,11 +2246,6 @@ declare namespace LocalJSX {
     interface ArtFieldSetAttributes {
         "disabled": boolean;
     }
-    interface ArtHelloAttributes {
-        "name": string;
-        "variant": 'default' | 'outline';
-        "disabled": boolean;
-    }
     interface ArtIconAttributes {
         "size": 'sm' | 'md' | 'lg';
         "label": string;
@@ -2502,7 +2422,6 @@ declare namespace LocalJSX {
         "art-field": Omit<ArtField, keyof ArtFieldAttributes> & { [K in keyof ArtField & keyof ArtFieldAttributes]?: ArtField[K] } & { [K in keyof ArtField & keyof ArtFieldAttributes as `attr:${K}`]?: ArtFieldAttributes[K] } & { [K in keyof ArtField & keyof ArtFieldAttributes as `prop:${K}`]?: ArtField[K] };
         "art-field-group": ArtFieldGroup;
         "art-field-set": Omit<ArtFieldSet, keyof ArtFieldSetAttributes> & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes]?: ArtFieldSet[K] } & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes as `attr:${K}`]?: ArtFieldSetAttributes[K] } & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes as `prop:${K}`]?: ArtFieldSet[K] };
-        "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
         "art-input": Omit<ArtInput, keyof ArtInputAttributes> & { [K in keyof ArtInput & keyof ArtInputAttributes]?: ArtInput[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `attr:${K}`]?: ArtInputAttributes[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `prop:${K}`]?: ArtInput[K] };
         "art-input-group": ArtInputGroup;
@@ -2597,12 +2516,6 @@ declare module "@stencil/core" {
              * (and restores only what it disabled).
              */
             "art-field-set": LocalJSX.IntrinsicElements["art-field-set"] & JSXBase.HTMLAttributes<HTMLArtFieldSetElement>;
-            /**
-             * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
-             * recipe, a native `click` passing through and a kebab-case custom event.
-             * Removed when Button lands.
-             */
-            "art-hello": LocalJSX.IntrinsicElements["art-hello"] & JSXBase.HTMLAttributes<HTMLArtHelloElement>;
             /**
              * Renders an icon from `@aranghat/icons` (ADR-0007). Icons are never bundled
              * into components: import the icon module you need and pass it as `icon`.

@@ -7,12 +7,6 @@
       "budgetKb": 3,
       "components": [
         {
-          "tag": "art-hello",
-          "name": "Hello",
-          "status": "in-progress",
-          "phase0": true
-        },
-        {
           "tag": "art-icon",
           "name": "Icon",
           "status": "done",
@@ -596,25 +590,19 @@
       "budgetKb": 8,
       "components": [
         {
-          "tag": "art-hello-overlay",
-          "name": "Hello Overlay",
-          "status": "in-progress",
-          "phase0": true
-        },
-        {
           "tag": "art-dialog",
           "name": "Dialog",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-alert-dialog",
           "name": "Alert Dialog",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-sheet",
           "name": "Sheet",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-drawer",
