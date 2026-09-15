@@ -21,6 +21,10 @@
       "types": "./dist/breadcrumb-item.d.ts",
       "import": "./dist/breadcrumb-item.js"
     },
+    "./context-menu": {
+      "types": "./dist/context-menu.d.ts",
+      "import": "./dist/context-menu.js"
+    },
     "./dropdown-menu": {
       "types": "./dist/dropdown-menu.d.ts",
       "import": "./dist/dropdown-menu.js"
@@ -48,6 +52,26 @@
     "./menu-sub": {
       "types": "./dist/menu-sub.d.ts",
       "import": "./dist/menu-sub.js"
+    },
+    "./menubar": {
+      "types": "./dist/menubar.d.ts",
+      "import": "./dist/menubar.js"
+    },
+    "./menubar-menu": {
+      "types": "./dist/menubar-menu.d.ts",
+      "import": "./dist/menubar-menu.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/navigation-menu.d.ts",
+      "import": "./dist/navigation-menu.js"
+    },
+    "./navigation-menu-item": {
+      "types": "./dist/navigation-menu-item.d.ts",
+      "import": "./dist/navigation-menu-item.js"
+    },
+    "./navigation-menu-link": {
+      "types": "./dist/navigation-menu-link.d.ts",
+      "import": "./dist/navigation-menu-link.js"
     },
     "./pagination": {
       "types": "./dist/pagination.d.ts",

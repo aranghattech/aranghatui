@@ -85,6 +85,12 @@ import { defineCustomElement as defineMenuLabel } from '@aranghat/navigation/men
 import { defineCustomElement as defineMenuSeparator } from '@aranghat/navigation/menu-separator';
 import { defineCustomElement as defineMenuGroup } from '@aranghat/navigation/menu-group';
 import { defineCustomElement as defineMenuSub } from '@aranghat/navigation/menu-sub';
+import { defineCustomElement as defineContextMenu } from '@aranghat/navigation/context-menu';
+import { defineCustomElement as defineMenubar } from '@aranghat/navigation/menubar';
+import { defineCustomElement as defineMenubarMenu } from '@aranghat/navigation/menubar-menu';
+import { defineCustomElement as defineNavigationMenu } from '@aranghat/navigation/navigation-menu';
+import { defineCustomElement as defineNavigationMenuItem } from '@aranghat/navigation/navigation-menu-item';
+import { defineCustomElement as defineNavigationMenuLink } from '@aranghat/navigation/navigation-menu-link';
 import './sandbox.css';
 
 defineButton();
@@ -171,6 +177,12 @@ defineMenuLabel();
 defineMenuSeparator();
 defineMenuGroup();
 defineMenuSub();
+defineContextMenu();
+defineMenubar();
+defineMenubarMenu();
+defineNavigationMenu();
+defineNavigationMenuItem();
+defineNavigationMenuLink();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

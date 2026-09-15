@@ -43,6 +43,26 @@ export namespace Components {
         "ellipsis": boolean;
     }
     /**
+     * Context Menu — shadcn/ui parity. Right-click (or Shift+F10 / the Menu key) anywhere on the
+     * wrapped content opens a menu at the pointer, on the platform top layer. Same items as
+     * Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`, `-sub`.
+     */
+    interface ArtContextMenu {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Accessible name of the menu.
+          * @default 'Context menu'
+         */
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+    }
+    /**
      * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
      * top layer: items, checkbox and radio items, labels, groups, separators, shortcuts and
      * submenus. Arrow keys move, typing jumps, Enter / Space activate, Escape closes and returns
@@ -150,6 +170,95 @@ export namespace Components {
         "openSub": () => Promise<void>;
     }
     /**
+     * Menubar — shadcn/ui parity. A row of `<art-menubar-menu>`s (File, Edit, View…): one trigger is
+     * in the tab order, ← / → move between them, ↓ / Enter / Space open a menu, and while one is
+     * open pointing at or arrowing to another trigger switches menus.
+     */
+    interface ArtMenubar {
+        /**
+          * Accessible name of the bar.
+         */
+        "label"?: string;
+    }
+    /**
+     * Menubar Menu — one menu of an `<art-menubar>`: the trigger (`label`) and its items.
+     */
+    interface ArtMenubarMenu {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Trigger text.
+          * @default ''
+         */
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Open or close (the bar calls it to switch menus).
+         */
+        "setOpen": (open: boolean, byKeyboard?: boolean) => Promise<void>;
+    }
+    /**
+     * Navigation Menu — shadcn/ui parity. A site navigation bar: a list of links and triggers that
+     * reveal rich panels below the bar (on hover, click, Enter / Space or ↓). Panels sit on the
+     * platform top layer; one is open at a time.
+     */
+    interface ArtNavigationMenu {
+        /**
+          * Accessible name of the `<nav>`.
+          * @default 'Main'
+         */
+        "label": string;
+    }
+    /**
+     * Navigation Menu Item — a bar entry: either a plain link (`href`) or a trigger (`label`) that
+     * reveals the panel in its default slot below the bar.
+     */
+    interface ArtNavigationMenuItem {
+        /**
+          * Marks the link as the current page.
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * Makes the entry a plain link instead of a trigger.
+         */
+        "href"?: string;
+        /**
+          * Trigger text.
+          * @default ''
+         */
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Open or close the panel.
+         */
+        "setOpen": (open: boolean, byKeyboard?: boolean) => Promise<void>;
+    }
+    /**
+     * Navigation Menu Link — a link inside a panel (or in the bar): a title line and an optional
+     * description, tinted when `active`.
+     */
+    interface ArtNavigationMenuLink {
+        /**
+          * The current page.
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * @default '#'
+         */
+        "href": string;
+        "target"?: string;
+    }
+    /**
      * Pagination — shadcn/ui parity. Previous / next, page numbers around the current page with
      * ellipses, the active page as an outline button. Buttons by default (`page-change`), links
      * with `href-template` (`?page={page}`) for crawlable pages.
@@ -194,6 +303,10 @@ export namespace Components {
         "total": number;
     }
 }
+export interface ArtContextMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtContextMenuElement;
+}
 export interface ArtDropdownMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtDropdownMenuElement;
@@ -209,6 +322,14 @@ export interface ArtMenuRadioGroupCustomEvent<T> extends CustomEvent<T> {
 export interface ArtMenuSubCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtMenuSubElement;
+}
+export interface ArtMenubarMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtMenubarMenuElement;
+}
+export interface ArtNavigationMenuItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtNavigationMenuItemElement;
 }
 export interface ArtPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -236,6 +357,28 @@ declare global {
     var HTMLArtBreadcrumbItemElement: {
         prototype: HTMLArtBreadcrumbItemElement;
         new (): HTMLArtBreadcrumbItemElement;
+    };
+    interface HTMLArtContextMenuElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Context Menu — shadcn/ui parity. Right-click (or Shift+F10 / the Menu key) anywhere on the
+     * wrapped content opens a menu at the pointer, on the platform top layer. Same items as
+     * Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`, `-sub`.
+     */
+    interface HTMLArtContextMenuElement extends Components.ArtContextMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtContextMenuElementEventMap>(type: K, listener: (this: HTMLArtContextMenuElement, ev: ArtContextMenuCustomEvent<HTMLArtContextMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtContextMenuElementEventMap>(type: K, listener: (this: HTMLArtContextMenuElement, ev: ArtContextMenuCustomEvent<HTMLArtContextMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtContextMenuElement: {
+        prototype: HTMLArtContextMenuElement;
+        new (): HTMLArtContextMenuElement;
     };
     interface HTMLArtDropdownMenuElementEventMap {
         "open-change": { open: boolean };
@@ -353,6 +496,81 @@ declare global {
         prototype: HTMLArtMenuSubElement;
         new (): HTMLArtMenuSubElement;
     };
+    /**
+     * Menubar — shadcn/ui parity. A row of `<art-menubar-menu>`s (File, Edit, View…): one trigger is
+     * in the tab order, ← / → move between them, ↓ / Enter / Space open a menu, and while one is
+     * open pointing at or arrowing to another trigger switches menus.
+     */
+    interface HTMLArtMenubarElement extends Components.ArtMenubar, HTMLStencilElement {
+    }
+    var HTMLArtMenubarElement: {
+        prototype: HTMLArtMenubarElement;
+        new (): HTMLArtMenubarElement;
+    };
+    interface HTMLArtMenubarMenuElementEventMap {
+        "open-change": { open: boolean };
+        "menubar-open": void;
+    }
+    /**
+     * Menubar Menu — one menu of an `<art-menubar>`: the trigger (`label`) and its items.
+     */
+    interface HTMLArtMenubarMenuElement extends Components.ArtMenubarMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMenubarMenuElementEventMap>(type: K, listener: (this: HTMLArtMenubarMenuElement, ev: ArtMenubarMenuCustomEvent<HTMLArtMenubarMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMenubarMenuElementEventMap>(type: K, listener: (this: HTMLArtMenubarMenuElement, ev: ArtMenubarMenuCustomEvent<HTMLArtMenubarMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtMenubarMenuElement: {
+        prototype: HTMLArtMenubarMenuElement;
+        new (): HTMLArtMenubarMenuElement;
+    };
+    /**
+     * Navigation Menu — shadcn/ui parity. A site navigation bar: a list of links and triggers that
+     * reveal rich panels below the bar (on hover, click, Enter / Space or ↓). Panels sit on the
+     * platform top layer; one is open at a time.
+     */
+    interface HTMLArtNavigationMenuElement extends Components.ArtNavigationMenu, HTMLStencilElement {
+    }
+    var HTMLArtNavigationMenuElement: {
+        prototype: HTMLArtNavigationMenuElement;
+        new (): HTMLArtNavigationMenuElement;
+    };
+    interface HTMLArtNavigationMenuItemElementEventMap {
+        "open-change": { open: boolean };
+        "navigation-menu-open": void;
+    }
+    /**
+     * Navigation Menu Item — a bar entry: either a plain link (`href`) or a trigger (`label`) that
+     * reveals the panel in its default slot below the bar.
+     */
+    interface HTMLArtNavigationMenuItemElement extends Components.ArtNavigationMenuItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtNavigationMenuItemElementEventMap>(type: K, listener: (this: HTMLArtNavigationMenuItemElement, ev: ArtNavigationMenuItemCustomEvent<HTMLArtNavigationMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtNavigationMenuItemElementEventMap>(type: K, listener: (this: HTMLArtNavigationMenuItemElement, ev: ArtNavigationMenuItemCustomEvent<HTMLArtNavigationMenuItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtNavigationMenuItemElement: {
+        prototype: HTMLArtNavigationMenuItemElement;
+        new (): HTMLArtNavigationMenuItemElement;
+    };
+    /**
+     * Navigation Menu Link — a link inside a panel (or in the bar): a title line and an optional
+     * description, tinted when `active`.
+     */
+    interface HTMLArtNavigationMenuLinkElement extends Components.ArtNavigationMenuLink, HTMLStencilElement {
+    }
+    var HTMLArtNavigationMenuLinkElement: {
+        prototype: HTMLArtNavigationMenuLinkElement;
+        new (): HTMLArtNavigationMenuLinkElement;
+    };
     interface HTMLArtPaginationElementEventMap {
         "page-change": { page: number };
     }
@@ -378,6 +596,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "art-breadcrumb": HTMLArtBreadcrumbElement;
         "art-breadcrumb-item": HTMLArtBreadcrumbItemElement;
+        "art-context-menu": HTMLArtContextMenuElement;
         "art-dropdown-menu": HTMLArtDropdownMenuElement;
         "art-menu-group": HTMLArtMenuGroupElement;
         "art-menu-item": HTMLArtMenuItemElement;
@@ -385,6 +604,11 @@ declare global {
         "art-menu-radio-group": HTMLArtMenuRadioGroupElement;
         "art-menu-separator": HTMLArtMenuSeparatorElement;
         "art-menu-sub": HTMLArtMenuSubElement;
+        "art-menubar": HTMLArtMenubarElement;
+        "art-menubar-menu": HTMLArtMenubarMenuElement;
+        "art-navigation-menu": HTMLArtNavigationMenuElement;
+        "art-navigation-menu-item": HTMLArtNavigationMenuItemElement;
+        "art-navigation-menu-link": HTMLArtNavigationMenuLinkElement;
         "art-pagination": HTMLArtPaginationElement;
     }
 }
@@ -422,6 +646,27 @@ declare namespace LocalJSX {
           * @default false
          */
         "ellipsis"?: boolean;
+    }
+    /**
+     * Context Menu — shadcn/ui parity. Right-click (or Shift+F10 / the Menu key) anywhere on the
+     * wrapped content opens a menu at the pointer, on the platform top layer. Same items as
+     * Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`, `-sub`.
+     */
+    interface ArtContextMenu {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Accessible name of the menu.
+          * @default 'Context menu'
+         */
+        "label"?: string;
+        "onOpen-change"?: (event: ArtContextMenuCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
     }
     /**
      * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
@@ -541,6 +786,97 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     /**
+     * Menubar — shadcn/ui parity. A row of `<art-menubar-menu>`s (File, Edit, View…): one trigger is
+     * in the tab order, ← / → move between them, ↓ / Enter / Space open a menu, and while one is
+     * open pointing at or arrowing to another trigger switches menus.
+     */
+    interface ArtMenubar {
+        /**
+          * Accessible name of the bar.
+         */
+        "label"?: string;
+    }
+    /**
+     * Menubar Menu — one menu of an `<art-menubar>`: the trigger (`label`) and its items.
+     */
+    interface ArtMenubarMenu {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Trigger text.
+          * @default ''
+         */
+        "label"?: string;
+        /**
+          * Internal: tells the bar to close its other menus.
+         */
+        "onMenubar-open"?: (event: ArtMenubarMenuCustomEvent<void>) => void;
+        "onOpen-change"?: (event: ArtMenubarMenuCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+    }
+    /**
+     * Navigation Menu — shadcn/ui parity. A site navigation bar: a list of links and triggers that
+     * reveal rich panels below the bar (on hover, click, Enter / Space or ↓). Panels sit on the
+     * platform top layer; one is open at a time.
+     */
+    interface ArtNavigationMenu {
+        /**
+          * Accessible name of the `<nav>`.
+          * @default 'Main'
+         */
+        "label"?: string;
+    }
+    /**
+     * Navigation Menu Item — a bar entry: either a plain link (`href`) or a trigger (`label`) that
+     * reveals the panel in its default slot below the bar.
+     */
+    interface ArtNavigationMenuItem {
+        /**
+          * Marks the link as the current page.
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * Makes the entry a plain link instead of a trigger.
+         */
+        "href"?: string;
+        /**
+          * Trigger text.
+          * @default ''
+         */
+        "label"?: string;
+        /**
+          * Internal: tells the menu to close the other panels.
+         */
+        "onNavigation-menu-open"?: (event: ArtNavigationMenuItemCustomEvent<void>) => void;
+        "onOpen-change"?: (event: ArtNavigationMenuItemCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+    }
+    /**
+     * Navigation Menu Link — a link inside a panel (or in the bar): a title line and an optional
+     * description, tinted when `active`.
+     */
+    interface ArtNavigationMenuLink {
+        /**
+          * The current page.
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * @default '#'
+         */
+        "href"?: string;
+        "target"?: string;
+    }
+    /**
      * Pagination — shadcn/ui parity. Previous / next, page numbers around the current page with
      * ellipses, the active page as an outline button. Buttons by default (`page-change`), links
      * with `href-template` (`?page={page}`) for crawlable pages.
@@ -597,6 +933,11 @@ declare namespace LocalJSX {
         "current": boolean;
         "ellipsis": boolean;
     }
+    interface ArtContextMenuAttributes {
+        "open": boolean;
+        "label": string;
+        "disabled": boolean;
+    }
     interface ArtDropdownMenuAttributes {
         "open": boolean;
         "placement": Placement;
@@ -624,6 +965,28 @@ declare namespace LocalJSX {
     interface ArtMenuSubAttributes {
         "open": boolean;
     }
+    interface ArtMenubarAttributes {
+        "label": string;
+    }
+    interface ArtMenubarMenuAttributes {
+        "label": string;
+        "open": boolean;
+        "disabled": boolean;
+    }
+    interface ArtNavigationMenuAttributes {
+        "label": string;
+    }
+    interface ArtNavigationMenuItemAttributes {
+        "label": string;
+        "href": string;
+        "active": boolean;
+        "open": boolean;
+    }
+    interface ArtNavigationMenuLinkAttributes {
+        "href": string;
+        "target": string;
+        "active": boolean;
+    }
     interface ArtPaginationAttributes {
         "page": number;
         "total": number;
@@ -638,6 +1001,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "art-breadcrumb": Omit<ArtBreadcrumb, keyof ArtBreadcrumbAttributes> & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes]?: ArtBreadcrumb[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `attr:${K}`]?: ArtBreadcrumbAttributes[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `prop:${K}`]?: ArtBreadcrumb[K] };
         "art-breadcrumb-item": Omit<ArtBreadcrumbItem, keyof ArtBreadcrumbItemAttributes> & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes]?: ArtBreadcrumbItem[K] } & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes as `attr:${K}`]?: ArtBreadcrumbItemAttributes[K] } & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes as `prop:${K}`]?: ArtBreadcrumbItem[K] };
+        "art-context-menu": Omit<ArtContextMenu, keyof ArtContextMenuAttributes> & { [K in keyof ArtContextMenu & keyof ArtContextMenuAttributes]?: ArtContextMenu[K] } & { [K in keyof ArtContextMenu & keyof ArtContextMenuAttributes as `attr:${K}`]?: ArtContextMenuAttributes[K] } & { [K in keyof ArtContextMenu & keyof ArtContextMenuAttributes as `prop:${K}`]?: ArtContextMenu[K] };
         "art-dropdown-menu": Omit<ArtDropdownMenu, keyof ArtDropdownMenuAttributes> & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes]?: ArtDropdownMenu[K] } & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes as `attr:${K}`]?: ArtDropdownMenuAttributes[K] } & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes as `prop:${K}`]?: ArtDropdownMenu[K] };
         "art-menu-group": Omit<ArtMenuGroup, keyof ArtMenuGroupAttributes> & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes]?: ArtMenuGroup[K] } & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes as `attr:${K}`]?: ArtMenuGroupAttributes[K] } & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes as `prop:${K}`]?: ArtMenuGroup[K] };
         "art-menu-item": Omit<ArtMenuItem, keyof ArtMenuItemAttributes> & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes]?: ArtMenuItem[K] } & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes as `attr:${K}`]?: ArtMenuItemAttributes[K] } & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes as `prop:${K}`]?: ArtMenuItem[K] };
@@ -645,6 +1009,11 @@ declare namespace LocalJSX {
         "art-menu-radio-group": Omit<ArtMenuRadioGroup, keyof ArtMenuRadioGroupAttributes> & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes]?: ArtMenuRadioGroup[K] } & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes as `attr:${K}`]?: ArtMenuRadioGroupAttributes[K] } & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes as `prop:${K}`]?: ArtMenuRadioGroup[K] };
         "art-menu-separator": ArtMenuSeparator;
         "art-menu-sub": Omit<ArtMenuSub, keyof ArtMenuSubAttributes> & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes]?: ArtMenuSub[K] } & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes as `attr:${K}`]?: ArtMenuSubAttributes[K] } & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes as `prop:${K}`]?: ArtMenuSub[K] };
+        "art-menubar": Omit<ArtMenubar, keyof ArtMenubarAttributes> & { [K in keyof ArtMenubar & keyof ArtMenubarAttributes]?: ArtMenubar[K] } & { [K in keyof ArtMenubar & keyof ArtMenubarAttributes as `attr:${K}`]?: ArtMenubarAttributes[K] } & { [K in keyof ArtMenubar & keyof ArtMenubarAttributes as `prop:${K}`]?: ArtMenubar[K] };
+        "art-menubar-menu": Omit<ArtMenubarMenu, keyof ArtMenubarMenuAttributes> & { [K in keyof ArtMenubarMenu & keyof ArtMenubarMenuAttributes]?: ArtMenubarMenu[K] } & { [K in keyof ArtMenubarMenu & keyof ArtMenubarMenuAttributes as `attr:${K}`]?: ArtMenubarMenuAttributes[K] } & { [K in keyof ArtMenubarMenu & keyof ArtMenubarMenuAttributes as `prop:${K}`]?: ArtMenubarMenu[K] };
+        "art-navigation-menu": Omit<ArtNavigationMenu, keyof ArtNavigationMenuAttributes> & { [K in keyof ArtNavigationMenu & keyof ArtNavigationMenuAttributes]?: ArtNavigationMenu[K] } & { [K in keyof ArtNavigationMenu & keyof ArtNavigationMenuAttributes as `attr:${K}`]?: ArtNavigationMenuAttributes[K] } & { [K in keyof ArtNavigationMenu & keyof ArtNavigationMenuAttributes as `prop:${K}`]?: ArtNavigationMenu[K] };
+        "art-navigation-menu-item": Omit<ArtNavigationMenuItem, keyof ArtNavigationMenuItemAttributes> & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes]?: ArtNavigationMenuItem[K] } & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes as `attr:${K}`]?: ArtNavigationMenuItemAttributes[K] } & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes as `prop:${K}`]?: ArtNavigationMenuItem[K] };
+        "art-navigation-menu-link": Omit<ArtNavigationMenuLink, keyof ArtNavigationMenuLinkAttributes> & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes]?: ArtNavigationMenuLink[K] } & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes as `attr:${K}`]?: ArtNavigationMenuLinkAttributes[K] } & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes as `prop:${K}`]?: ArtNavigationMenuLink[K] };
         "art-pagination": Omit<ArtPagination, keyof ArtPaginationAttributes> & { [K in keyof ArtPagination & keyof ArtPaginationAttributes]?: ArtPagination[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `attr:${K}`]?: ArtPaginationAttributes[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `prop:${K}`]?: ArtPagination[K] };
     }
 }
@@ -664,6 +1033,12 @@ declare module "@stencil/core" {
              * is drawn here so the list stays a plain sequence of items.
              */
             "art-breadcrumb-item": LocalJSX.IntrinsicElements["art-breadcrumb-item"] & JSXBase.HTMLAttributes<HTMLArtBreadcrumbItemElement>;
+            /**
+             * Context Menu — shadcn/ui parity. Right-click (or Shift+F10 / the Menu key) anywhere on the
+             * wrapped content opens a menu at the pointer, on the platform top layer. Same items as
+             * Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`, `-sub`.
+             */
+            "art-context-menu": LocalJSX.IntrinsicElements["art-context-menu"] & JSXBase.HTMLAttributes<HTMLArtContextMenuElement>;
             /**
              * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
              * top layer: items, checkbox and radio items, labels, groups, separators, shortcuts and
@@ -700,6 +1075,32 @@ declare module "@stencil/core" {
              * to the trigger.
              */
             "art-menu-sub": LocalJSX.IntrinsicElements["art-menu-sub"] & JSXBase.HTMLAttributes<HTMLArtMenuSubElement>;
+            /**
+             * Menubar — shadcn/ui parity. A row of `<art-menubar-menu>`s (File, Edit, View…): one trigger is
+             * in the tab order, ← / → move between them, ↓ / Enter / Space open a menu, and while one is
+             * open pointing at or arrowing to another trigger switches menus.
+             */
+            "art-menubar": LocalJSX.IntrinsicElements["art-menubar"] & JSXBase.HTMLAttributes<HTMLArtMenubarElement>;
+            /**
+             * Menubar Menu — one menu of an `<art-menubar>`: the trigger (`label`) and its items.
+             */
+            "art-menubar-menu": LocalJSX.IntrinsicElements["art-menubar-menu"] & JSXBase.HTMLAttributes<HTMLArtMenubarMenuElement>;
+            /**
+             * Navigation Menu — shadcn/ui parity. A site navigation bar: a list of links and triggers that
+             * reveal rich panels below the bar (on hover, click, Enter / Space or ↓). Panels sit on the
+             * platform top layer; one is open at a time.
+             */
+            "art-navigation-menu": LocalJSX.IntrinsicElements["art-navigation-menu"] & JSXBase.HTMLAttributes<HTMLArtNavigationMenuElement>;
+            /**
+             * Navigation Menu Item — a bar entry: either a plain link (`href`) or a trigger (`label`) that
+             * reveals the panel in its default slot below the bar.
+             */
+            "art-navigation-menu-item": LocalJSX.IntrinsicElements["art-navigation-menu-item"] & JSXBase.HTMLAttributes<HTMLArtNavigationMenuItemElement>;
+            /**
+             * Navigation Menu Link — a link inside a panel (or in the bar): a title line and an optional
+             * description, tinted when `active`.
+             */
+            "art-navigation-menu-link": LocalJSX.IntrinsicElements["art-navigation-menu-link"] & JSXBase.HTMLAttributes<HTMLArtNavigationMenuLinkElement>;
             /**
              * Pagination — shadcn/ui parity. Previous / next, page numbers around the current page with
              * ellipses, the active page as an outline button. Buttons by default (`page-change`), links

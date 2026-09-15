@@ -489,17 +489,35 @@
         {
           "tag": "art-context-menu",
           "name": "Context Menu",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-menubar",
           "name": "Menubar",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-menubar-menu",
+          "name": "Menubar Menu",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-navigation-menu",
           "name": "Navigation Menu",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-navigation-menu-item",
+          "name": "Navigation Menu Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-navigation-menu-link",
+          "name": "Navigation Menu Link",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-sidebar",

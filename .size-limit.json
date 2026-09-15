@@ -1147,6 +1147,84 @@
     "gzip": true
   },
   {
+    "name": "navigation/art-context-menu",
+    "path": "packages/navigation/dist/components/art-context-menu.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menubar",
+    "path": "packages/navigation/dist/components/art-menubar.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menubar-menu",
+    "path": "packages/navigation/dist/components/art-menubar-menu.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-navigation-menu",
+    "path": "packages/navigation/dist/components/art-navigation-menu.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-navigation-menu-item",
+    "path": "packages/navigation/dist/components/art-navigation-menu-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-navigation-menu-link",
+    "path": "packages/navigation/dist/components/art-navigation-menu-link.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "navigation: whole tier",
     "path": "packages/navigation/dist/components/index.js",
     "import": "*",

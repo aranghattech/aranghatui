@@ -31,6 +31,10 @@
       "types": "./dist/components/art-breadcrumb-item.d.ts",
       "import": "./dist/components/art-breadcrumb-item.js"
     },
+    "./context-menu": {
+      "types": "./dist/components/art-context-menu.d.ts",
+      "import": "./dist/components/art-context-menu.js"
+    },
     "./dropdown-menu": {
       "types": "./dist/components/art-dropdown-menu.d.ts",
       "import": "./dist/components/art-dropdown-menu.js"
@@ -58,6 +62,26 @@
     "./menu-sub": {
       "types": "./dist/components/art-menu-sub.d.ts",
       "import": "./dist/components/art-menu-sub.js"
+    },
+    "./menubar": {
+      "types": "./dist/components/art-menubar.d.ts",
+      "import": "./dist/components/art-menubar.js"
+    },
+    "./menubar-menu": {
+      "types": "./dist/components/art-menubar-menu.d.ts",
+      "import": "./dist/components/art-menubar-menu.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/components/art-navigation-menu.d.ts",
+      "import": "./dist/components/art-navigation-menu.js"
+    },
+    "./navigation-menu-item": {
+      "types": "./dist/components/art-navigation-menu-item.d.ts",
+      "import": "./dist/components/art-navigation-menu-item.js"
+    },
+    "./navigation-menu-link": {
+      "types": "./dist/components/art-navigation-menu-link.d.ts",
+      "import": "./dist/components/art-navigation-menu-link.js"
     },
     "./pagination": {
       "types": "./dist/components/art-pagination.d.ts",
