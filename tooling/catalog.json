@@ -204,17 +204,17 @@
         {
           "tag": "art-popover",
           "name": "Popover",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-tooltip",
           "name": "Tooltip",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-hover-card",
           "name": "Hover Card",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-collapsible",

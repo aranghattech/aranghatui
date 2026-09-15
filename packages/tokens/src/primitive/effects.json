@@ -39,6 +39,22 @@
     "caret-blink": {
       "$value": "1200ms",
       "$description": "Fake caret blink in segmented inputs (Input OTP)."
+    },
+    "hover-open": {
+      "$value": "300ms",
+      "$description": "Hover intent before a tooltip / hover card opens."
+    },
+    "hover-close": {
+      "$value": "150ms",
+      "$description": "Grace period after the pointer leaves before a tooltip closes."
+    },
+    "hover-card-open": {
+      "$value": "700ms",
+      "$description": "Hover intent before a hover card opens (slower than a tooltip: it is content, not a label)."
+    },
+    "hover-card-close": {
+      "$value": "300ms",
+      "$description": "Grace period after the pointer leaves a hover card or its trigger."
     }
   },
   "ease": {

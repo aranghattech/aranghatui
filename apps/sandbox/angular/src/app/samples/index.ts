@@ -153,9 +153,20 @@ import { TypographyArticle } from './typography/article';
 import { TypographyHeadings } from './typography/headings';
 import { TypographyTextStyles } from './typography/text-styles';
 import { TypographyList } from './typography/list';
+import { TooltipBasic } from './tooltip/basic';
+import { TooltipPlacements } from './tooltip/placements';
+import { TooltipIconButton } from './tooltip/icon-button';
+import { TooltipDelays } from './tooltip/delays';
+import { PopoverBasic } from './popover/basic';
+import { PopoverOpen } from './popover/open';
+import { HoverCardBasic } from './hover-card/basic';
+import { HoverCardOpen } from './hover-card/open';
+import { HoverCardWithLink } from './hover-card/with-link';
+import { PopoverPlacements } from './popover/placements';
+import { HoverCardPlacements } from './hover-card/placements';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -312,4 +323,15 @@ export const SAMPLES = [
   { id: 'typography/headings', component: TypographyHeadings },
   { id: 'typography/text-styles', component: TypographyTextStyles },
   { id: 'typography/list', component: TypographyList },
+  { id: 'tooltip/basic', component: TooltipBasic },
+  { id: 'tooltip/placements', component: TooltipPlacements },
+  { id: 'tooltip/icon-button', component: TooltipIconButton },
+  { id: 'tooltip/delays', component: TooltipDelays },
+  { id: 'popover/basic', component: PopoverBasic },
+  { id: 'popover/open', component: PopoverOpen },
+  { id: 'hover-card/basic', component: HoverCardBasic },
+  { id: 'hover-card/open', component: HoverCardOpen },
+  { id: 'hover-card/with-link', component: HoverCardWithLink },
+  { id: 'popover/placements', component: PopoverPlacements },
+  { id: 'hover-card/placements', component: HoverCardPlacements },
 ];

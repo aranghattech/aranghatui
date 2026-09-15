@@ -402,6 +402,7 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Screenshot determinism | VRT and a11y run in the official Playwright Docker image locally and in CI; Linux-only baselines | 0018 |
 | Cross-tier composition | No downward deps: Command has no built-in dialog mode; Sidebar mobile mode is built on primitives, not Sheet | 0019 |
 | Native controls first | Wrap and style the native element wherever HTML has one (`input` types, `select`, `textarea`, `button`, `progress`, `dialog`, `details`); custom logic only where no native exists or to orchestrate natives across shadow roots | 0020 |
+| Overlays on the top layer | Tooltip, Popover, Hover Card (and later menus, selects, dialogs) show their panel with the Popover API (`popover="manual"`) and position it with floating-ui's fixed strategy — no portal, no DOM moves, styles stay in the shadow root | 0022 |
 | Light-DOM prose and tables | `art-table` and `art-typography` render in the light DOM (`shadow: false`) with tag-scoped stylesheets, because `::slotted()` cannot reach nested rows, cells or list items; the Tailwind plugin skips the shadow reset for them (`/* light-dom */` marker) | 0021 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

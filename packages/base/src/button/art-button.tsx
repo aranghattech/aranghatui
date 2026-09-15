@@ -11,7 +11,7 @@ import { AttachInternals, Component, Element, Host, Prop, State, Watch, h } from
  * @slot end - Trailing icon.
  * @part button - The native `<button>` (or `<a>` when `href` is set).
  */
-@Component({ tag: 'art-button', styleUrl: 'art-button.css', shadow: true, formAssociated: true })
+@Component({ tag: 'art-button', styleUrl: 'art-button.css', shadow: { delegatesFocus: true }, formAssociated: true })
 export class ArtButton {
   @Element() host!: HTMLElement;
   @AttachInternals() internals?: ElementInternals;
@@ -43,6 +43,13 @@ export class ArtButton {
    */
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @State() private ariaLabel?: string;
+  /** Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them). */
+  @Prop({ attribute: 'aria-expanded' }) hostAriaExpanded?: string | null;
+  @Prop({ attribute: 'aria-haspopup' }) hostAriaHaspopup?: string | null;
+  @Prop({ attribute: 'aria-description' }) hostAriaDescription?: string | null;
+  @State() private ariaExpanded?: string;
+  @State() private ariaHaspopup?: string;
+  @State() private ariaDescription?: string;
   /** Which icon slots are filled — the padding on that side tightens (optical alignment, shadcn `has-[>svg]:px-3`). */
   @State() private hasStart = false;
   @State() private hasEnd = false;
@@ -53,10 +60,20 @@ export class ArtButton {
     this.ariaLabel = value;
     this.host.removeAttribute('aria-label');
   }
+  @Watch('hostAriaExpanded') @Watch('hostAriaHaspopup') @Watch('hostAriaDescription')
+  adoptAria() {
+    for (const [attr, key] of [['aria-expanded', 'ariaExpanded'], ['aria-haspopup', 'ariaHaspopup'], ['aria-description', 'ariaDescription']] as const) {
+      const v = this.host.getAttribute(attr);
+      if (v == null) continue;
+      (this as unknown as Record<string, string>)[key] = v;
+      this.host.removeAttribute(attr);
+    }
+  }
 
   connectedCallback() {
     this.syncSlots();
     this.adoptAriaLabel(this.hostAriaLabel);
+    this.adoptAria();
   }
   private syncSlots = () => {
     const slots = Array.from(this.host.children).map((c) => c.getAttribute('slot'));
@@ -116,11 +133,11 @@ export class ArtButton {
     return (
       <Host aria-busy={this.loading ? 'true' : undefined} onSlotchange={this.syncSlots}>
         {this.href ? (
-          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.ariaLabel} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
+          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.ariaLabel} aria-expanded={this.ariaExpanded} aria-haspopup={this.ariaHaspopup} aria-description={this.ariaDescription} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
             {content}
           </a>
         ) : (
-          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.ariaLabel} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
+          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.ariaLabel} aria-expanded={this.ariaExpanded} aria-haspopup={this.ariaHaspopup} aria-description={this.ariaDescription} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
             {content}
           </button>
         )}

@@ -486,6 +486,63 @@
     "gzip": true
   },
   {
+    "name": "components: runtime chunk (index2.js)",
+    "path": "packages/components/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-popover",
+    "path": "packages/components/dist/components/art-popover.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-tooltip",
+    "path": "packages/components/dist/components/art-tooltip.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-hover-card",
+    "path": "packages/components/dist/components/art-hover-card.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components: whole tier",
+    "path": "packages/components/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "90 kB",
+    "gzip": true
+  },
+  {
     "name": "modals/art-hello-overlay (+ inlined runtime: single-component tier)",
     "path": "packages/modals/dist/components/art-hello-overlay.js",
     "import": "{ defineCustomElement }",

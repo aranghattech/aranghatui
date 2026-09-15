@@ -12,7 +12,7 @@ import { join, resolve } from 'node:path';
 
 const repo = resolve(import.meta.dirname, '..');
 const run = (cmd, cwd = repo) => execSync(cmd, { cwd, stdio: 'pipe', encoding: 'utf8' });
-const tiers = ['tokens', 'primitives', 'icons', 'base', 'modals'];
+const tiers = ['tokens', 'primitives', 'icons', 'base', 'components', 'modals'];
 const scratch = mkdtempSync(join(tmpdir(), 'artui-isolation-'));
 
 const tarballs = {};
