@@ -13,9 +13,17 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./hello-overlay": {
-      "types": "./dist/hello-overlay.d.ts",
-      "import": "./dist/hello-overlay.js"
+    "./alert-dialog": {
+      "types": "./dist/alert-dialog.d.ts",
+      "import": "./dist/alert-dialog.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "import": "./dist/dialog.js"
+    },
+    "./sheet": {
+      "types": "./dist/sheet.d.ts",
+      "import": "./dist/sheet.js"
     },
     "./package.json": "./package.json"
   },

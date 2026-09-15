@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { ArtDialog } from '@aranghat/modals-angular';
+import { ArtButton } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-dialog-scrollable',
+  imports: [ArtButton, ArtDialog],
+  template: `
+    <art-dialog>
+      <art-button slot="trigger" variant="outline">Read more</art-button>
+      <span slot="title">Terms of service</span>
+      <span slot="description">Scroll inside the dialog to read everything.</span>
+      <p style="margin: 0">Section 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 6. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 7. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <p style="margin: 0">Section 8. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+      <art-button slot="footer" dialog-close>Done</art-button>
+    </art-dialog>
+  `,
+})
+export class DialogScrollable {}

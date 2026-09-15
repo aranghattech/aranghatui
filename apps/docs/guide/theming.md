@@ -23,8 +23,8 @@ import '@aranghat/tokens/themes/example.css';
 Mode and brand compose: `data-brand="example"` + `data-theme="dark"` uses the brand's dark values. Try it — switch the brand and the mode on the frame:
 
 <Preview :brands="['example']">
-  <art-hello name="artui"></art-hello>
-  <art-hello name="artui" variant="outline"></art-hello>
+  <art-button>Primary</art-button>
+  <art-button variant="outline">Outline</art-button>
 </Preview>
 
 Changing `--art-radius` restyles every component: `sm/md/lg/xl` derive from it with `calc()` — the example brand sets a tighter radius.

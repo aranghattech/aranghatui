@@ -23,9 +23,17 @@
       "import": "./dist/components/index.js"
     },
     "./dist/components/*": "./dist/components/*",
-    "./hello-overlay": {
-      "types": "./dist/components/art-hello-overlay.d.ts",
-      "import": "./dist/components/art-hello-overlay.js"
+    "./alert-dialog": {
+      "types": "./dist/components/art-alert-dialog.d.ts",
+      "import": "./dist/components/art-alert-dialog.js"
+    },
+    "./dialog": {
+      "types": "./dist/components/art-dialog.d.ts",
+      "import": "./dist/components/art-dialog.js"
+    },
+    "./sheet": {
+      "types": "./dist/components/art-sheet.d.ts",
+      "import": "./dist/components/art-sheet.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"

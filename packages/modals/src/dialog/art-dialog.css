@@ -1,0 +1,77 @@
+:host {
+  display: contents;
+}
+:host([hidden]) {
+  display: none;
+}
+/* the native dialog on the top layer (ADR-0020 / ADR-0022): reset the UA box, keep the modal semantics */
+@layer base {
+  dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
+.content {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  gap: var(--art-space-4);
+  width: calc(100% - 2 * var(--art-space-4));
+  max-width: var(--art-container-lg);
+  max-height: calc(100% - 2 * var(--art-space-4));
+  overflow: auto;
+  padding: var(--art-space-6);
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  border-radius: var(--art-radius-lg);
+  background: var(--art-color-bg-popover);
+  color: var(--art-color-fg-default);
+  box-shadow: var(--art-shadow-popover);
+}
+.content:not([open]) {
+  display: none;
+}
+.content[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.content[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+.content::backdrop {
+  background: var(--art-color-bg-overlay);
+}
+.content[data-state='open']::backdrop {
+  animation: backdrop-in var(--art-duration-base) var(--art-ease-out);
+}
+.content[data-state='closed']::backdrop {
+  animation: backdrop-out var(--art-duration-fast) var(--art-ease-out) forwards;
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+.close {
+  top: var(--art-space-4);
+  inset-inline-end: var(--art-space-4);
+  width: var(--art-space-6);
+  height: var(--art-space-6);
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--art-color-bg-accent);
+}

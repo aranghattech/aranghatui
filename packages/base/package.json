@@ -67,10 +67,6 @@
       "types": "./dist/components/art-field-set.d.ts",
       "import": "./dist/components/art-field-set.js"
     },
-    "./hello": {
-      "types": "./dist/components/art-hello.d.ts",
-      "import": "./dist/components/art-hello.js"
-    },
     "./icon": {
       "types": "./dist/components/art-icon.d.ts",
       "import": "./dist/components/art-icon.js"

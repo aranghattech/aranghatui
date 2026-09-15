@@ -6,19 +6,6 @@
     "gzip": true
   },
   {
-    "name": "base/art-hello",
-    "path": "packages/base/dist/components/art-hello.js",
-    "import": "{ defineCustomElement }",
-    "ignore": [
-      "@aranghat/*",
-      "@floating-ui/dom",
-      "embla-carousel",
-      "./index*.js"
-    ],
-    "limit": "3 kB",
-    "gzip": true
-  },
-  {
     "name": "base/art-icon",
     "path": "packages/base/dist/components/art-icon.js",
     "import": "{ defineCustomElement }",
@@ -1393,8 +1380,34 @@
     "gzip": true
   },
   {
-    "name": "modals/art-hello-overlay (+ inlined runtime: single-component tier)",
-    "path": "packages/modals/dist/components/art-hello-overlay.js",
+    "name": "modals/art-dialog (+ inlined runtime: single-component tier)",
+    "path": "packages/modals/dist/components/art-dialog.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "28 kB",
+    "gzip": true
+  },
+  {
+    "name": "modals/art-alert-dialog (+ inlined runtime: single-component tier)",
+    "path": "packages/modals/dist/components/art-alert-dialog.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "28 kB",
+    "gzip": true
+  },
+  {
+    "name": "modals/art-sheet (+ inlined runtime: single-component tier)",
+    "path": "packages/modals/dist/components/art-sheet.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",

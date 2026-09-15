@@ -57,10 +57,6 @@
       "types": "./dist/field-set.d.ts",
       "import": "./dist/field-set.js"
     },
-    "./hello": {
-      "types": "./dist/hello.d.ts",
-      "import": "./dist/hello.js"
-    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "import": "./dist/icon.js"

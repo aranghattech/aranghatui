@@ -1,0 +1,108 @@
+:host {
+  display: contents;
+}
+:host([hidden]) {
+  display: none;
+}
+@layer base {
+  dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
+.content {
+  position: fixed;
+  inset: unset;
+  background: var(--art-color-bg-popover);
+  color: var(--art-color-fg-default);
+  box-shadow: var(--art-shadow-popover);
+  overflow: hidden;
+}
+.content:not([open]) {
+  display: none;
+}
+/* sides: `left` / `right` are logical */
+:host([side='right']) .content,
+:host([side='left']) .content {
+  inset-block: 0;
+  width: 75%;
+  max-width: var(--art-container-sm);
+  height: 100%;
+}
+:host([side='right']) .content {
+  inset-inline-end: 0;
+  border-inline-start: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([side='left']) .content {
+  inset-inline-start: 0;
+  border-inline-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([side='top']) .content,
+:host([side='bottom']) .content {
+  inset-inline: 0;
+  width: 100%;
+  max-height: 100%;
+}
+:host([side='top']) .content {
+  top: 0;
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([side='bottom']) .content {
+  bottom: 0;
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+}
+/* motion shared with the Sidebar's off-canvas mode (ADR-0019) */
+.content[data-state='open'] {
+  animation: sheet-in var(--art-duration-slow) var(--art-ease-out);
+}
+.content[data-state='closed'] {
+  animation: sheet-out var(--art-duration-base) var(--art-ease-out) forwards;
+  pointer-events: none;
+}
+.content::backdrop {
+  background: var(--art-color-bg-overlay);
+}
+.content[data-state='open']::backdrop {
+  animation: backdrop-in var(--art-duration-slow) var(--art-ease-out);
+}
+.content[data-state='closed']::backdrop {
+  animation: backdrop-out var(--art-duration-base) var(--art-ease-out) forwards;
+}
+@keyframes sheet-in {
+  from {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes sheet-out {
+  to {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+.close {
+  top: var(--art-space-4);
+  inset-inline-end: var(--art-space-4);
+  width: var(--art-space-6);
+  height: var(--art-space-6);
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--art-color-bg-accent);
+}

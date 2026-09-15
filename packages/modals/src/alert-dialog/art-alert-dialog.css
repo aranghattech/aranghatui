@@ -1,0 +1,78 @@
+:host {
+  display: contents;
+}
+:host([hidden]) {
+  display: none;
+}
+@layer base {
+  dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
+.content {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  gap: var(--art-space-4);
+  width: calc(100% - 2 * var(--art-space-4));
+  max-width: var(--art-container-lg);
+  max-height: calc(100% - 2 * var(--art-space-4));
+  overflow: auto;
+  padding: var(--art-space-6);
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  border-radius: var(--art-radius-lg);
+  background: var(--art-color-bg-popover);
+  color: var(--art-color-fg-default);
+  box-shadow: var(--art-shadow-popover);
+}
+:host([size='sm']) .content {
+  max-width: var(--art-container-sm);
+}
+.content:not([open]) {
+  display: none;
+}
+.content[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.content[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+.content::backdrop {
+  background: var(--art-color-bg-overlay);
+}
+.content[data-state='open']::backdrop {
+  animation: backdrop-in var(--art-duration-base) var(--art-ease-out);
+}
+.content[data-state='closed']::backdrop {
+  animation: backdrop-out var(--art-duration-fast) var(--art-ease-out) forwards;
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+/* media: a tinted square before the title (shadcn AlertDialogMedia); the row layout above sm is a Tailwind variant in the markup */
+.media {
+  width: var(--art-space-10);
+  height: var(--art-space-10);
+}
+::slotted([slot='media']) {
+  width: var(--art-size-icon-lg);
+  height: var(--art-size-icon-lg);
+}
