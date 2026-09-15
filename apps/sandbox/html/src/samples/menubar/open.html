@@ -1,0 +1,38 @@
+<art-menubar aria-label="Application">
+  <art-menubar-menu label="File">
+    <art-menu-item value="new-tab">New tab<span slot="shortcut">⌘T</span></art-menu-item>
+    <art-menu-item value="new-window">New window<span slot="shortcut">⌘N</span></art-menu-item>
+    <art-menu-item value="incognito" disabled>New incognito window</art-menu-item>
+    <art-menu-separator></art-menu-separator>
+    <art-menu-sub>
+      <art-menu-item slot="trigger">Share</art-menu-item>
+      <art-menu-item value="email">Email link</art-menu-item>
+      <art-menu-item value="messages">Messages</art-menu-item>
+    </art-menu-sub>
+    <art-menu-separator></art-menu-separator>
+    <art-menu-item value="print">Print…<span slot="shortcut">⌘P</span></art-menu-item>
+  </art-menubar-menu>
+  <art-menubar-menu label="Edit" open>
+    <art-menu-item value="undo">Undo<span slot="shortcut">⌘Z</span></art-menu-item>
+    <art-menu-item value="redo">Redo<span slot="shortcut">⇧⌘Z</span></art-menu-item>
+    <art-menu-separator></art-menu-separator>
+    <art-menu-item value="cut">Cut</art-menu-item>
+    <art-menu-item value="copy">Copy</art-menu-item>
+    <art-menu-item value="paste">Paste</art-menu-item>
+  </art-menubar-menu>
+  <art-menubar-menu label="View">
+    <art-menu-item type="checkbox" value="bookmarks">Always show bookmarks bar</art-menu-item>
+    <art-menu-item type="checkbox" value="urls" checked>Always show full URLs</art-menu-item>
+    <art-menu-separator></art-menu-separator>
+    <art-menu-item value="reload" inset>Reload<span slot="shortcut">⌘R</span></art-menu-item>
+  </art-menubar-menu>
+  <art-menubar-menu label="Profiles">
+    <art-menu-radio-group value="benoit">
+      <art-menu-item type="radio" value="andy">Andy</art-menu-item>
+      <art-menu-item type="radio" value="benoit">Benoit</art-menu-item>
+      <art-menu-item type="radio" value="luis">Luis</art-menu-item>
+    </art-menu-radio-group>
+    <art-menu-separator></art-menu-separator>
+    <art-menu-item value="edit" inset>Edit…</art-menu-item>
+  </art-menubar-menu>
+</art-menubar>

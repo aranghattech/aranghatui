@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+.link {
+  text-decoration: none;
+}
+.link[data-active] {
+  background: color-mix(in oklab, var(--art-color-bg-accent) 50%, transparent);
+}
+:host(:not([data-has-description])) .description {
+  display: none;
+}
+::slotted([slot='description']) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: var(--art-font-line-height-sm);
+}
