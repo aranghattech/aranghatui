@@ -7,10 +7,10 @@ export const config: Config = createTierConfig({
   componentModels: [
     { elements: ['art-tooltip', 'art-popover', 'art-hover-card', 'art-collapsible'], targetAttr: 'open', event: 'open-change' },
     { elements: ['art-accordion', 'art-tabs'], targetAttr: 'value', event: 'value-change' },
-    { elements: ['art-select', 'art-combobox'], targetAttr: 'value', event: 'change' },
+    { elements: ['art-select', 'art-combobox', 'art-calendar', 'art-date-picker'], targetAttr: 'value', event: 'change' },
   ],
   // Angular ngModel / reactive forms
   valueAccessorConfigs: [
-    { elementSelectors: ['art-select', 'art-combobox'], event: 'change', targetAttr: 'value', type: 'select' },
+    { elementSelectors: ['art-select', 'art-combobox', 'art-calendar', 'art-date-picker'], event: 'change', targetAttr: 'value', type: 'select' },
   ],
 });

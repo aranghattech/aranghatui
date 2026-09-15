@@ -60,6 +60,12 @@ import { defineCustomElement as defineCommandGroup } from '@aranghat/components/
 import { defineCustomElement as defineCombobox } from '@aranghat/components/combobox';
 import { defineCustomElement as defineComboboxItem } from '@aranghat/components/combobox-item';
 import { defineCustomElement as defineComboboxGroup } from '@aranghat/components/combobox-group';
+import { defineCustomElement as defineCalendar } from '@aranghat/components/calendar';
+import { defineCustomElement as defineDatePicker } from '@aranghat/components/date-picker';
+import { defineCustomElement as defineToaster } from '@aranghat/components/toaster';
+import { defineCustomElement as defineToast } from '@aranghat/components/toast';
+import { defineCustomElement as defineCarousel } from '@aranghat/components/carousel';
+import { defineCustomElement as defineCarouselItem } from '@aranghat/components/carousel-item';
 import './sandbox.css';
 
 defineButton();
@@ -121,6 +127,12 @@ defineCommandGroup();
 defineCombobox();
 defineComboboxItem();
 defineComboboxGroup();
+defineCalendar();
+defineDatePicker();
+defineToaster();
+defineToast();
+defineCarousel();
+defineCarouselItem();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

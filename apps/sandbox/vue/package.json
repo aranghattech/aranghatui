@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aranghat/base-vue": "workspace:*",
+    "@aranghat/components": "workspace:*",
     "@aranghat/components-vue": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals-vue": "workspace:*",

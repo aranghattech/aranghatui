@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  position: relative;
+}
+:host([hidden]) {
+  display: none;
+}
+/* The track bleeds by one gap so the slides' leading padding lines up with the viewport edge (shadcn `-ml-4` + `pl-4`). */
+.track {
+  margin-inline-start: calc(-1 * var(--art-space-4));
+  touch-action: pan-y pinch-zoom;
+}
+:host([orientation='vertical']) .track {
+  margin-inline-start: 0;
+  margin-top: calc(-1 * var(--art-space-4));
+  touch-action: pan-x pinch-zoom;
+}
+/* Controls sit just outside the viewport, centred on the cross axis. */
+.control {
+  position: absolute;
+}
+:host([orientation='horizontal']) .control {
+  top: 50%;
+  translate: 0 -50%;
+}
+:host([orientation='horizontal']) .previous {
+  inset-inline-start: calc(-1 * var(--art-space-12));
+}
+:host([orientation='horizontal']) .next {
+  inset-inline-end: calc(-1 * var(--art-space-12));
+}
+:host([orientation='vertical']) .control {
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  rotate: 90deg;
+}
+:host([orientation='vertical']:dir(rtl)) .control {
+  translate: 50% 0;
+}
+:host([orientation='vertical']) .previous {
+  top: calc(-1 * var(--art-space-12));
+}
+:host([orientation='vertical']) .next {
+  bottom: calc(-1 * var(--art-space-12));
+}
+/* The arrows flip with the writing direction. */
+:host(:dir(rtl)) .control svg {
+  transform: scaleX(-1);
+}

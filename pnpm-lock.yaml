@@ -100,6 +100,9 @@ importers:
       '@aranghat/base-angular':
         specifier: workspace:*
         version: link:../../../packages/angular/base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@aranghat/components-angular':
         specifier: workspace:*
         version: link:../../../packages/angular/components
@@ -162,6 +165,9 @@ importers:
       '@aranghat/base-react':
         specifier: workspace:*
         version: link:../../../packages/react/base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@aranghat/components-react':
         specifier: workspace:*
         version: link:../../../packages/react/components
@@ -202,6 +208,9 @@ importers:
       '@aranghat/base-vue':
         specifier: workspace:*
         version: link:../../../packages/vue/base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@aranghat/components-vue':
         specifier: workspace:*
         version: link:../../../packages/vue/components
@@ -379,6 +388,10 @@ importers:
         version: 4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1))
 
   packages/components:
+    dependencies:
+      embla-carousel:
+        specifier: ^8.6.0
+        version: 8.6.0
     devDependencies:
       '@aranghat/base':
         specifier: workspace:*
@@ -3558,6 +3571,9 @@ packages:
 
   electron-to-chromium@1.5.427:
     resolution: {integrity: sha512-n14zb3FdsChZ2BNobqNHAJMcP3ifFv4paox2LvCrfVAQcqGiSURgbJl+PfMpHVCNFkStnNc+RRVtPBTVW5PDgw==}
+
+  embla-carousel@8.6.0:
+    resolution: {integrity: sha512-SjWyZBHJPbqxHOzckOfo8lHisEaJWmwd23XppYFYVh10bU66/Pn5tkVkbkCMZVdbUE5eTCI2nD8OyIP4Z+uwkA==}
 
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
@@ -7721,6 +7737,8 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.427: {}
+
+  embla-carousel@8.6.0: {}
 
   emoji-regex-xs@1.0.0: {}
 

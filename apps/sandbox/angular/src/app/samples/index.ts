@@ -207,9 +207,35 @@ import { ComboboxNoTrigger } from './combobox/no-trigger';
 import { ComboboxSizes } from './combobox/sizes';
 import { ComboboxDisabled } from './combobox/disabled';
 import { ComboboxForm } from './combobox/form';
+import { CalendarBasic } from './calendar/basic';
+import { CalendarRange } from './calendar/range';
+import { CalendarMultiple } from './calendar/multiple';
+import { CalendarDropdown } from './calendar/dropdown';
+import { CalendarMinMax } from './calendar/min-max';
+import { CalendarDisabledDays } from './calendar/disabled-days';
+import { CalendarWeekStartsMonday } from './calendar/week-starts-monday';
+import { CalendarDisabled } from './calendar/disabled';
+import { DatePickerBasic } from './date-picker/basic';
+import { DatePickerOpen } from './date-picker/open';
+import { DatePickerRange } from './date-picker/range';
+import { DatePickerDateOfBirth } from './date-picker/date-of-birth';
+import { DatePickerSizes } from './date-picker/sizes';
+import { DatePickerDisabled } from './date-picker/disabled';
+import { DatePickerForm } from './date-picker/form';
+import { ToasterBasic } from './toaster/basic';
+import { ToasterVariants } from './toaster/variants';
+import { ToasterRichColors } from './toaster/rich-colors';
+import { ToasterWithAction } from './toaster/with-action';
+import { ToasterCloseButton } from './toaster/close-button';
+import { ToasterPromise } from './toaster/promise';
+import { CarouselBasic } from './carousel/basic';
+import { CarouselMultiplePerView } from './carousel/multiple-per-view';
+import { CarouselLoop } from './carousel/loop';
+import { CarouselVertical } from './carousel/vertical';
+import { CarouselNoControls } from './carousel/no-controls';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm, CalendarBasic, CalendarRange, CalendarMultiple, CalendarDropdown, CalendarMinMax, CalendarDisabledDays, CalendarWeekStartsMonday, CalendarDisabled, DatePickerBasic, DatePickerOpen, DatePickerRange, DatePickerDateOfBirth, DatePickerSizes, DatePickerDisabled, DatePickerForm, ToasterBasic, ToasterVariants, ToasterRichColors, ToasterWithAction, ToasterCloseButton, ToasterPromise, CarouselBasic, CarouselMultiplePerView, CarouselLoop, CarouselVertical, CarouselNoControls];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -420,4 +446,30 @@ export const SAMPLES = [
   { id: 'combobox/sizes', component: ComboboxSizes },
   { id: 'combobox/disabled', component: ComboboxDisabled },
   { id: 'combobox/form', component: ComboboxForm },
+  { id: 'calendar/basic', component: CalendarBasic },
+  { id: 'calendar/range', component: CalendarRange },
+  { id: 'calendar/multiple', component: CalendarMultiple },
+  { id: 'calendar/dropdown', component: CalendarDropdown },
+  { id: 'calendar/min-max', component: CalendarMinMax },
+  { id: 'calendar/disabled-days', component: CalendarDisabledDays },
+  { id: 'calendar/week-starts-monday', component: CalendarWeekStartsMonday },
+  { id: 'calendar/disabled', component: CalendarDisabled },
+  { id: 'date-picker/basic', component: DatePickerBasic },
+  { id: 'date-picker/open', component: DatePickerOpen },
+  { id: 'date-picker/range', component: DatePickerRange },
+  { id: 'date-picker/date-of-birth', component: DatePickerDateOfBirth },
+  { id: 'date-picker/sizes', component: DatePickerSizes },
+  { id: 'date-picker/disabled', component: DatePickerDisabled },
+  { id: 'date-picker/form', component: DatePickerForm },
+  { id: 'toaster/basic', component: ToasterBasic },
+  { id: 'toaster/variants', component: ToasterVariants },
+  { id: 'toaster/rich-colors', component: ToasterRichColors },
+  { id: 'toaster/with-action', component: ToasterWithAction },
+  { id: 'toaster/close-button', component: ToasterCloseButton },
+  { id: 'toaster/promise', component: ToasterPromise },
+  { id: 'carousel/basic', component: CarouselBasic },
+  { id: 'carousel/multiple-per-view', component: CarouselMultiplePerView },
+  { id: 'carousel/loop', component: CarouselLoop },
+  { id: 'carousel/vertical', component: CarouselVertical },
+  { id: 'carousel/no-controls', component: CarouselNoControls },
 ];

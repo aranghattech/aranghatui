@@ -648,6 +648,32 @@
     "gzip": true
   },
   {
+    "name": "components/art-toast",
+    "path": "packages/components/dist/components/art-toast.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-toaster",
+    "path": "packages/components/dist/components/art-toaster.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "components/art-select",
     "path": "packages/components/dist/components/art-select.js",
     "import": "{ defineCustomElement }",
@@ -765,6 +791,32 @@
     "gzip": true
   },
   {
+    "name": "components/art-calendar",
+    "path": "packages/components/dist/components/art-calendar.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "15 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-date-picker",
+    "path": "packages/components/dist/components/art-date-picker.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "components/art-resizable",
     "path": "packages/components/dist/components/art-resizable.js",
     "import": "{ defineCustomElement }",
@@ -793,6 +845,32 @@
   {
     "name": "components/art-resizable-handle",
     "path": "packages/components/dist/components/art-resizable-handle.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-carousel",
+    "path": "packages/components/dist/components/art-carousel.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-carousel-item",
+    "path": "packages/components/dist/components/art-carousel-item.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",

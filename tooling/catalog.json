@@ -267,7 +267,13 @@
         {
           "tag": "art-toast",
           "name": "Toast",
-          "status": "planned"
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-toaster",
+          "name": "Toast",
+          "status": "in-progress"
         },
         {
           "tag": "art-select",
@@ -324,13 +330,13 @@
         {
           "tag": "art-calendar",
           "name": "Calendar",
-          "status": "planned",
+          "status": "in-progress",
           "budgetKb": 15
         },
         {
           "tag": "art-date-picker",
           "name": "Date Picker",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-resizable",
@@ -352,7 +358,13 @@
         {
           "tag": "art-carousel",
           "name": "Carousel",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-carousel-item",
+          "name": "Carousel Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "data-table",

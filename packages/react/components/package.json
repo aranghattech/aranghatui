@@ -29,6 +29,18 @@
       "types": "./dist/avatar.d.ts",
       "import": "./dist/avatar.js"
     },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./carousel": {
+      "types": "./dist/carousel.d.ts",
+      "import": "./dist/carousel.js"
+    },
+    "./carousel-item": {
+      "types": "./dist/carousel-item.d.ts",
+      "import": "./dist/carousel-item.js"
+    },
     "./collapsible": {
       "types": "./dist/collapsible.d.ts",
       "import": "./dist/collapsible.js"
@@ -56,6 +68,10 @@
     "./command-item": {
       "types": "./dist/command-item.d.ts",
       "import": "./dist/command-item.js"
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker.d.ts",
+      "import": "./dist/date-picker.js"
     },
     "./hover-card": {
       "types": "./dist/hover-card.d.ts",
@@ -104,6 +120,14 @@
     "./tabs": {
       "types": "./dist/tabs.d.ts",
       "import": "./dist/tabs.js"
+    },
+    "./toast": {
+      "types": "./dist/toast.d.ts",
+      "import": "./dist/toast.js"
+    },
+    "./toaster": {
+      "types": "./dist/toaster.d.ts",
+      "import": "./dist/toaster.js"
     },
     "./tooltip": {
       "types": "./dist/tooltip.d.ts",

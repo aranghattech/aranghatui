@@ -34,7 +34,8 @@ function toReact(html) {
   out = out.replace(VOID, '<$1$2 />');
   out = out.replace(/\sclass=/g, ' className=').replace(/\sfor=/g, ' htmlFor=').replace(/\stabindex=/g, ' tabIndex=').replace(/\sreadonly\b/g, ' readOnly').replace(/\smaxlength=/g, ' maxLength=').replace(/\sautocomplete=/g, ' autoComplete=').replace(/\scolspan=/g, ' colSpan=').replace(/\srowspan=/g, ' rowSpan=');
   for (const a of ['stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'clip-rule', 'stroke-dasharray']) out = out.replaceAll(` ${a}=`, ` ${camel(a)}=`);
-  out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter(Boolean).map((decl) => { const [k, ...v] = decl.split(':'); return `${camel(k.trim())}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
+  // custom properties keep their name (quoted); other declarations become camelCase keys
+  out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter((d) => d.trim()).map((decl) => { const [k, ...v] = decl.split(':'); const key = k.trim(); return `${key.startsWith('--') ? `'${key}'` : camel(key)}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
   // kebab-case props on wrapped components → camelCase (aria-/data- stay)
   out = out.replace(/<[A-Z][\w]*[^>]*>/g, (tagStr) => tagStr.replace(/\s(?!aria-|data-)([a-z]+(?:-[a-z]+)+)=/g, (_, k) => ` ${camel(k)}=`));
   out = out.replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />'); // empty elements self-close

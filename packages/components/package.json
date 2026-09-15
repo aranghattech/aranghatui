@@ -39,6 +39,18 @@
       "types": "./dist/components/art-avatar.d.ts",
       "import": "./dist/components/art-avatar.js"
     },
+    "./calendar": {
+      "types": "./dist/components/art-calendar.d.ts",
+      "import": "./dist/components/art-calendar.js"
+    },
+    "./carousel": {
+      "types": "./dist/components/art-carousel.d.ts",
+      "import": "./dist/components/art-carousel.js"
+    },
+    "./carousel-item": {
+      "types": "./dist/components/art-carousel-item.d.ts",
+      "import": "./dist/components/art-carousel-item.js"
+    },
     "./collapsible": {
       "types": "./dist/components/art-collapsible.d.ts",
       "import": "./dist/components/art-collapsible.js"
@@ -66,6 +78,10 @@
     "./command-item": {
       "types": "./dist/components/art-command-item.d.ts",
       "import": "./dist/components/art-command-item.js"
+    },
+    "./date-picker": {
+      "types": "./dist/components/art-date-picker.d.ts",
+      "import": "./dist/components/art-date-picker.js"
     },
     "./hover-card": {
       "types": "./dist/components/art-hover-card.d.ts",
@@ -115,6 +131,14 @@
       "types": "./dist/components/art-tabs.d.ts",
       "import": "./dist/components/art-tabs.js"
     },
+    "./toast": {
+      "types": "./dist/components/art-toast.d.ts",
+      "import": "./dist/components/art-toast.js"
+    },
+    "./toaster": {
+      "types": "./dist/components/art-toaster.d.ts",
+      "import": "./dist/components/art-toaster.js"
+    },
     "./tooltip": {
       "types": "./dist/components/art-tooltip.d.ts",
       "import": "./dist/components/art-tooltip.js"
@@ -147,5 +171,8 @@
     "@stencil/vitest": "1.15.1",
     "jsdom": "28.1.0",
     "vitest": "4.1.11"
+  },
+  "dependencies": {
+    "embla-carousel": "^8.6.0"
   }
 }

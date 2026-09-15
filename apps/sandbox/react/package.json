@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aranghat/base-react": "workspace:*",
+    "@aranghat/components": "workspace:*",
     "@aranghat/components-react": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals-react": "workspace:*",

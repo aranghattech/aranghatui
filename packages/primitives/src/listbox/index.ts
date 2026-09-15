@@ -61,24 +61,19 @@ export function createListbox(options: ListboxOptions): Listbox {
     if (scroll) el.scrollIntoView?.({ block: 'nearest' });
     onHighlight(el, next);
   }
-  function step(delta: number) {
+  /** Move by `delta` enabled options; arrows wrap when `loop`, paging clamps. */
+  function move(delta: number, wrap: boolean) {
     const list = enabled();
-    if (!list.length) return;
+    const last = list.length - 1;
+    if (last < 0) return;
     const pos = list.findIndex(({ i }) => i === index);
-    let n = pos < 0 ? (delta > 0 ? 0 : list.length - 1) : pos + delta;
-    if (n < 0) n = loop ? list.length - 1 : 0;
-    if (n >= list.length) n = loop ? 0 : list.length - 1;
+    let n = pos < 0 ? (delta > 0 ? 0 : last) : pos + delta;
+    if (n < 0) n = wrap && loop ? last : 0;
+    if (n > last) n = wrap && loop ? 0 : last;
     highlight(list[n]!.i);
   }
   function first(scroll = true) { const l = enabled(); if (l.length) highlight(l[0]!.i, scroll); }
   function last(scroll = true) { const l = enabled(); if (l.length) highlight(l[l.length - 1]!.i, scroll); }
-  function page(delta: number) {
-    const list = enabled();
-    if (!list.length) return;
-    const pos = Math.max(0, list.findIndex(({ i }) => i === index));
-    const n = Math.min(list.length - 1, Math.max(0, pos + delta));
-    highlight(list[n]!.i);
-  }
   function selectHighlighted(): boolean {
     const el = getItems()[index];
     if (!el || isDisabled(el)) return false;
@@ -98,18 +93,18 @@ export function createListbox(options: ListboxOptions): Listbox {
     highlight,
     first,
     last,
-    next: () => step(1),
-    prev: () => step(-1),
+    next: () => move(1, true),
+    prev: () => move(-1, true),
     selectHighlighted,
     clear() { highlight(-1, false); },
     handleKey(e) {
       switch (e.key) {
-        case 'ArrowDown': step(1); return true;
-        case 'ArrowUp': step(-1); return true;
+        case 'ArrowDown': move(1, true); return true;
+        case 'ArrowUp': move(-1, true); return true;
         case 'Home': first(true); return true;
         case 'End': last(true); return true;
-        case 'PageDown': page(10); return true;
-        case 'PageUp': page(-10); return true;
+        case 'PageDown': move(10, false); return true;
+        case 'PageUp': move(-10, false); return true;
         case 'Enter': return selectHighlighted();
         case ' ': return space ? selectHighlighted() : false;
         default: return ta?.handleKey(e) ?? false;
