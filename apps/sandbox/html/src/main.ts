@@ -91,6 +91,18 @@ import { defineCustomElement as defineMenubarMenu } from '@aranghat/navigation/m
 import { defineCustomElement as defineNavigationMenu } from '@aranghat/navigation/navigation-menu';
 import { defineCustomElement as defineNavigationMenuItem } from '@aranghat/navigation/navigation-menu-item';
 import { defineCustomElement as defineNavigationMenuLink } from '@aranghat/navigation/navigation-menu-link';
+import { defineCustomElement as defineSidebarProvider } from '@aranghat/navigation/sidebar-provider';
+import { defineCustomElement as defineSidebarMenu } from '@aranghat/navigation/sidebar-menu';
+import { defineCustomElement as defineSidebarMenuItem } from '@aranghat/navigation/sidebar-menu-item';
+import { defineCustomElement as defineSidebarMenuButton } from '@aranghat/navigation/sidebar-menu-button';
+import { defineCustomElement as defineSidebarGroup } from '@aranghat/navigation/sidebar-group';
+import { defineCustomElement as defineSidebarInset } from '@aranghat/navigation/sidebar-inset';
+import { defineCustomElement as defineSidebarTrigger } from '@aranghat/navigation/sidebar-trigger';
+import { defineCustomElement as defineSidebarMenuSub } from '@aranghat/navigation/sidebar-menu-sub';
+import { defineCustomElement as defineTopNav } from '@aranghat/navigation/top-nav';
+import { defineCustomElement as defineTreeView } from '@aranghat/navigation/tree-view';
+import { defineCustomElement as defineTreeItem } from '@aranghat/navigation/tree-item';
+import { defineCustomElement as defineSidebar } from '@aranghat/navigation/sidebar';
 import './sandbox.css';
 
 defineButton();
@@ -183,6 +195,18 @@ defineMenubarMenu();
 defineNavigationMenu();
 defineNavigationMenuItem();
 defineNavigationMenuLink();
+defineSidebarProvider();
+defineSidebarMenu();
+defineSidebarMenuItem();
+defineSidebarMenuButton();
+defineSidebarGroup();
+defineSidebarInset();
+defineSidebarTrigger();
+defineSidebarMenuSub();
+defineTopNav();
+defineTreeView();
+defineTreeItem();
+defineSidebar();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

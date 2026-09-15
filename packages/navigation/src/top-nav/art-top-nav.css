@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([sticky]) {
+  position: sticky;
+  top: 0;
+  z-index: var(--art-z-sticky);
+}
+.bar {
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+.links {
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  gap: var(--art-space-1);
+  min-width: 0;
+}
+::slotted(a) {
+  display: inline-flex;
+  align-items: center;
+  height: var(--art-space-9);
+  padding-inline: var(--art-space-3);
+  border-radius: var(--art-radius-md);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+  color: var(--art-color-fg-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  transition:
+    color var(--art-duration-fast) var(--art-ease-out),
+    background-color var(--art-duration-fast) var(--art-ease-out);
+}
+::slotted(a:hover) {
+  color: var(--art-color-fg-default);
+  background: var(--art-color-bg-accent);
+}
+::slotted(a[aria-current='page']) {
+  color: var(--art-color-fg-default);
+}
+::slotted(a:focus-visible) {
+  @apply focus-ring-shadow;
+}
+/* Collapsed: the links become a panel under the bar. */
+:host([data-collapsed]) .links {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: var(--art-z-dropdown);
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  padding: var(--art-space-2);
+  background: var(--art-color-bg-canvas);
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+  box-shadow: var(--art-shadow-overlay);
+}
+:host([data-collapsed][open]) .links {
+  display: flex;
+  @apply animate-overlay-in;
+}
+:host([data-collapsed]) ::slotted(a) {
+  width: 100%;
+  height: var(--art-space-10);
+}

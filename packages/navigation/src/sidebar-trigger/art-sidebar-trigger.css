@@ -1,0 +1,12 @@
+/* A stretched flex item (a column layout) must not widen the hit area beyond the button. */
+:host {
+  display: inline-flex;
+  width: max-content;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}

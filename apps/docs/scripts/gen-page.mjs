@@ -38,10 +38,11 @@ function toReact(html) {
   out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter((d) => d.trim()).map((decl) => { const [k, ...v] = decl.split(':'); const key = k.trim(); return `${key.startsWith('--') ? `'${key}'` : camel(key)}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
   // kebab-case props on wrapped components → camelCase (aria-/data- stay)
   out = out.replace(/<[A-Z][\w]*[^>]*>/g, (tagStr) => tagStr.replace(/\s(?!aria-|data-)([a-z]+(?:-[a-z]+)+)=/g, (_, k) => ` ${camel(k)}=`));
+  out = out.replace(/<[A-Z][\w]*[^>]*>/g, (tagStr) => tagStr.replace(/\s([a-zA-Z]+)="(true|false)"/g, ' $1={$2}')); // open="false" → open={false}
   out = out.replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />'); // empty elements self-close
   return out.trim();
 }
-function toVue(html) { return html.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`).replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />').trim(); }
+function toVue(html) { return html.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`).replace(/<[A-Z][\w]*[^>]*>/g, (tagStr) => tagStr.replace(/\s([a-z-]+)="(true|false)"/g, ' :$1="$2"')).replace(/<([A-Z]\w*)([^>]*)><\/\1>/g, '<$1$2 />').trim(); }
 const indent = (s, n) => s.split('\n').map((l) => ' '.repeat(n) + l).join('\n');
 
 function imports(html, fw) {
@@ -72,7 +73,8 @@ for (const [key, ex] of Object.entries(stories.examples)) {
   if (writeIfAbsent(join(S, 'react/src/samples', slug, `${key}.tsx`), `${imports(html, 'react')}\n\nexport default function ${cmp}() {\n  return (\n    <>\n${indent(toReact(html), 6)}\n    </>\n  );\n}\n`)) written.push(`react/${key}`);
   if (writeIfAbsent(join(S, 'vue/src/samples', slug, `${key}.vue`), `<script setup lang="ts">\n${imports(html, 'vue')}\n</script>\n\n<template>\n${indent(toVue(html), 2)}\n</template>\n`)) written.push(`vue/${key}`);
   // the Angular template is a template literal: backticks and `${` in the sample must be escaped
-  const ngHtml = html.replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+  const ngHtml = html.replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
+    .replace(/<art-[^>]*>/g, (tagStr) => tagStr.replace(/\s([a-z-]+)="(true|false)"/g, (_, k, v) => ` [${camel(k)}]="${v}"`)); // open="false" → [open]="false"
   if (writeIfAbsent(join(S, 'angular/src/app/samples', slug, `${key}.ts`), `import { Component } from '@angular/core';\n${imports(html, 'angular')}\n\n@Component({\n  selector: 'sample-${slug}-${key}',\n  imports: [${artTags(html).map(pascal).sort().join(', ')}],\n  template: \`\n${indent(ngHtml, 4)}\n  \`,\n})\nexport class ${pascal(slug)}${cmp} {}\n`)) written.push(`angular/${key}`);
 }
 
@@ -95,7 +97,7 @@ for (const [key, ex] of Object.entries(stories.examples)) {
   let s = readFileSync(p, 'utf8');
   for (const t of new Set(Object.values(stories.examples).flatMap((ex) => artTags(ex.render())))) {
     const fn = `define${pascal(t.replace(/^art-/, ''))}`;
-    if (s.includes(fn)) continue;
+    if (new RegExp(`\\b${fn}\\(\\)`).test(s)) continue; // whole name: defineSidebar is not defineSidebarProvider
     s = s.replace("import './sandbox.css';", `import { defineCustomElement as ${fn} } from '@aranghat/${tierOf(t) ?? tier}/${t.replace(/^art-/, '')}';\nimport './sandbox.css';`);
     s = s.replace(/\n\n\/\/ Every sample/, `\n${fn}();\n\n// Every sample`);
   }

@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+.main {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  background: var(--art-color-bg-canvas);
+  transition: margin var(--art-duration-base) var(--art-ease-out);
+}
+/* State attributes are pushed by the sibling `art-sidebar`. */
+:host([data-variant='inset']:not([data-mobile])) .main {
+  margin: var(--art-space-2);
+  border-radius: var(--art-radius-xl);
+  box-shadow: var(--art-shadow-raised);
+  overflow: hidden;
+}
+:host([data-variant='inset'][data-side='left']:not([data-mobile]):not([data-collapsed])) .main {
+  margin-inline-start: 0;
+}
+:host([data-variant='inset'][data-side='right']:not([data-mobile]):not([data-collapsed])) .main {
+  margin-inline-end: 0;
+}

@@ -15,4 +15,16 @@ export { ArtNavigationMenu as NavigationMenu } from './components/art-navigation
 export { ArtNavigationMenuItem as NavigationMenuItem } from './components/art-navigation-menu-item.js';
 export { ArtNavigationMenuLink as NavigationMenuLink } from './components/art-navigation-menu-link.js';
 export { ArtPagination as Pagination } from './components/art-pagination.js';
+export { ArtSidebar as Sidebar } from './components/art-sidebar.js';
+export { ArtSidebarGroup as SidebarGroup } from './components/art-sidebar-group.js';
+export { ArtSidebarInset as SidebarInset } from './components/art-sidebar-inset.js';
+export { ArtSidebarMenu as SidebarMenu } from './components/art-sidebar-menu.js';
+export { ArtSidebarMenuButton as SidebarMenuButton } from './components/art-sidebar-menu-button.js';
+export { ArtSidebarMenuItem as SidebarMenuItem } from './components/art-sidebar-menu-item.js';
+export { ArtSidebarMenuSub as SidebarMenuSub } from './components/art-sidebar-menu-sub.js';
+export { ArtSidebarProvider as SidebarProvider } from './components/art-sidebar-provider.js';
+export { ArtSidebarTrigger as SidebarTrigger } from './components/art-sidebar-trigger.js';
+export { ArtTopNav as TopNav } from './components/art-top-nav.js';
+export { ArtTreeItem as TreeItem } from './components/art-tree-item.js';
+export { ArtTreeView as TreeView } from './components/art-tree-view.js';
 export type { StencilReactComponent } from '@stencil/react-output-target/runtime';

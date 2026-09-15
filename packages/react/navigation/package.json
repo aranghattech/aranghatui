@@ -77,6 +77,54 @@
       "types": "./dist/pagination.d.ts",
       "import": "./dist/pagination.js"
     },
+    "./sidebar": {
+      "types": "./dist/sidebar.d.ts",
+      "import": "./dist/sidebar.js"
+    },
+    "./sidebar-group": {
+      "types": "./dist/sidebar-group.d.ts",
+      "import": "./dist/sidebar-group.js"
+    },
+    "./sidebar-inset": {
+      "types": "./dist/sidebar-inset.d.ts",
+      "import": "./dist/sidebar-inset.js"
+    },
+    "./sidebar-menu": {
+      "types": "./dist/sidebar-menu.d.ts",
+      "import": "./dist/sidebar-menu.js"
+    },
+    "./sidebar-menu-button": {
+      "types": "./dist/sidebar-menu-button.d.ts",
+      "import": "./dist/sidebar-menu-button.js"
+    },
+    "./sidebar-menu-item": {
+      "types": "./dist/sidebar-menu-item.d.ts",
+      "import": "./dist/sidebar-menu-item.js"
+    },
+    "./sidebar-menu-sub": {
+      "types": "./dist/sidebar-menu-sub.d.ts",
+      "import": "./dist/sidebar-menu-sub.js"
+    },
+    "./sidebar-provider": {
+      "types": "./dist/sidebar-provider.d.ts",
+      "import": "./dist/sidebar-provider.js"
+    },
+    "./sidebar-trigger": {
+      "types": "./dist/sidebar-trigger.d.ts",
+      "import": "./dist/sidebar-trigger.js"
+    },
+    "./top-nav": {
+      "types": "./dist/top-nav.d.ts",
+      "import": "./dist/top-nav.js"
+    },
+    "./tree-item": {
+      "types": "./dist/tree-item.d.ts",
+      "import": "./dist/tree-item.js"
+    },
+    "./tree-view": {
+      "types": "./dist/tree-view.d.ts",
+      "import": "./dist/tree-view.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+.label {
+  white-space: nowrap;
+  transition:
+    margin var(--art-duration-base) var(--art-ease-out),
+    opacity var(--art-duration-base) var(--art-ease-out);
+}
+.action {
+  top: var(--art-space-2);
+  inset-inline-end: var(--art-space-2);
+}
+/* Icons only: the heading folds away and the action hides. */
+:host([data-icon]) .label {
+  margin-top: calc(-1 * var(--art-space-8));
+  opacity: 0;
+}
+:host([data-icon]) .action {
+  display: none;
+}

@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+.action {
+  top: var(--art-space-1);
+  inset-inline-end: var(--art-space-1);
+}
+.badge {
+  top: var(--art-space-1-5);
+  inset-inline-end: var(--art-space-1);
+}
+/* Icons only: no room beside the icon. */
+:host([data-icon]) .action,
+:host([data-icon]) .badge {
+  display: none;
+}
+@media (hover: hover) {
+  :host([action-on-hover]) .action {
+    opacity: 0;
+    transition: opacity var(--art-duration-fast) var(--art-ease-out);
+  }
+  :host([action-on-hover]) .item:hover .action,
+  :host([action-on-hover]) .item:focus-within .action,
+  :host([action-on-hover][open]) .action {
+    opacity: 1;
+  }
+}

@@ -87,6 +87,54 @@
       "types": "./dist/components/art-pagination.d.ts",
       "import": "./dist/components/art-pagination.js"
     },
+    "./sidebar": {
+      "types": "./dist/components/art-sidebar.d.ts",
+      "import": "./dist/components/art-sidebar.js"
+    },
+    "./sidebar-group": {
+      "types": "./dist/components/art-sidebar-group.d.ts",
+      "import": "./dist/components/art-sidebar-group.js"
+    },
+    "./sidebar-inset": {
+      "types": "./dist/components/art-sidebar-inset.d.ts",
+      "import": "./dist/components/art-sidebar-inset.js"
+    },
+    "./sidebar-menu": {
+      "types": "./dist/components/art-sidebar-menu.d.ts",
+      "import": "./dist/components/art-sidebar-menu.js"
+    },
+    "./sidebar-menu-button": {
+      "types": "./dist/components/art-sidebar-menu-button.d.ts",
+      "import": "./dist/components/art-sidebar-menu-button.js"
+    },
+    "./sidebar-menu-item": {
+      "types": "./dist/components/art-sidebar-menu-item.d.ts",
+      "import": "./dist/components/art-sidebar-menu-item.js"
+    },
+    "./sidebar-menu-sub": {
+      "types": "./dist/components/art-sidebar-menu-sub.d.ts",
+      "import": "./dist/components/art-sidebar-menu-sub.js"
+    },
+    "./sidebar-provider": {
+      "types": "./dist/components/art-sidebar-provider.d.ts",
+      "import": "./dist/components/art-sidebar-provider.js"
+    },
+    "./sidebar-trigger": {
+      "types": "./dist/components/art-sidebar-trigger.d.ts",
+      "import": "./dist/components/art-sidebar-trigger.js"
+    },
+    "./top-nav": {
+      "types": "./dist/components/art-top-nav.d.ts",
+      "import": "./dist/components/art-top-nav.js"
+    },
+    "./tree-item": {
+      "types": "./dist/components/art-tree-item.d.ts",
+      "import": "./dist/components/art-tree-item.js"
+    },
+    "./tree-view": {
+      "types": "./dist/components/art-tree-view.d.ts",
+      "import": "./dist/components/art-tree-view.js"
+    },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
