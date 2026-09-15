@@ -1011,6 +1011,154 @@
     "gzip": true
   },
   {
+    "name": "navigation: runtime chunk (index2.js)",
+    "path": "packages/navigation/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-breadcrumb",
+    "path": "packages/navigation/dist/components/art-breadcrumb.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-breadcrumb-item",
+    "path": "packages/navigation/dist/components/art-breadcrumb-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-pagination",
+    "path": "packages/navigation/dist/components/art-pagination.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-dropdown-menu",
+    "path": "packages/navigation/dist/components/art-dropdown-menu.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-item",
+    "path": "packages/navigation/dist/components/art-menu-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-radio-group",
+    "path": "packages/navigation/dist/components/art-menu-radio-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-label",
+    "path": "packages/navigation/dist/components/art-menu-label.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-separator",
+    "path": "packages/navigation/dist/components/art-menu-separator.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-group",
+    "path": "packages/navigation/dist/components/art-menu-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-menu-sub",
+    "path": "packages/navigation/dist/components/art-menu-sub.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation: whole tier",
+    "path": "packages/navigation/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "45 kB",
+    "gzip": true
+  },
+  {
     "name": "modals/art-hello-overlay (+ inlined runtime: single-component tier)",
     "path": "packages/modals/dist/components/art-hello-overlay.js",
     "import": "{ defineCustomElement }",

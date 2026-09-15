@@ -1,0 +1,72 @@
+:host {
+  display: block;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+.item {
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+}
+/* Focus (on the host) is the highlight; pointer hover moves focus too. */
+:host(:focus) .item {
+  background: var(--art-color-bg-accent);
+}
+:host([disabled]) .item {
+  pointer-events: none;
+  opacity: 50%;
+}
+:host([variant='destructive']) .item {
+  color: var(--art-color-destructive-fg);
+}
+:host([variant='destructive']:focus) .item {
+  background: var(--art-color-destructive-muted);
+}
+/* Checkbox / radio items and `inset` items leave room for the indicator (shadcn `pl-8`). */
+:host([type='checkbox']) .item,
+:host([type='radio']) .item,
+:host([inset]) .item {
+  padding-inline-start: var(--art-space-8);
+}
+.indicator {
+  inset-inline-start: var(--art-space-2);
+  width: var(--art-space-3-5);
+  height: var(--art-space-3-5);
+}
+.dot {
+  width: var(--art-space-2);
+  height: var(--art-space-2);
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+  color: var(--art-color-fg-muted);
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+:host([variant='destructive']) ::slotted(svg),
+:host([variant='destructive']) ::slotted(art-icon) {
+  color: currentColor;
+}
+::slotted([slot='shortcut']) {
+  margin-inline-start: auto;
+  font-size: var(--art-font-size-xs);
+  letter-spacing: var(--art-font-tracking-wide);
+  color: var(--art-color-fg-muted);
+}
+/* Only the trigger of a submenu shows the chevron. */
+.sub-chevron {
+  display: none;
+  margin-inline-start: auto;
+}
+:host([slot='trigger']) .sub-chevron {
+  display: block;
+}
+:host(:dir(rtl)) .sub-chevron {
+  transform: scaleX(-1);
+}

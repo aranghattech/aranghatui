@@ -14,6 +14,8 @@
     "@aranghat/components-react": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals-react": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/navigation-react": "workspace:*",
     "@aranghat/tokens": "workspace:*",
     "react": "19.3.0",
     "react-dom": "19.3.0"

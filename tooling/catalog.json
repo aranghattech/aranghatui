@@ -432,17 +432,59 @@
         {
           "tag": "art-breadcrumb",
           "name": "Breadcrumb",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-breadcrumb-item",
+          "name": "Breadcrumb Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-pagination",
           "name": "Pagination",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-dropdown-menu",
           "name": "Dropdown Menu",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-menu-item",
+          "name": "Menu Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-menu-radio-group",
+          "name": "Menu Radio Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-menu-label",
+          "name": "Menu Label",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-menu-separator",
+          "name": "Menu Separator",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-menu-group",
+          "name": "Menu Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-menu-sub",
+          "name": "Menu Sub",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-context-menu",

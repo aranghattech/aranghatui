@@ -1,0 +1,48 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--art-space-1-5);
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(a) {
+  color: inherit;
+  text-decoration: none;
+  transition-property: color;
+  transition-duration: var(--art-duration-fast);
+  transition-timing-function: var(--art-ease-out);
+  outline: none;
+  border-radius: var(--art-radius-sm);
+}
+::slotted(a:hover) {
+  color: var(--art-color-fg-default);
+}
+::slotted(a:focus-visible) {
+  box-shadow: 0 0 0 var(--art-ring-offset) var(--art-color-bg-canvas), 0 0 0 calc(var(--art-ring-width) + var(--art-ring-offset)) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+}
+.ellipsis {
+  width: var(--art-space-9);
+  height: var(--art-space-9);
+}
+/* The separator follows every item except the last; the breadcrumb sets which glyph. */
+.separator {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: var(--art-space-1-5);
+}
+:host([data-last]) .separator {
+  display: none;
+}
+.slash {
+  display: none;
+}
+:host([data-separator='slash']) .chevron {
+  display: none;
+}
+:host([data-separator='slash']) .slash {
+  display: inline;
+}
+:host(:dir(rtl)) .chevron {
+  transform: scaleX(-1);
+}

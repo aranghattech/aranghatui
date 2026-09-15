@@ -18,6 +18,8 @@
     "@aranghat/components-angular": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals-angular": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/navigation-angular": "workspace:*",
     "@aranghat/tokens": "workspace:*",
     "rxjs": "7.8.2",
     "tslib": "2.8.1"

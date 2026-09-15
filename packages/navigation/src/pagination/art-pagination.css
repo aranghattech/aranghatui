@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+/* The arrows flip with the writing direction. */
+:host(:dir(rtl)) [part='previous'] svg,
+:host(:dir(rtl)) [part='next'] svg {
+  transform: scaleX(-1);
+}

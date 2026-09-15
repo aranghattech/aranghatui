@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  height: var(--art-border-width);
+  margin-block: var(--art-space-1);
+  margin-inline: calc(-1 * var(--art-space-1));
+  background: var(--art-color-border-default);
+}
+:host([hidden]) {
+  display: none;
+}
