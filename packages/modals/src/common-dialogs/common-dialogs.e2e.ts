@@ -18,6 +18,7 @@ test.describe('common dialogs', () => {
     await expect(page.locator('art-alert-dialog[data-art-common-dialog] [part="content"]')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect.poll(() => page.evaluate(() => window.__r)).toBe(false);
+    await expect(page.locator('art-alert-dialog[data-art-common-dialog]')).toHaveCount(0); // removed after the exit motion
 
     await page.evaluate(() => { window.__r = 'pending'; window.__m.alert({ title: 'Saved', description: 'All good.' }).then(() => (window.__r = 'closed')); });
     const a = page.locator('art-alert-dialog[data-art-common-dialog]');
@@ -25,6 +26,7 @@ test.describe('common dialogs', () => {
     await expect(a.locator('[slot="cancel"]')).toHaveCount(0);
     await a.locator('[slot="action"]').click();
     await expect.poll(() => page.evaluate(() => window.__r)).toBe('closed');
+    await expect(a).toHaveCount(0);
 
     await page.evaluate(() => { window.__r = 'pending'; window.__m.prompt({ title: 'Rename', defaultValue: 'Old', required: true }).then((v: string | null) => (window.__r = v)); });
     const d = page.locator('art-dialog[data-art-common-dialog]');
