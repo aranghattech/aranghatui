@@ -660,12 +660,24 @@
         {
           "tag": "art-onboarding-wizard",
           "name": "Onboarding Wizard",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-notification-centre",
           "name": "Notification Centre",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-wizard-step",
+          "name": "Wizard Step",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-notification-item",
+          "name": "Notification Item",
+          "status": "in-progress",
+          "internal": true
         }
       ]
     }

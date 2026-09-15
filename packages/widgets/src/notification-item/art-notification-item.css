@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+.item {
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+  transition: background-color var(--art-duration-fast) var(--art-ease-out);
+}
+:host(:last-child) .item {
+  border-block-end: 0;
+}
+.item:hover {
+  background: var(--art-color-bg-accent);
+}
+:host([unread]) .item {
+  background: color-mix(in oklab, var(--art-color-bg-accent) 50%, transparent);
+}
+.media {
+  width: var(--art-space-9);
+  height: var(--art-space-9);
+}
+::slotted([slot='media']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+/* The heading is the control; its hit area is the whole row (extra actions sit above it). */
+.heading {
+  cursor: pointer;
+  color: var(--art-color-fg-default);
+  text-decoration: none;
+  outline: none;
+}
+.stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.heading:focus-visible::after {
+  @apply focus-ring-shadow;
+  border-radius: var(--art-radius-sm);
+}
+.body {
+  z-index: 1;
+}
+.dot {
+  position: absolute;
+  top: var(--art-space-3-5);
+  inset-inline-end: var(--art-space-3);
+  width: var(--art-space-2);
+  height: var(--art-space-2);
+  border-radius: var(--art-radius-full);
+  background: var(--art-color-primary-solid);
+}
+:host([unread]) .time {
+  padding-inline-end: var(--art-space-4);
+}

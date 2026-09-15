@@ -1,0 +1,43 @@
+import { Component } from '@angular/core';
+import { ArtOnboardingWizard, ArtWizardStep } from '@aranghat/widgets-angular';
+import { ArtField, ArtInput, ArtLabel, ArtNativeSelect } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-onboarding-wizard-basic',
+  imports: [ArtField, ArtInput, ArtLabel, ArtNativeSelect, ArtOnboardingWizard, ArtWizardStep],
+  template: `
+    <art-onboarding-wizard step="2">
+      <art-wizard-step label="Account" description="Sign in details">
+        <art-field>
+          <art-label slot="label">Email</art-label>
+          <art-input type="email" value="ada@example.com"></art-input>
+        </art-field>
+      </art-wizard-step>
+      <art-wizard-step label="Profile" description="Tell us about you">
+        <art-field>
+          <art-label slot="label">Full name</art-label>
+          <art-input value="Ada Lovelace"></art-input>
+        </art-field>
+        <art-field>
+          <art-label slot="label">Role</art-label>
+          <art-native-select value="engineer">
+            <option value="engineer">Engineer</option>
+            <option value="designer">Designer</option>
+            <option value="manager">Manager</option>
+          </art-native-select>
+        </art-field>
+      </art-wizard-step>
+      <art-wizard-step label="Team" description="Invite your colleagues" optional>
+        <art-field>
+          <art-label slot="label">Invite by email</art-label>
+          <art-input placeholder="name@company.com"></art-input>
+          <p slot="description">You can skip this and invite people later.</p>
+        </art-field>
+      </art-wizard-step>
+      <art-wizard-step label="Done" description="Review and finish">
+        <p style="margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted)">Everything is set. Press Finish to open your workspace.</p>
+      </art-wizard-step>
+    </art-onboarding-wizard>
+  `,
+})
+export class OnboardingWizardBasic {}

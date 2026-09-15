@@ -71,6 +71,18 @@
       "types": "./dist/components/art-login.d.ts",
       "import": "./dist/components/art-login.js"
     },
+    "./notification-centre": {
+      "types": "./dist/components/art-notification-centre.d.ts",
+      "import": "./dist/components/art-notification-centre.js"
+    },
+    "./notification-item": {
+      "types": "./dist/components/art-notification-item.d.ts",
+      "import": "./dist/components/art-notification-item.js"
+    },
+    "./onboarding-wizard": {
+      "types": "./dist/components/art-onboarding-wizard.d.ts",
+      "import": "./dist/components/art-onboarding-wizard.js"
+    },
     "./settings-page": {
       "types": "./dist/components/art-settings-page.d.ts",
       "import": "./dist/components/art-settings-page.js"
@@ -82,6 +94,10 @@
     "./state-page": {
       "types": "./dist/components/art-state-page.d.ts",
       "import": "./dist/components/art-state-page.js"
+    },
+    "./wizard-step": {
+      "types": "./dist/components/art-wizard-step.d.ts",
+      "import": "./dist/components/art-wizard-step.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"

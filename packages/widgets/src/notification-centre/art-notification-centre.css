@@ -1,0 +1,75 @@
+:host {
+  display: inline-flex;
+  width: max-content;
+}
+:host([inline]) {
+  display: block;
+  width: 100%;
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+.trigger {
+  width: var(--art-space-9);
+  height: var(--art-space-9);
+}
+.badge {
+  top: calc(-1 * var(--art-space-1));
+  inset-inline-end: calc(-1 * var(--art-space-1));
+  min-width: var(--art-space-4);
+  height: var(--art-space-4);
+  padding-inline: var(--art-space-1);
+  line-height: 1;
+}
+.panel {
+  width: var(--art-container-xs);
+  max-width: 100%;
+}
+:host([inline]) .panel {
+  width: 100%;
+  max-width: var(--art-container-sm);
+}
+.header {
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+.list {
+  max-height: var(--art-container-sm);
+  overflow: auto;
+}
+/* the unread filter hides read rows without touching the consumer's DOM */
+:host([filter='unread']) ::slotted(art-notification-item:not([unread])) {
+  display: none;
+}
+/* the top-layer panel (ADR-0022) */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+:host(:not([inline])) .panel {
+  position: fixed;
+  box-shadow: var(--art-shadow-popover);
+  outline: none;
+}
+:host(:not([inline])) .panel:not([data-state]),
+:host(:not([inline])) .panel[popover]:not(:popover-open) {
+  display: none;
+}
+.panel[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.panel[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}

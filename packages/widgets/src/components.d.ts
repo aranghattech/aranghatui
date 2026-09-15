@@ -211,6 +211,128 @@ export namespace Components {
         "submitLabel": string;
     }
     /**
+     * Notification Centre — a bell with an unread count that opens a panel of
+     * `art-notification-item`s: a heading, "Mark all as read", an all / unread filter, the list and
+     * an empty state. `inline` renders the panel in place (a settings page, the docs). Clicking an
+     * item emits `select` and marks it read; the count follows the items' `unread` attributes.
+     */
+    interface ArtNotificationCentre {
+        /**
+          * @default 'All'
+         */
+        "allLabel": string;
+        /**
+          * @default 'New notifications will appear here.'
+         */
+        "emptyDescription": string;
+        /**
+          * @default "You're all caught up"
+         */
+        "emptyHeading": string;
+        /**
+          * Show every item or only the unread ones.
+          * @default 'all'
+         */
+        "filter": 'all' | 'unread';
+        /**
+          * @default 'Notifications'
+         */
+        "heading": string;
+        /**
+          * Render the panel in place, without the bell.
+          * @default false
+         */
+        "inline": boolean;
+        /**
+          * @default 'Mark all as read'
+         */
+        "markAllLabel": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * @default 'Notifications'
+         */
+        "triggerLabel": string;
+        /**
+          * @default 'Unread'
+         */
+        "unreadLabel": string;
+    }
+    /**
+     * Notification Item — one row of an `art-notification-centre`: media, heading, description,
+     * time, and the unread dot. The whole row activates (`select`, then the centre marks it read);
+     * with `href` it is a link. Extra actions go in the default slot and stay clickable on their own.
+     */
+    interface ArtNotificationItem {
+        "description"?: string;
+        /**
+          * @default ''
+         */
+        "heading": string;
+        /**
+          * Makes the heading a link.
+         */
+        "href"?: string;
+        /**
+          * Relative or absolute time, as text (`2m ago`).
+         */
+        "time"?: string;
+        /**
+          * @default false
+         */
+        "unread": boolean;
+        /**
+          * Reported by `select`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Onboarding Wizard — a multi-step flow: a stepper (numbers, check marks, the current step),
+     * one `art-wizard-step` shown at a time, and Back / Next / Finish (and Skip on optional steps).
+     * `step` is 1-based; `step-change` is cancelable so you can validate before moving on.
+     */
+    interface ArtOnboardingWizard {
+        /**
+          * @default 'Back'
+         */
+        "backLabel": string;
+        /**
+          * @default 'Finish'
+         */
+        "finishLabel": string;
+        /**
+          * Accessible name of the stepper.
+          * @default 'Setup'
+         */
+        "label": string;
+        /**
+          * Spinner on the Next / Finish button; moves are ignored meanwhile.
+          * @default false
+         */
+        "loading": boolean;
+        /**
+          * @default 'Next'
+         */
+        "nextLabel": string;
+        /**
+          * Stepper beside the content instead of above it.
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * @default 'Skip'
+         */
+        "skipLabel": string;
+        /**
+          * Current step, 1-based.
+          * @default 1
+         */
+        "step": number;
+    }
+    /**
      * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
      * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
      * description and content. Links are plain `<a slot="nav">`s (or router links) and
@@ -320,6 +442,22 @@ export namespace Components {
          */
         "kind": 'empty' | 'not-found' | 'error';
     }
+    /**
+     * Wizard Step — one step of an `art-onboarding-wizard`: its `label` / `description` feed the
+     * stepper, its content is shown while it is the current step (the wizard hides the others).
+     */
+    interface ArtWizardStep {
+        "description"?: string;
+        /**
+          * @default ''
+         */
+        "label": string;
+        /**
+          * May be skipped (the wizard offers a Skip button on it).
+          * @default false
+         */
+        "optional": boolean;
+    }
 }
 export interface ArtDataTablePageCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -332,6 +470,18 @@ export interface ArtForgotPasswordCustomEvent<T> extends CustomEvent<T> {
 export interface ArtLoginCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtLoginElement;
+}
+export interface ArtNotificationCentreCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtNotificationCentreElement;
+}
+export interface ArtNotificationItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtNotificationItemElement;
+}
+export interface ArtOnboardingWizardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtOnboardingWizardElement;
 }
 export interface ArtSignupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -421,6 +571,75 @@ declare global {
         prototype: HTMLArtLoginElement;
         new (): HTMLArtLoginElement;
     };
+    interface HTMLArtNotificationCentreElementEventMap {
+        "open-change": { open: boolean };
+        "read-all": void;
+    }
+    /**
+     * Notification Centre — a bell with an unread count that opens a panel of
+     * `art-notification-item`s: a heading, "Mark all as read", an all / unread filter, the list and
+     * an empty state. `inline` renders the panel in place (a settings page, the docs). Clicking an
+     * item emits `select` and marks it read; the count follows the items' `unread` attributes.
+     */
+    interface HTMLArtNotificationCentreElement extends Components.ArtNotificationCentre, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtNotificationCentreElementEventMap>(type: K, listener: (this: HTMLArtNotificationCentreElement, ev: ArtNotificationCentreCustomEvent<HTMLArtNotificationCentreElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtNotificationCentreElementEventMap>(type: K, listener: (this: HTMLArtNotificationCentreElement, ev: ArtNotificationCentreCustomEvent<HTMLArtNotificationCentreElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtNotificationCentreElement: {
+        prototype: HTMLArtNotificationCentreElement;
+        new (): HTMLArtNotificationCentreElement;
+    };
+    interface HTMLArtNotificationItemElementEventMap {
+        "select": { value: string };
+    }
+    /**
+     * Notification Item — one row of an `art-notification-centre`: media, heading, description,
+     * time, and the unread dot. The whole row activates (`select`, then the centre marks it read);
+     * with `href` it is a link. Extra actions go in the default slot and stay clickable on their own.
+     */
+    interface HTMLArtNotificationItemElement extends Components.ArtNotificationItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtNotificationItemElementEventMap>(type: K, listener: (this: HTMLArtNotificationItemElement, ev: ArtNotificationItemCustomEvent<HTMLArtNotificationItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtNotificationItemElementEventMap>(type: K, listener: (this: HTMLArtNotificationItemElement, ev: ArtNotificationItemCustomEvent<HTMLArtNotificationItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtNotificationItemElement: {
+        prototype: HTMLArtNotificationItemElement;
+        new (): HTMLArtNotificationItemElement;
+    };
+    interface HTMLArtOnboardingWizardElementEventMap {
+        "step-change": { step: number; from: number };
+        "finish": void;
+    }
+    /**
+     * Onboarding Wizard — a multi-step flow: a stepper (numbers, check marks, the current step),
+     * one `art-wizard-step` shown at a time, and Back / Next / Finish (and Skip on optional steps).
+     * `step` is 1-based; `step-change` is cancelable so you can validate before moving on.
+     */
+    interface HTMLArtOnboardingWizardElement extends Components.ArtOnboardingWizard, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtOnboardingWizardElementEventMap>(type: K, listener: (this: HTMLArtOnboardingWizardElement, ev: ArtOnboardingWizardCustomEvent<HTMLArtOnboardingWizardElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtOnboardingWizardElementEventMap>(type: K, listener: (this: HTMLArtOnboardingWizardElement, ev: ArtOnboardingWizardCustomEvent<HTMLArtOnboardingWizardElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtOnboardingWizardElement: {
+        prototype: HTMLArtOnboardingWizardElement;
+        new (): HTMLArtOnboardingWizardElement;
+    };
     /**
      * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
      * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
@@ -467,14 +686,28 @@ declare global {
         prototype: HTMLArtStatePageElement;
         new (): HTMLArtStatePageElement;
     };
+    /**
+     * Wizard Step — one step of an `art-onboarding-wizard`: its `label` / `description` feed the
+     * stepper, its content is shown while it is the current step (the wizard hides the others).
+     */
+    interface HTMLArtWizardStepElement extends Components.ArtWizardStep, HTMLStencilElement {
+    }
+    var HTMLArtWizardStepElement: {
+        prototype: HTMLArtWizardStepElement;
+        new (): HTMLArtWizardStepElement;
+    };
     interface HTMLElementTagNameMap {
         "art-app-shell": HTMLArtAppShellElement;
         "art-data-table-page": HTMLArtDataTablePageElement;
         "art-forgot-password": HTMLArtForgotPasswordElement;
         "art-login": HTMLArtLoginElement;
+        "art-notification-centre": HTMLArtNotificationCentreElement;
+        "art-notification-item": HTMLArtNotificationItemElement;
+        "art-onboarding-wizard": HTMLArtOnboardingWizardElement;
         "art-settings-page": HTMLArtSettingsPageElement;
         "art-signup": HTMLArtSignupElement;
         "art-state-page": HTMLArtStatePageElement;
+        "art-wizard-step": HTMLArtWizardStepElement;
     }
 }
 declare namespace LocalJSX {
@@ -703,6 +936,148 @@ declare namespace LocalJSX {
         "submitLabel"?: string;
     }
     /**
+     * Notification Centre — a bell with an unread count that opens a panel of
+     * `art-notification-item`s: a heading, "Mark all as read", an all / unread filter, the list and
+     * an empty state. `inline` renders the panel in place (a settings page, the docs). Clicking an
+     * item emits `select` and marks it read; the count follows the items' `unread` attributes.
+     */
+    interface ArtNotificationCentre {
+        /**
+          * @default 'All'
+         */
+        "allLabel"?: string;
+        /**
+          * @default 'New notifications will appear here.'
+         */
+        "emptyDescription"?: string;
+        /**
+          * @default "You're all caught up"
+         */
+        "emptyHeading"?: string;
+        /**
+          * Show every item or only the unread ones.
+          * @default 'all'
+         */
+        "filter"?: 'all' | 'unread';
+        /**
+          * @default 'Notifications'
+         */
+        "heading"?: string;
+        /**
+          * Render the panel in place, without the bell.
+          * @default false
+         */
+        "inline"?: boolean;
+        /**
+          * @default 'Mark all as read'
+         */
+        "markAllLabel"?: string;
+        /**
+          * Emitted when the user opens or closes the panel; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtNotificationCentreCustomEvent<{ open: boolean }>) => void;
+        /**
+          * Emitted when "Mark all as read" is pressed (the items are marked read too).
+         */
+        "onRead-all"?: (event: ArtNotificationCentreCustomEvent<void>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * @default 'Notifications'
+         */
+        "triggerLabel"?: string;
+        /**
+          * @default 'Unread'
+         */
+        "unreadLabel"?: string;
+    }
+    /**
+     * Notification Item — one row of an `art-notification-centre`: media, heading, description,
+     * time, and the unread dot. The whole row activates (`select`, then the centre marks it read);
+     * with `href` it is a link. Extra actions go in the default slot and stay clickable on their own.
+     */
+    interface ArtNotificationItem {
+        "description"?: string;
+        /**
+          * @default ''
+         */
+        "heading"?: string;
+        /**
+          * Makes the heading a link.
+         */
+        "href"?: string;
+        /**
+          * Emitted when the row is activated; `detail.value`. Cancelable — `preventDefault()` keeps it unread.
+         */
+        "onSelect"?: (event: ArtNotificationItemCustomEvent<{ value: string }>) => void;
+        /**
+          * Relative or absolute time, as text (`2m ago`).
+         */
+        "time"?: string;
+        /**
+          * @default false
+         */
+        "unread"?: boolean;
+        /**
+          * Reported by `select`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Onboarding Wizard — a multi-step flow: a stepper (numbers, check marks, the current step),
+     * one `art-wizard-step` shown at a time, and Back / Next / Finish (and Skip on optional steps).
+     * `step` is 1-based; `step-change` is cancelable so you can validate before moving on.
+     */
+    interface ArtOnboardingWizard {
+        /**
+          * @default 'Back'
+         */
+        "backLabel"?: string;
+        /**
+          * @default 'Finish'
+         */
+        "finishLabel"?: string;
+        /**
+          * Accessible name of the stepper.
+          * @default 'Setup'
+         */
+        "label"?: string;
+        /**
+          * Spinner on the Next / Finish button; moves are ignored meanwhile.
+          * @default false
+         */
+        "loading"?: boolean;
+        /**
+          * @default 'Next'
+         */
+        "nextLabel"?: string;
+        /**
+          * Emitted when Finish is pressed on the last step.
+         */
+        "onFinish"?: (event: ArtOnboardingWizardCustomEvent<void>) => void;
+        /**
+          * Emitted before the step changes; `detail.step` (target), `detail.from`. Cancelable — `preventDefault()` stays on the current step.
+         */
+        "onStep-change"?: (event: ArtOnboardingWizardCustomEvent<{ step: number; from: number }>) => void;
+        /**
+          * Stepper beside the content instead of above it.
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * @default 'Skip'
+         */
+        "skipLabel"?: string;
+        /**
+          * Current step, 1-based.
+          * @default 1
+         */
+        "step"?: number;
+    }
+    /**
      * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
      * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
      * description and content. Links are plain `<a slot="nav">`s (or router links) and
@@ -816,6 +1191,22 @@ declare namespace LocalJSX {
          */
         "kind"?: 'empty' | 'not-found' | 'error';
     }
+    /**
+     * Wizard Step — one step of an `art-onboarding-wizard`: its `label` / `description` feed the
+     * stepper, its content is shown while it is the current step (the wizard hides the others).
+     */
+    interface ArtWizardStep {
+        "description"?: string;
+        /**
+          * @default ''
+         */
+        "label"?: string;
+        /**
+          * May be skipped (the wizard offers a Skip button on it).
+          * @default false
+         */
+        "optional"?: boolean;
+    }
 
     interface ArtAppShellAttributes {
         "open": boolean;
@@ -865,6 +1256,36 @@ declare namespace LocalJSX {
         "loading": boolean;
         "error": string;
     }
+    interface ArtNotificationCentreAttributes {
+        "open": boolean;
+        "inline": boolean;
+        "heading": string;
+        "triggerLabel": string;
+        "markAllLabel": string;
+        "allLabel": string;
+        "unreadLabel": string;
+        "emptyHeading": string;
+        "emptyDescription": string;
+        "filter": 'all' | 'unread';
+    }
+    interface ArtNotificationItemAttributes {
+        "value": string;
+        "heading": string;
+        "description": string;
+        "time": string;
+        "unread": boolean;
+        "href": string;
+    }
+    interface ArtOnboardingWizardAttributes {
+        "step": number;
+        "orientation": 'horizontal' | 'vertical';
+        "label": string;
+        "backLabel": string;
+        "nextLabel": string;
+        "finishLabel": string;
+        "skipLabel": string;
+        "loading": boolean;
+    }
     interface ArtSettingsPageAttributes {
         "heading": string;
         "description": string;
@@ -894,15 +1315,24 @@ declare namespace LocalJSX {
         "heading": string;
         "description": string;
     }
+    interface ArtWizardStepAttributes {
+        "label": string;
+        "description": string;
+        "optional": boolean;
+    }
 
     interface IntrinsicElements {
         "art-app-shell": Omit<ArtAppShell, keyof ArtAppShellAttributes> & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes]?: ArtAppShell[K] } & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes as `attr:${K}`]?: ArtAppShellAttributes[K] } & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes as `prop:${K}`]?: ArtAppShell[K] };
         "art-data-table-page": Omit<ArtDataTablePage, keyof ArtDataTablePageAttributes> & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes]?: ArtDataTablePage[K] } & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes as `attr:${K}`]?: ArtDataTablePageAttributes[K] } & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes as `prop:${K}`]?: ArtDataTablePage[K] };
         "art-forgot-password": Omit<ArtForgotPassword, keyof ArtForgotPasswordAttributes> & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes]?: ArtForgotPassword[K] } & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes as `attr:${K}`]?: ArtForgotPasswordAttributes[K] } & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes as `prop:${K}`]?: ArtForgotPassword[K] };
         "art-login": Omit<ArtLogin, keyof ArtLoginAttributes> & { [K in keyof ArtLogin & keyof ArtLoginAttributes]?: ArtLogin[K] } & { [K in keyof ArtLogin & keyof ArtLoginAttributes as `attr:${K}`]?: ArtLoginAttributes[K] } & { [K in keyof ArtLogin & keyof ArtLoginAttributes as `prop:${K}`]?: ArtLogin[K] };
+        "art-notification-centre": Omit<ArtNotificationCentre, keyof ArtNotificationCentreAttributes> & { [K in keyof ArtNotificationCentre & keyof ArtNotificationCentreAttributes]?: ArtNotificationCentre[K] } & { [K in keyof ArtNotificationCentre & keyof ArtNotificationCentreAttributes as `attr:${K}`]?: ArtNotificationCentreAttributes[K] } & { [K in keyof ArtNotificationCentre & keyof ArtNotificationCentreAttributes as `prop:${K}`]?: ArtNotificationCentre[K] };
+        "art-notification-item": Omit<ArtNotificationItem, keyof ArtNotificationItemAttributes> & { [K in keyof ArtNotificationItem & keyof ArtNotificationItemAttributes]?: ArtNotificationItem[K] } & { [K in keyof ArtNotificationItem & keyof ArtNotificationItemAttributes as `attr:${K}`]?: ArtNotificationItemAttributes[K] } & { [K in keyof ArtNotificationItem & keyof ArtNotificationItemAttributes as `prop:${K}`]?: ArtNotificationItem[K] };
+        "art-onboarding-wizard": Omit<ArtOnboardingWizard, keyof ArtOnboardingWizardAttributes> & { [K in keyof ArtOnboardingWizard & keyof ArtOnboardingWizardAttributes]?: ArtOnboardingWizard[K] } & { [K in keyof ArtOnboardingWizard & keyof ArtOnboardingWizardAttributes as `attr:${K}`]?: ArtOnboardingWizardAttributes[K] } & { [K in keyof ArtOnboardingWizard & keyof ArtOnboardingWizardAttributes as `prop:${K}`]?: ArtOnboardingWizard[K] };
         "art-settings-page": Omit<ArtSettingsPage, keyof ArtSettingsPageAttributes> & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes]?: ArtSettingsPage[K] } & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes as `attr:${K}`]?: ArtSettingsPageAttributes[K] } & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes as `prop:${K}`]?: ArtSettingsPage[K] };
         "art-signup": Omit<ArtSignup, keyof ArtSignupAttributes> & { [K in keyof ArtSignup & keyof ArtSignupAttributes]?: ArtSignup[K] } & { [K in keyof ArtSignup & keyof ArtSignupAttributes as `attr:${K}`]?: ArtSignupAttributes[K] } & { [K in keyof ArtSignup & keyof ArtSignupAttributes as `prop:${K}`]?: ArtSignup[K] };
         "art-state-page": Omit<ArtStatePage, keyof ArtStatePageAttributes> & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes]?: ArtStatePage[K] } & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes as `attr:${K}`]?: ArtStatePageAttributes[K] } & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes as `prop:${K}`]?: ArtStatePage[K] };
+        "art-wizard-step": Omit<ArtWizardStep, keyof ArtWizardStepAttributes> & { [K in keyof ArtWizardStep & keyof ArtWizardStepAttributes]?: ArtWizardStep[K] } & { [K in keyof ArtWizardStep & keyof ArtWizardStepAttributes as `attr:${K}`]?: ArtWizardStepAttributes[K] } & { [K in keyof ArtWizardStep & keyof ArtWizardStepAttributes as `prop:${K}`]?: ArtWizardStep[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -938,6 +1368,25 @@ declare module "@stencil/core" {
              */
             "art-login": LocalJSX.IntrinsicElements["art-login"] & JSXBase.HTMLAttributes<HTMLArtLoginElement>;
             /**
+             * Notification Centre — a bell with an unread count that opens a panel of
+             * `art-notification-item`s: a heading, "Mark all as read", an all / unread filter, the list and
+             * an empty state. `inline` renders the panel in place (a settings page, the docs). Clicking an
+             * item emits `select` and marks it read; the count follows the items' `unread` attributes.
+             */
+            "art-notification-centre": LocalJSX.IntrinsicElements["art-notification-centre"] & JSXBase.HTMLAttributes<HTMLArtNotificationCentreElement>;
+            /**
+             * Notification Item — one row of an `art-notification-centre`: media, heading, description,
+             * time, and the unread dot. The whole row activates (`select`, then the centre marks it read);
+             * with `href` it is a link. Extra actions go in the default slot and stay clickable on their own.
+             */
+            "art-notification-item": LocalJSX.IntrinsicElements["art-notification-item"] & JSXBase.HTMLAttributes<HTMLArtNotificationItemElement>;
+            /**
+             * Onboarding Wizard — a multi-step flow: a stepper (numbers, check marks, the current step),
+             * one `art-wizard-step` shown at a time, and Back / Next / Finish (and Skip on optional steps).
+             * `step` is 1-based; `step-change` is cancelable so you can validate before moving on.
+             */
+            "art-onboarding-wizard": LocalJSX.IntrinsicElements["art-onboarding-wizard"] & JSXBase.HTMLAttributes<HTMLArtOnboardingWizardElement>;
+            /**
              * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
              * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
              * description and content. Links are plain `<a slot="nav">`s (or router links) and
@@ -957,6 +1406,11 @@ declare module "@stencil/core" {
              * actions. Fill the viewport (or a docs frame) and put the way out in `actions`.
              */
             "art-state-page": LocalJSX.IntrinsicElements["art-state-page"] & JSXBase.HTMLAttributes<HTMLArtStatePageElement>;
+            /**
+             * Wizard Step — one step of an `art-onboarding-wizard`: its `label` / `description` feed the
+             * stepper, its content is shown while it is the current step (the wizard hides the others).
+             */
+            "art-wizard-step": LocalJSX.IntrinsicElements["art-wizard-step"] & JSXBase.HTMLAttributes<HTMLArtWizardStepElement>;
         }
     }
 }

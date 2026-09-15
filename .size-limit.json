@@ -1541,6 +1541,58 @@
     "gzip": true
   },
   {
+    "name": "widgets/art-onboarding-wizard",
+    "path": "packages/widgets/dist/components/art-onboarding-wizard.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-notification-centre",
+    "path": "packages/widgets/dist/components/art-notification-centre.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-wizard-step",
+    "path": "packages/widgets/dist/components/art-wizard-step.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-notification-item",
+    "path": "packages/widgets/dist/components/art-notification-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "widgets: whole tier",
     "path": "packages/widgets/dist/components/index.js",
     "import": "*",

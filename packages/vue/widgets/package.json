@@ -29,6 +29,18 @@
       "types": "./dist/login.d.ts",
       "import": "./dist/login.js"
     },
+    "./notification-centre": {
+      "types": "./dist/notification-centre.d.ts",
+      "import": "./dist/notification-centre.js"
+    },
+    "./notification-item": {
+      "types": "./dist/notification-item.d.ts",
+      "import": "./dist/notification-item.js"
+    },
+    "./onboarding-wizard": {
+      "types": "./dist/onboarding-wizard.d.ts",
+      "import": "./dist/onboarding-wizard.js"
+    },
     "./settings-page": {
       "types": "./dist/settings-page.d.ts",
       "import": "./dist/settings-page.js"
@@ -40,6 +52,10 @@
     "./state-page": {
       "types": "./dist/state-page.d.ts",
       "import": "./dist/state-page.js"
+    },
+    "./wizard-step": {
+      "types": "./dist/wizard-step.d.ts",
+      "import": "./dist/wizard-step.js"
     },
     "./package.json": "./package.json"
   },

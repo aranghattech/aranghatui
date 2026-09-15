@@ -113,6 +113,10 @@ import { defineCustomElement as defineStatePage } from '@aranghat/widgets/state-
 import { defineCustomElement as defineSettingsPage } from '@aranghat/widgets/settings-page';
 import { defineCustomElement as defineRadio } from '@aranghat/base/radio';
 import { defineCustomElement as defineDataTablePage } from '@aranghat/widgets/data-table-page';
+import { defineCustomElement as defineOnboardingWizard } from '@aranghat/widgets/onboarding-wizard';
+import { defineCustomElement as defineWizardStep } from '@aranghat/widgets/wizard-step';
+import { defineCustomElement as defineNotificationCentre } from '@aranghat/widgets/notification-centre';
+import { defineCustomElement as defineNotificationItem } from '@aranghat/widgets/notification-item';
 import './sandbox.css';
 
 defineButton();
@@ -227,6 +231,10 @@ defineStatePage();
 defineSettingsPage();
 defineRadio();
 defineDataTablePage();
+defineOnboardingWizard();
+defineWizardStep();
+defineNotificationCentre();
+defineNotificationItem();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.
