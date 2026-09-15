@@ -26,6 +26,24 @@ test.describe('art-input', () => {
     expect(await page.evaluate(() => (document.getElementById('f') as HTMLFormElement).checkValidity())).toBe(true);
   });
 
+  test('addons render inside the frame; clicking one focuses the input; the ring sits on the frame', async ({ page }) => {
+    await page.setContent(`<art-input placeholder="Domain" aria-label="Domain"><span slot="start">https://</span><span slot="end">.com</span></art-input>`);
+    const host = page.locator('art-input');
+    const frame = host.locator('[part="field"]');
+    const input = host.locator('input');
+    // the addons and the input share one frame of control height; the input is borderless inside it
+    const [f, i, start] = await Promise.all([frame.boundingBox(), input.boundingBox(), page.locator('[slot="start"]').boundingBox()]);
+    expect(Math.round(f!.height)).toBe(36);
+    expect(i!.x).toBeGreaterThan(start!.x + start!.width - 1);
+    expect(await input.evaluate((el) => getComputedStyle(el).borderTopWidth)).toBe('0px');
+    await page.locator('[slot="end"]').click();
+    await expect(input).toBeFocused();
+    await page.keyboard.press('Tab'); // leave, then come back by keyboard → focus-visible ring on the frame
+    await page.keyboard.press('Shift+Tab');
+    await expect(input).toBeFocused();
+    await expect.poll(() => frame.evaluate((el) => getComputedStyle(el).boxShadow)).not.toBe('none');
+  });
+
   test('label names the input across the shadow boundary', async ({ page }) => {
     await page.setContent(`<art-label for="e">Email address</art-label><art-input id="e"></art-input>`);
     await expect(page.locator('art-input input')).toHaveAccessibleName('Email address');

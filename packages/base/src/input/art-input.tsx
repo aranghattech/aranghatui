@@ -6,8 +6,13 @@ import { uniqueId } from '@aranghat/primitives/id';
  * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
  * reset); `input` / `change` are emitted from the host in response to the native events with
  * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
- * share the control-height tokens so inputs align with buttons.
+ * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+ * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+ * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
  *
+ * @slot start - Leading addon inside the field: an icon (`<art-icon slot="start">`) or short text.
+ * @slot end - Trailing addon inside the field.
+ * @part field - The bordered frame around the input and its addons.
  * @part input - The native `<input>`.
  */
 @Component({ tag: 'art-input', styleUrl: 'art-input.css', shadow: { delegatesFocus: true }, formAssociated: true })
@@ -110,38 +115,47 @@ export class ArtInput {
   render() {
     return (
       <Host>
-        <input
-          part="input"
-          ref={(el) => (this.input = el)}
+        <div
+          part="field"
           class={{
-            'w-full min-w-0 rounded-md border-default bg-transparent text-md md:text-sm text-fg shadow-raised transition-interactive motion-fast focus-ring': true,
-            'placeholder:text-fg-muted selection:bg-primary selection:text-primary-fg': true,
-            'file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-fg': true,
-            'disabled:pointer-events-none disabled:opacity-50 aria-invalid:invalid-ring': true,
-            // safelist for the scanner: field-sm field-md field-lg
-            [`field-${this.size}`]: true,
+            'flex w-full items-center rounded-md border-default bg-transparent shadow-raised transition-interactive motion-fast focus-ring-within has-disabled:opacity-50 has-aria-invalid:invalid-ring': true,
+            // safelist for the scanner: field-frame-sm field-frame-md field-frame-lg
+            [`field-frame-${this.size}`]: true,
           }}
-          type={this.type}
-          value={this.value}
-          placeholder={this.placeholder}
-          name={this.name}
-          disabled={this.disabled}
-          readOnly={this.readonly}
-          required={this.required}
-          autocomplete={this.autocomplete}
-          inputmode={this.inputmode}
-          pattern={this.pattern}
-          min={this.min}
-          max={this.max}
-          step={this.step}
-          minlength={this.minlength}
-          maxlength={this.maxlength}
-          aria-invalid={this.invalid ? 'true' : undefined}
-          aria-label={this.ariaLabel}
-          aria-description={this.ariaDescription}
-          onInput={this.onInput}
-          onChange={this.onChange}
-        />
+        >
+          <slot name="start" />
+          <input
+            part="input"
+            ref={(el) => (this.input = el)}
+            class={{
+              'h-full min-w-0 flex-1 text-md md:text-sm text-fg outline-none placeholder:text-fg-muted selection:bg-primary selection:text-primary-fg': true,
+              'file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-fg': true,
+              // safelist for the scanner: field-pad-sm field-pad-md field-pad-lg
+              [`field-pad-${this.size}`]: true,
+            }}
+            type={this.type}
+            value={this.value}
+            placeholder={this.placeholder}
+            name={this.name}
+            disabled={this.disabled}
+            readOnly={this.readonly}
+            required={this.required}
+            autocomplete={this.autocomplete}
+            inputmode={this.inputmode}
+            pattern={this.pattern}
+            min={this.min}
+            max={this.max}
+            step={this.step}
+            minlength={this.minlength}
+            maxlength={this.maxlength}
+            aria-invalid={this.invalid ? 'true' : undefined}
+            aria-label={this.ariaLabel}
+            aria-description={this.ariaDescription}
+            onInput={this.onInput}
+            onChange={this.onChange}
+          />
+          <slot name="end" />
+        </div>
       </Host>
     );
   }

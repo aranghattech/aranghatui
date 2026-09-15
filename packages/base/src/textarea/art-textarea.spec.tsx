@@ -7,7 +7,7 @@ describe('art-textarea', () => {
   it('renders a native textarea with size padding and value', async () => {
     const { root } = await render(<art-textarea size="lg" value="hi"></art-textarea>);
     const ta = root.shadowRoot!.querySelector('textarea')!;
-    expect(ta.className).toContain('textarea-lg');
+    expect(ta.className).toContain('field-pad-lg');
     expect(ta.value).toBe('hi');
   });
   it('emits input/change from the host with detail.value', async () => {

@@ -149,7 +149,9 @@ export namespace Components {
      * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
      * reset); `input` / `change` are emitted from the host in response to the native events with
      * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
-     * share the control-height tokens so inputs align with buttons.
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
      */
     interface ArtInput {
         "autocomplete"?: string;
@@ -633,7 +635,9 @@ declare global {
      * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
      * reset); `input` / `change` are emitted from the host in response to the native events with
      * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
-     * share the control-height tokens so inputs align with buttons.
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
      */
     interface HTMLArtInputElement extends Components.ArtInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLArtInputElementEventMap>(type: K, listener: (this: HTMLArtInputElement, ev: ArtInputCustomEvent<HTMLArtInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1008,7 +1012,9 @@ declare namespace LocalJSX {
      * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
      * reset); `input` / `change` are emitted from the host in response to the native events with
      * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
-     * share the control-height tokens so inputs align with buttons.
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
      */
     interface ArtInput {
         "autocomplete"?: string;
@@ -1634,7 +1640,9 @@ declare module "@stencil/core" {
              * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
              * reset); `input` / `change` are emitted from the host in response to the native events with
              * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
-             * share the control-height tokens so inputs align with buttons.
+             * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+             * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+             * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
              */
             "art-input": LocalJSX.IntrinsicElements["art-input"] & JSXBase.HTMLAttributes<HTMLArtInputElement>;
             /**
