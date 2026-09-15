@@ -2,7 +2,7 @@ import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } 
 import { createDismissable, type Dismissable } from '@aranghat/primitives/dismissable';
 import { isRtl } from '@aranghat/primitives/dom';
 import { trapFocus, type FocusTrap } from '@aranghat/primitives/focus-trap';
-import { watchState, type SidebarProviderLike } from './context';
+import { FAMILY, REBIND_EVENT, flatClosest, watchState, type SidebarProviderLike } from './context';
 
 /**
  * Sidebar (SideNav) — shadcn/ui parity. A collapsible app sidebar inside an
@@ -47,7 +47,7 @@ export class ArtSidebar {
   @Event({ eventName: 'sidebar-state', bubbles: false, composed: false }) stateChange!: EventEmitter<void>;
 
   connectedCallback() {
-    this.provider = this.host.closest('art-sidebar-provider') as SidebarProviderLike | null;
+    this.provider = flatClosest(this.host, 'art-sidebar-provider') as SidebarProviderLike | null;
     this.unwatch = watchState(this.provider, this.sync);
   }
   componentDidLoad() {
@@ -87,6 +87,18 @@ export class ArtSidebar {
       if (this.mobile) inset.setAttribute('data-mobile', ''); else inset.removeAttribute('data-mobile');
     }
     this.stateChange.emit();
+    // members slotted through another shadow root (a widget) may have connected before this sidebar existed
+    for (const el of this.family()) el.dispatchEvent(new CustomEvent(REBIND_EVENT));
+  }
+  private family(): Element[] {
+    const out: Element[] = [];
+    for (const slot of Array.from(this.host.shadowRoot?.querySelectorAll('slot') ?? [])) {
+      for (const el of slot.assignedElements({ flatten: true })) {
+        if (el.matches(FAMILY)) out.push(el);
+        out.push(...Array.from(el.querySelectorAll(FAMILY)));
+      }
+    }
+    return out;
   }
 
   @Watch('openMobile') @Watch('mobile')

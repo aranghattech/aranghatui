@@ -15,6 +15,7 @@
     "@aranghat/modals": "workspace:*",
     "@aranghat/navigation": "workspace:*",
     "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*",
     "@artui/stories": "workspace:*"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
-import { isIconMode, watchState } from '../sidebar/context';
+import { bindSidebar, isIconMode } from '../sidebar/context';
 
 type MenuButton = HTMLElement & { expanded?: boolean };
 
@@ -18,7 +18,6 @@ type MenuButton = HTMLElement & { expanded?: boolean };
 @Component({ tag: 'art-sidebar-menu-item', styleUrl: 'art-sidebar-menu-item.css', shadow: true })
 export class ArtSidebarMenuItem {
   @Element() host!: HTMLElement;
-  private sidebar: HTMLElement | null = null;
   private unwatch?: () => void;
   private sub: HTMLElement | null = null;
   private button: MenuButton | null = null;
@@ -36,8 +35,7 @@ export class ArtSidebarMenuItem {
 
   connectedCallback() {
     this.host.setAttribute('role', 'listitem');
-    this.sidebar = this.host.closest('art-sidebar');
-    this.unwatch = watchState(this.sidebar, () => { this.icon = isIconMode(this.sidebar); });
+    this.unwatch = bindSidebar(this.host, (s) => { this.icon = isIconMode(s); });
     this.host.addEventListener('click', this.onClick);
   }
   componentWillLoad() {

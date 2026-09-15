@@ -14,7 +14,8 @@
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/navigation": "workspace:*",
-    "@aranghat/tokens": "workspace:*"
+    "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*"
   },
   "devDependencies": {
     "typescript": "6.0.3",

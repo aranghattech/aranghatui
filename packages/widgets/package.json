@@ -1,0 +1,77 @@
+{
+  "name": "@aranghat/widgets",
+  "version": "0.0.0",
+  "description": "artui Tier 6 — widgets (app shell, auth screens, ready-made pages).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/components/index.js",
+  "module": "./dist/components/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core widgets",
+    "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "peerDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/components": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/components": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@artui/e2e": "workspace:*",
+    "@artui/stencil-config": "workspace:*",
+    "@artui/stories": "workspace:*",
+    "@artui/wrapper-entries": "workspace:*",
+    "@playwright/test": "1.63.0",
+    "@stencil/core": "4.45.0",
+    "@stencil/playwright": "0.5.1",
+    "@stencil/vitest": "1.15.1",
+    "jsdom": "28.1.0",
+    "vitest": "4.1.11"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components/*": "./dist/components/*",
+    "./app-shell": {
+      "types": "./dist/components/art-app-shell.d.ts",
+      "import": "./dist/components/art-app-shell.js"
+    },
+    "./forgot-password": {
+      "types": "./dist/components/art-forgot-password.d.ts",
+      "import": "./dist/components/art-forgot-password.js"
+    },
+    "./login": {
+      "types": "./dist/components/art-login.d.ts",
+      "import": "./dist/components/art-login.js"
+    },
+    "./signup": {
+      "types": "./dist/components/art-signup.d.ts",
+      "import": "./dist/components/art-signup.js"
+    },
+    "./docs.json": "./dist/docs.json",
+    "./package.json": "./package.json"
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, Element, Host, State, h } from '@stencil/core';
-import { isIconMode, watchState } from '../sidebar/context';
+import { bindSidebar, isIconMode } from '../sidebar/context';
 
 /**
  * Sidebar Menu Sub — a nested list under an `art-sidebar-menu-item` (shown while the item is
@@ -12,13 +12,11 @@ import { isIconMode, watchState } from '../sidebar/context';
 @Component({ tag: 'art-sidebar-menu-sub', styleUrl: 'art-sidebar-menu-sub.css', shadow: true })
 export class ArtSidebarMenuSub {
   @Element() host!: HTMLElement;
-  private sidebar: HTMLElement | null = null;
   private unwatch?: () => void;
   @State() icon = false;
 
   connectedCallback() {
-    this.sidebar = this.host.closest('art-sidebar');
-    this.unwatch = watchState(this.sidebar, () => { this.icon = isIconMode(this.sidebar); });
+    this.unwatch = bindSidebar(this.host, (s) => { this.icon = isIconMode(s); });
   }
   disconnectedCallback() {
     this.unwatch?.();

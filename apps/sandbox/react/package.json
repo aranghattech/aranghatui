@@ -18,6 +18,8 @@
     "@aranghat/navigation": "workspace:*",
     "@aranghat/navigation-react": "workspace:*",
     "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*",
+    "@aranghat/widgets-react": "workspace:*",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

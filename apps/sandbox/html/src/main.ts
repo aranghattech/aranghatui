@@ -105,6 +105,10 @@ import { defineCustomElement as defineDialog } from '@aranghat/modals/dialog';
 import { defineCustomElement as defineAlertDialog } from '@aranghat/modals/alert-dialog';
 import { defineCustomElement as defineSheet } from '@aranghat/modals/sheet';
 import { defineCustomElement as defineDrawer } from '@aranghat/modals/drawer';
+import { defineCustomElement as defineAppShell } from '@aranghat/widgets/app-shell';
+import { defineCustomElement as defineLogin } from '@aranghat/widgets/login';
+import { defineCustomElement as defineSignup } from '@aranghat/widgets/signup';
+import { defineCustomElement as defineForgotPassword } from '@aranghat/widgets/forgot-password';
 import './sandbox.css';
 
 defineButton();
@@ -211,6 +215,10 @@ defineDialog();
 defineAlertDialog();
 defineSheet();
 defineDrawer();
+defineAppShell();
+defineLogin();
+defineSignup();
+defineForgotPassword();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

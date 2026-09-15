@@ -1444,6 +1444,76 @@
     "gzip": true
   },
   {
+    "name": "widgets: runtime chunk (index2.js)",
+    "path": "packages/widgets/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-app-shell",
+    "path": "packages/widgets/dist/components/art-app-shell.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-login",
+    "path": "packages/widgets/dist/components/art-login.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-signup",
+    "path": "packages/widgets/dist/components/art-signup.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-forgot-password",
+    "path": "packages/widgets/dist/components/art-forgot-password.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets: whole tier",
+    "path": "packages/widgets/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "60 kB",
+    "gzip": true
+  },
+  {
     "name": "primitives: all modules (incl. @floating-ui/dom)",
     "path": "packages/primitives/dist/index.js",
     "import": "*",
