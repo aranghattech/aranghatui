@@ -12,7 +12,7 @@ export const stories: ComponentStories = {
     checked: { title: 'Checked', render: () => `<art-checkbox id="terms-2" checked></art-checkbox>\n<art-label for="terms-2">Accept terms and conditions</art-label>` },
     indeterminate: { title: 'Indeterminate', render: () => `<art-checkbox id="all" indeterminate></art-checkbox>\n<art-label for="all">Select all</art-label>`, note: '`indeterminate` shows the mixed state (`aria-checked="mixed"`); the next toggle checks it.' },
     sizes: { title: 'Sizes', render: () => `<art-checkbox size="sm" checked aria-label="Small"></art-checkbox>\n<art-checkbox checked aria-label="Medium"></art-checkbox>\n<art-checkbox size="lg" checked aria-label="Large"></art-checkbox>` },
-    'with-text': { title: 'With text', frame: 'stack', render: () => `<art-checkbox id="terms-3" aria-describedby="terms-3-help"></art-checkbox>
+    'with-text': { title: 'With text', frame: 'control-text', render: () => `<art-checkbox id="terms-3" aria-describedby="terms-3-help"></art-checkbox>
 <art-label for="terms-3">Accept terms and conditions</art-label>
 <p id="terms-3-help">You agree to our Terms of Service and Privacy Policy.</p>` },
     disabled: { title: 'Disabled', render: () => `<art-checkbox id="d1" disabled></art-checkbox>\n<art-label for="d1" disabled>Unavailable</art-label>` },

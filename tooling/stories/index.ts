@@ -7,8 +7,9 @@ export type Theme = 'light' | 'dark';
  * How the gallery / docs preview lays out an example. Layout lives in the frame so that
  * sample code shows only the component(s) — never wrapper divs developers would copy.
  * inline: row, wrapping, centred. stack: column at field width (label + control + text).
+ * control-text: a control in the first column with label + text stacked beside it (checkbox / radio / switch with description).
  */
-export type StoryFrame = 'inline' | 'stack';
+export type StoryFrame = 'inline' | 'stack' | 'control-text';
 
 export interface StoryContext {
   variant: string;
