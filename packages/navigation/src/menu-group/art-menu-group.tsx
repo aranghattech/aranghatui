@@ -3,10 +3,10 @@ import { Component, Element, Host, Prop, h } from '@stencil/core';
 /**
  * Dropdown Menu Group — groups items under an accessible name.
  *
- * @slot - Items (and an `art-dropdown-menu-label`).
+ * @slot - Items (and an `art-menu-label`).
  */
-@Component({ tag: 'art-dropdown-menu-group', styleUrl: 'art-dropdown-menu-group.css', shadow: true })
-export class ArtDropdownMenuGroup {
+@Component({ tag: 'art-menu-group', styleUrl: 'art-menu-group.css', shadow: true })
+export class ArtMenuGroup {
   @Element() host!: HTMLElement;
   @Prop() label?: string;
   componentWillRender() {

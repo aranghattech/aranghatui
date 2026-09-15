@@ -1,4 +1,4 @@
-# art-dropdown-menu-radio-group
+# art-menu-radio-group
 
 
 
@@ -25,9 +25,9 @@ Dropdown Menu Radio Group — keeps one `type="radio"` item checked and reports 
 
 ## Slots
 
-| Slot | Description                             |
-| ---- | --------------------------------------- |
-|      | `art-dropdown-menu-item type="radio"`s. |
+| Slot | Description                    |
+| ---- | ------------------------------ |
+|      | `art-menu-item type="radio"`s. |
 
 
 ----------------------------------------------

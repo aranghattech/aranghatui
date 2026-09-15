@@ -5,8 +5,8 @@ import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
 
-const MENU_ITEM_SELECTOR = 'art-dropdown-menu-item';
-const MENU_LEVEL_SELECTOR = 'art-dropdown-menu, art-dropdown-menu-sub';
+const MENU_ITEM_SELECTOR = 'art-menu-item';
+const MENU_LEVEL_SELECTOR = 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub';
 
 /**
  * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
@@ -15,7 +15,7 @@ const MENU_LEVEL_SELECTOR = 'art-dropdown-menu, art-dropdown-menu-sub';
  * focus to the trigger.
  *
  * @slot trigger - The button that opens the menu.
- * @slot - `art-dropdown-menu-item`s, `-label`s, `-separator`s, `-group`s, `-radio-group`s and `-sub`s.
+ * @slot - `art-menu-item`s, `-label`s, `-separator`s, `-group`s, `-radio-group`s and `-sub`s.
  * @part content - The `role="menu"` panel.
  */
 @Component({ tag: 'art-dropdown-menu', styleUrl: 'art-dropdown-menu.css', shadow: true })
@@ -50,7 +50,7 @@ export class ArtDropdownMenu {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
     this.list = createMenuList({
       getItems: () => this.items(),
-      onOpenSub: (item) => { const sub = item.closest('art-dropdown-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub.closest(MENU_LEVEL_SELECTOR.split(',')[0]!.trim()) === this.host) { void sub.openSub?.(); return true; } return false; },
+      onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub.parentElement?.closest(MENU_LEVEL_SELECTOR) === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => { this.set(false); if (reason !== 'tab') this.trigger()?.focus({ preventScroll: true }); },
       isRtl: () => this.host.matches(':dir(rtl)'),
     });
@@ -113,7 +113,7 @@ export class ArtDropdownMenu {
     }
     if (!this.open) return;
     // keys inside a submenu belong to it
-    const sub = (e.target as Element).closest?.('art-dropdown-menu-sub');
+    const sub = (e.target as Element).closest?.('art-menu-sub');
     if (sub && sub.closest('art-dropdown-menu') === this.host && (sub as HTMLElement & { isOpen?: boolean }).isOpen) return;
     if (this.list?.handleKey(e)) e.preventDefault();
   };

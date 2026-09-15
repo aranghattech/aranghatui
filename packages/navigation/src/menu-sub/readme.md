@@ -1,4 +1,4 @@
-# art-dropdown-menu-sub
+# art-menu-sub
 
 
 
@@ -40,10 +40,10 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot        | Description                                         |
-| ----------- | --------------------------------------------------- |
-|             | The submenu's items.                                |
-| `"trigger"` | An `art-dropdown-menu-item` that opens the submenu. |
+| Slot        | Description                                |
+| ----------- | ------------------------------------------ |
+|             | The submenu's items.                       |
+| `"trigger"` | An `art-menu-item` that opens the submenu. |
 
 
 ## Shadow Parts

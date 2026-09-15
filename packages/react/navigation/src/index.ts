@@ -2,11 +2,11 @@
 export { ArtBreadcrumb as Breadcrumb } from './components/art-breadcrumb.js';
 export { ArtBreadcrumbItem as BreadcrumbItem } from './components/art-breadcrumb-item.js';
 export { ArtDropdownMenu as DropdownMenu } from './components/art-dropdown-menu.js';
-export { ArtDropdownMenuGroup as DropdownMenuGroup } from './components/art-dropdown-menu-group.js';
-export { ArtDropdownMenuItem as DropdownMenuItem } from './components/art-dropdown-menu-item.js';
-export { ArtDropdownMenuLabel as DropdownMenuLabel } from './components/art-dropdown-menu-label.js';
-export { ArtDropdownMenuRadioGroup as DropdownMenuRadioGroup } from './components/art-dropdown-menu-radio-group.js';
-export { ArtDropdownMenuSeparator as DropdownMenuSeparator } from './components/art-dropdown-menu-separator.js';
-export { ArtDropdownMenuSub as DropdownMenuSub } from './components/art-dropdown-menu-sub.js';
+export { ArtMenuGroup as MenuGroup } from './components/art-menu-group.js';
+export { ArtMenuItem as MenuItem } from './components/art-menu-item.js';
+export { ArtMenuLabel as MenuLabel } from './components/art-menu-label.js';
+export { ArtMenuRadioGroup as MenuRadioGroup } from './components/art-menu-radio-group.js';
+export { ArtMenuSeparator as MenuSeparator } from './components/art-menu-separator.js';
+export { ArtMenuSub as MenuSub } from './components/art-menu-sub.js';
 export { ArtPagination as Pagination } from './components/art-pagination.js';
 export type { StencilReactComponent } from '@stencil/react-output-target/runtime';

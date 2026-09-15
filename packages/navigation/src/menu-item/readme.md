@@ -1,4 +1,4 @@
-# art-dropdown-menu-item
+# art-menu-item
 
 
 
@@ -8,7 +8,7 @@
 ## Overview
 
 Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
-(`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+(`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
 Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
 and radio items also emit `change`.
 

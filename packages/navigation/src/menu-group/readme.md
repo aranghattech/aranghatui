@@ -1,4 +1,4 @@
-# art-dropdown-menu-group
+# art-menu-group
 
 
 
@@ -18,9 +18,9 @@ Dropdown Menu Group — groups items under an accessible name.
 
 ## Slots
 
-| Slot | Description                               |
-| ---- | ----------------------------------------- |
-|      | Items (and an `art-dropdown-menu-label`). |
+| Slot | Description                      |
+| ---- | -------------------------------- |
+|      | Items (and an `art-menu-label`). |
 
 
 ----------------------------------------------

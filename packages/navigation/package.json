@@ -35,29 +35,29 @@
       "types": "./dist/components/art-dropdown-menu.d.ts",
       "import": "./dist/components/art-dropdown-menu.js"
     },
-    "./dropdown-menu-group": {
-      "types": "./dist/components/art-dropdown-menu-group.d.ts",
-      "import": "./dist/components/art-dropdown-menu-group.js"
+    "./menu-group": {
+      "types": "./dist/components/art-menu-group.d.ts",
+      "import": "./dist/components/art-menu-group.js"
     },
-    "./dropdown-menu-item": {
-      "types": "./dist/components/art-dropdown-menu-item.d.ts",
-      "import": "./dist/components/art-dropdown-menu-item.js"
+    "./menu-item": {
+      "types": "./dist/components/art-menu-item.d.ts",
+      "import": "./dist/components/art-menu-item.js"
     },
-    "./dropdown-menu-label": {
-      "types": "./dist/components/art-dropdown-menu-label.d.ts",
-      "import": "./dist/components/art-dropdown-menu-label.js"
+    "./menu-label": {
+      "types": "./dist/components/art-menu-label.d.ts",
+      "import": "./dist/components/art-menu-label.js"
     },
-    "./dropdown-menu-radio-group": {
-      "types": "./dist/components/art-dropdown-menu-radio-group.d.ts",
-      "import": "./dist/components/art-dropdown-menu-radio-group.js"
+    "./menu-radio-group": {
+      "types": "./dist/components/art-menu-radio-group.d.ts",
+      "import": "./dist/components/art-menu-radio-group.js"
     },
-    "./dropdown-menu-separator": {
-      "types": "./dist/components/art-dropdown-menu-separator.d.ts",
-      "import": "./dist/components/art-dropdown-menu-separator.js"
+    "./menu-separator": {
+      "types": "./dist/components/art-menu-separator.d.ts",
+      "import": "./dist/components/art-menu-separator.js"
     },
-    "./dropdown-menu-sub": {
-      "types": "./dist/components/art-dropdown-menu-sub.d.ts",
-      "import": "./dist/components/art-dropdown-menu-sub.js"
+    "./menu-sub": {
+      "types": "./dist/components/art-menu-sub.d.ts",
+      "import": "./dist/components/art-menu-sub.js"
     },
     "./pagination": {
       "types": "./dist/components/art-pagination.d.ts",

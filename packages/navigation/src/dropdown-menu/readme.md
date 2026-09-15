@@ -30,10 +30,10 @@ focus to the trigger.
 
 ## Slots
 
-| Slot        | Description                                                                                  |
-| ----------- | -------------------------------------------------------------------------------------------- |
-|             | `art-dropdown-menu-item`s, `-label`s, `-separator`s, `-group`s, `-radio-group`s and `-sub`s. |
-| `"trigger"` | The button that opens the menu.                                                              |
+| Slot        | Description                                                                         |
+| ----------- | ----------------------------------------------------------------------------------- |
+|             | `art-menu-item`s, `-label`s, `-separator`s, `-group`s, `-radio-group`s and `-sub`s. |
+| `"trigger"` | The button that opens the menu.                                                     |
 
 
 ## Shadow Parts

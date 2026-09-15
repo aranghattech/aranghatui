@@ -5,8 +5,8 @@ import { Component, Host, Prop, h } from '@stencil/core';
  *
  * @slot - The label text.
  */
-@Component({ tag: 'art-dropdown-menu-label', styleUrl: 'art-dropdown-menu-label.css', shadow: true })
-export class ArtDropdownMenuLabel {
+@Component({ tag: 'art-menu-label', styleUrl: 'art-menu-label.css', shadow: true })
+export class ArtMenuLabel {
   /** Indent to align with checkbox / radio items. */
   @Prop({ reflect: true }) inset = false;
   render() {

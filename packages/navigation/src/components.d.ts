@@ -66,16 +66,16 @@ export namespace Components {
     /**
      * Dropdown Menu Group — groups items under an accessible name.
      */
-    interface ArtDropdownMenuGroup {
+    interface ArtMenuGroup {
         "label"?: string;
     }
     /**
      * Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
-     * (`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+     * (`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
      * Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
      * and radio items also emit `change`.
      */
-    interface ArtDropdownMenuItem {
+    interface ArtMenuItem {
         /**
           * Checkbox / radio state.
           * @default false
@@ -112,7 +112,7 @@ export namespace Components {
     /**
      * Dropdown Menu Label — a heading for a run of items.
      */
-    interface ArtDropdownMenuLabel {
+    interface ArtMenuLabel {
         /**
           * Indent to align with checkbox / radio items.
           * @default false
@@ -122,7 +122,7 @@ export namespace Components {
     /**
      * Dropdown Menu Radio Group — keeps one `type="radio"` item checked and reports its value.
      */
-    interface ArtDropdownMenuRadioGroup {
+    interface ArtMenuRadioGroup {
         /**
           * Value of the checked item.
           * @default ''
@@ -132,14 +132,14 @@ export namespace Components {
     /**
      * Dropdown Menu Separator — a rule between runs of items.
      */
-    interface ArtDropdownMenuSeparator {
+    interface ArtMenuSeparator {
     }
     /**
      * Dropdown Menu Sub — a submenu: an item in the `trigger` slot opens a nested `role="menu"`
      * beside it on hover, ArrowRight, Enter or Space; ArrowLeft or Escape closes it and returns
      * to the trigger.
      */
-    interface ArtDropdownMenuSub {
+    interface ArtMenuSub {
         /**
           * @default false
          */
@@ -198,17 +198,17 @@ export interface ArtDropdownMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtDropdownMenuElement;
 }
-export interface ArtDropdownMenuItemCustomEvent<T> extends CustomEvent<T> {
+export interface ArtMenuItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLArtDropdownMenuItemElement;
+    target: HTMLArtMenuItemElement;
 }
-export interface ArtDropdownMenuRadioGroupCustomEvent<T> extends CustomEvent<T> {
+export interface ArtMenuRadioGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLArtDropdownMenuRadioGroupElement;
+    target: HTMLArtMenuRadioGroupElement;
 }
-export interface ArtDropdownMenuSubCustomEvent<T> extends CustomEvent<T> {
+export interface ArtMenuSubCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLArtDropdownMenuSubElement;
+    target: HTMLArtMenuSubElement;
 }
 export interface ArtPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -263,75 +263,75 @@ declare global {
     /**
      * Dropdown Menu Group — groups items under an accessible name.
      */
-    interface HTMLArtDropdownMenuGroupElement extends Components.ArtDropdownMenuGroup, HTMLStencilElement {
+    interface HTMLArtMenuGroupElement extends Components.ArtMenuGroup, HTMLStencilElement {
     }
-    var HTMLArtDropdownMenuGroupElement: {
-        prototype: HTMLArtDropdownMenuGroupElement;
-        new (): HTMLArtDropdownMenuGroupElement;
+    var HTMLArtMenuGroupElement: {
+        prototype: HTMLArtMenuGroupElement;
+        new (): HTMLArtMenuGroupElement;
     };
-    interface HTMLArtDropdownMenuItemElementEventMap {
+    interface HTMLArtMenuItemElementEventMap {
         "select": { value: string; checked?: boolean };
         "change": { value: string; checked: boolean };
     }
     /**
      * Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
-     * (`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+     * (`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
      * Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
      * and radio items also emit `change`.
      */
-    interface HTMLArtDropdownMenuItemElement extends Components.ArtDropdownMenuItem, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLArtDropdownMenuItemElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuItemElement, ev: ArtDropdownMenuItemCustomEvent<HTMLArtDropdownMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLArtMenuItemElement extends Components.ArtMenuItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMenuItemElementEventMap>(type: K, listener: (this: HTMLArtMenuItemElement, ev: ArtMenuItemCustomEvent<HTMLArtMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLArtDropdownMenuItemElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuItemElement, ev: ArtDropdownMenuItemCustomEvent<HTMLArtDropdownMenuItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMenuItemElementEventMap>(type: K, listener: (this: HTMLArtMenuItemElement, ev: ArtMenuItemCustomEvent<HTMLArtMenuItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLArtDropdownMenuItemElement: {
-        prototype: HTMLArtDropdownMenuItemElement;
-        new (): HTMLArtDropdownMenuItemElement;
+    var HTMLArtMenuItemElement: {
+        prototype: HTMLArtMenuItemElement;
+        new (): HTMLArtMenuItemElement;
     };
     /**
      * Dropdown Menu Label — a heading for a run of items.
      */
-    interface HTMLArtDropdownMenuLabelElement extends Components.ArtDropdownMenuLabel, HTMLStencilElement {
+    interface HTMLArtMenuLabelElement extends Components.ArtMenuLabel, HTMLStencilElement {
     }
-    var HTMLArtDropdownMenuLabelElement: {
-        prototype: HTMLArtDropdownMenuLabelElement;
-        new (): HTMLArtDropdownMenuLabelElement;
+    var HTMLArtMenuLabelElement: {
+        prototype: HTMLArtMenuLabelElement;
+        new (): HTMLArtMenuLabelElement;
     };
-    interface HTMLArtDropdownMenuRadioGroupElementEventMap {
+    interface HTMLArtMenuRadioGroupElementEventMap {
         "value-change": { value: string };
     }
     /**
      * Dropdown Menu Radio Group — keeps one `type="radio"` item checked and reports its value.
      */
-    interface HTMLArtDropdownMenuRadioGroupElement extends Components.ArtDropdownMenuRadioGroup, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLArtDropdownMenuRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuRadioGroupElement, ev: ArtDropdownMenuRadioGroupCustomEvent<HTMLArtDropdownMenuRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLArtMenuRadioGroupElement extends Components.ArtMenuRadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMenuRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtMenuRadioGroupElement, ev: ArtMenuRadioGroupCustomEvent<HTMLArtMenuRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLArtDropdownMenuRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuRadioGroupElement, ev: ArtDropdownMenuRadioGroupCustomEvent<HTMLArtDropdownMenuRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMenuRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtMenuRadioGroupElement, ev: ArtMenuRadioGroupCustomEvent<HTMLArtMenuRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLArtDropdownMenuRadioGroupElement: {
-        prototype: HTMLArtDropdownMenuRadioGroupElement;
-        new (): HTMLArtDropdownMenuRadioGroupElement;
+    var HTMLArtMenuRadioGroupElement: {
+        prototype: HTMLArtMenuRadioGroupElement;
+        new (): HTMLArtMenuRadioGroupElement;
     };
     /**
      * Dropdown Menu Separator — a rule between runs of items.
      */
-    interface HTMLArtDropdownMenuSeparatorElement extends Components.ArtDropdownMenuSeparator, HTMLStencilElement {
+    interface HTMLArtMenuSeparatorElement extends Components.ArtMenuSeparator, HTMLStencilElement {
     }
-    var HTMLArtDropdownMenuSeparatorElement: {
-        prototype: HTMLArtDropdownMenuSeparatorElement;
-        new (): HTMLArtDropdownMenuSeparatorElement;
+    var HTMLArtMenuSeparatorElement: {
+        prototype: HTMLArtMenuSeparatorElement;
+        new (): HTMLArtMenuSeparatorElement;
     };
-    interface HTMLArtDropdownMenuSubElementEventMap {
+    interface HTMLArtMenuSubElementEventMap {
         "open-change": { open: boolean };
     }
     /**
@@ -339,19 +339,19 @@ declare global {
      * beside it on hover, ArrowRight, Enter or Space; ArrowLeft or Escape closes it and returns
      * to the trigger.
      */
-    interface HTMLArtDropdownMenuSubElement extends Components.ArtDropdownMenuSub, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLArtDropdownMenuSubElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuSubElement, ev: ArtDropdownMenuSubCustomEvent<HTMLArtDropdownMenuSubElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLArtMenuSubElement extends Components.ArtMenuSub, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMenuSubElementEventMap>(type: K, listener: (this: HTMLArtMenuSubElement, ev: ArtMenuSubCustomEvent<HTMLArtMenuSubElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLArtDropdownMenuSubElementEventMap>(type: K, listener: (this: HTMLArtDropdownMenuSubElement, ev: ArtDropdownMenuSubCustomEvent<HTMLArtDropdownMenuSubElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMenuSubElementEventMap>(type: K, listener: (this: HTMLArtMenuSubElement, ev: ArtMenuSubCustomEvent<HTMLArtMenuSubElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLArtDropdownMenuSubElement: {
-        prototype: HTMLArtDropdownMenuSubElement;
-        new (): HTMLArtDropdownMenuSubElement;
+    var HTMLArtMenuSubElement: {
+        prototype: HTMLArtMenuSubElement;
+        new (): HTMLArtMenuSubElement;
     };
     interface HTMLArtPaginationElementEventMap {
         "page-change": { page: number };
@@ -379,12 +379,12 @@ declare global {
         "art-breadcrumb": HTMLArtBreadcrumbElement;
         "art-breadcrumb-item": HTMLArtBreadcrumbItemElement;
         "art-dropdown-menu": HTMLArtDropdownMenuElement;
-        "art-dropdown-menu-group": HTMLArtDropdownMenuGroupElement;
-        "art-dropdown-menu-item": HTMLArtDropdownMenuItemElement;
-        "art-dropdown-menu-label": HTMLArtDropdownMenuLabelElement;
-        "art-dropdown-menu-radio-group": HTMLArtDropdownMenuRadioGroupElement;
-        "art-dropdown-menu-separator": HTMLArtDropdownMenuSeparatorElement;
-        "art-dropdown-menu-sub": HTMLArtDropdownMenuSubElement;
+        "art-menu-group": HTMLArtMenuGroupElement;
+        "art-menu-item": HTMLArtMenuItemElement;
+        "art-menu-label": HTMLArtMenuLabelElement;
+        "art-menu-radio-group": HTMLArtMenuRadioGroupElement;
+        "art-menu-separator": HTMLArtMenuSeparatorElement;
+        "art-menu-sub": HTMLArtMenuSubElement;
         "art-pagination": HTMLArtPaginationElement;
     }
 }
@@ -448,16 +448,16 @@ declare namespace LocalJSX {
     /**
      * Dropdown Menu Group — groups items under an accessible name.
      */
-    interface ArtDropdownMenuGroup {
+    interface ArtMenuGroup {
         "label"?: string;
     }
     /**
      * Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
-     * (`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+     * (`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
      * Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
      * and radio items also emit `change`.
      */
-    interface ArtDropdownMenuItem {
+    interface ArtMenuItem {
         /**
           * Checkbox / radio state.
           * @default false
@@ -479,11 +479,11 @@ declare namespace LocalJSX {
         /**
           * Checkbox / radio state changed; `detail.checked`, `detail.value`.
          */
-        "onChange"?: (event: ArtDropdownMenuItemCustomEvent<{ value: string; checked: boolean }>) => void;
+        "onChange"?: (event: ArtMenuItemCustomEvent<{ value: string; checked: boolean }>) => void;
         /**
           * Emitted when the item is activated; `detail.value`, `detail.checked`. Cancelable — `preventDefault()` keeps the menu open.
          */
-        "onSelect"?: (event: ArtDropdownMenuItemCustomEvent<{ value: string; checked?: boolean }>) => void;
+        "onSelect"?: (event: ArtMenuItemCustomEvent<{ value: string; checked?: boolean }>) => void;
         "target"?: string;
         /**
           * @default 'item'
@@ -502,7 +502,7 @@ declare namespace LocalJSX {
     /**
      * Dropdown Menu Label — a heading for a run of items.
      */
-    interface ArtDropdownMenuLabel {
+    interface ArtMenuLabel {
         /**
           * Indent to align with checkbox / radio items.
           * @default false
@@ -512,11 +512,11 @@ declare namespace LocalJSX {
     /**
      * Dropdown Menu Radio Group — keeps one `type="radio"` item checked and reports its value.
      */
-    interface ArtDropdownMenuRadioGroup {
+    interface ArtMenuRadioGroup {
         /**
           * Emitted when the checked item changes; `detail.value`.
          */
-        "onValue-change"?: (event: ArtDropdownMenuRadioGroupCustomEvent<{ value: string }>) => void;
+        "onValue-change"?: (event: ArtMenuRadioGroupCustomEvent<{ value: string }>) => void;
         /**
           * Value of the checked item.
           * @default ''
@@ -526,15 +526,15 @@ declare namespace LocalJSX {
     /**
      * Dropdown Menu Separator — a rule between runs of items.
      */
-    interface ArtDropdownMenuSeparator {
+    interface ArtMenuSeparator {
     }
     /**
      * Dropdown Menu Sub — a submenu: an item in the `trigger` slot opens a nested `role="menu"`
      * beside it on hover, ArrowRight, Enter or Space; ArrowLeft or Escape closes it and returns
      * to the trigger.
      */
-    interface ArtDropdownMenuSub {
-        "onOpen-change"?: (event: ArtDropdownMenuSubCustomEvent<{ open: boolean }>) => void;
+    interface ArtMenuSub {
+        "onOpen-change"?: (event: ArtMenuSubCustomEvent<{ open: boolean }>) => void;
         /**
           * @default false
          */
@@ -602,10 +602,10 @@ declare namespace LocalJSX {
         "placement": Placement;
         "label": string;
     }
-    interface ArtDropdownMenuGroupAttributes {
+    interface ArtMenuGroupAttributes {
         "label": string;
     }
-    interface ArtDropdownMenuItemAttributes {
+    interface ArtMenuItemAttributes {
         "type": 'item' | 'checkbox' | 'radio';
         "value": string;
         "checked": boolean;
@@ -615,13 +615,13 @@ declare namespace LocalJSX {
         "href": string;
         "target": string;
     }
-    interface ArtDropdownMenuLabelAttributes {
+    interface ArtMenuLabelAttributes {
         "inset": boolean;
     }
-    interface ArtDropdownMenuRadioGroupAttributes {
+    interface ArtMenuRadioGroupAttributes {
         "value": string;
     }
-    interface ArtDropdownMenuSubAttributes {
+    interface ArtMenuSubAttributes {
         "open": boolean;
     }
     interface ArtPaginationAttributes {
@@ -639,12 +639,12 @@ declare namespace LocalJSX {
         "art-breadcrumb": Omit<ArtBreadcrumb, keyof ArtBreadcrumbAttributes> & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes]?: ArtBreadcrumb[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `attr:${K}`]?: ArtBreadcrumbAttributes[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `prop:${K}`]?: ArtBreadcrumb[K] };
         "art-breadcrumb-item": Omit<ArtBreadcrumbItem, keyof ArtBreadcrumbItemAttributes> & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes]?: ArtBreadcrumbItem[K] } & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes as `attr:${K}`]?: ArtBreadcrumbItemAttributes[K] } & { [K in keyof ArtBreadcrumbItem & keyof ArtBreadcrumbItemAttributes as `prop:${K}`]?: ArtBreadcrumbItem[K] };
         "art-dropdown-menu": Omit<ArtDropdownMenu, keyof ArtDropdownMenuAttributes> & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes]?: ArtDropdownMenu[K] } & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes as `attr:${K}`]?: ArtDropdownMenuAttributes[K] } & { [K in keyof ArtDropdownMenu & keyof ArtDropdownMenuAttributes as `prop:${K}`]?: ArtDropdownMenu[K] };
-        "art-dropdown-menu-group": Omit<ArtDropdownMenuGroup, keyof ArtDropdownMenuGroupAttributes> & { [K in keyof ArtDropdownMenuGroup & keyof ArtDropdownMenuGroupAttributes]?: ArtDropdownMenuGroup[K] } & { [K in keyof ArtDropdownMenuGroup & keyof ArtDropdownMenuGroupAttributes as `attr:${K}`]?: ArtDropdownMenuGroupAttributes[K] } & { [K in keyof ArtDropdownMenuGroup & keyof ArtDropdownMenuGroupAttributes as `prop:${K}`]?: ArtDropdownMenuGroup[K] };
-        "art-dropdown-menu-item": Omit<ArtDropdownMenuItem, keyof ArtDropdownMenuItemAttributes> & { [K in keyof ArtDropdownMenuItem & keyof ArtDropdownMenuItemAttributes]?: ArtDropdownMenuItem[K] } & { [K in keyof ArtDropdownMenuItem & keyof ArtDropdownMenuItemAttributes as `attr:${K}`]?: ArtDropdownMenuItemAttributes[K] } & { [K in keyof ArtDropdownMenuItem & keyof ArtDropdownMenuItemAttributes as `prop:${K}`]?: ArtDropdownMenuItem[K] };
-        "art-dropdown-menu-label": Omit<ArtDropdownMenuLabel, keyof ArtDropdownMenuLabelAttributes> & { [K in keyof ArtDropdownMenuLabel & keyof ArtDropdownMenuLabelAttributes]?: ArtDropdownMenuLabel[K] } & { [K in keyof ArtDropdownMenuLabel & keyof ArtDropdownMenuLabelAttributes as `attr:${K}`]?: ArtDropdownMenuLabelAttributes[K] } & { [K in keyof ArtDropdownMenuLabel & keyof ArtDropdownMenuLabelAttributes as `prop:${K}`]?: ArtDropdownMenuLabel[K] };
-        "art-dropdown-menu-radio-group": Omit<ArtDropdownMenuRadioGroup, keyof ArtDropdownMenuRadioGroupAttributes> & { [K in keyof ArtDropdownMenuRadioGroup & keyof ArtDropdownMenuRadioGroupAttributes]?: ArtDropdownMenuRadioGroup[K] } & { [K in keyof ArtDropdownMenuRadioGroup & keyof ArtDropdownMenuRadioGroupAttributes as `attr:${K}`]?: ArtDropdownMenuRadioGroupAttributes[K] } & { [K in keyof ArtDropdownMenuRadioGroup & keyof ArtDropdownMenuRadioGroupAttributes as `prop:${K}`]?: ArtDropdownMenuRadioGroup[K] };
-        "art-dropdown-menu-separator": ArtDropdownMenuSeparator;
-        "art-dropdown-menu-sub": Omit<ArtDropdownMenuSub, keyof ArtDropdownMenuSubAttributes> & { [K in keyof ArtDropdownMenuSub & keyof ArtDropdownMenuSubAttributes]?: ArtDropdownMenuSub[K] } & { [K in keyof ArtDropdownMenuSub & keyof ArtDropdownMenuSubAttributes as `attr:${K}`]?: ArtDropdownMenuSubAttributes[K] } & { [K in keyof ArtDropdownMenuSub & keyof ArtDropdownMenuSubAttributes as `prop:${K}`]?: ArtDropdownMenuSub[K] };
+        "art-menu-group": Omit<ArtMenuGroup, keyof ArtMenuGroupAttributes> & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes]?: ArtMenuGroup[K] } & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes as `attr:${K}`]?: ArtMenuGroupAttributes[K] } & { [K in keyof ArtMenuGroup & keyof ArtMenuGroupAttributes as `prop:${K}`]?: ArtMenuGroup[K] };
+        "art-menu-item": Omit<ArtMenuItem, keyof ArtMenuItemAttributes> & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes]?: ArtMenuItem[K] } & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes as `attr:${K}`]?: ArtMenuItemAttributes[K] } & { [K in keyof ArtMenuItem & keyof ArtMenuItemAttributes as `prop:${K}`]?: ArtMenuItem[K] };
+        "art-menu-label": Omit<ArtMenuLabel, keyof ArtMenuLabelAttributes> & { [K in keyof ArtMenuLabel & keyof ArtMenuLabelAttributes]?: ArtMenuLabel[K] } & { [K in keyof ArtMenuLabel & keyof ArtMenuLabelAttributes as `attr:${K}`]?: ArtMenuLabelAttributes[K] } & { [K in keyof ArtMenuLabel & keyof ArtMenuLabelAttributes as `prop:${K}`]?: ArtMenuLabel[K] };
+        "art-menu-radio-group": Omit<ArtMenuRadioGroup, keyof ArtMenuRadioGroupAttributes> & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes]?: ArtMenuRadioGroup[K] } & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes as `attr:${K}`]?: ArtMenuRadioGroupAttributes[K] } & { [K in keyof ArtMenuRadioGroup & keyof ArtMenuRadioGroupAttributes as `prop:${K}`]?: ArtMenuRadioGroup[K] };
+        "art-menu-separator": ArtMenuSeparator;
+        "art-menu-sub": Omit<ArtMenuSub, keyof ArtMenuSubAttributes> & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes]?: ArtMenuSub[K] } & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes as `attr:${K}`]?: ArtMenuSubAttributes[K] } & { [K in keyof ArtMenuSub & keyof ArtMenuSubAttributes as `prop:${K}`]?: ArtMenuSub[K] };
         "art-pagination": Omit<ArtPagination, keyof ArtPaginationAttributes> & { [K in keyof ArtPagination & keyof ArtPaginationAttributes]?: ArtPagination[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `attr:${K}`]?: ArtPaginationAttributes[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `prop:${K}`]?: ArtPagination[K] };
     }
 }
@@ -674,32 +674,32 @@ declare module "@stencil/core" {
             /**
              * Dropdown Menu Group — groups items under an accessible name.
              */
-            "art-dropdown-menu-group": LocalJSX.IntrinsicElements["art-dropdown-menu-group"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuGroupElement>;
+            "art-menu-group": LocalJSX.IntrinsicElements["art-menu-group"] & JSXBase.HTMLAttributes<HTMLArtMenuGroupElement>;
             /**
              * Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
-             * (`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+             * (`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
              * Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
              * and radio items also emit `change`.
              */
-            "art-dropdown-menu-item": LocalJSX.IntrinsicElements["art-dropdown-menu-item"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuItemElement>;
+            "art-menu-item": LocalJSX.IntrinsicElements["art-menu-item"] & JSXBase.HTMLAttributes<HTMLArtMenuItemElement>;
             /**
              * Dropdown Menu Label — a heading for a run of items.
              */
-            "art-dropdown-menu-label": LocalJSX.IntrinsicElements["art-dropdown-menu-label"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuLabelElement>;
+            "art-menu-label": LocalJSX.IntrinsicElements["art-menu-label"] & JSXBase.HTMLAttributes<HTMLArtMenuLabelElement>;
             /**
              * Dropdown Menu Radio Group — keeps one `type="radio"` item checked and reports its value.
              */
-            "art-dropdown-menu-radio-group": LocalJSX.IntrinsicElements["art-dropdown-menu-radio-group"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuRadioGroupElement>;
+            "art-menu-radio-group": LocalJSX.IntrinsicElements["art-menu-radio-group"] & JSXBase.HTMLAttributes<HTMLArtMenuRadioGroupElement>;
             /**
              * Dropdown Menu Separator — a rule between runs of items.
              */
-            "art-dropdown-menu-separator": LocalJSX.IntrinsicElements["art-dropdown-menu-separator"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuSeparatorElement>;
+            "art-menu-separator": LocalJSX.IntrinsicElements["art-menu-separator"] & JSXBase.HTMLAttributes<HTMLArtMenuSeparatorElement>;
             /**
              * Dropdown Menu Sub — a submenu: an item in the `trigger` slot opens a nested `role="menu"`
              * beside it on hover, ArrowRight, Enter or Space; ArrowLeft or Escape closes it and returns
              * to the trigger.
              */
-            "art-dropdown-menu-sub": LocalJSX.IntrinsicElements["art-dropdown-menu-sub"] & JSXBase.HTMLAttributes<HTMLArtDropdownMenuSubElement>;
+            "art-menu-sub": LocalJSX.IntrinsicElements["art-menu-sub"] & JSXBase.HTMLAttributes<HTMLArtMenuSubElement>;
             /**
              * Pagination — shadcn/ui parity. Previous / next, page numbers around the current page with
              * ellipses, the active page as an outline button. Buttons by default (`page-change`), links

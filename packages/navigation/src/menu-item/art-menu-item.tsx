@@ -2,7 +2,7 @@ import { Component, Element, Event, EventEmitter, Host, Prop, h } from '@stencil
 
 /**
  * Dropdown Menu Item — an action (`type="item"`), a toggle (`type="checkbox"`) or a choice
- * (`type="radio"`, inside `art-dropdown-menu-radio-group`); with `href` it is a link.
+ * (`type="radio"`, inside `art-menu-radio-group`); with `href` it is a link.
  * Emits `select` when activated (cancelable: `preventDefault()` keeps the menu open); checkbox
  * and radio items also emit `change`.
  *
@@ -11,8 +11,8 @@ import { Component, Element, Event, EventEmitter, Host, Prop, h } from '@stencil
  * @part item - The `role="menuitem*"` element.
  * @part indicator - The check / dot of a checkbox / radio item.
  */
-@Component({ tag: 'art-dropdown-menu-item', styleUrl: 'art-dropdown-menu-item.css', shadow: true })
-export class ArtDropdownMenuItem {
+@Component({ tag: 'art-menu-item', styleUrl: 'art-menu-item.css', shadow: true })
+export class ArtMenuItem {
   @Element() host!: HTMLElement;
 
   @Prop({ reflect: true }) type: 'item' | 'checkbox' | 'radio' = 'item';

@@ -10,12 +10,12 @@ import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
  * beside it on hover, ArrowRight, Enter or Space; ArrowLeft or Escape closes it and returns
  * to the trigger.
  *
- * @slot trigger - An `art-dropdown-menu-item` that opens the submenu.
+ * @slot trigger - An `art-menu-item` that opens the submenu.
  * @slot - The submenu's items.
  * @part content - The nested `role="menu"` panel.
  */
-@Component({ tag: 'art-dropdown-menu-sub', styleUrl: 'art-dropdown-menu-sub.css', shadow: true })
-export class ArtDropdownMenuSub {
+@Component({ tag: 'art-menu-sub', styleUrl: 'art-menu-sub.css', shadow: true })
+export class ArtMenuSub {
   @Element() host!: HTMLElement;
   private panel?: HTMLDivElement;
   private overlay?: Overlay;
@@ -23,7 +23,7 @@ export class ArtDropdownMenuSub {
   private hover?: HoverIntent;
   private list?: MenuList;
   private opening?: Promise<void>;
-  private menuId = uniqueId('art-dropdown-menu-sub');
+  private menuId = uniqueId('art-menu-sub');
 
   @Prop({ mutable: true, reflect: true }) open = false;
   @Event({ eventName: 'open-change', bubbles: true, composed: true }) openChange!: EventEmitter<{ open: boolean }>;
@@ -31,7 +31,7 @@ export class ArtDropdownMenuSub {
   /** Whether the submenu is open (read by the parent menu's key handling). */
   get isOpen() { return this.open; }
   private trigger(): HTMLElement | null { return this.host.querySelector(':scope > [slot="trigger"]'); }
-  private items(): HTMLElement[] { return levelItems(this.host, 'art-dropdown-menu-item', 'art-dropdown-menu, art-dropdown-menu-sub'); }
+  private items(): HTMLElement[] { return levelItems(this.host, 'art-menu-item', 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub'); }
 
   connectedCallback() {
     this.host.setAttribute('role', 'none');
@@ -47,7 +47,7 @@ export class ArtDropdownMenuSub {
     }
     this.list = createMenuList({
       getItems: () => this.items(),
-      onOpenSub: (item) => { const sub = item.closest('art-dropdown-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub !== this.host && sub.parentElement?.closest('art-dropdown-menu-sub') === this.host) { void sub.openSub?.(); return true; } return false; },
+      onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub !== this.host && sub.parentElement?.closest('art-menu-sub') === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => { this.set(false); if (reason !== 'tab') this.trigger()?.focus({ preventScroll: true }); },
       isRtl: () => this.host.matches(':dir(rtl)'),
     });
@@ -102,7 +102,7 @@ export class ArtDropdownMenuSub {
     }
     if (!this.open) return;
     // keys inside a deeper submenu belong to it
-    const deeper = (e.target as Element).closest?.('art-dropdown-menu-sub');
+    const deeper = (e.target as Element).closest?.('art-menu-sub');
     if (deeper && deeper !== this.host && (deeper as HTMLElement & { isOpen?: boolean }).isOpen) return;
     if (this.list?.handleKey(e)) { e.preventDefault(); e.stopPropagation(); }
   };

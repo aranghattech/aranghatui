@@ -1,4 +1,4 @@
-import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@aranghat/navigation-react';
+import { DropdownMenu, MenuItem, MenuLabel, MenuSeparator } from '@aranghat/navigation-react';
 import { Button } from '@aranghat/base-react';
 
 export default function Checkboxes() {
@@ -6,11 +6,11 @@ export default function Checkboxes() {
     <>
       <DropdownMenu open>
         <Button slot="trigger" variant="outline">View</Button>
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem type="checkbox" value="status" checked>Status bar</DropdownMenuItem>
-        <DropdownMenuItem type="checkbox" value="activity" disabled>Activity bar</DropdownMenuItem>
-        <DropdownMenuItem type="checkbox" value="panel">Panel</DropdownMenuItem>
+        <MenuLabel>Appearance</MenuLabel>
+        <MenuSeparator />
+        <MenuItem type="checkbox" value="status" checked>Status bar</MenuItem>
+        <MenuItem type="checkbox" value="activity" disabled>Activity bar</MenuItem>
+        <MenuItem type="checkbox" value="panel">Panel</MenuItem>
       </DropdownMenu>
     </>
   );

@@ -1,4 +1,4 @@
-# art-dropdown-menu-separator
+# art-menu-separator
 
 
 

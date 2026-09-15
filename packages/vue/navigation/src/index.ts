@@ -2,10 +2,10 @@
 export { ArtBreadcrumb as Breadcrumb } from './components/index.js';
 export { ArtBreadcrumbItem as BreadcrumbItem } from './components/index.js';
 export { ArtDropdownMenu as DropdownMenu } from './components/index.js';
-export { ArtDropdownMenuGroup as DropdownMenuGroup } from './components/index.js';
-export { ArtDropdownMenuItem as DropdownMenuItem } from './components/index.js';
-export { ArtDropdownMenuLabel as DropdownMenuLabel } from './components/index.js';
-export { ArtDropdownMenuRadioGroup as DropdownMenuRadioGroup } from './components/index.js';
-export { ArtDropdownMenuSeparator as DropdownMenuSeparator } from './components/index.js';
-export { ArtDropdownMenuSub as DropdownMenuSub } from './components/index.js';
+export { ArtMenuGroup as MenuGroup } from './components/index.js';
+export { ArtMenuItem as MenuItem } from './components/index.js';
+export { ArtMenuLabel as MenuLabel } from './components/index.js';
+export { ArtMenuRadioGroup as MenuRadioGroup } from './components/index.js';
+export { ArtMenuSeparator as MenuSeparator } from './components/index.js';
+export { ArtMenuSub as MenuSub } from './components/index.js';
 export { ArtPagination as Pagination } from './components/index.js';

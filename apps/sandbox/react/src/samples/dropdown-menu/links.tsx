@@ -1,4 +1,4 @@
-import { DropdownMenu, DropdownMenuItem } from '@aranghat/navigation-react';
+import { DropdownMenu, MenuItem } from '@aranghat/navigation-react';
 import { Button } from '@aranghat/base-react';
 
 export default function Links() {
@@ -6,9 +6,9 @@ export default function Links() {
     <>
       <DropdownMenu>
         <Button slot="trigger" variant="outline">Go to</Button>
-        <DropdownMenuItem href="#dashboard">Dashboard</DropdownMenuItem>
-        <DropdownMenuItem href="#reports">Reports</DropdownMenuItem>
-        <DropdownMenuItem href="https://example.com" target="_blank">Docs ↗</DropdownMenuItem>
+        <MenuItem href="#dashboard">Dashboard</MenuItem>
+        <MenuItem href="#reports">Reports</MenuItem>
+        <MenuItem href="https://example.com" target="_blank">Docs ↗</MenuItem>
       </DropdownMenu>
     </>
   );

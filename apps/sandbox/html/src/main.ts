@@ -79,12 +79,12 @@ import { defineCustomElement as defineBreadcrumb } from '@aranghat/navigation/br
 import { defineCustomElement as defineBreadcrumbItem } from '@aranghat/navigation/breadcrumb-item';
 import { defineCustomElement as definePagination } from '@aranghat/navigation/pagination';
 import { defineCustomElement as defineDropdownMenu } from '@aranghat/navigation/dropdown-menu';
-import { defineCustomElement as defineDropdownMenuItem } from '@aranghat/navigation/dropdown-menu-item';
-import { defineCustomElement as defineDropdownMenuRadioGroup } from '@aranghat/navigation/dropdown-menu-radio-group';
-import { defineCustomElement as defineDropdownMenuLabel } from '@aranghat/navigation/dropdown-menu-label';
-import { defineCustomElement as defineDropdownMenuSeparator } from '@aranghat/navigation/dropdown-menu-separator';
-import { defineCustomElement as defineDropdownMenuGroup } from '@aranghat/navigation/dropdown-menu-group';
-import { defineCustomElement as defineDropdownMenuSub } from '@aranghat/navigation/dropdown-menu-sub';
+import { defineCustomElement as defineMenuItem } from '@aranghat/navigation/menu-item';
+import { defineCustomElement as defineMenuRadioGroup } from '@aranghat/navigation/menu-radio-group';
+import { defineCustomElement as defineMenuLabel } from '@aranghat/navigation/menu-label';
+import { defineCustomElement as defineMenuSeparator } from '@aranghat/navigation/menu-separator';
+import { defineCustomElement as defineMenuGroup } from '@aranghat/navigation/menu-group';
+import { defineCustomElement as defineMenuSub } from '@aranghat/navigation/menu-sub';
 import './sandbox.css';
 
 defineButton();
@@ -165,12 +165,12 @@ defineBreadcrumb();
 defineBreadcrumbItem();
 definePagination();
 defineDropdownMenu();
-defineDropdownMenuItem();
-defineDropdownMenuRadioGroup();
-defineDropdownMenuLabel();
-defineDropdownMenuSeparator();
-defineDropdownMenuGroup();
-defineDropdownMenuSub();
+defineMenuItem();
+defineMenuRadioGroup();
+defineMenuLabel();
+defineMenuSeparator();
+defineMenuGroup();
+defineMenuSub();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

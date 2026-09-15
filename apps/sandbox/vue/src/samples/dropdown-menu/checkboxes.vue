@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@aranghat/navigation-vue';
+import { DropdownMenu, MenuItem, MenuLabel, MenuSeparator } from '@aranghat/navigation-vue';
 import { Button } from '@aranghat/base-vue';
 </script>
 
 <template>
   <DropdownMenu open>
     <Button slot="trigger" variant="outline">View</Button>
-    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem type="checkbox" value="status" checked>Status bar</DropdownMenuItem>
-    <DropdownMenuItem type="checkbox" value="activity" disabled>Activity bar</DropdownMenuItem>
-    <DropdownMenuItem type="checkbox" value="panel">Panel</DropdownMenuItem>
+    <MenuLabel>Appearance</MenuLabel>
+    <MenuSeparator />
+    <MenuItem type="checkbox" value="status" checked>Status bar</MenuItem>
+    <MenuItem type="checkbox" value="activity" disabled>Activity bar</MenuItem>
+    <MenuItem type="checkbox" value="panel">Panel</MenuItem>
   </DropdownMenu>
 </template>

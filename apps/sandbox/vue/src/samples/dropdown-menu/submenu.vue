@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuSub } from '@aranghat/navigation-vue';
+import { DropdownMenu, MenuItem, MenuSeparator, MenuSub } from '@aranghat/navigation-vue';
 import { Button } from '@aranghat/base-vue';
 </script>
 
 <template>
   <DropdownMenu open>
     <Button slot="trigger" variant="outline">Open</Button>
-    <DropdownMenuItem value="new">New file</DropdownMenuItem>
-    <DropdownMenuSub open>
-      <DropdownMenuItem slot="trigger">Share</DropdownMenuItem>
-      <DropdownMenuItem value="email">Email</DropdownMenuItem>
-      <DropdownMenuItem value="message">Message</DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem value="more">More…</DropdownMenuItem>
-    </DropdownMenuSub>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem value="delete" variant="destructive">Delete</DropdownMenuItem>
+    <MenuItem value="new">New file</MenuItem>
+    <MenuSub open>
+      <MenuItem slot="trigger">Share</MenuItem>
+      <MenuItem value="email">Email</MenuItem>
+      <MenuItem value="message">Message</MenuItem>
+      <MenuSeparator />
+      <MenuItem value="more">More…</MenuItem>
+    </MenuSub>
+    <MenuSeparator />
+    <MenuItem value="delete" variant="destructive">Delete</MenuItem>
   </DropdownMenu>
 </template>

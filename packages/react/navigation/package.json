@@ -25,29 +25,29 @@
       "types": "./dist/dropdown-menu.d.ts",
       "import": "./dist/dropdown-menu.js"
     },
-    "./dropdown-menu-group": {
-      "types": "./dist/dropdown-menu-group.d.ts",
-      "import": "./dist/dropdown-menu-group.js"
+    "./menu-group": {
+      "types": "./dist/menu-group.d.ts",
+      "import": "./dist/menu-group.js"
     },
-    "./dropdown-menu-item": {
-      "types": "./dist/dropdown-menu-item.d.ts",
-      "import": "./dist/dropdown-menu-item.js"
+    "./menu-item": {
+      "types": "./dist/menu-item.d.ts",
+      "import": "./dist/menu-item.js"
     },
-    "./dropdown-menu-label": {
-      "types": "./dist/dropdown-menu-label.d.ts",
-      "import": "./dist/dropdown-menu-label.js"
+    "./menu-label": {
+      "types": "./dist/menu-label.d.ts",
+      "import": "./dist/menu-label.js"
     },
-    "./dropdown-menu-radio-group": {
-      "types": "./dist/dropdown-menu-radio-group.d.ts",
-      "import": "./dist/dropdown-menu-radio-group.js"
+    "./menu-radio-group": {
+      "types": "./dist/menu-radio-group.d.ts",
+      "import": "./dist/menu-radio-group.js"
     },
-    "./dropdown-menu-separator": {
-      "types": "./dist/dropdown-menu-separator.d.ts",
-      "import": "./dist/dropdown-menu-separator.js"
+    "./menu-separator": {
+      "types": "./dist/menu-separator.d.ts",
+      "import": "./dist/menu-separator.js"
     },
-    "./dropdown-menu-sub": {
-      "types": "./dist/dropdown-menu-sub.d.ts",
-      "import": "./dist/dropdown-menu-sub.js"
+    "./menu-sub": {
+      "types": "./dist/menu-sub.d.ts",
+      "import": "./dist/menu-sub.js"
     },
     "./pagination": {
       "types": "./dist/pagination.d.ts",

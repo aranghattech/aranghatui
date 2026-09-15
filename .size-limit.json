@@ -1069,8 +1069,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-item",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-item.js",
+    "name": "navigation/art-menu-item",
+    "path": "packages/navigation/dist/components/art-menu-item.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
@@ -1082,8 +1082,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-radio-group",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-radio-group.js",
+    "name": "navigation/art-menu-radio-group",
+    "path": "packages/navigation/dist/components/art-menu-radio-group.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
@@ -1095,8 +1095,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-label",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-label.js",
+    "name": "navigation/art-menu-label",
+    "path": "packages/navigation/dist/components/art-menu-label.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
@@ -1108,8 +1108,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-separator",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-separator.js",
+    "name": "navigation/art-menu-separator",
+    "path": "packages/navigation/dist/components/art-menu-separator.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
@@ -1121,8 +1121,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-group",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-group.js",
+    "name": "navigation/art-menu-group",
+    "path": "packages/navigation/dist/components/art-menu-group.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
@@ -1134,8 +1134,8 @@
     "gzip": true
   },
   {
-    "name": "navigation/art-dropdown-menu-sub",
-    "path": "packages/navigation/dist/components/art-dropdown-menu-sub.js",
+    "name": "navigation/art-menu-sub",
+    "path": "packages/navigation/dist/components/art-menu-sub.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",
