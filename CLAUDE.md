@@ -280,7 +280,7 @@ pnpm verify           # all of the above — this is the gate
 `apps/docs`. Every component page uses the **identical** structure — no exceptions, no reordering:
 
 1. **Title + one-line description**
-2. **Preview** — live, interactive web component embed (light/dark toggle on the frame)
+2. **Preview** — live, interactive web component embed that follows the page's light/dark mode (RTL and brand toggles on the frame)
 3. **Installation** — the tier package this component lives in, plus the install + import line for each framework
 4. **Usage** — tabbed code blocks: `HTML | React | Vue | Angular`, all four always present, all four copy-pasteable and verified against the sandbox. Each tab uses that framework's idiomatic form per §3a (`onClick`, `@click`, `v-model`, `(click)`) — never the web-component form dressed up.
 5. **Examples** — one section per variation, each with live preview + 4-framework tabs. **Every documented variant, size and state must appear here.**
@@ -347,6 +347,7 @@ Each `SKILL.md` gets a tight `description` so it triggers on the right task, and
 - Never hardcode a colour, spacing, radius, duration or font value.
 - Never add an `art` prefix to a React/Vue component name or to an event that has no collision.
 - Never invent a custom event where a native one exists — re-dispatch the native one instead.
+- Never re-implement a control the platform provides. A checkbox is `<input type="checkbox">`, a slider is `<input type="range">`: wrap the native element, style it with `appearance: none` + pseudo-elements, keep its behaviour (ADR-0020). Custom interaction only where no native element exists (Toggle, Tabs, Combobox…).
 - Never add a cross-tier dependency that points downward (base must not import from components).
 - Never list a sibling `@aranghat/*` package under `dependencies` — peer + dev only.
 - Never introduce a runtime dependency without an ADR in `.claude/adr/`.
@@ -400,5 +401,6 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Tier 3 dependency on `base` | Allowed (peer + dev), matching §5 | 0017 |
 | Screenshot determinism | VRT and a11y run in the official Playwright Docker image locally and in CI; Linux-only baselines | 0018 |
 | Cross-tier composition | No downward deps: Command has no built-in dialog mode; Sidebar mobile mode is built on primitives, not Sheet | 0019 |
+| Native controls first | Wrap and style the native element wherever HTML has one (`input` types, `select`, `textarea`, `button`, `progress`, `dialog`, `details`); custom logic only where no native exists or to orchestrate natives across shadow roots | 0020 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

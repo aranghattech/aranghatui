@@ -63,6 +63,48 @@ export namespace Components {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
+     */
+    interface ArtCheckbox {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Mixed state (e.g. "select all" with a partial selection). Cleared by the next toggle.
+          * @default false
+         */
+        "indeterminate": boolean;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * Submitted with the form when checked.
+          * @default 'on'
+         */
+        "value": string;
+    }
+    /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
      * recipe, a native `click` passing through and a kebab-case custom event.
      * Removed when Button lands.
@@ -103,10 +145,419 @@ export namespace Components {
          */
         "size": 'sm' | 'md' | 'lg';
     }
+    /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
+     */
+    interface ArtInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "inputmode"?: string;
+        /**
+          * Marks the field invalid (`aria-invalid` + destructive ring). Field sets it from validation.
+          * @default false
+         */
+        "invalid": boolean;
+        "max"?: string | number;
+        "maxlength"?: number;
+        "min"?: string | number;
+        "minlength"?: number;
+        /**
+          * Form field name (submitted with the value).
+         */
+        "name"?: string;
+        "pattern"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Select all text.
+         */
+        "select": () => Promise<void>;
+        /**
+          * Focus the native input.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Control size; aligns with Button.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        "step"?: string | number;
+        /**
+          * Native input type.
+          * @default 'text'
+         */
+        "type": 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        /**
+          * Current value.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface ArtLabel {
+        /**
+          * Dimmed and inert; Field sets this when its control is disabled.
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
+         */
+        "htmlFor"?: string;
+    }
+    /**
+     * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
+     * `<optgroup>` children and they are mirrored into the control (and kept in sync).
+     * Form-associated; `change` (and `input`) emitted from the host with `detail.value`.
+     */
+    interface ArtNativeSelect {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        "setFocus": () => Promise<void>;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
+     */
+    interface ArtRadio {
+        /**
+          * Managed by the group.
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "groupDisabled": boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "name"?: string;
+        /**
+          * Managed by the group.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default false
+         */
+        "tabbable": boolean;
+        /**
+          * Value reported by the group when this item is selected.
+         */
+        "value": string;
+    }
+    /**
+     * Radio Group — shadcn/ui parity. Owns the selected `value`, form association and keyboard
+     * navigation for its `<art-radio>` children (arrows move focus and select, APG radio group).
+     * The host carries `role="radiogroup"`, so `aria-label` / `aria-labelledby` go straight on it.
+     */
+    interface ArtRadioGroup {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * Layout and arrow-key axis.
+          * @default 'vertical'
+         */
+        "orientation": 'vertical' | 'horizontal';
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Item size, applied to every `<art-radio>`.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * Selected item value.
+         */
+        "value"?: string;
+    }
+    /**
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
+     */
+    interface ArtSlider {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max": number;
+        /**
+          * @default 0
+         */
+        "min": number;
+        "name"?: string;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Track and thumb thickness.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default 1
+         */
+        "step": number;
+        /**
+          * @default 0
+         */
+        "value": number | string;
+    }
+    /**
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
+     */
+    interface ArtSwitch {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default 'on'
+         */
+        "value": string;
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface ArtTextarea {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "maxlength"?: number;
+        "minlength"?: number;
+        "name"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Initial visible rows; the field still grows with content.
+         */
+        "rows"?: number;
+        "setFocus": () => Promise<void>;
+        /**
+          * Density; changes inline padding only (height follows content).
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Toggle — shadcn/ui parity. A two-state button (`aria-pressed`), variants `default | outline`,
+     * sizes `sm | md | lg`. Inside `<art-toggle-group>` the group owns the pressed state.
+     * Form-associated: submits `value` while pressed.
+     */
+    interface ArtToggle {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "groupDisabled": boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Square icon-only toggle.
+          * @default false
+         */
+        "icon": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "pressed": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        "tabbable"?: boolean;
+        /**
+          * Submitted with the form while pressed; also the item value inside a toggle group.
+          * @default 'on'
+         */
+        "value": string;
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'outline';
+    }
+    /**
+     * Toggle Group — shadcn/ui parity. A set of `<art-toggle>` items with a shared `value`
+     * (`type="single"`: one or none; `type="multiple"`: array). The group applies `variant`,
+     * `size` and `disabled` to its items, joins their edges, and moves focus with the arrows.
+     */
+    interface ArtToggleGroup {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * `single`: one pressed item (or none). `multiple`: any number.
+          * @default 'single'
+         */
+        "type": 'single' | 'multiple';
+        /**
+          * Pressed value(s). As an attribute, `multiple` values are comma-separated.
+          * @default ''
+         */
+        "value": string | string[];
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'outline';
+    }
+}
+export interface ArtCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCheckboxElement;
 }
 export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtHelloElement;
+}
+export interface ArtInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtInputElement;
+}
+export interface ArtNativeSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtNativeSelectElement;
+}
+export interface ArtRadioGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtRadioGroupElement;
+}
+export interface ArtSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSliderElement;
+}
+export interface ArtSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSwitchElement;
+}
+export interface ArtTextareaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTextareaElement;
+}
+export interface ArtToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtToggleElement;
+}
+export interface ArtToggleGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtToggleGroupElement;
 }
 declare global {
     /**
@@ -120,6 +571,29 @@ declare global {
     var HTMLArtButtonElement: {
         prototype: HTMLArtButtonElement;
         new (): HTMLArtButtonElement;
+    };
+    interface HTMLArtCheckboxElementEventMap {
+        "change": { checked: boolean };
+    }
+    /**
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
+     */
+    interface HTMLArtCheckboxElement extends Components.ArtCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCheckboxElementEventMap>(type: K, listener: (this: HTMLArtCheckboxElement, ev: ArtCheckboxCustomEvent<HTMLArtCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCheckboxElementEventMap>(type: K, listener: (this: HTMLArtCheckboxElement, ev: ArtCheckboxCustomEvent<HTMLArtCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCheckboxElement: {
+        prototype: HTMLArtCheckboxElement;
+        new (): HTMLArtCheckboxElement;
     };
     interface HTMLArtHelloElementEventMap {
         "greet": { name: string };
@@ -153,13 +627,230 @@ declare global {
         prototype: HTMLArtIconElement;
         new (): HTMLArtIconElement;
     };
+    interface HTMLArtInputElementEventMap {
+        "input": { value: string };
+        "change": { value: string };
+    }
+    /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
+     */
+    interface HTMLArtInputElement extends Components.ArtInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtInputElementEventMap>(type: K, listener: (this: HTMLArtInputElement, ev: ArtInputCustomEvent<HTMLArtInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtInputElementEventMap>(type: K, listener: (this: HTMLArtInputElement, ev: ArtInputCustomEvent<HTMLArtInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtInputElement: {
+        prototype: HTMLArtInputElement;
+        new (): HTMLArtInputElement;
+    };
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface HTMLArtLabelElement extends Components.ArtLabel, HTMLStencilElement {
+    }
+    var HTMLArtLabelElement: {
+        prototype: HTMLArtLabelElement;
+        new (): HTMLArtLabelElement;
+    };
+    interface HTMLArtNativeSelectElementEventMap {
+        "change": { value: string };
+        "input": { value: string };
+    }
+    /**
+     * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
+     * `<optgroup>` children and they are mirrored into the control (and kept in sync).
+     * Form-associated; `change` (and `input`) emitted from the host with `detail.value`.
+     */
+    interface HTMLArtNativeSelectElement extends Components.ArtNativeSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtNativeSelectElementEventMap>(type: K, listener: (this: HTMLArtNativeSelectElement, ev: ArtNativeSelectCustomEvent<HTMLArtNativeSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtNativeSelectElementEventMap>(type: K, listener: (this: HTMLArtNativeSelectElement, ev: ArtNativeSelectCustomEvent<HTMLArtNativeSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtNativeSelectElement: {
+        prototype: HTMLArtNativeSelectElement;
+        new (): HTMLArtNativeSelectElement;
+    };
+    /**
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
+     */
+    interface HTMLArtRadioElement extends Components.ArtRadio, HTMLStencilElement {
+    }
+    var HTMLArtRadioElement: {
+        prototype: HTMLArtRadioElement;
+        new (): HTMLArtRadioElement;
+    };
+    interface HTMLArtRadioGroupElementEventMap {
+        "change": { value: string };
+    }
+    /**
+     * Radio Group — shadcn/ui parity. Owns the selected `value`, form association and keyboard
+     * navigation for its `<art-radio>` children (arrows move focus and select, APG radio group).
+     * The host carries `role="radiogroup"`, so `aria-label` / `aria-labelledby` go straight on it.
+     */
+    interface HTMLArtRadioGroupElement extends Components.ArtRadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtRadioGroupElement, ev: ArtRadioGroupCustomEvent<HTMLArtRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtRadioGroupElementEventMap>(type: K, listener: (this: HTMLArtRadioGroupElement, ev: ArtRadioGroupCustomEvent<HTMLArtRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtRadioGroupElement: {
+        prototype: HTMLArtRadioGroupElement;
+        new (): HTMLArtRadioGroupElement;
+    };
+    interface HTMLArtSliderElementEventMap {
+        "input": { value: number };
+        "change": { value: number };
+    }
+    /**
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
+     */
+    interface HTMLArtSliderElement extends Components.ArtSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSliderElementEventMap>(type: K, listener: (this: HTMLArtSliderElement, ev: ArtSliderCustomEvent<HTMLArtSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSliderElementEventMap>(type: K, listener: (this: HTMLArtSliderElement, ev: ArtSliderCustomEvent<HTMLArtSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSliderElement: {
+        prototype: HTMLArtSliderElement;
+        new (): HTMLArtSliderElement;
+    };
+    interface HTMLArtSwitchElementEventMap {
+        "change": { checked: boolean };
+    }
+    /**
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
+     */
+    interface HTMLArtSwitchElement extends Components.ArtSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSwitchElementEventMap>(type: K, listener: (this: HTMLArtSwitchElement, ev: ArtSwitchCustomEvent<HTMLArtSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSwitchElementEventMap>(type: K, listener: (this: HTMLArtSwitchElement, ev: ArtSwitchCustomEvent<HTMLArtSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSwitchElement: {
+        prototype: HTMLArtSwitchElement;
+        new (): HTMLArtSwitchElement;
+    };
+    interface HTMLArtTextareaElementEventMap {
+        "input": { value: string };
+        "change": { value: string };
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface HTMLArtTextareaElement extends Components.ArtTextarea, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTextareaElementEventMap>(type: K, listener: (this: HTMLArtTextareaElement, ev: ArtTextareaCustomEvent<HTMLArtTextareaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTextareaElementEventMap>(type: K, listener: (this: HTMLArtTextareaElement, ev: ArtTextareaCustomEvent<HTMLArtTextareaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTextareaElement: {
+        prototype: HTMLArtTextareaElement;
+        new (): HTMLArtTextareaElement;
+    };
+    interface HTMLArtToggleElementEventMap {
+        "change": { pressed: boolean };
+    }
+    /**
+     * Toggle — shadcn/ui parity. A two-state button (`aria-pressed`), variants `default | outline`,
+     * sizes `sm | md | lg`. Inside `<art-toggle-group>` the group owns the pressed state.
+     * Form-associated: submits `value` while pressed.
+     */
+    interface HTMLArtToggleElement extends Components.ArtToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtToggleElementEventMap>(type: K, listener: (this: HTMLArtToggleElement, ev: ArtToggleCustomEvent<HTMLArtToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtToggleElementEventMap>(type: K, listener: (this: HTMLArtToggleElement, ev: ArtToggleCustomEvent<HTMLArtToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtToggleElement: {
+        prototype: HTMLArtToggleElement;
+        new (): HTMLArtToggleElement;
+    };
+    interface HTMLArtToggleGroupElementEventMap {
+        "change": { value: string | string[] };
+    }
+    /**
+     * Toggle Group — shadcn/ui parity. A set of `<art-toggle>` items with a shared `value`
+     * (`type="single"`: one or none; `type="multiple"`: array). The group applies `variant`,
+     * `size` and `disabled` to its items, joins their edges, and moves focus with the arrows.
+     */
+    interface HTMLArtToggleGroupElement extends Components.ArtToggleGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtToggleGroupElementEventMap>(type: K, listener: (this: HTMLArtToggleGroupElement, ev: ArtToggleGroupCustomEvent<HTMLArtToggleGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtToggleGroupElementEventMap>(type: K, listener: (this: HTMLArtToggleGroupElement, ev: ArtToggleGroupCustomEvent<HTMLArtToggleGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtToggleGroupElement: {
+        prototype: HTMLArtToggleGroupElement;
+        new (): HTMLArtToggleGroupElement;
+    };
     interface HTMLElementTagNameMap {
         "art-button": HTMLArtButtonElement;
+        "art-checkbox": HTMLArtCheckboxElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
+        "art-input": HTMLArtInputElement;
+        "art-label": HTMLArtLabelElement;
+        "art-native-select": HTMLArtNativeSelectElement;
+        "art-radio": HTMLArtRadioElement;
+        "art-radio-group": HTMLArtRadioGroupElement;
+        "art-slider": HTMLArtSliderElement;
+        "art-switch": HTMLArtSwitchElement;
+        "art-textarea": HTMLArtTextareaElement;
+        "art-toggle": HTMLArtToggleElement;
+        "art-toggle-group": HTMLArtToggleGroupElement;
     }
 }
 declare namespace LocalJSX {
+    type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K]?: never };
+
     /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
      * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
@@ -223,6 +914,56 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
+     */
+    interface ArtCheckbox {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Mixed state (e.g. "select all" with a partial selection). Cleared by the next toggle.
+          * @default false
+         */
+        "indeterminate"?: boolean;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user toggle; `detail.checked` mirrors `target.checked`.
+         */
+        "onChange"?: (event: ArtCheckboxCustomEvent<{ checked: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * Submitted with the form when checked.
+          * @default 'on'
+         */
+        "value"?: string;
+    }
+    /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
      * recipe, a native `click` passing through and a kebab-case custom event.
      * Removed when Button lands.
@@ -267,6 +1008,433 @@ declare namespace LocalJSX {
          */
         "size"?: 'sm' | 'md' | 'lg';
     }
+    /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+     * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+     * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
+     */
+    interface ArtInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "inputmode"?: string;
+        /**
+          * Marks the field invalid (`aria-invalid` + destructive ring). Field sets it from validation.
+          * @default false
+         */
+        "invalid"?: boolean;
+        "max"?: string | number;
+        "maxlength"?: number;
+        "min"?: string | number;
+        "minlength"?: number;
+        /**
+          * Form field name (submitted with the value).
+         */
+        "name"?: string;
+        /**
+          * Emitted when the value is committed (blur / Enter).
+         */
+        "onChange"?: (event: ArtInputCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted on every keystroke; `detail.value` mirrors `target.value`. Kept native-named so `addEventListener('input')`, `onInput`, `@input` and `(input)` all work.
+         */
+        "onInput"?: (event: ArtInputCustomEvent<{ value: string }>) => void;
+        "pattern"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Control size; aligns with Button.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        "step"?: string | number;
+        /**
+          * Native input type.
+          * @default 'text'
+         */
+        "type"?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        /**
+          * Current value.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface ArtLabel {
+        /**
+          * Dimmed and inert; Field sets this when its control is disabled.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
+         */
+        "htmlFor"?: string;
+    }
+    /**
+     * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
+     * `<optgroup>` children and they are mirrored into the control (and kept in sync).
+     * Form-associated; `change` (and `input`) emitted from the host with `detail.value`.
+     */
+    interface ArtNativeSelect {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        "onChange"?: (event: ArtNativeSelectCustomEvent<{ value: string }>) => void;
+        "onInput"?: (event: ArtNativeSelectCustomEvent<{ value: string }>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
+     */
+    interface ArtRadio {
+        /**
+          * Managed by the group.
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "groupDisabled"?: boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "name"?: string;
+        /**
+          * Managed by the group.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default false
+         */
+        "tabbable"?: boolean;
+        /**
+          * Value reported by the group when this item is selected.
+         */
+        "value": string;
+    }
+    /**
+     * Radio Group — shadcn/ui parity. Owns the selected `value`, form association and keyboard
+     * navigation for its `<art-radio>` children (arrows move focus and select, APG radio group).
+     * The host carries `role="radiogroup"`, so `aria-label` / `aria-labelledby` go straight on it.
+     */
+    interface ArtRadioGroup {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user selection; `detail.value` mirrors `target.value`.
+         */
+        "onChange"?: (event: ArtRadioGroupCustomEvent<{ value: string }>) => void;
+        /**
+          * Layout and arrow-key axis.
+          * @default 'vertical'
+         */
+        "orientation"?: 'vertical' | 'horizontal';
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Item size, applied to every `<art-radio>`.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * Selected item value.
+         */
+        "value"?: string;
+    }
+    /**
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
+     */
+    interface ArtSlider {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max"?: number;
+        /**
+          * @default 0
+         */
+        "min"?: number;
+        "name"?: string;
+        /**
+          * Emitted when the interaction ends.
+         */
+        "onChange"?: (event: ArtSliderCustomEvent<{ value: number }>) => void;
+        /**
+          * Emitted while the value changes (drag, keys); `detail.value` mirrors `target.value`.
+         */
+        "onInput"?: (event: ArtSliderCustomEvent<{ value: number }>) => void;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * Track and thumb thickness.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default 1
+         */
+        "step"?: number;
+        /**
+          * @default 0
+         */
+        "value"?: number | string;
+    }
+    /**
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
+     */
+    interface ArtSwitch {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user toggle; `detail.checked` mirrors `target.checked`.
+         */
+        "onChange"?: (event: ArtSwitchCustomEvent<{ checked: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default 'on'
+         */
+        "value"?: string;
+    }
+    /**
+     * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+     * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+     */
+    interface ArtTextarea {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "maxlength"?: number;
+        "minlength"?: number;
+        "name"?: string;
+        "onChange"?: (event: ArtTextareaCustomEvent<{ value: string }>) => void;
+        "onInput"?: (event: ArtTextareaCustomEvent<{ value: string }>) => void;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Initial visible rows; the field still grows with content.
+         */
+        "rows"?: number;
+        /**
+          * Density; changes inline padding only (height follows content).
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Toggle — shadcn/ui parity. A two-state button (`aria-pressed`), variants `default | outline`,
+     * sizes `sm | md | lg`. Inside `<art-toggle-group>` the group owns the pressed state.
+     * Form-associated: submits `value` while pressed.
+     */
+    interface ArtToggle {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
+        "groupDisabled"?: boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Square icon-only toggle.
+          * @default false
+         */
+        "icon"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted after a user toggle; `detail.pressed` mirrors `target.pressed`.
+         */
+        "onChange"?: (event: ArtToggleCustomEvent<{ pressed: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "pressed"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        "tabbable"?: boolean;
+        /**
+          * Submitted with the form while pressed; also the item value inside a toggle group.
+          * @default 'on'
+         */
+        "value"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'outline';
+    }
+    /**
+     * Toggle Group — shadcn/ui parity. A set of `<art-toggle>` items with a shared `value`
+     * (`type="single"`: one or none; `type="multiple"`: array). The group applies `variant`,
+     * `size` and `disabled` to its items, joins their edges, and moves focus with the arrows.
+     */
+    interface ArtToggleGroup {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Emitted after a user toggle; `detail.value` is a string (`single`) or string[] (`multiple`).
+         */
+        "onChange"?: (event: ArtToggleGroupCustomEvent<{ value: string | string[] }>) => void;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * `single`: one pressed item (or none). `multiple`: any number.
+          * @default 'single'
+         */
+        "type"?: 'single' | 'multiple';
+        /**
+          * Pressed value(s). As an attribute, `multiple` values are comma-separated.
+          * @default ''
+         */
+        "value"?: string | string[];
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'outline';
+    }
 
     interface ArtButtonAttributes {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -280,6 +1448,19 @@ declare namespace LocalJSX {
         "rel": string;
         "hostAriaLabel": string | null;
     }
+    interface ArtCheckboxAttributes {
+        "checked": boolean;
+        "indeterminate": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
     interface ArtHelloAttributes {
         "name": string;
         "variant": 'default' | 'outline';
@@ -289,11 +1470,141 @@ declare namespace LocalJSX {
         "size": 'sm' | 'md' | 'lg';
         "label": string;
     }
+    interface ArtInputAttributes {
+        "value": string;
+        "type": 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        "size": 'sm' | 'md' | 'lg';
+        "placeholder": string;
+        "name": string;
+        "disabled": boolean;
+        "readonly": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "autocomplete": string;
+        "inputmode": string;
+        "pattern": string;
+        "min": string;
+        "max": string;
+        "step": string;
+        "minlength": number;
+        "maxlength": number;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtLabelAttributes {
+        "htmlFor": string;
+        "disabled": boolean;
+    }
+    interface ArtNativeSelectAttributes {
+        "value": string;
+        "size": 'sm' | 'md' | 'lg';
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtRadioAttributes {
+        "value": string;
+        "disabled": boolean;
+        "checked": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "tabbable": boolean;
+        "groupDisabled": boolean;
+        "name": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+    }
+    interface ArtRadioGroupAttributes {
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "orientation": 'vertical' | 'horizontal';
+        "size": 'sm' | 'md' | 'lg';
+    }
+    interface ArtSliderAttributes {
+        "value": string;
+        "min": number;
+        "max": number;
+        "step": number;
+        "orientation": 'horizontal' | 'vertical';
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+        "name": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtSwitchAttributes {
+        "checked": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtTextareaAttributes {
+        "value": string;
+        "size": 'sm' | 'md' | 'lg';
+        "placeholder": string;
+        "name": string;
+        "disabled": boolean;
+        "readonly": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "rows": number;
+        "minlength": number;
+        "maxlength": number;
+        "autocomplete": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtToggleAttributes {
+        "pressed": boolean;
+        "variant": 'default' | 'outline';
+        "size": 'sm' | 'md' | 'lg';
+        "icon": boolean;
+        "disabled": boolean;
+        "value": string;
+        "name": string;
+        "tabbable": boolean;
+        "groupDisabled": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+    }
+    interface ArtToggleGroupAttributes {
+        "type": 'single' | 'multiple';
+        "value": string | string[];
+        "variant": 'default' | 'outline';
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+    }
 
     interface IntrinsicElements {
         "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
+        "art-checkbox": Omit<ArtCheckbox, keyof ArtCheckboxAttributes> & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes]?: ArtCheckbox[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `attr:${K}`]?: ArtCheckboxAttributes[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `prop:${K}`]?: ArtCheckbox[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
+        "art-input": Omit<ArtInput, keyof ArtInputAttributes> & { [K in keyof ArtInput & keyof ArtInputAttributes]?: ArtInput[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `attr:${K}`]?: ArtInputAttributes[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `prop:${K}`]?: ArtInput[K] };
+        "art-label": Omit<ArtLabel, keyof ArtLabelAttributes> & { [K in keyof ArtLabel & keyof ArtLabelAttributes]?: ArtLabel[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `attr:${K}`]?: ArtLabelAttributes[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `prop:${K}`]?: ArtLabel[K] };
+        "art-native-select": Omit<ArtNativeSelect, keyof ArtNativeSelectAttributes> & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes]?: ArtNativeSelect[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `attr:${K}`]?: ArtNativeSelectAttributes[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `prop:${K}`]?: ArtNativeSelect[K] };
+        "art-radio": Omit<ArtRadio, keyof ArtRadioAttributes> & { [K in keyof ArtRadio & keyof ArtRadioAttributes]?: ArtRadio[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `attr:${K}`]?: ArtRadioAttributes[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `prop:${K}`]?: ArtRadio[K] } & OneOf<"value", ArtRadio["value"], ArtRadioAttributes["value"]>;
+        "art-radio-group": Omit<ArtRadioGroup, keyof ArtRadioGroupAttributes> & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes]?: ArtRadioGroup[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `attr:${K}`]?: ArtRadioGroupAttributes[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `prop:${K}`]?: ArtRadioGroup[K] };
+        "art-slider": Omit<ArtSlider, keyof ArtSliderAttributes> & { [K in keyof ArtSlider & keyof ArtSliderAttributes]?: ArtSlider[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `attr:${K}`]?: ArtSliderAttributes[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `prop:${K}`]?: ArtSlider[K] };
+        "art-switch": Omit<ArtSwitch, keyof ArtSwitchAttributes> & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes]?: ArtSwitch[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `attr:${K}`]?: ArtSwitchAttributes[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `prop:${K}`]?: ArtSwitch[K] };
+        "art-textarea": Omit<ArtTextarea, keyof ArtTextareaAttributes> & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes]?: ArtTextarea[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `attr:${K}`]?: ArtTextareaAttributes[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `prop:${K}`]?: ArtTextarea[K] };
+        "art-toggle": Omit<ArtToggle, keyof ArtToggleAttributes> & { [K in keyof ArtToggle & keyof ArtToggleAttributes]?: ArtToggle[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `attr:${K}`]?: ArtToggleAttributes[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `prop:${K}`]?: ArtToggle[K] };
+        "art-toggle-group": Omit<ArtToggleGroup, keyof ArtToggleGroupAttributes> & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes]?: ArtToggleGroup[K] } & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes as `attr:${K}`]?: ArtToggleGroupAttributes[K] } & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes as `prop:${K}`]?: ArtToggleGroup[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -308,6 +1619,13 @@ declare module "@stencil/core" {
              */
             "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;
             /**
+             * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+             * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+             * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+             * `ngModel` work out of the box.
+             */
+            "art-checkbox": LocalJSX.IntrinsicElements["art-checkbox"] & JSXBase.HTMLAttributes<HTMLArtCheckboxElement>;
+            /**
              * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
              * recipe, a native `click` passing through and a kebab-case custom event.
              * Removed when Button lands.
@@ -318,6 +1636,68 @@ declare module "@stencil/core" {
              * into components: import the icon module you need and pass it as `icon`.
              */
             "art-icon": LocalJSX.IntrinsicElements["art-icon"] & JSXBase.HTMLAttributes<HTMLArtIconElement>;
+            /**
+             * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+             * reset); `input` / `change` are emitted from the host in response to the native events with
+             * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+             * share the control-height tokens so inputs align with buttons. `start` / `end` slots place an
+             * icon or short text inside the same frame (shadcn Input Group addons): the frame — not the native
+             * input — carries the border, focus ring and invalid ring, so the addons read as part of the field.
+             */
+            "art-input": LocalJSX.IntrinsicElements["art-input"] & JSXBase.HTMLAttributes<HTMLArtInputElement>;
+            /**
+             * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+             * ids, `for` is resolved at click time: activating the label focuses the target control
+             * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+             */
+            "art-label": LocalJSX.IntrinsicElements["art-label"] & JSXBase.HTMLAttributes<HTMLArtLabelElement>;
+            /**
+             * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
+             * `<optgroup>` children and they are mirrored into the control (and kept in sync).
+             * Form-associated; `change` (and `input`) emitted from the host with `detail.value`.
+             */
+            "art-native-select": LocalJSX.IntrinsicElements["art-native-select"] & JSXBase.HTMLAttributes<HTMLArtNativeSelectElement>;
+            /**
+             * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+             * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+             * roots). The label is the default slot, so no wrapper markup is needed.
+             */
+            "art-radio": LocalJSX.IntrinsicElements["art-radio"] & JSXBase.HTMLAttributes<HTMLArtRadioElement>;
+            /**
+             * Radio Group — shadcn/ui parity. Owns the selected `value`, form association and keyboard
+             * navigation for its `<art-radio>` children (arrows move focus and select, APG radio group).
+             * The host carries `role="radiogroup"`, so `aria-label` / `aria-labelledby` go straight on it.
+             */
+            "art-radio-group": LocalJSX.IntrinsicElements["art-radio-group"] & JSXBase.HTMLAttributes<HTMLArtRadioGroupElement>;
+            /**
+             * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+             * provides drag, keyboard, screen-reader value announcements and form participation; artui
+             * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+             * `change` on commit; `detail.value` is a number.
+             */
+            "art-slider": LocalJSX.IntrinsicElements["art-slider"] & JSXBase.HTMLAttributes<HTMLArtSliderElement>;
+            /**
+             * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+             * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
+             */
+            "art-switch": LocalJSX.IntrinsicElements["art-switch"] & JSXBase.HTMLAttributes<HTMLArtSwitchElement>;
+            /**
+             * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
+             * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
+             */
+            "art-textarea": LocalJSX.IntrinsicElements["art-textarea"] & JSXBase.HTMLAttributes<HTMLArtTextareaElement>;
+            /**
+             * Toggle — shadcn/ui parity. A two-state button (`aria-pressed`), variants `default | outline`,
+             * sizes `sm | md | lg`. Inside `<art-toggle-group>` the group owns the pressed state.
+             * Form-associated: submits `value` while pressed.
+             */
+            "art-toggle": LocalJSX.IntrinsicElements["art-toggle"] & JSXBase.HTMLAttributes<HTMLArtToggleElement>;
+            /**
+             * Toggle Group — shadcn/ui parity. A set of `<art-toggle>` items with a shared `value`
+             * (`type="single"`: one or none; `type="multiple"`: array). The group applies `variant`,
+             * `size` and `disabled` to its items, joins their edges, and moves focus with the arrows.
+             */
+            "art-toggle-group": LocalJSX.IntrinsicElements["art-toggle-group"] & JSXBase.HTMLAttributes<HTMLArtToggleGroupElement>;
         }
     }
 }

@@ -10,7 +10,7 @@ const componentSidebar = Object.entries(catalog.tiers as Record<string, any>).ma
   text: def.title,
   collapsed: false,
   items: def.components
-    .filter((c: any) => existsSync(resolve(docsDir, 'components', tier, `${c.tag.replace(/^art-/, '')}.md`)))
+    .filter((c: any) => !c.internal && existsSync(resolve(docsDir, 'components', tier, `${c.tag.replace(/^art-/, '')}.md`)))
     .map((c: any) => ({ text: c.name, link: `/components/${tier}/${c.tag.replace(/^art-/, '')}` })),
 })).filter((g) => g.items.length);
 

@@ -1,6 +1,10 @@
 {
   "radius": {
     "$type": "dimension",
+    "xs": {
+      "$value": "calc({radius.base} - 6px)",
+      "$description": "Smallest step (checkboxes, chips)."
+    },
     "sm": {
       "$value": "calc({radius.base} - 4px)",
       "$description": "Derived from the single base radius. Change --art-radius to restyle everything."
@@ -53,6 +57,19 @@
     "padding-x-icon": {
       "$type": "dimension",
       "$description": "Inline padding on the side that carries an icon (optical alignment).",
+      "sm": {
+        "$value": "{space.2-5}"
+      },
+      "md": {
+        "$value": "{space.3}"
+      },
+      "lg": {
+        "$value": "{space.4}"
+      }
+    },
+    "padding-x-field": {
+      "$type": "dimension",
+      "$description": "Inline padding for text fields (Input, Select, Combobox); tighter than buttons.",
       "sm": {
         "$value": "{space.2-5}"
       },

@@ -11,9 +11,67 @@ import { ButtonLoading } from './button/loading';
 import { ButtonDisabled } from './button/disabled';
 import { ButtonLink } from './button/link';
 import { ButtonForm } from './button/form';
+import { LabelBasic } from './label/basic';
+import { LabelDisabled } from './label/disabled';
+import { InputBasic } from './input/basic';
+import { InputSizes } from './input/sizes';
+import { InputWithLabel } from './input/with-label';
+import { InputWithButton } from './input/with-button';
+import { InputDisabled } from './input/disabled';
+import { InputInvalid } from './input/invalid';
+import { InputFile } from './input/file';
+import { InputForm } from './input/form';
+import { TextareaBasic } from './textarea/basic';
+import { TextareaWithLabel } from './textarea/with-label';
+import { TextareaWithText } from './textarea/with-text';
+import { TextareaDisabled } from './textarea/disabled';
+import { TextareaInvalid } from './textarea/invalid';
+import { TextareaWithButton } from './textarea/with-button';
+import { CheckboxBasic } from './checkbox/basic';
+import { CheckboxChecked } from './checkbox/checked';
+import { CheckboxIndeterminate } from './checkbox/indeterminate';
+import { CheckboxSizes } from './checkbox/sizes';
+import { CheckboxWithText } from './checkbox/with-text';
+import { CheckboxDisabled } from './checkbox/disabled';
+import { CheckboxInvalid } from './checkbox/invalid';
+import { SwitchBasic } from './switch/basic';
+import { SwitchChecked } from './switch/checked';
+import { SwitchSizes } from './switch/sizes';
+import { SwitchDisabled } from './switch/disabled';
+import { RadioGroupBasic } from './radio-group/basic';
+import { RadioGroupHorizontal } from './radio-group/horizontal';
+import { RadioGroupDisabledItem } from './radio-group/disabled-item';
+import { RadioGroupSizes } from './radio-group/sizes';
+import { RadioGroupForm } from './radio-group/form';
+import { NativeSelectBasic } from './native-select/basic';
+import { NativeSelectWithLabel } from './native-select/with-label';
+import { NativeSelectGroups } from './native-select/groups';
+import { NativeSelectSizes } from './native-select/sizes';
+import { NativeSelectDisabled } from './native-select/disabled';
+import { NativeSelectInvalid } from './native-select/invalid';
+import { ToggleBasic } from './toggle/basic';
+import { ToggleOutline } from './toggle/outline';
+import { ToggleWithText } from './toggle/with-text';
+import { ToggleSizes } from './toggle/sizes';
+import { TogglePressed } from './toggle/pressed';
+import { ToggleDisabled } from './toggle/disabled';
+import { ToggleGroupBasic } from './toggle-group/basic';
+import { ToggleGroupSingle } from './toggle-group/single';
+import { ToggleGroupOutline } from './toggle-group/outline';
+import { ToggleGroupSizes } from './toggle-group/sizes';
+import { ToggleGroupDisabled } from './toggle-group/disabled';
+import { SliderBasic } from './slider/basic';
+import { SliderStep } from './slider/step';
+import { SliderSizes } from './slider/sizes';
+import { SliderVertical } from './slider/vertical';
+import { SliderDisabled } from './slider/disabled';
+import { InputWithIcon } from './input/with-icon';
+import { InputWithEndIcon } from './input/with-end-icon';
+import { InputWithText } from './input/with-text';
+import { InputAddonSizes } from './input/addon-sizes';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -28,4 +86,62 @@ export const SAMPLES = [
   { id: 'button/disabled', component: ButtonDisabled },
   { id: 'button/link', component: ButtonLink },
   { id: 'button/form', component: ButtonForm },
+  { id: 'label/basic', component: LabelBasic },
+  { id: 'label/disabled', component: LabelDisabled },
+  { id: 'input/basic', component: InputBasic },
+  { id: 'input/sizes', component: InputSizes },
+  { id: 'input/with-label', component: InputWithLabel },
+  { id: 'input/with-button', component: InputWithButton },
+  { id: 'input/disabled', component: InputDisabled },
+  { id: 'input/invalid', component: InputInvalid },
+  { id: 'input/file', component: InputFile },
+  { id: 'input/form', component: InputForm },
+  { id: 'textarea/basic', component: TextareaBasic },
+  { id: 'textarea/with-label', component: TextareaWithLabel },
+  { id: 'textarea/with-text', component: TextareaWithText },
+  { id: 'textarea/disabled', component: TextareaDisabled },
+  { id: 'textarea/invalid', component: TextareaInvalid },
+  { id: 'textarea/with-button', component: TextareaWithButton },
+  { id: 'checkbox/basic', component: CheckboxBasic },
+  { id: 'checkbox/checked', component: CheckboxChecked },
+  { id: 'checkbox/indeterminate', component: CheckboxIndeterminate },
+  { id: 'checkbox/sizes', component: CheckboxSizes },
+  { id: 'checkbox/with-text', component: CheckboxWithText },
+  { id: 'checkbox/disabled', component: CheckboxDisabled },
+  { id: 'checkbox/invalid', component: CheckboxInvalid },
+  { id: 'switch/basic', component: SwitchBasic },
+  { id: 'switch/checked', component: SwitchChecked },
+  { id: 'switch/sizes', component: SwitchSizes },
+  { id: 'switch/disabled', component: SwitchDisabled },
+  { id: 'radio-group/basic', component: RadioGroupBasic },
+  { id: 'radio-group/horizontal', component: RadioGroupHorizontal },
+  { id: 'radio-group/disabled-item', component: RadioGroupDisabledItem },
+  { id: 'radio-group/sizes', component: RadioGroupSizes },
+  { id: 'radio-group/form', component: RadioGroupForm },
+  { id: 'native-select/basic', component: NativeSelectBasic },
+  { id: 'native-select/with-label', component: NativeSelectWithLabel },
+  { id: 'native-select/groups', component: NativeSelectGroups },
+  { id: 'native-select/sizes', component: NativeSelectSizes },
+  { id: 'native-select/disabled', component: NativeSelectDisabled },
+  { id: 'native-select/invalid', component: NativeSelectInvalid },
+  { id: 'toggle/basic', component: ToggleBasic },
+  { id: 'toggle/outline', component: ToggleOutline },
+  { id: 'toggle/with-text', component: ToggleWithText },
+  { id: 'toggle/sizes', component: ToggleSizes },
+  { id: 'toggle/pressed', component: TogglePressed },
+  { id: 'toggle/disabled', component: ToggleDisabled },
+  { id: 'toggle-group/basic', component: ToggleGroupBasic },
+  { id: 'toggle-group/single', component: ToggleGroupSingle },
+  { id: 'toggle-group/outline', component: ToggleGroupOutline },
+  { id: 'toggle-group/sizes', component: ToggleGroupSizes },
+  { id: 'toggle-group/disabled', component: ToggleGroupDisabled },
+  { id: 'slider/basic', component: SliderBasic },
+  { id: 'slider/step', component: SliderStep },
+  { id: 'slider/sizes', component: SliderSizes },
+  { id: 'slider/vertical', component: SliderVertical },
+  { id: 'slider/disabled', component: SliderDisabled },
+  { id: 'input/with-icon', component: InputWithIcon },
+  { id: 'input/with-end-icon', component: InputWithEndIcon },
+  { id: 'input/with-text', component: InputWithText },
+  { id: 'input/addon-sizes', component: InputAddonSizes },
 ];

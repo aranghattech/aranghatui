@@ -1,0 +1,10 @@
+:host {
+  display: inline-flex;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Disabled = muted foreground (AA), not opacity: axe measures dimmed text as a contrast failure. */
+:host([disabled]) label {
+  @apply pointer-events-none text-fg-muted;
+}

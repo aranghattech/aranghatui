@@ -1,6 +1,6 @@
 # ADR-0015: Branch per component, PR, self-merge on green; baseline policy
 
-**Status:** Accepted (2026-09-14)
+**Status:** Accepted (2026-09-14). **Amended 2026-09-15:** no PRs are opened by Claude. Work is committed locally on a feature branch, docs updated, and the user is asked to review; the PR is created together afterwards.
 
 ## Decision
 - `origin` is `github.com/aranghattech/aranghatui`. Work happens on `phase-N/<slug>` or `component/<name>` branches, one PR each, with the verify report and bundle delta in the PR body.

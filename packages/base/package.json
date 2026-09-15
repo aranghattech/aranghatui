@@ -27,6 +27,10 @@
       "types": "./dist/components/art-button.d.ts",
       "import": "./dist/components/art-button.js"
     },
+    "./checkbox": {
+      "types": "./dist/components/art-checkbox.d.ts",
+      "import": "./dist/components/art-checkbox.js"
+    },
     "./hello": {
       "types": "./dist/components/art-hello.d.ts",
       "import": "./dist/components/art-hello.js"
@@ -34,6 +38,46 @@
     "./icon": {
       "types": "./dist/components/art-icon.d.ts",
       "import": "./dist/components/art-icon.js"
+    },
+    "./input": {
+      "types": "./dist/components/art-input.d.ts",
+      "import": "./dist/components/art-input.js"
+    },
+    "./label": {
+      "types": "./dist/components/art-label.d.ts",
+      "import": "./dist/components/art-label.js"
+    },
+    "./native-select": {
+      "types": "./dist/components/art-native-select.d.ts",
+      "import": "./dist/components/art-native-select.js"
+    },
+    "./radio": {
+      "types": "./dist/components/art-radio.d.ts",
+      "import": "./dist/components/art-radio.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/art-radio-group.d.ts",
+      "import": "./dist/components/art-radio-group.js"
+    },
+    "./slider": {
+      "types": "./dist/components/art-slider.d.ts",
+      "import": "./dist/components/art-slider.js"
+    },
+    "./switch": {
+      "types": "./dist/components/art-switch.d.ts",
+      "import": "./dist/components/art-switch.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/art-textarea.d.ts",
+      "import": "./dist/components/art-textarea.js"
+    },
+    "./toggle": {
+      "types": "./dist/components/art-toggle.d.ts",
+      "import": "./dist/components/art-toggle.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/components/art-toggle-group.d.ts",
+      "import": "./dist/components/art-toggle-group.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
@@ -61,6 +105,7 @@
     "@stencil/core": "4.45.0",
     "@stencil/playwright": "0.5.1",
     "@stencil/vitest": "1.15.1",
+    "jsdom": "28.1.0",
     "vitest": "4.1.11"
   }
 }

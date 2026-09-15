@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+/* light-DOM options are data, not UI: the select shows the mirrored copies */
+slot {
+  display: none;
+}

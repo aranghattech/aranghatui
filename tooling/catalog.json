@@ -13,6 +13,12 @@
           "phase0": true
         },
         {
+          "tag": "art-icon",
+          "name": "Icon",
+          "status": "done",
+          "internal": true
+        },
+        {
           "tag": "art-button",
           "name": "Button",
           "status": "done"
@@ -20,52 +26,58 @@
         {
           "tag": "art-label",
           "name": "Label",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-input",
           "name": "Input",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-textarea",
           "name": "Textarea",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-checkbox",
           "name": "Checkbox",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-radio-group",
           "name": "Radio Group",
-          "status": "planned"
+          "status": "done"
+        },
+        {
+          "tag": "art-radio",
+          "name": "Radio (item)",
+          "status": "done",
+          "internal": true
         },
         {
           "tag": "art-switch",
           "name": "Switch",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-native-select",
           "name": "Native Select",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-slider",
           "name": "Slider",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-toggle",
           "name": "Toggle",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-toggle-group",
           "name": "Toggle Group",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-button-group",

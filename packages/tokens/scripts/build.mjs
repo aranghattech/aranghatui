@@ -90,7 +90,7 @@ StyleDictionary.registerFormat({
     add('--color-current', 'currentColor');
     add('--color-inherit', 'inherit');
     // shape
-    for (const k of ['sm', 'md', 'lg', 'xl']) add(`--radius-${k}`, v(`radius.${k}`));
+    for (const k of ['xs', 'sm', 'md', 'lg', 'xl']) add(`--radius-${k}`, v(`radius.${k}`));
     add('--radius-none', v('radius.none'));
     add('--radius-full', v('radius.full'));
     // spacing multiplier: p-4 => calc(var(--art-space-1) * 4)
@@ -124,6 +124,12 @@ StyleDictionary.registerFormat({
     box-shadow: 0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent);
   }
 }
+/* focus-ring-within: the same ring, on a frame whose focusable control sits inside it */
+@utility focus-ring-within {
+  &:has(:focus-visible) {
+    box-shadow: 0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent);
+  }
+}
 @utility motion-fast { transition-duration: ${v('duration.fast')}; transition-timing-function: ${v('ease.out')}; }
 @utility motion-base { transition-duration: ${v('duration.base')}; transition-timing-function: ${v('ease.out')}; }
 @utility control-sm { height: ${v('control.height.sm')}; padding-inline: ${v('control.padding-x.sm')}; }
@@ -140,6 +146,18 @@ StyleDictionary.registerFormat({
 @utility control-icon-end-sm { padding-inline-end: ${v('control.padding-x-icon.sm')}; }
 @utility control-icon-end-md { padding-inline-end: ${v('control.padding-x-icon.md')}; }
 @utility control-icon-end-lg { padding-inline-end: ${v('control.padding-x-icon.lg')}; }
+@utility field-sm { height: ${v('control.height.sm')}; padding-inline: ${v('control.padding-x-field.sm')}; }
+@utility field-md { height: ${v('control.height.md')}; padding-inline: ${v('control.padding-x-field.md')}; }
+@utility field-lg { height: ${v('control.height.lg')}; padding-inline: ${v('control.padding-x-field.lg')}; }
+/* field-pad-*: inline padding only (Textarea, and the native input inside Input's frame) */
+@utility field-pad-sm { padding-inline: ${v('control.padding-x-field.sm')}; }
+@utility field-pad-md { padding-inline: ${v('control.padding-x-field.md')}; }
+@utility field-pad-lg { padding-inline: ${v('control.padding-x-field.lg')}; }
+/* field-frame-*: the bordered box around a native control plus its start/end addons (Input, Input Group) */
+@utility field-frame-sm { height: ${v('control.height.sm')}; }
+@utility field-frame-md { height: ${v('control.height.md')}; }
+@utility field-frame-lg { height: ${v('control.height.lg')}; }
+@utility invalid-ring { border-color: ${v('color.destructive.solid')}; box-shadow: 0 0 0 ${v('ring.width')} color-mix(in oklab, ${v('color.destructive.solid')} 20%, transparent); }
 @utility control-icon-sm { height: ${v('control.height.sm')}; width: ${v('control.height.sm')}; padding: 0; }
 @utility control-icon-md { height: ${v('control.height.md')}; width: ${v('control.height.md')}; padding: 0; }
 @utility control-icon-lg { height: ${v('control.height.lg')}; width: ${v('control.height.lg')}; padding: 0; }

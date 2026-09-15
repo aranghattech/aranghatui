@@ -1,3 +1,4 @@
+<!-- hand-written -->
 # Button
 
 Displays a button or a component that looks like a button. shadcn/ui parity (ADR-0012): six variants, three sizes, icon-only, loading, and an anchor mode via `href`.

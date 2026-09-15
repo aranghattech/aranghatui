@@ -3,6 +3,14 @@ export type StoryState = 'default' | 'hover' | 'focus-visible' | 'active' | 'dis
 export type StorySize = 'sm' | 'md' | 'lg';
 export type Theme = 'light' | 'dark';
 
+/**
+ * How the gallery / docs preview lays out an example. Layout lives in the frame so that
+ * sample code shows only the component(s) — never wrapper divs developers would copy.
+ * inline: row, wrapping, centred. stack: column at field width (label + control + text).
+ * control-text: a control in the first column with label + text stacked beside it (checkbox / radio / switch with description).
+ */
+export type StoryFrame = 'inline' | 'stack' | 'control-text';
+
 export interface StoryContext {
   variant: string;
   size: StorySize | '';
@@ -16,6 +24,30 @@ export interface StoryExample {
   title: string;
   /** Returns an HTML string rendered inside the gallery frame. */
   render: () => string;
+  /** Paragraph shown under the example heading on the docs page. */
+  note?: string;
+  /** Preview layout for this example (overrides the story-level frame). Samples never contain layout markup. */
+  frame?: StoryFrame;
+  /** Framework samples are hand-written (events, v-model, scripts); the generator only emits the HTML sample. */
+  manual?: boolean;
+}
+
+/** Content for the generated nine-section docs page (apps/docs/scripts/gen-page.mjs). */
+export interface StoryDocs {
+  /** One-line description under the title. */
+  description: string;
+  /** Paragraph after the Usage code group. */
+  usage?: string;
+  /** Extra packages the tier needs (e.g. modals → base). */
+  requires?: string[];
+  keyboard: Array<[key: string, action: string]>;
+  /** Roles / ARIA sentence, then the APG pattern URL. */
+  roles: string;
+  apg?: string;
+  /** Which states are implemented and why any are missing (CLAUDE.md §8). */
+  states: string;
+  tokens: Array<[token: string, usedFor: string]>;
+  dos: Array<[doThis: string, notThat: string]>;
 }
 
 export interface ComponentStories {
@@ -40,4 +72,7 @@ export interface ComponentStories {
    * viewport — required for fixed/portaled components (dialogs, sheets, toasts, overlays).
    */
   screenshot?: 'stage' | 'viewport';
+  /** Default preview layout for the matrix and examples. @default 'inline' */
+  frame?: StoryFrame;
+  docs?: StoryDocs;
 }

@@ -54,7 +54,8 @@ export function createTierConfig({ tier, componentModels = [], valueAccessorConf
       { type: 'docs-readme' },
       { type: 'docs-json', file: 'dist/docs.json' },
       // Dev server for @stencil/playwright e2e + `pnpm dev`; not published.
-      { type: 'www', dir: 'www', serviceWorker: null, empty: true, copy: [] },
+      // the token sheet is copied so e2e pages (via @artui/e2e's setContent) have real token-derived geometry
+      { type: 'www', dir: 'www', serviceWorker: null, empty: true, copy: [{ src: '../node_modules/@aranghat/tokens/dist/css/aranghat.css', dest: 'aranghat.css' }] },
       reactOutputTarget({
         outDir: `../react/${tier}/src/components/`,
         esModules: true,

@@ -1,0 +1,29 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+/* The thumb: a square pseudo-element inside the padded track; the inner width is twice the
+   thumb for every size, so "on" is always a 100% translate. */
+input::before {
+  content: '';
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--art-radius-full);
+  background-color: var(--art-color-bg-canvas);
+  box-shadow: var(--art-shadow-raised);
+  translate: 0 0;
+  transition: translate var(--art-duration-fast) var(--art-ease-out);
+}
+input:checked::before {
+  translate: 100% 0;
+}
+input:dir(rtl):checked::before {
+  translate: -100% 0;
+}

@@ -40,8 +40,11 @@ if (!tag) {
   if (!s) {
     stage.textContent = `unknown story: ${tag}`;
   } else if (params.get('example')) {
-    stage.innerHTML = s.examples[params.get('example')!]?.render() ?? `unknown example`;
+    const ex = s.examples[params.get('example')!];
+    stage.dataset.frame = ex?.frame ?? s.frame ?? 'inline';
+    stage.innerHTML = ex?.render() ?? `unknown example`;
   } else {
+    stage.dataset.frame = s.frame ?? 'inline';
     const ctx: StoryContext = {
       variant: params.get('variant') ?? s.variants[0] ?? 'default',
       size: (params.get('size') as StoryContext['size']) ?? (s.sizes[0] ?? ''),

@@ -20,9 +20,13 @@ Add the catalogue entry status `in-progress` in `tooling/catalog.json`. Angular 
 
 ## 2. Tokens
 - Every design value is a **semantic** token. Missing one? Add it in `packages/tokens` in its own commit (see `token-authoring`). Never a literal, never `px`, never `!important`, never arbitrary Tailwind values.
-- Use the recipes: `focus-ring`, `motion-fast|base`, `control-sm|md|lg`, `icon-*`.
+- Use the recipes: `focus-ring`, `motion-fast|base`, `control-sm|md|lg`, `field-*`, `icon-*`.
+- **Conditional utilities must be exclusive pairs.** Never put `bg-transparent` (unconditional) next to `'bg-primary': checked` — Tailwind's emit order decides the winner, not your intent; write `'bg-transparent': !checked`. Checkbox shipped with an invisible checked state this way. Review baselines for BOTH states of every toggle.
+- **Dotted utility names (`h-1.5`, `p-0.5`) are only scanned inside real class strings**, not comments — write them as literal keys in the class object.
+- **Interpolated class names are invisible to the Tailwind scanner.** Any `` `x-${size}` `` must be accompanied by a comment listing every literal (`// safelist: field-sm field-md field-lg`), or the utility is silently missing (Input's sizes shipped without heights once).
 
 ## 3. Implement (Stencil)
+- **Native first (ADR-0020).** If HTML has the element, wrap it and style it (`appearance: none` + pseudo-elements on tokens); do not rebuild its behaviour. Custom logic only where no native element exists or to orchestrate natives across shadow roots.
 - `shadow: true`; document `::part()` and CSS custom property hooks in JSDoc (`@part`, `@slot`).
 - Props camelCase + reflect where styling depends on them; booleans default `false`.
 - Native events: re-dispatch `input|change|reset|submit` with `redispatch(host, e)`.

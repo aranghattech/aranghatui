@@ -1,6 +1,4 @@
 // Registers the built custom elements for spec tests (build runs first via Turborepo).
-import { defineCustomElementArtButton, defineCustomElementArtHello, defineCustomElementArtIcon } from './dist/components/index.js';
+import * as base from './dist/components/index.js';
 
-defineCustomElementArtButton();
-defineCustomElementArtHello();
-defineCustomElementArtIcon();
+for (const [k, fn] of Object.entries(base)) if (k.startsWith('defineCustomElement') && typeof fn === 'function') (fn as () => void)();

@@ -1,3 +1,8 @@
 body { margin: 0; background: var(--art-color-bg-canvas); color: var(--art-color-fg-default); font-family: var(--art-font-family-sans); }
-#stage { display: inline-block; padding: var(--art-space-4); min-width: 0; }
+#stage { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--art-space-3); padding: var(--art-space-4); min-width: 0; }
+#stage[data-frame='stack'] { display: flex; flex-direction: column; align-items: stretch; gap: var(--art-space-2); width: 20rem; max-width: 100%; }
+#stage[data-frame='control-text'] { display: grid; grid-template-columns: auto 1fr; align-items: start; column-gap: var(--art-space-3); row-gap: var(--art-space-1-5); width: 20rem; max-width: 100%; }
+#stage[data-frame='control-text'] > :first-child { grid-row: span 2; }
+/* helper text in examples is plain <p>; the frame styles it (samples stay markup-only) */
+#stage p { margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); }
 #index { padding: var(--art-space-8); }

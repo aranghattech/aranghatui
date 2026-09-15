@@ -9,7 +9,15 @@ export interface RovingTabindexOptions {
   loop?: boolean;
   /** @default 0 */
   initialIndex?: number;
+  /** Fires when the user moves the active item (keys, click); not for silent `setActive(i, false)` syncs. */
   onChange?: (item: HTMLElement, index: number) => void;
+  /**
+   * How to mark an item (non-)tabbable. Defaults to `item.tabIndex`. Shadow-DOM items whose
+   * inner control renders `tabindex` from a prop pass a setter here instead.
+   */
+  setTabbable?: (item: HTMLElement, tabbable: boolean) => void;
+  /** Items to skip (disabled). */
+  isDisabled?: (item: HTMLElement) => boolean;
 }
 
 export interface RovingTabindex {
@@ -24,22 +32,30 @@ export interface RovingTabindex {
  * focus, Home/End jump, RTL swaps left/right. Clicking an item makes it the active one.
  */
 export function createRovingTabindex(container: HTMLElement, options: RovingTabindexOptions): RovingTabindex {
-  const { getItems, orientation = 'horizontal', loop = true, onChange } = options;
+  const { getItems, orientation = 'horizontal', loop = true, onChange, isDisabled = () => false } = options;
+  const setTabbable = options.setTabbable ?? ((item, t) => { item.tabIndex = t ? 0 : -1; });
   let active = options.initialIndex ?? 0;
 
   const apply = () => {
     const items = getItems();
     if (active >= items.length) active = Math.max(0, items.length - 1);
-    items.forEach((item, i) => { item.tabIndex = i === active ? 0 : -1; });
+    items.forEach((item, i) => setTabbable(item, i === active));
   };
-  const setActive = (index: number, focus = true) => {
+  const setActive = (index: number, focus = true, direction: 1 | -1 = 1) => {
     const items = getItems();
     if (items.length === 0) return;
-    const next = loop ? (index + items.length) % items.length : Math.min(Math.max(index, 0), items.length - 1);
+    let next = loop ? (index + items.length) % items.length : Math.min(Math.max(index, 0), items.length - 1);
+    // skip disabled items in the direction of travel
+    for (let guard = 0; guard < items.length && isDisabled(items[next]!); guard++) {
+      next = loop ? (next + direction + items.length) % items.length : Math.min(Math.max(next + direction, 0), items.length - 1);
+    }
+    if (isDisabled(items[next]!)) return;
     active = next;
     apply();
-    if (focus) items[next]!.focus();
-    onChange?.(items[next]!, next);
+    if (focus) {
+      items[next]!.focus();
+      onChange?.(items[next]!, next);
+    }
   };
 
   const onKeydown = (e: KeyboardEvent) => {
@@ -60,7 +76,7 @@ export function createRovingTabindex(container: HTMLElement, options: RovingTabi
     if (next === null) return;
     if (!loop && (next < 0 || next >= items.length)) { e.preventDefault(); return; }
     e.preventDefault();
-    setActive(next);
+    setActive(next, true, next >= active ? 1 : -1);
   };
   const onFocusin = (e: FocusEvent) => {
     const items = getItems();

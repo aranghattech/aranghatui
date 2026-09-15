@@ -5,12 +5,32 @@ import { defineCustomElement as defineButton } from '@aranghat/base/button';
 import { defineCustomElement as defineHello } from '@aranghat/base/hello';
 import { defineCustomElement as defineIcon } from '@aranghat/base/icon';
 import { defineCustomElement as defineHelloOverlay } from '@aranghat/modals/hello-overlay';
+import { defineCustomElement as defineLabel } from '@aranghat/base/label';
+import { defineCustomElement as defineInput } from '@aranghat/base/input';
+import { defineCustomElement as defineTextarea } from '@aranghat/base/textarea';
+import { defineCustomElement as defineCheckbox } from '@aranghat/base/checkbox';
+import { defineCustomElement as defineSwitch } from '@aranghat/base/switch';
+import { defineCustomElement as defineRadioGroup } from '@aranghat/base/radio-group';
+import { defineCustomElement as defineNativeSelect } from '@aranghat/base/native-select';
+import { defineCustomElement as defineToggle } from '@aranghat/base/toggle';
+import { defineCustomElement as defineToggleGroup } from '@aranghat/base/toggle-group';
+import { defineCustomElement as defineSlider } from '@aranghat/base/slider';
 import './sandbox.css';
 
 defineButton();
 defineHello();
 defineIcon();
 defineHelloOverlay();
+defineLabel();
+defineInput();
+defineTextarea();
+defineCheckbox();
+defineSwitch();
+defineRadioGroup();
+defineNativeSelect();
+defineToggle();
+defineToggleGroup();
+defineSlider();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

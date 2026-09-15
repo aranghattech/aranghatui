@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  --addon-pad: var(--art-control-padding-x-field-md);
+}
+:host([size='sm']) {
+  --addon-pad: var(--art-control-padding-x-field-sm);
+}
+:host([size='lg']) {
+  --addon-pad: var(--art-control-padding-x-field-lg);
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+/* Addons: an icon or short text beside the control, inside the same frame (shadcn Input Group addon).
+   The outer padding matches the field padding; the gap to the text is the input's own padding. */
+::slotted([slot='start']),
+::slotted([slot='end']) {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--art-color-fg-muted);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+}
+::slotted([slot='start']) {
+  padding-inline-start: var(--addon-pad);
+}
+::slotted([slot='end']) {
+  padding-inline-end: var(--addon-pad);
+}
+/* A raw <svg slot="…"> takes the icon scale (content-box: the page's box-sizing must not eat it). */
+::slotted(svg) {
+  box-sizing: content-box;
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}

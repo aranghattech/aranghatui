@@ -1,0 +1,12 @@
+:host {
+  display: grid;
+  gap: var(--art-space-3);
+}
+:host([orientation='horizontal']) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--art-space-4);
+}
+:host([hidden]) {
+  display: none;
+}
