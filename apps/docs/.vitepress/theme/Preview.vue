@@ -32,5 +32,5 @@ const brand = ref<string>('');
 .artui-preview__stage[data-frame='control-text'] { display: grid; grid-template-columns: auto 1fr; align-items: start; column-gap: 12px; row-gap: 6px; width: 20rem; max-width: 100%; margin-inline: auto; justify-content: start; }
 .artui-preview__stage[data-frame='control-text'] > :first-child { grid-row: span 2; }
 .artui-preview__stage[data-frame='control-text'] p { width: auto; }
-.artui-preview__stage p { margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); width: 20rem; max-width: 100%; }
+.artui-preview__stage > p { margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); width: 20rem; max-width: 100%; }
 </style>

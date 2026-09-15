@@ -1,0 +1,11 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+}

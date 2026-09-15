@@ -7,3 +7,9 @@
 :host([disabled]) {
   pointer-events: none;
 }
+/* Inside an Input Group the group draws the frame, ring, invalid ring and disabled dim. */
+:host([data-in-group]) textarea {
+  border-color: transparent;
+  box-shadow: none;
+  opacity: 1;
+}

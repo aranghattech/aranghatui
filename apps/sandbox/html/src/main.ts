@@ -15,6 +15,20 @@ import { defineCustomElement as defineNativeSelect } from '@aranghat/base/native
 import { defineCustomElement as defineToggle } from '@aranghat/base/toggle';
 import { defineCustomElement as defineToggleGroup } from '@aranghat/base/toggle-group';
 import { defineCustomElement as defineSlider } from '@aranghat/base/slider';
+import { defineCustomElement as defineSeparator } from '@aranghat/base/separator';
+import { defineCustomElement as defineBadge } from '@aranghat/base/badge';
+import { defineCustomElement as defineKbd } from '@aranghat/base/kbd';
+import { defineCustomElement as defineKbdGroup } from '@aranghat/base/kbd-group';
+import { defineCustomElement as defineSkeleton } from '@aranghat/base/skeleton';
+import { defineCustomElement as defineSpinner } from '@aranghat/base/spinner';
+import { defineCustomElement as defineProgress } from '@aranghat/base/progress';
+import { defineCustomElement as defineButtonGroup } from '@aranghat/base/button-group';
+import { defineCustomElement as defineButtonGroupText } from '@aranghat/base/button-group-text';
+import { defineCustomElement as defineInputGroup } from '@aranghat/base/input-group';
+import { defineCustomElement as defineField } from '@aranghat/base/field';
+import { defineCustomElement as defineFieldSet } from '@aranghat/base/field-set';
+import { defineCustomElement as defineFieldGroup } from '@aranghat/base/field-group';
+import { defineCustomElement as defineInputOtp } from '@aranghat/base/input-otp';
 import './sandbox.css';
 
 defineButton();
@@ -31,6 +45,20 @@ defineNativeSelect();
 defineToggle();
 defineToggleGroup();
 defineSlider();
+defineSeparator();
+defineBadge();
+defineKbd();
+defineKbdGroup();
+defineSkeleton();
+defineSpinner();
+defineProgress();
+defineButtonGroup();
+defineButtonGroupText();
+defineInputGroup();
+defineField();
+defineFieldSet();
+defineFieldGroup();
+defineInputOtp();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

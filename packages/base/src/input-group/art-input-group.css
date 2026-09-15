@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  /* radius on the host, inherited by the frame: a Button Group rounds only the outer corners */
+  border-radius: var(--art-radius-md);
+}
+:host([hidden]) {
+  display: none;
+}
+[part='frame'] {
+  border-radius: inherit;
+}
+/* Ring, invalid ring and disabled dim follow the slotted control (which has dropped its own);
+   the component mirrors them onto the host because :host(:has(…)) cannot see slotted state. */
+:host([data-focus]) [part='frame'] {
+  @apply focus-ring-shadow;
+}
+:host([data-invalid]) [part='frame'] {
+  @apply invalid-ring;
+}
+:host([data-disabled]) [part='frame'] {
+  @apply opacity-50;
+}
+:host([data-disabled]) {
+  pointer-events: none;
+}
+/* The control keeps its own (now transparent) border; pulling it under the group's border keeps
+   the group exactly one control height. */
+::slotted(art-input),
+::slotted(art-textarea) {
+  flex: 1;
+  min-width: 0;
+  margin-block: calc(-1 * var(--art-border-width));
+}
+/* Inline addons: same recipe as Input's own slots — muted, field padding on the outer side. */
+::slotted([slot='start']),
+::slotted([slot='end']) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--art-space-2);
+  flex-shrink: 0;
+  color: var(--art-color-fg-muted);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+}
+::slotted([slot='start']) {
+  padding-inline-start: var(--art-control-padding-x-field-md);
+}
+::slotted([slot='end']) {
+  padding-inline-end: var(--art-control-padding-x-field-md);
+}
+/* A button addon sits close to the edge (shadcn has-[>button]:mr-[-0.45rem]). */
+::slotted(art-button) {
+  padding-inline: var(--art-space-1);
+}
+/* Block addons: full-width rows above / below the control. */
+::slotted([slot='block-start']),
+::slotted([slot='block-end']) {
+  display: flex;
+  align-items: center;
+  gap: var(--art-space-2);
+  width: 100%;
+  padding: var(--art-space-2) var(--art-control-padding-x-field-md);
+  color: var(--art-color-fg-muted);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+}
+::slotted(svg) {
+  box-sizing: content-box;
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}

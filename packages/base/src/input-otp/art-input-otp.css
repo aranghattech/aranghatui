@@ -1,0 +1,43 @@
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 50%;
+}
+/* Slots in a group share one border (the next overlaps the previous); only the group's outer corners round. */
+.slot + .slot {
+  margin-inline-start: calc(-1 * var(--art-border-width));
+}
+.slot:first-child {
+  border-start-start-radius: var(--art-radius-md);
+  border-end-start-radius: var(--art-radius-md);
+}
+.slot:last-child {
+  border-start-end-radius: var(--art-radius-md);
+  border-end-end-radius: var(--art-radius-md);
+}
+.slot.active {
+  border-color: var(--art-color-border-strong);
+}
+/* Invalid: destructive border on every slot (a ring per slot would double up between neighbours). */
+.slot.invalid {
+  border-color: var(--art-color-destructive-solid);
+}
+.caret {
+  width: var(--art-border-width);
+  height: var(--art-size-icon-md);
+}
+/* The real input sits on top so clicks, paste and autofill are native; its text stays invisible. */
+input {
+  caret-color: transparent;
+  color: transparent;
+  cursor: text;
+}
+input::selection {
+  background: transparent;
+}

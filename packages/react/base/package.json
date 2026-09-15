@@ -13,13 +13,37 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./badge": {
+      "types": "./dist/badge.d.ts",
+      "import": "./dist/badge.js"
+    },
     "./button": {
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js"
     },
+    "./button-group": {
+      "types": "./dist/button-group.d.ts",
+      "import": "./dist/button-group.js"
+    },
+    "./button-group-text": {
+      "types": "./dist/button-group-text.d.ts",
+      "import": "./dist/button-group-text.js"
+    },
     "./checkbox": {
       "types": "./dist/checkbox.d.ts",
       "import": "./dist/checkbox.js"
+    },
+    "./field": {
+      "types": "./dist/field.d.ts",
+      "import": "./dist/field.js"
+    },
+    "./field-group": {
+      "types": "./dist/field-group.d.ts",
+      "import": "./dist/field-group.js"
+    },
+    "./field-set": {
+      "types": "./dist/field-set.d.ts",
+      "import": "./dist/field-set.js"
     },
     "./hello": {
       "types": "./dist/hello.d.ts",
@@ -33,6 +57,22 @@
       "types": "./dist/input.d.ts",
       "import": "./dist/input.js"
     },
+    "./input-group": {
+      "types": "./dist/input-group.d.ts",
+      "import": "./dist/input-group.js"
+    },
+    "./input-otp": {
+      "types": "./dist/input-otp.d.ts",
+      "import": "./dist/input-otp.js"
+    },
+    "./kbd": {
+      "types": "./dist/kbd.d.ts",
+      "import": "./dist/kbd.js"
+    },
+    "./kbd-group": {
+      "types": "./dist/kbd-group.d.ts",
+      "import": "./dist/kbd-group.js"
+    },
     "./label": {
       "types": "./dist/label.d.ts",
       "import": "./dist/label.js"
@@ -40,6 +80,10 @@
     "./native-select": {
       "types": "./dist/native-select.d.ts",
       "import": "./dist/native-select.js"
+    },
+    "./progress": {
+      "types": "./dist/progress.d.ts",
+      "import": "./dist/progress.js"
     },
     "./radio": {
       "types": "./dist/radio.d.ts",
@@ -49,9 +93,21 @@
       "types": "./dist/radio-group.d.ts",
       "import": "./dist/radio-group.js"
     },
+    "./separator": {
+      "types": "./dist/separator.d.ts",
+      "import": "./dist/separator.js"
+    },
+    "./skeleton": {
+      "types": "./dist/skeleton.d.ts",
+      "import": "./dist/skeleton.js"
+    },
     "./slider": {
       "types": "./dist/slider.d.ts",
       "import": "./dist/slider.js"
+    },
+    "./spinner": {
+      "types": "./dist/spinner.d.ts",
+      "import": "./dist/spinner.js"
     },
     "./switch": {
       "types": "./dist/switch.d.ts",

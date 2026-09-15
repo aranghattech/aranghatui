@@ -1,0 +1,7 @@
+:host {
+  @apply inline-flex items-center gap-1 text-xs text-fg-muted;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}

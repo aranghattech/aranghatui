@@ -1,0 +1,23 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Same border box on every variant (only outline paints it) so badges line up. */
+[part='badge'] {
+  border: var(--art-border-width) solid transparent;
+}
+:host([variant='outline']) [part='badge'] {
+  border-color: var(--art-color-border-default);
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+}

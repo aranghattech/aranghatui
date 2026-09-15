@@ -1,0 +1,14 @@
+import { Component } from '@angular/core';
+import { ArtBadge, ArtIcon } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-badge-with-icon',
+  imports: [ArtBadge, ArtIcon],
+  template: `
+    <art-badge variant="secondary">
+      <art-icon size="sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></art-icon>
+      Verified
+    </art-badge>
+  `,
+})
+export class BadgeWithIcon {}

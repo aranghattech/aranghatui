@@ -188,6 +188,188 @@
     "gzip": true
   },
   {
+    "name": "base/art-button-group",
+    "path": "packages/base/dist/components/art-button-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-button-group-text",
+    "path": "packages/base/dist/components/art-button-group-text.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-input-group",
+    "path": "packages/base/dist/components/art-input-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-field",
+    "path": "packages/base/dist/components/art-field.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-field-group",
+    "path": "packages/base/dist/components/art-field-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-field-set",
+    "path": "packages/base/dist/components/art-field-set.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-input-otp",
+    "path": "packages/base/dist/components/art-input-otp.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-badge",
+    "path": "packages/base/dist/components/art-badge.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-kbd",
+    "path": "packages/base/dist/components/art-kbd.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-kbd-group",
+    "path": "packages/base/dist/components/art-kbd-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-separator",
+    "path": "packages/base/dist/components/art-separator.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-skeleton",
+    "path": "packages/base/dist/components/art-skeleton.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-spinner",
+    "path": "packages/base/dist/components/art-spinner.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-progress",
+    "path": "packages/base/dist/components/art-progress.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base: whole tier",
     "path": "packages/base/dist/components/index.js",
     "import": "*",

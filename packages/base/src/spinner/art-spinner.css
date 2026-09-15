@@ -1,0 +1,8 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+  line-height: 0;
+}
+:host([hidden]) {
+  display: none;
+}

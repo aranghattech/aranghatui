@@ -1,0 +1,53 @@
+:host {
+  display: inline-flex;
+  width: fit-content;
+  align-items: stretch;
+  vertical-align: middle;
+}
+:host([orientation='vertical']) {
+  flex-direction: column;
+}
+:host([hidden]) {
+  display: none;
+}
+/* A group of groups: spaced clusters, each keeping its own corners. */
+:host([data-nested]) {
+  gap: var(--art-space-2);
+}
+/* Joined edges: every item after the first overlaps its neighbour by the border width so two
+   borders read as one; inner corners are squared. A focused item lifts above its neighbours
+   so the ring is never clipped. Nested groups and separators keep their own geometry. */
+::slotted(:not(:first-child):not(art-button-group)) {
+  margin-inline-start: calc(-1 * var(--art-border-width));
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+::slotted(:not(:last-child):not(art-button-group)) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+:host([orientation='vertical']) ::slotted(:not(art-button-group)) {
+  border-radius: 0;
+}
+:host([orientation='vertical']) ::slotted(:not(:first-child):not(art-button-group)) {
+  margin-inline-start: 0;
+  margin-block-start: calc(-1 * var(--art-border-width));
+}
+:host([orientation='vertical']) ::slotted(:first-child) {
+  border-start-start-radius: var(--art-radius-md);
+  border-start-end-radius: var(--art-radius-md);
+}
+:host([orientation='vertical']) ::slotted(:last-child) {
+  border-end-start-radius: var(--art-radius-md);
+  border-end-end-radius: var(--art-radius-md);
+}
+::slotted(:focus-within) {
+  position: relative;
+  z-index: 1;
+}
+::slotted(art-input) {
+  flex: 1;
+}
+::slotted(art-separator) {
+  margin: 0;
+}

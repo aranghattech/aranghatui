@@ -42,7 +42,7 @@ export class ArtLabel {
 
   private onClick = (e: MouseEvent) => {
     const el = this.target();
-    if (!el || e.defaultPrevented) return;
+    if (!el || e.defaultPrevented || this.disabled) return;
     const toggles = el.matches('input[type="checkbox"],input[type="radio"],art-checkbox,art-radio,art-switch,art-toggle');
     if (toggles) el.click();
     el.focus();
@@ -50,8 +50,9 @@ export class ArtLabel {
 
   render() {
     return (
-      <Host>
-        <label part="label" class="inline-flex items-center gap-2 text-sm font-medium leading-none select-none" onClick={this.onClick}>
+      <Host onClick={this.onClick}>
+        {/* the handler sits on the host so the whole box activates, like a block-level native label */}
+        <label part="label" class="inline-flex items-center gap-2 text-sm font-medium leading-none select-none">
           <slot />
         </label>
       </Host>
