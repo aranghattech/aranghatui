@@ -327,6 +327,47 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
+     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
+     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
+     * for one thumb and a number[] for a range.
+     */
+    interface ArtSlider {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max": number;
+        /**
+          * @default 0
+         */
+        "min": number;
+        "name"?: string;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Track and thumb thickness.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default 1
+         */
+        "step": number;
+        /**
+          * Current value: a number, an array for a range, or the attribute form `"25,75"`.
+          * @default 0
+         */
+        "value": number | number[] | string;
+    }
+    /**
      * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
      * `change` is emitted from the host with `detail.checked`.
      */
@@ -494,6 +535,10 @@ export interface ArtNativeSelectCustomEvent<T> extends CustomEvent<T> {
 export interface ArtRadioGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtRadioGroupElement;
+}
+export interface ArtSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSliderElement;
 }
 export interface ArtSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -669,6 +714,30 @@ declare global {
         prototype: HTMLArtRadioGroupElement;
         new (): HTMLArtRadioGroupElement;
     };
+    interface HTMLArtSliderElementEventMap {
+        "input": { value: number | number[] };
+        "change": { value: number | number[] };
+    }
+    /**
+     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
+     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
+     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
+     * for one thumb and a number[] for a range.
+     */
+    interface HTMLArtSliderElement extends Components.ArtSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSliderElementEventMap>(type: K, listener: (this: HTMLArtSliderElement, ev: ArtSliderCustomEvent<HTMLArtSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSliderElementEventMap>(type: K, listener: (this: HTMLArtSliderElement, ev: ArtSliderCustomEvent<HTMLArtSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSliderElement: {
+        prototype: HTMLArtSliderElement;
+        new (): HTMLArtSliderElement;
+    };
     interface HTMLArtSwitchElementEventMap {
         "change": { checked: boolean };
     }
@@ -766,6 +835,7 @@ declare global {
         "art-native-select": HTMLArtNativeSelectElement;
         "art-radio": HTMLArtRadioElement;
         "art-radio-group": HTMLArtRadioGroupElement;
+        "art-slider": HTMLArtSliderElement;
         "art-switch": HTMLArtSwitchElement;
         "art-textarea": HTMLArtTextareaElement;
         "art-toggle": HTMLArtToggleElement;
@@ -1131,6 +1201,59 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
+     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
+     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
+     * for one thumb and a number[] for a range.
+     */
+    interface ArtSlider {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max"?: number;
+        /**
+          * @default 0
+         */
+        "min"?: number;
+        "name"?: string;
+        /**
+          * Emitted when a drag or key interaction ends.
+         */
+        "onChange"?: (event: ArtSliderCustomEvent<{ value: number | number[] }>) => void;
+        /**
+          * Emitted while the value changes (drag, keys); `detail.value` mirrors `target.value`.
+         */
+        "onInput"?: (event: ArtSliderCustomEvent<{ value: number | number[] }>) => void;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * Track and thumb thickness.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default 1
+         */
+        "step"?: number;
+        /**
+          * Current value: a number, an array for a range, or the attribute form `"25,75"`.
+          * @default 0
+         */
+        "value"?: number | number[] | string;
+    }
+    /**
      * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
      * `change` is emitted from the host with `detail.checked`.
      */
@@ -1395,6 +1518,18 @@ declare namespace LocalJSX {
         "orientation": 'vertical' | 'horizontal';
         "size": 'sm' | 'md' | 'lg';
     }
+    interface ArtSliderAttributes {
+        "value": string;
+        "min": number;
+        "max": number;
+        "step": number;
+        "orientation": 'horizontal' | 'vertical';
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+        "name": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+    }
     interface ArtSwitchAttributes {
         "checked": boolean;
         "size": 'sm' | 'md' | 'lg';
@@ -1455,6 +1590,7 @@ declare namespace LocalJSX {
         "art-native-select": Omit<ArtNativeSelect, keyof ArtNativeSelectAttributes> & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes]?: ArtNativeSelect[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `attr:${K}`]?: ArtNativeSelectAttributes[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `prop:${K}`]?: ArtNativeSelect[K] };
         "art-radio": Omit<ArtRadio, keyof ArtRadioAttributes> & { [K in keyof ArtRadio & keyof ArtRadioAttributes]?: ArtRadio[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `attr:${K}`]?: ArtRadioAttributes[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `prop:${K}`]?: ArtRadio[K] } & OneOf<"value", ArtRadio["value"], ArtRadioAttributes["value"]>;
         "art-radio-group": Omit<ArtRadioGroup, keyof ArtRadioGroupAttributes> & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes]?: ArtRadioGroup[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `attr:${K}`]?: ArtRadioGroupAttributes[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `prop:${K}`]?: ArtRadioGroup[K] };
+        "art-slider": Omit<ArtSlider, keyof ArtSliderAttributes> & { [K in keyof ArtSlider & keyof ArtSliderAttributes]?: ArtSlider[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `attr:${K}`]?: ArtSliderAttributes[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `prop:${K}`]?: ArtSlider[K] };
         "art-switch": Omit<ArtSwitch, keyof ArtSwitchAttributes> & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes]?: ArtSwitch[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `attr:${K}`]?: ArtSwitchAttributes[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `prop:${K}`]?: ArtSwitch[K] };
         "art-textarea": Omit<ArtTextarea, keyof ArtTextareaAttributes> & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes]?: ArtTextarea[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `attr:${K}`]?: ArtTextareaAttributes[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `prop:${K}`]?: ArtTextarea[K] };
         "art-toggle": Omit<ArtToggle, keyof ArtToggleAttributes> & { [K in keyof ArtToggle & keyof ArtToggleAttributes]?: ArtToggle[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `attr:${K}`]?: ArtToggleAttributes[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `prop:${K}`]?: ArtToggle[K] };
@@ -1520,6 +1656,13 @@ declare module "@stencil/core" {
              * The host carries `role="radiogroup"`, so `aria-label` / `aria-labelledby` go straight on it.
              */
             "art-radio-group": LocalJSX.IntrinsicElements["art-radio-group"] & JSXBase.HTMLAttributes<HTMLArtRadioGroupElement>;
+            /**
+             * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
+             * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
+             * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
+             * for one thumb and a number[] for a range.
+             */
+            "art-slider": LocalJSX.IntrinsicElements["art-slider"] & JSXBase.HTMLAttributes<HTMLArtSliderElement>;
             /**
              * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
              * `change` is emitted from the host with `detail.checked`.

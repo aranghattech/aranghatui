@@ -149,6 +149,19 @@
     "gzip": true
   },
   {
+    "name": "base/art-slider",
+    "path": "packages/base/dist/components/art-slider.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "4 kB",
+    "gzip": true
+  },
+  {
     "name": "base/art-toggle",
     "path": "packages/base/dist/components/art-toggle.js",
     "import": "{ defineCustomElement }",

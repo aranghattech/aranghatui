@@ -59,6 +59,10 @@
       "types": "./dist/components/art-radio-group.d.ts",
       "import": "./dist/components/art-radio-group.js"
     },
+    "./slider": {
+      "types": "./dist/components/art-slider.d.ts",
+      "import": "./dist/components/art-slider.js"
+    },
     "./switch": {
       "types": "./dist/components/art-switch.d.ts",
       "import": "./dist/components/art-switch.js"

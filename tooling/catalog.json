@@ -67,7 +67,8 @@
         {
           "tag": "art-slider",
           "name": "Slider",
-          "status": "planned"
+          "status": "done",
+          "budgetKb": 4
         },
         {
           "tag": "art-toggle",

@@ -400,5 +400,6 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Tier 3 dependency on `base` | Allowed (peer + dev), matching §5 | 0017 |
 | Screenshot determinism | VRT and a11y run in the official Playwright Docker image locally and in CI; Linux-only baselines | 0018 |
 | Cross-tier composition | No downward deps: Command has no built-in dialog mode; Sidebar mobile mode is built on primitives, not Sheet | 0019 |
+| Slider budget | 4 kB (range + vertical + full keyboard map); Tier 2 default stays 3 kB | 0020 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

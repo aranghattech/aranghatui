@@ -14,6 +14,7 @@ import { defineCustomElement as defineRadioGroup } from '@aranghat/base/radio-gr
 import { defineCustomElement as defineNativeSelect } from '@aranghat/base/native-select';
 import { defineCustomElement as defineToggle } from '@aranghat/base/toggle';
 import { defineCustomElement as defineToggleGroup } from '@aranghat/base/toggle-group';
+import { defineCustomElement as defineSlider } from '@aranghat/base/slider';
 import './sandbox.css';
 
 defineButton();
@@ -29,6 +30,7 @@ defineRadioGroup();
 defineNativeSelect();
 defineToggle();
 defineToggleGroup();
+defineSlider();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

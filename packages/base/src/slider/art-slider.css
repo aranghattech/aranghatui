@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  width: 100%;
+}
+:host([orientation='vertical']) {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}

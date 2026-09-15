@@ -8,6 +8,7 @@ export { ArtLabel as Label } from './components/index.js';
 export { ArtNativeSelect as NativeSelect } from './components/index.js';
 export { ArtRadio as Radio } from './components/index.js';
 export { ArtRadioGroup as RadioGroup } from './components/index.js';
+export { ArtSlider as Slider } from './components/index.js';
 export { ArtSwitch as Switch } from './components/index.js';
 export { ArtTextarea as Textarea } from './components/index.js';
 export { ArtToggle as Toggle } from './components/index.js';
