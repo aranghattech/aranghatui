@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { ArtAvatar, ArtBubble, ArtMessage } from '@aranghat/components-angular';
+import { ArtButton, ArtIcon } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-message-actions',
+  imports: [ArtAvatar, ArtBubble, ArtButton, ArtIcon, ArtMessage],
+  template: `
+    <art-message>
+      <art-avatar slot="avatar" size="sm" alt="">AI</art-avatar>
+      <art-bubble variant="ghost">Here is a summary of the document you shared: it covers three quarters of results and ends with next year's targets.</art-bubble>
+      <art-button slot="footer" variant="ghost" size="sm" icon aria-label="Copy"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></art-icon></art-button>
+      <art-button slot="footer" variant="ghost" size="sm" icon aria-label="Retry"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></art-icon></art-button>
+    </art-message>
+  `,
+})
+export class MessageActions {}

@@ -1,0 +1,109 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--art-space-1);
+  width: fit-content;
+  min-width: 0;
+  max-width: 80%;
+  color: var(--art-color-fg-default);
+}
+:host([hidden]) {
+  display: none;
+}
+/* End alignment in a flex column, a grid cell or plain flow (the auto margin covers all three). */
+:host([align='end']) {
+  align-self: flex-end;
+  justify-self: end;
+  margin-inline-start: auto;
+}
+:host([variant='ghost']) {
+  max-width: 100%;
+}
+.content {
+  border: var(--art-border-width) solid transparent;
+  overflow-wrap: anywhere;
+}
+/* Variants (shadcn: primary, secondary, muted, tinted, outline, ghost, destructive). */
+:host([variant='default']) .content {
+  background: var(--art-color-primary-solid);
+  color: var(--art-color-fg-on-primary);
+}
+:host([variant='default']) a.content:hover {
+  background: var(--art-color-primary-hover);
+}
+:host([variant='secondary']) .content {
+  background: var(--art-color-secondary-solid);
+  color: var(--art-color-secondary-fg);
+}
+:host([variant='secondary']) a.content:hover {
+  background: var(--art-color-secondary-hover);
+}
+:host([variant='muted']) .content {
+  background: var(--art-color-bg-muted);
+}
+:host([variant='muted']) a.content:hover {
+  background: color-mix(in oklab, var(--art-color-bg-muted), var(--art-color-fg-default) 5%);
+}
+:host([variant='tinted']) .content {
+  background: color-mix(in oklab, var(--art-color-primary-solid) 10%, var(--art-color-bg-canvas));
+  color: var(--art-color-fg-default);
+}
+:host([variant='tinted']) a.content:hover {
+  background: color-mix(in oklab, var(--art-color-primary-solid) 16%, var(--art-color-bg-canvas));
+}
+:host([variant='outline']) .content {
+  border-color: var(--art-color-border-default);
+  background: var(--art-color-bg-canvas);
+}
+:host([variant='outline']) a.content:hover {
+  background: var(--art-color-bg-muted);
+}
+:host([variant='ghost']) .content {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+:host([variant='destructive']) .content {
+  background: var(--art-color-destructive-muted);
+  color: var(--art-color-destructive-fg);
+}
+/* Reactions pill: hangs off an edge, ringed by the page colour so it reads as floating. */
+.reactions {
+  box-shadow: 0 0 0 var(--art-ring-width) var(--art-color-bg-canvas);
+  z-index: 1;
+}
+:host(:not([data-has-reactions])) .reactions {
+  display: none;
+}
+:host([reactions-side='bottom']) .reactions {
+  bottom: 0;
+  translate: 0 75%;
+}
+:host([reactions-side='top']) .reactions {
+  top: 0;
+  translate: 0 -75%;
+}
+:host([reactions-align='end']) .reactions {
+  inset-inline-end: var(--art-space-3);
+}
+:host([reactions-align='start']) .reactions {
+  inset-inline-start: var(--art-space-3);
+}
+/* Slotted rhythm: paragraphs and lists inside a bubble keep the small scale. */
+::slotted(p) {
+  margin: 0;
+}
+::slotted(p + p) {
+  margin-top: var(--art-space-2);
+}
+::slotted(a) {
+  text-decoration: underline;
+  text-underline-offset: var(--art-space-1);
+}
+::slotted(img) {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--art-radius-md);
+}

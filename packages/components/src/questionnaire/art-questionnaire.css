@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  color: var(--art-color-fg-default);
+}
+:host([hidden]) {
+  display: none;
+}
+/* Disabled = muted text and dimmed chrome, not opacity on text (axe reads dimmed text as a contrast failure). */
+:host([disabled]) {
+  pointer-events: none;
+}
+:host([disabled]) legend,
+:host([disabled]) .choice,
+:host([disabled]) .choice span,
+:host([disabled]) .progress {
+  color: var(--art-color-fg-muted);
+}
+:host([disabled]) .choice,
+:host([disabled]) .field,
+:host([disabled]) .track {
+  background: var(--art-color-bg-muted);
+}
+/* The native radio / checkbox covers its card invisibly: clicks, hover, focus and the arrow keys all stay native. */
+.choice .pick {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Choice cards: the border strengthens and the card tints when chosen; the ring follows the input's focus. */
+.choice[data-checked] {
+  border-color: var(--art-color-border-strong);
+  background: var(--art-color-bg-accent);
+}
+.choice:has(input:focus-visible) {
+  box-shadow: 0 0 0 var(--art-ring-offset) var(--art-color-bg-canvas), 0 0 0 calc(var(--art-ring-width) + var(--art-ring-offset)) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+}
+.shortcut {
+  min-width: var(--art-space-5);
+  height: var(--art-space-5);
+  padding-inline: var(--art-space-1);
+}
+.field {
+  border-width: var(--art-border-width);
+}
+textarea.field {
+  min-height: calc(var(--art-space-20) * 0.8);
+  resize: vertical;
+}
+.progress .track {
+  height: var(--art-space-1);
+}

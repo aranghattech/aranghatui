@@ -1,0 +1,18 @@
+<art-button variant="outline" id="earlier">Load earlier messages</art-button>
+<art-message-scroller id="history" default-scroll-position="start" style="height: calc(var(--art-space-20) * 4)">
+  <art-message-scroller-item message-id="m21"><art-message><art-bubble variant="muted">Message 21</art-bubble></art-message></art-message-scroller-item>
+  <art-message-scroller-item message-id="m22"><art-message align="end"><art-bubble>Message 22</art-bubble></art-message></art-message-scroller-item>
+  <art-message-scroller-item message-id="m23"><art-message><art-bubble variant="muted">Message 23</art-bubble></art-message></art-message-scroller-item>
+  <art-message-scroller-item message-id="m24"><art-message align="end"><art-bubble>Message 24</art-bubble></art-message></art-message-scroller-item>
+</art-message-scroller>
+<script type="module">
+  const scroller = document.getElementById('history');
+  let oldest = 21;
+  document.getElementById('earlier').addEventListener('click', () => {
+    // rows inserted before the first one keep the visible row exactly where it is
+    for (let i = 0; i < 5; i++) {
+      oldest--;
+      scroller.insertAdjacentHTML('afterbegin', `<art-message-scroller-item message-id="m${oldest}"><art-message${oldest % 2 ? '' : ' align="end"'}><art-bubble${oldest % 2 ? ' variant="muted"' : ''}>Message ${oldest}</art-bubble></art-message></art-message-scroller-item>`);
+    }
+  });
+</script>

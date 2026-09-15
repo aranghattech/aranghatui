@@ -66,6 +66,15 @@ import { defineCustomElement as defineToaster } from '@aranghat/components/toast
 import { defineCustomElement as defineToast } from '@aranghat/components/toast';
 import { defineCustomElement as defineCarousel } from '@aranghat/components/carousel';
 import { defineCustomElement as defineCarouselItem } from '@aranghat/components/carousel-item';
+import { defineCustomElement as defineBubble } from '@aranghat/components/bubble';
+import { defineCustomElement as defineBubbleGroup } from '@aranghat/components/bubble-group';
+import { defineCustomElement as defineMessage } from '@aranghat/components/message';
+import { defineCustomElement as defineMessageGroup } from '@aranghat/components/message-group';
+import { defineCustomElement as defineMessageScroller } from '@aranghat/components/message-scroller';
+import { defineCustomElement as defineMessageScrollerItem } from '@aranghat/components/message-scroller-item';
+import { defineCustomElement as defineAttachment } from '@aranghat/components/attachment';
+import { defineCustomElement as defineAttachmentGroup } from '@aranghat/components/attachment-group';
+import { defineCustomElement as defineQuestionnaire } from '@aranghat/components/questionnaire';
 import './sandbox.css';
 
 defineButton();
@@ -133,6 +142,15 @@ defineToaster();
 defineToast();
 defineCarousel();
 defineCarouselItem();
+defineBubble();
+defineBubbleGroup();
+defineMessage();
+defineMessageGroup();
+defineMessageScroller();
+defineMessageScrollerItem();
+defineAttachment();
+defineAttachmentGroup();
+defineQuestionnaire();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

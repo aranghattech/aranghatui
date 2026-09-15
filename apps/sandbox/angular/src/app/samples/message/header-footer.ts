@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { ArtAvatar, ArtBubble, ArtMessage } from '@aranghat/components-angular';
+import { ArtMarker } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-message-header-footer',
+  imports: [ArtAvatar, ArtBubble, ArtMarker, ArtMessage],
+  template: `
+    <art-message>
+      <art-avatar slot="avatar" size="sm" alt="">AL</art-avatar>
+      <span slot="header">Ada Lovelace · 09:41</span>
+      <art-bubble variant="muted">The analytical engine has no pretensions to originate anything.</art-bubble>
+      <span slot="footer">Delivered</span>
+    </art-message>
+    <art-message align="end">
+      <art-avatar slot="avatar" size="sm" alt="">ME</art-avatar>
+      <span slot="header">You · 09:42</span>
+      <art-bubble>It can do whatever we know how to order it to perform.</art-bubble>
+      <art-marker slot="footer" role="status">Sending…</art-marker>
+    </art-message>
+  `,
+})
+export class MessageHeaderFooter {}

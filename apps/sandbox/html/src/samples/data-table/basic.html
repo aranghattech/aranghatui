@@ -1,0 +1,51 @@
+<art-input id="filter" placeholder="Filter emails…" aria-label="Filter emails"></art-input>
+<art-native-select id="columns" aria-label="Toggle a column">
+  <option value="">Columns</option>
+  <option value="status">Status</option>
+  <option value="email">Email</option>
+  <option value="amount">Amount</option>
+</art-native-select>
+<art-table>
+  <table id="table">
+    <thead><tr id="head"></tr></thead>
+    <tbody id="body"></tbody>
+  </table>
+</art-table>
+<span class="muted" id="summary"></span>
+<art-button variant="outline" size="sm" id="prev">Previous</art-button>
+<art-button variant="outline" size="sm" id="next">Next</art-button>
+<script type="module">
+  import { createTableState } from '@aranghat/components';
+  const payments = [
+    { id: 'm5gr84i9', amount: 316, status: 'success', email: 'ken99@example.com' },
+    { id: '3u1reuv4', amount: 242, status: 'success', email: 'abe45@example.com' },
+    { id: 'derv1ws0', amount: 837, status: 'processing', email: 'monserrat44@example.com' },
+    { id: '5kma53ae', amount: 874, status: 'success', email: 'silas22@example.com' },
+    { id: 'bhqecj4p', amount: 721, status: 'failed', email: 'carmella@example.com' },
+  ];
+  const columns = [{ id: 'status', header: 'Status' }, { id: 'email', header: 'Email' }, { id: 'amount', header: 'Amount', filterable: false }];
+  const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const table = createTableState({ data: payments, columns, pageSize: 3, filterColumn: 'email' });
+  const $ = (id) => document.getElementById(id);
+  $('filter').addEventListener('input', (e) => table.setFilter(e.detail.value));
+  $('columns').addEventListener('change', (e) => { if (e.detail.value) table.setColumnVisible(e.detail.value, !table.isColumnVisible(e.detail.value)); e.target.value = ''; });
+  $('prev').addEventListener('click', () => table.previousPage());
+  $('next').addEventListener('click', () => table.nextPage());
+  table.subscribe((s) => {
+    // header: a select-all checkbox, then a sort button per visible column (aria-sort on the th)
+    const arrow = (c) => (s.sort?.id === c.id ? (s.sort.desc ? '↓' : '↑') : '↕');
+    $('head').innerHTML = `<th><art-checkbox aria-label="Select all"${s.pageSelection === 'all' ? ' checked' : ''}${s.pageSelection === 'some' ? ' indeterminate' : ''}></art-checkbox></th>` +
+      s.visibleColumns.map((c) => `<th${s.sort?.id === c.id ? ` aria-sort="${s.sort.desc ? 'descending' : 'ascending'}"` : ''}${c.id === 'amount' ? ' data-align="end"' : ''}>${c.header} <art-button variant="ghost" size="sm" icon aria-label="Sort by ${c.header.toLowerCase()}" data-sort="${c.id}">${arrow(c)}</art-button></th>`).join('');
+    $('body').innerHTML = s.rows.length
+      ? s.rows.map((row) => `<tr${table.isSelected(row) ? ' aria-selected="true"' : ''}><td><art-checkbox aria-label="Select row" data-row="${row.id}"${table.isSelected(row) ? ' checked' : ''}></art-checkbox></td>` + s.visibleColumns.map((c) => `<td${c.id === 'amount' ? ' data-align="end"' : ''}>${c.id === 'amount' ? money.format(row.amount) : row[c.id]}</td>`).join('') + '</tr>').join('')
+      : `<tr><td colspan="${s.visibleColumns.length + 1}">No results.</td></tr>`;
+    $('summary').textContent = `${s.selected.size} of ${s.total} row(s) selected.`;
+    $('prev').disabled = s.page === 0;
+    $('next').disabled = s.page >= s.pageCount - 1;
+  });
+  $('table').addEventListener('click', (e) => { const b = e.target.closest('[data-sort]'); if (b) table.sortBy(b.dataset.sort); });
+  $('table').addEventListener('change', (e) => {
+    const cb = e.target.closest('art-checkbox'); if (!cb) return;
+    if (cb.dataset.row) table.setSelected(payments.find((p) => p.id === cb.dataset.row), e.detail.checked); else table.setPageSelected(e.detail.checked);
+  });
+</script>

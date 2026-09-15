@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  gap: var(--art-space-2);
+  overflow-x: auto;
+  padding-block: var(--art-space-1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--art-color-border-default) transparent;
+  outline: none;
+}
+:host(:focus-visible) {
+  box-shadow: 0 0 0 var(--art-ring-offset) var(--art-color-bg-canvas), 0 0 0 calc(var(--art-ring-width) + var(--art-ring-offset)) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+  border-radius: var(--art-radius-md);
+}
+:host([hidden]) {
+  display: none;
+}

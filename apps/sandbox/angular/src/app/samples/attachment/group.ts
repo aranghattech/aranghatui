@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { ArtAttachment, ArtAttachmentGroup } from '@aranghat/components-angular';
+import { ArtButton, ArtIcon } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-attachment-group',
+  imports: [ArtAttachment, ArtAttachmentGroup, ArtButton, ArtIcon],
+  template: `
+    <art-attachment-group label="Files to send">
+      <art-attachment size="sm" name="a.pdf" description="12 KB"><art-button slot="actions" variant="ghost" size="sm" icon aria-label="Remove"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></art-icon></art-button></art-attachment>
+      <art-attachment size="sm" name="b.pdf" description="80 KB"><art-button slot="actions" variant="ghost" size="sm" icon aria-label="Remove"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></art-icon></art-button></art-attachment>
+      <art-attachment size="sm" name="c.pdf" description="1.4 MB"><art-button slot="actions" variant="ghost" size="sm" icon aria-label="Remove"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></art-icon></art-button></art-attachment>
+      <art-attachment size="sm" name="d.pdf" description="220 KB"><art-button slot="actions" variant="ghost" size="sm" icon aria-label="Remove"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></art-icon></art-button></art-attachment>
+    </art-attachment-group>
+  `,
+})
+export class AttachmentGroup {}

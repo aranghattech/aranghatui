@@ -45,7 +45,7 @@ Close now: plays the exit motion, then emits `dismiss`. (`dismiss` is the event'
 
 | Name     | Type                                                             | Description |
 | -------- | ---------------------------------------------------------------- | ----------- |
-| `reason` | `"timeout" \| "close" \| "action" \| "cancel" \| "programmatic"` |             |
+| `reason` | `"cancel" \| "close" \| "timeout" \| "action" \| "programmatic"` |             |
 
 #### Returns
 
