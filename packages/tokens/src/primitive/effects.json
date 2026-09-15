@@ -31,6 +31,14 @@
     "spin": {
       "$value": "1000ms",
       "$description": "Loading spinner revolution."
+    },
+    "pulse": {
+      "$value": "2000ms",
+      "$description": "Skeleton shimmer cycle."
+    },
+    "caret-blink": {
+      "$value": "1200ms",
+      "$description": "Fake caret blink in segmented inputs (Input OTP)."
     }
   },
   "ease": {
