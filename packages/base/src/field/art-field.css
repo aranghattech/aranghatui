@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted([slot='description']),
+::slotted([slot='error']) {
+  margin: 0;
+  font-size: var(--art-font-size-sm);
+  line-height: var(--art-font-line-height-sm);
+}
+::slotted([slot='description']) {
+  color: var(--art-color-fg-muted);
+}
+::slotted([slot='error']) {
+  color: var(--art-color-destructive-fg);
+}
+/* A checkbox / switch row: the control aligns with the first line of the label. */
+:host([orientation='horizontal']) ::slotted(art-label) {
+  line-height: var(--art-font-line-height-sm);
+}

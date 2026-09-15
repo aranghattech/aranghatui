@@ -25,7 +25,9 @@ for (const [framework, port] of Object.entries(apps)) {
         const tag = `art-${id.split('/')[0]}`;
         const el = section.locator(tag).first();
         await expect(el).toBeAttached();
-        await expect.poll(() => el.evaluate((n) => !!n.shadowRoot && n.shadowRoot.childElementCount >= 0)).toBe(true);
+        // upgraded and rendered: a shadow root for shadow components, light-DOM children for the
+        // light-DOM ones (art-table, art-typography; ADR-0021)
+        await expect.poll(() => el.evaluate((n) => n.matches(':defined') && (!!n.shadowRoot || n.childElementCount > 0))).toBe(true);
         expect(errors).toEqual([]);
       });
     }

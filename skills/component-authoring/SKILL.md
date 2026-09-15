@@ -26,6 +26,7 @@ Add the catalogue entry status `in-progress` in `tooling/catalog.json`. Angular 
 - **Interpolated class names are invisible to the Tailwind scanner.** Any `` `x-${size}` `` must be accompanied by a comment listing every literal (`// safelist: field-sm field-md field-lg`), or the utility is silently missing (Input's sizes shipped without heights once).
 
 ## 3. Implement (Stencil)
+- **Light DOM only for nested native content (ADR-0021).** `::slotted()` reaches direct children only; a table's rows or a list's items cannot be styled from a shadow root. Such a component is `shadow: false`, its CSS starts with `/* light-dom */` (the Tailwind plugin then skips @theme, recipes and the shadow reset) and every selector is scoped under the tag. No Tailwind classes, no `@apply` there.
 - **Native first (ADR-0020).** If HTML has the element, wrap it and style it (`appearance: none` + pseudo-elements on tokens); do not rebuild its behaviour. Custom logic only where no native element exists or to orchestrate natives across shadow roots.
 - `shadow: true`; document `::part()` and CSS custom property hooks in JSDoc (`@part`, `@slot`).
 - Props camelCase + reflect where styling depends on them; booleans default `false`.

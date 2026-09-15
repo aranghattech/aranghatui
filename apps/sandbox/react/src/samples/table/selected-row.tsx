@@ -1,0 +1,34 @@
+import { Table } from '@aranghat/base-react';
+
+export default function SelectedRow() {
+  return (
+    <>
+      <Table>
+      <table>
+        <thead>
+          <tr>
+            <th>Invoice</th>
+            <th>Status</th>
+            <th>Method</th>
+            <th data-align="end">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr aria-selected="true">
+            <td>INV001</td>
+            <td>Paid</td>
+            <td>Credit card</td>
+            <td data-align="end">$250.00</td>
+          </tr>
+          <tr>
+            <td>INV002</td>
+            <td>Pending</td>
+            <td>PayPal</td>
+            <td data-align="end">$150.00</td>
+          </tr>
+        </tbody>
+      </table>
+      </Table>
+    </>
+  );
+}

@@ -96,7 +96,7 @@ export class ArtNativeSelect {
             part="select"
             ref={(el) => (this.select = el)}
             class={{
-              'w-full min-w-0 appearance-none rounded-md border-default bg-transparent pe-9 text-md md:text-sm text-fg shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
+              'w-full min-w-0 appearance-none border-default bg-transparent pe-9 text-md md:text-sm text-fg shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
               // safelist: field-sm field-md field-lg
               [`field-${this.size}`]: true,
             }}

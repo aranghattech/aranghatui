@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  width: 100%;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted([slot='media']) {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--art-space-2);
+}
+::slotted(art-icon[slot='media']),
+::slotted(svg[slot='media']) {
+  box-sizing: border-box;
+  width: var(--art-space-10);
+  height: var(--art-space-10);
+  border-radius: var(--art-radius-lg);
+  background: var(--art-color-bg-muted);
+  color: var(--art-color-fg-default);
+}
+::slotted([slot='title']) {
+  margin: 0;
+  font-size: var(--art-font-size-lg);
+  font-weight: var(--art-font-weight-medium);
+  letter-spacing: var(--art-font-tracking-tight);
+}
+::slotted([slot='description']) {
+  margin: 0;
+  font-size: var(--art-font-size-sm);
+  line-height: var(--art-font-line-height-md);
+  color: var(--art-color-fg-muted);
+  text-wrap: balance;
+}

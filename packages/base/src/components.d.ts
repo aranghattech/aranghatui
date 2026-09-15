@@ -9,6 +9,33 @@ import { IconData } from "@aranghat/icons";
 export { IconData } from "@aranghat/icons";
 export namespace Components {
     /**
+     * Aspect Ratio — shadcn/ui parity. Constrains its content to a ratio (`16/9`, `1`, `4/3`)
+     * with the native `aspect-ratio` property; the slotted element fills the box.
+     */
+    interface ArtAspectRatio {
+        /**
+          * Width / height: `"16/9"`, `"1"`, `"4/3"` or a number.
+          * @default '1'
+         */
+        "ratio": string | number;
+    }
+    /**
+     * Badge — shadcn/ui parity. A small status label; renders as a link when `href` is set.
+     * Every variant keeps the same border box so filled and outline badges align.
+     */
+    interface ArtBadge {
+        /**
+          * Renders an `<a>` instead of a `<span>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'secondary' | 'outline' | 'destructive';
+    }
+    /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
      * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
      * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
@@ -63,6 +90,30 @@ export namespace Components {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
+     * Button Group — shadcn/ui parity. Joins adjacent buttons (and inputs, selects, text
+     * addons, separators) into one control: only the outer corners stay rounded and neighbours
+     * share a single border. Nest groups to get spaced clusters of joined groups.
+     */
+    interface ArtButtonGroup {
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+    }
+    /**
+     * Button Group Text — a muted, bordered label that joins a Button Group like a button
+     * (a unit, a prefix, an icon + word). Stretches to the height of its neighbours.
+     */
+    interface ArtButtonGroupText {
+    }
+    /**
+     * Card — shadcn/ui parity. A bordered surface with an optional header (title, description,
+     * action), content and footer. Regions render only when their slot is filled, so a card with
+     * just content has no empty header or footer space.
+     */
+    interface ArtCard {
+    }
+    /**
      * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
      * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
      * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
@@ -103,6 +154,47 @@ export namespace Components {
           * @default 'on'
          */
         "value": string;
+    }
+    /**
+     * Empty — shadcn/ui parity. A centred empty state: media (an icon in a muted box, an image),
+     * title, description and content (actions, a search field).
+     */
+    interface ArtEmpty {
+    }
+    /**
+     * Field — shadcn/ui parity. Wires a label, a control, a description and an error message
+     * together: the label names the control, description and error become its accessible
+     * description, an error (or `invalid`) marks the control invalid, and a disabled control dims
+     * the label. Stack fields with `<art-field-group>`; group related fields with `<art-field-set>`.
+     */
+    interface ArtField {
+        /**
+          * Marks the control invalid; set automatically while the `error` slot has content.
+          * @default false
+         */
+        "invalid": boolean;
+        /**
+          * `vertical`: label above the control. `horizontal`: control first, label and description beside it (checkbox, switch).
+          * @default 'vertical'
+         */
+        "orientation": 'vertical' | 'horizontal';
+    }
+    /**
+     * Field Group — a vertical stack of `<art-field>`s (and `<art-field-set>`s) with form spacing.
+     */
+    interface ArtFieldGroup {
+    }
+    /**
+     * Field Set — a native `<fieldset>` with a legend, grouping related fields (a radio group with
+     * its question, an address block). `disabled` disables every control inside — the slotted
+     * controls are not DOM descendants of the shadow `<fieldset>`, so the component applies it
+     * (and restores only what it disabled).
+     */
+    interface ArtFieldSet {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
     }
     /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
@@ -212,6 +304,96 @@ export namespace Components {
         "value": string;
     }
     /**
+     * Input Group — shadcn/ui parity. One field frame around an `<art-input>` or `<art-textarea>`
+     * and its addons: icons, text, kbd hints, buttons, or whole rows above / below the control.
+     * The group draws the border, focus ring, invalid ring and disabled state for everything inside.
+     */
+    interface ArtInputGroup {
+    }
+    /**
+     * Input OTP — shadcn/ui parity. A one-time-code field: one native `<input>` (so typing, paste,
+     * autofill, Backspace and arrows are all platform behaviour) laid invisibly over a row of
+     * character slots that render its value, with a caret in the active slot. Form-associated.
+     */
+    interface ArtInputOtp {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Characters per group; `0` renders one group. A separator is drawn between groups.
+          * @default 0
+         */
+        "groupSize": number;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        /**
+          * Number of characters.
+          * @default 6
+         */
+        "length": number;
+        "name"?: string;
+        /**
+          * `numeric` (digits, numeric keyboard) or `alphanumeric`.
+          * @default 'numeric'
+         */
+        "pattern": 'numeric' | 'alphanumeric';
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Focus the field.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Item — shadcn/ui parity. A flexible row: media (icon or image), title, description and
+     * actions, with optional header and footer rows. Renders as a link when `href` is set. Stack
+     * items in `<art-item-group>` (a list) with `<art-separator>`s between them.
+     */
+    interface ArtItem {
+        /**
+          * Renders the row as an `<a>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md';
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'outline' | 'muted';
+    }
+    /**
+     * Item Group — a list of `<art-item>`s, optionally divided by `<art-separator>`s.
+     */
+    interface ArtItemGroup {
+    }
+    /**
+     * Kbd — shadcn/ui parity. A keyboard key, on the native `<kbd>` element. Group several with
+     * `<art-kbd-group>` (⌘ + K).
+     */
+    interface ArtKbd {
+    }
+    /**
+     * Kbd Group — a row of `<art-kbd>` keys and separators (`⌘` `K`, `Ctrl` + `B`).
+     */
+    interface ArtKbdGroup {
+    }
+    /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
      * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
@@ -226,6 +408,24 @@ export namespace Components {
           * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
          */
         "htmlFor"?: string;
+    }
+    /**
+     * Marker — shadcn/ui parity. An inline conversation marker: a status line, a system note, a
+     * bordered row or a labelled separator between messages. Renders as a link when `href` is set.
+     * For streaming updates set `role="status"` on the host.
+     */
+    interface ArtMarker {
+        /**
+          * Renders the marker as an `<a>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * `default`: inline line. `border`: with a bottom rule. `separator`: centred label between two rules.
+          * @default 'default'
+         */
+        "variant": 'default' | 'border' | 'separator';
     }
     /**
      * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
@@ -258,6 +458,22 @@ export namespace Components {
           * @default ''
          */
         "value": string;
+    }
+    /**
+     * Progress — shadcn/ui parity. A native `<progress>` styled on tokens: a muted track with a
+     * primary fill that animates between values. Omit `value` for the platform's indeterminate bar.
+     */
+    interface ArtProgress {
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max": number;
+        /**
+          * Completed amount, 0–`max`. Omit for indeterminate.
+         */
+        "value"?: number;
     }
     /**
      * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
@@ -330,6 +546,29 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * Separator — shadcn/ui parity. A native `<hr>` drawn with the one border colour and width,
+     * horizontal or vertical. Decorative by default (`role="none"`); `semantic` exposes the
+     * `separator` role for rules that structure content.
+     */
+    interface ArtSeparator {
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Announce the rule as a separator instead of hiding it from assistive tech.
+          * @default false
+         */
+        "semantic": boolean;
+    }
+    /**
+     * Skeleton — shadcn/ui parity. A pulsing placeholder that takes the size you give the host
+     * (`style="width: …; height: …"` or a class). Hidden from assistive tech: announce loading
+     * once with `aria-busy` on the region instead.
+     */
+    interface ArtSkeleton {
+    }
+    /**
      * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
      * provides drag, keyboard, screen-reader value announcements and form participation; artui
      * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
@@ -371,6 +610,22 @@ export namespace Components {
         "value": number | string;
     }
     /**
+     * Spinner — shadcn/ui parity. An indeterminate loading indicator on the icon size scale.
+     * Announced as a `status` region named `label` (default "Loading").
+     */
+    interface ArtSpinner {
+        /**
+          * Accessible name.
+          * @default 'Loading'
+         */
+        "label": string;
+        /**
+          * Icon size scale.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+    }
+    /**
      * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
      * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
      */
@@ -403,6 +658,14 @@ export namespace Components {
           * @default 'on'
          */
         "value": string;
+    }
+    /**
+     * Table — shadcn/ui parity. A scroll container that styles the native `<table>` inside it:
+     * header, body, footer, rows, cells and caption. Light DOM on purpose (ADR-0021): a table is
+     * deeply nested native markup that a shadow stylesheet could never reach, so the rules are
+     * scoped to `art-table` and the markup stays a real, accessible table.
+     */
+    interface ArtTable {
     }
     /**
      * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
@@ -518,6 +781,14 @@ export namespace Components {
          */
         "variant": 'default' | 'outline';
     }
+    /**
+     * Typography — shadcn/ui parity. A prose container that styles the native elements inside it:
+     * headings, paragraphs, lists, blockquotes, inline code, links, rules and images, plus the
+     * `lead`, `large`, `small` and `muted` text classes. Light DOM on purpose (ADR-0021): prose is
+     * nested native markup a shadow stylesheet could never reach.
+     */
+    interface ArtTypography {
+    }
 }
 export interface ArtCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -530,6 +801,10 @@ export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
 export interface ArtInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtInputElement;
+}
+export interface ArtInputOtpCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtInputOtpElement;
 }
 export interface ArtNativeSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -561,6 +836,26 @@ export interface ArtToggleGroupCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     /**
+     * Aspect Ratio — shadcn/ui parity. Constrains its content to a ratio (`16/9`, `1`, `4/3`)
+     * with the native `aspect-ratio` property; the slotted element fills the box.
+     */
+    interface HTMLArtAspectRatioElement extends Components.ArtAspectRatio, HTMLStencilElement {
+    }
+    var HTMLArtAspectRatioElement: {
+        prototype: HTMLArtAspectRatioElement;
+        new (): HTMLArtAspectRatioElement;
+    };
+    /**
+     * Badge — shadcn/ui parity. A small status label; renders as a link when `href` is set.
+     * Every variant keeps the same border box so filled and outline badges align.
+     */
+    interface HTMLArtBadgeElement extends Components.ArtBadge, HTMLStencilElement {
+    }
+    var HTMLArtBadgeElement: {
+        prototype: HTMLArtBadgeElement;
+        new (): HTMLArtBadgeElement;
+    };
+    /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
      * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
      * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
@@ -571,6 +866,38 @@ declare global {
     var HTMLArtButtonElement: {
         prototype: HTMLArtButtonElement;
         new (): HTMLArtButtonElement;
+    };
+    /**
+     * Button Group — shadcn/ui parity. Joins adjacent buttons (and inputs, selects, text
+     * addons, separators) into one control: only the outer corners stay rounded and neighbours
+     * share a single border. Nest groups to get spaced clusters of joined groups.
+     */
+    interface HTMLArtButtonGroupElement extends Components.ArtButtonGroup, HTMLStencilElement {
+    }
+    var HTMLArtButtonGroupElement: {
+        prototype: HTMLArtButtonGroupElement;
+        new (): HTMLArtButtonGroupElement;
+    };
+    /**
+     * Button Group Text — a muted, bordered label that joins a Button Group like a button
+     * (a unit, a prefix, an icon + word). Stretches to the height of its neighbours.
+     */
+    interface HTMLArtButtonGroupTextElement extends Components.ArtButtonGroupText, HTMLStencilElement {
+    }
+    var HTMLArtButtonGroupTextElement: {
+        prototype: HTMLArtButtonGroupTextElement;
+        new (): HTMLArtButtonGroupTextElement;
+    };
+    /**
+     * Card — shadcn/ui parity. A bordered surface with an optional header (title, description,
+     * action), content and footer. Regions render only when their slot is filled, so a card with
+     * just content has no empty header or footer space.
+     */
+    interface HTMLArtCardElement extends Components.ArtCard, HTMLStencilElement {
+    }
+    var HTMLArtCardElement: {
+        prototype: HTMLArtCardElement;
+        new (): HTMLArtCardElement;
     };
     interface HTMLArtCheckboxElementEventMap {
         "change": { checked: boolean };
@@ -594,6 +921,49 @@ declare global {
     var HTMLArtCheckboxElement: {
         prototype: HTMLArtCheckboxElement;
         new (): HTMLArtCheckboxElement;
+    };
+    /**
+     * Empty — shadcn/ui parity. A centred empty state: media (an icon in a muted box, an image),
+     * title, description and content (actions, a search field).
+     */
+    interface HTMLArtEmptyElement extends Components.ArtEmpty, HTMLStencilElement {
+    }
+    var HTMLArtEmptyElement: {
+        prototype: HTMLArtEmptyElement;
+        new (): HTMLArtEmptyElement;
+    };
+    /**
+     * Field — shadcn/ui parity. Wires a label, a control, a description and an error message
+     * together: the label names the control, description and error become its accessible
+     * description, an error (or `invalid`) marks the control invalid, and a disabled control dims
+     * the label. Stack fields with `<art-field-group>`; group related fields with `<art-field-set>`.
+     */
+    interface HTMLArtFieldElement extends Components.ArtField, HTMLStencilElement {
+    }
+    var HTMLArtFieldElement: {
+        prototype: HTMLArtFieldElement;
+        new (): HTMLArtFieldElement;
+    };
+    /**
+     * Field Group — a vertical stack of `<art-field>`s (and `<art-field-set>`s) with form spacing.
+     */
+    interface HTMLArtFieldGroupElement extends Components.ArtFieldGroup, HTMLStencilElement {
+    }
+    var HTMLArtFieldGroupElement: {
+        prototype: HTMLArtFieldGroupElement;
+        new (): HTMLArtFieldGroupElement;
+    };
+    /**
+     * Field Set — a native `<fieldset>` with a legend, grouping related fields (a radio group with
+     * its question, an address block). `disabled` disables every control inside — the slotted
+     * controls are not DOM descendants of the shadow `<fieldset>`, so the component applies it
+     * (and restores only what it disabled).
+     */
+    interface HTMLArtFieldSetElement extends Components.ArtFieldSet, HTMLStencilElement {
+    }
+    var HTMLArtFieldSetElement: {
+        prototype: HTMLArtFieldSetElement;
+        new (): HTMLArtFieldSetElement;
     };
     interface HTMLArtHelloElementEventMap {
         "greet": { name: string };
@@ -654,6 +1024,80 @@ declare global {
         new (): HTMLArtInputElement;
     };
     /**
+     * Input Group — shadcn/ui parity. One field frame around an `<art-input>` or `<art-textarea>`
+     * and its addons: icons, text, kbd hints, buttons, or whole rows above / below the control.
+     * The group draws the border, focus ring, invalid ring and disabled state for everything inside.
+     */
+    interface HTMLArtInputGroupElement extends Components.ArtInputGroup, HTMLStencilElement {
+    }
+    var HTMLArtInputGroupElement: {
+        prototype: HTMLArtInputGroupElement;
+        new (): HTMLArtInputGroupElement;
+    };
+    interface HTMLArtInputOtpElementEventMap {
+        "input": { value: string };
+        "change": { value: string };
+        "complete": { value: string };
+    }
+    /**
+     * Input OTP — shadcn/ui parity. A one-time-code field: one native `<input>` (so typing, paste,
+     * autofill, Backspace and arrows are all platform behaviour) laid invisibly over a row of
+     * character slots that render its value, with a caret in the active slot. Form-associated.
+     */
+    interface HTMLArtInputOtpElement extends Components.ArtInputOtp, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtInputOtpElementEventMap>(type: K, listener: (this: HTMLArtInputOtpElement, ev: ArtInputOtpCustomEvent<HTMLArtInputOtpElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtInputOtpElementEventMap>(type: K, listener: (this: HTMLArtInputOtpElement, ev: ArtInputOtpCustomEvent<HTMLArtInputOtpElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtInputOtpElement: {
+        prototype: HTMLArtInputOtpElement;
+        new (): HTMLArtInputOtpElement;
+    };
+    /**
+     * Item — shadcn/ui parity. A flexible row: media (icon or image), title, description and
+     * actions, with optional header and footer rows. Renders as a link when `href` is set. Stack
+     * items in `<art-item-group>` (a list) with `<art-separator>`s between them.
+     */
+    interface HTMLArtItemElement extends Components.ArtItem, HTMLStencilElement {
+    }
+    var HTMLArtItemElement: {
+        prototype: HTMLArtItemElement;
+        new (): HTMLArtItemElement;
+    };
+    /**
+     * Item Group — a list of `<art-item>`s, optionally divided by `<art-separator>`s.
+     */
+    interface HTMLArtItemGroupElement extends Components.ArtItemGroup, HTMLStencilElement {
+    }
+    var HTMLArtItemGroupElement: {
+        prototype: HTMLArtItemGroupElement;
+        new (): HTMLArtItemGroupElement;
+    };
+    /**
+     * Kbd — shadcn/ui parity. A keyboard key, on the native `<kbd>` element. Group several with
+     * `<art-kbd-group>` (⌘ + K).
+     */
+    interface HTMLArtKbdElement extends Components.ArtKbd, HTMLStencilElement {
+    }
+    var HTMLArtKbdElement: {
+        prototype: HTMLArtKbdElement;
+        new (): HTMLArtKbdElement;
+    };
+    /**
+     * Kbd Group — a row of `<art-kbd>` keys and separators (`⌘` `K`, `Ctrl` + `B`).
+     */
+    interface HTMLArtKbdGroupElement extends Components.ArtKbdGroup, HTMLStencilElement {
+    }
+    var HTMLArtKbdGroupElement: {
+        prototype: HTMLArtKbdGroupElement;
+        new (): HTMLArtKbdGroupElement;
+    };
+    /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
      * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
@@ -663,6 +1107,17 @@ declare global {
     var HTMLArtLabelElement: {
         prototype: HTMLArtLabelElement;
         new (): HTMLArtLabelElement;
+    };
+    /**
+     * Marker — shadcn/ui parity. An inline conversation marker: a status line, a system note, a
+     * bordered row or a labelled separator between messages. Renders as a link when `href` is set.
+     * For streaming updates set `role="status"` on the host.
+     */
+    interface HTMLArtMarkerElement extends Components.ArtMarker, HTMLStencilElement {
+    }
+    var HTMLArtMarkerElement: {
+        prototype: HTMLArtMarkerElement;
+        new (): HTMLArtMarkerElement;
     };
     interface HTMLArtNativeSelectElementEventMap {
         "change": { value: string };
@@ -686,6 +1141,16 @@ declare global {
     var HTMLArtNativeSelectElement: {
         prototype: HTMLArtNativeSelectElement;
         new (): HTMLArtNativeSelectElement;
+    };
+    /**
+     * Progress — shadcn/ui parity. A native `<progress>` styled on tokens: a muted track with a
+     * primary fill that animates between values. Omit `value` for the platform's indeterminate bar.
+     */
+    interface HTMLArtProgressElement extends Components.ArtProgress, HTMLStencilElement {
+    }
+    var HTMLArtProgressElement: {
+        prototype: HTMLArtProgressElement;
+        new (): HTMLArtProgressElement;
     };
     /**
      * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
@@ -720,6 +1185,28 @@ declare global {
         prototype: HTMLArtRadioGroupElement;
         new (): HTMLArtRadioGroupElement;
     };
+    /**
+     * Separator — shadcn/ui parity. A native `<hr>` drawn with the one border colour and width,
+     * horizontal or vertical. Decorative by default (`role="none"`); `semantic` exposes the
+     * `separator` role for rules that structure content.
+     */
+    interface HTMLArtSeparatorElement extends Components.ArtSeparator, HTMLStencilElement {
+    }
+    var HTMLArtSeparatorElement: {
+        prototype: HTMLArtSeparatorElement;
+        new (): HTMLArtSeparatorElement;
+    };
+    /**
+     * Skeleton — shadcn/ui parity. A pulsing placeholder that takes the size you give the host
+     * (`style="width: …; height: …"` or a class). Hidden from assistive tech: announce loading
+     * once with `aria-busy` on the region instead.
+     */
+    interface HTMLArtSkeletonElement extends Components.ArtSkeleton, HTMLStencilElement {
+    }
+    var HTMLArtSkeletonElement: {
+        prototype: HTMLArtSkeletonElement;
+        new (): HTMLArtSkeletonElement;
+    };
     interface HTMLArtSliderElementEventMap {
         "input": { value: number };
         "change": { value: number };
@@ -744,6 +1231,16 @@ declare global {
         prototype: HTMLArtSliderElement;
         new (): HTMLArtSliderElement;
     };
+    /**
+     * Spinner — shadcn/ui parity. An indeterminate loading indicator on the icon size scale.
+     * Announced as a `status` region named `label` (default "Loading").
+     */
+    interface HTMLArtSpinnerElement extends Components.ArtSpinner, HTMLStencilElement {
+    }
+    var HTMLArtSpinnerElement: {
+        prototype: HTMLArtSpinnerElement;
+        new (): HTMLArtSpinnerElement;
+    };
     interface HTMLArtSwitchElementEventMap {
         "change": { checked: boolean };
     }
@@ -764,6 +1261,18 @@ declare global {
     var HTMLArtSwitchElement: {
         prototype: HTMLArtSwitchElement;
         new (): HTMLArtSwitchElement;
+    };
+    /**
+     * Table — shadcn/ui parity. A scroll container that styles the native `<table>` inside it:
+     * header, body, footer, rows, cells and caption. Light DOM on purpose (ADR-0021): a table is
+     * deeply nested native markup that a shadow stylesheet could never reach, so the rules are
+     * scoped to `art-table` and the markup stays a real, accessible table.
+     */
+    interface HTMLArtTableElement extends Components.ArtTable, HTMLStencilElement {
+    }
+    var HTMLArtTableElement: {
+        prototype: HTMLArtTableElement;
+        new (): HTMLArtTableElement;
     };
     interface HTMLArtTextareaElementEventMap {
         "input": { value: string };
@@ -831,26 +1340,87 @@ declare global {
         prototype: HTMLArtToggleGroupElement;
         new (): HTMLArtToggleGroupElement;
     };
+    /**
+     * Typography — shadcn/ui parity. A prose container that styles the native elements inside it:
+     * headings, paragraphs, lists, blockquotes, inline code, links, rules and images, plus the
+     * `lead`, `large`, `small` and `muted` text classes. Light DOM on purpose (ADR-0021): prose is
+     * nested native markup a shadow stylesheet could never reach.
+     */
+    interface HTMLArtTypographyElement extends Components.ArtTypography, HTMLStencilElement {
+    }
+    var HTMLArtTypographyElement: {
+        prototype: HTMLArtTypographyElement;
+        new (): HTMLArtTypographyElement;
+    };
     interface HTMLElementTagNameMap {
+        "art-aspect-ratio": HTMLArtAspectRatioElement;
+        "art-badge": HTMLArtBadgeElement;
         "art-button": HTMLArtButtonElement;
+        "art-button-group": HTMLArtButtonGroupElement;
+        "art-button-group-text": HTMLArtButtonGroupTextElement;
+        "art-card": HTMLArtCardElement;
         "art-checkbox": HTMLArtCheckboxElement;
+        "art-empty": HTMLArtEmptyElement;
+        "art-field": HTMLArtFieldElement;
+        "art-field-group": HTMLArtFieldGroupElement;
+        "art-field-set": HTMLArtFieldSetElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
         "art-input": HTMLArtInputElement;
+        "art-input-group": HTMLArtInputGroupElement;
+        "art-input-otp": HTMLArtInputOtpElement;
+        "art-item": HTMLArtItemElement;
+        "art-item-group": HTMLArtItemGroupElement;
+        "art-kbd": HTMLArtKbdElement;
+        "art-kbd-group": HTMLArtKbdGroupElement;
         "art-label": HTMLArtLabelElement;
+        "art-marker": HTMLArtMarkerElement;
         "art-native-select": HTMLArtNativeSelectElement;
+        "art-progress": HTMLArtProgressElement;
         "art-radio": HTMLArtRadioElement;
         "art-radio-group": HTMLArtRadioGroupElement;
+        "art-separator": HTMLArtSeparatorElement;
+        "art-skeleton": HTMLArtSkeletonElement;
         "art-slider": HTMLArtSliderElement;
+        "art-spinner": HTMLArtSpinnerElement;
         "art-switch": HTMLArtSwitchElement;
+        "art-table": HTMLArtTableElement;
         "art-textarea": HTMLArtTextareaElement;
         "art-toggle": HTMLArtToggleElement;
         "art-toggle-group": HTMLArtToggleGroupElement;
+        "art-typography": HTMLArtTypographyElement;
     }
 }
 declare namespace LocalJSX {
     type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K]?: never };
 
+    /**
+     * Aspect Ratio — shadcn/ui parity. Constrains its content to a ratio (`16/9`, `1`, `4/3`)
+     * with the native `aspect-ratio` property; the slotted element fills the box.
+     */
+    interface ArtAspectRatio {
+        /**
+          * Width / height: `"16/9"`, `"1"`, `"4/3"` or a number.
+          * @default '1'
+         */
+        "ratio"?: string | number;
+    }
+    /**
+     * Badge — shadcn/ui parity. A small status label; renders as a link when `href` is set.
+     * Every variant keeps the same border box so filled and outline badges align.
+     */
+    interface ArtBadge {
+        /**
+          * Renders an `<a>` instead of a `<span>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'secondary' | 'outline' | 'destructive';
+    }
     /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
      * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
@@ -914,6 +1484,30 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
+     * Button Group — shadcn/ui parity. Joins adjacent buttons (and inputs, selects, text
+     * addons, separators) into one control: only the outer corners stay rounded and neighbours
+     * share a single border. Nest groups to get spaced clusters of joined groups.
+     */
+    interface ArtButtonGroup {
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+    }
+    /**
+     * Button Group Text — a muted, bordered label that joins a Button Group like a button
+     * (a unit, a prefix, an icon + word). Stretches to the height of its neighbours.
+     */
+    interface ArtButtonGroupText {
+    }
+    /**
+     * Card — shadcn/ui parity. A bordered surface with an optional header (title, description,
+     * action), content and footer. Regions render only when their slot is filled, so a card with
+     * just content has no empty header or footer space.
+     */
+    interface ArtCard {
+    }
+    /**
      * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
      * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
      * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
@@ -962,6 +1556,47 @@ declare namespace LocalJSX {
           * @default 'on'
          */
         "value"?: string;
+    }
+    /**
+     * Empty — shadcn/ui parity. A centred empty state: media (an icon in a muted box, an image),
+     * title, description and content (actions, a search field).
+     */
+    interface ArtEmpty {
+    }
+    /**
+     * Field — shadcn/ui parity. Wires a label, a control, a description and an error message
+     * together: the label names the control, description and error become its accessible
+     * description, an error (or `invalid`) marks the control invalid, and a disabled control dims
+     * the label. Stack fields with `<art-field-group>`; group related fields with `<art-field-set>`.
+     */
+    interface ArtField {
+        /**
+          * Marks the control invalid; set automatically while the `error` slot has content.
+          * @default false
+         */
+        "invalid"?: boolean;
+        /**
+          * `vertical`: label above the control. `horizontal`: control first, label and description beside it (checkbox, switch).
+          * @default 'vertical'
+         */
+        "orientation"?: 'vertical' | 'horizontal';
+    }
+    /**
+     * Field Group — a vertical stack of `<art-field>`s (and `<art-field-set>`s) with form spacing.
+     */
+    interface ArtFieldGroup {
+    }
+    /**
+     * Field Set — a native `<fieldset>` with a legend, grouping related fields (a radio group with
+     * its question, an address block). `disabled` disables every control inside — the slotted
+     * controls are not DOM descendants of the shadow `<fieldset>`, so the component applies it
+     * (and restores only what it disabled).
+     */
+    interface ArtFieldSet {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
     }
     /**
      * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
@@ -1079,6 +1714,108 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * Input Group — shadcn/ui parity. One field frame around an `<art-input>` or `<art-textarea>`
+     * and its addons: icons, text, kbd hints, buttons, or whole rows above / below the control.
+     * The group draws the border, focus ring, invalid ring and disabled state for everything inside.
+     */
+    interface ArtInputGroup {
+    }
+    /**
+     * Input OTP — shadcn/ui parity. A one-time-code field: one native `<input>` (so typing, paste,
+     * autofill, Backspace and arrows are all platform behaviour) laid invisibly over a row of
+     * character slots that render its value, with a caret in the active slot. Form-associated.
+     */
+    interface ArtInputOtp {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * Characters per group; `0` renders one group. A separator is drawn between groups.
+          * @default 0
+         */
+        "groupSize"?: number;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        /**
+          * Number of characters.
+          * @default 6
+         */
+        "length"?: number;
+        "name"?: string;
+        /**
+          * Emitted when the value is committed (blur).
+         */
+        "onChange"?: (event: ArtInputOtpCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted when every slot is filled.
+         */
+        "onComplete"?: (event: ArtInputOtpCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted on every change of the value; `detail.value` mirrors `target.value`.
+         */
+        "onInput"?: (event: ArtInputOtpCustomEvent<{ value: string }>) => void;
+        /**
+          * `numeric` (digits, numeric keyboard) or `alphanumeric`.
+          * @default 'numeric'
+         */
+        "pattern"?: 'numeric' | 'alphanumeric';
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Item — shadcn/ui parity. A flexible row: media (icon or image), title, description and
+     * actions, with optional header and footer rows. Renders as a link when `href` is set. Stack
+     * items in `<art-item-group>` (a list) with `<art-separator>`s between them.
+     */
+    interface ArtItem {
+        /**
+          * Renders the row as an `<a>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md';
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'outline' | 'muted';
+    }
+    /**
+     * Item Group — a list of `<art-item>`s, optionally divided by `<art-separator>`s.
+     */
+    interface ArtItemGroup {
+    }
+    /**
+     * Kbd — shadcn/ui parity. A keyboard key, on the native `<kbd>` element. Group several with
+     * `<art-kbd-group>` (⌘ + K).
+     */
+    interface ArtKbd {
+    }
+    /**
+     * Kbd Group — a row of `<art-kbd>` keys and separators (`⌘` `K`, `Ctrl` + `B`).
+     */
+    interface ArtKbdGroup {
+    }
+    /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
      * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
@@ -1093,6 +1830,24 @@ declare namespace LocalJSX {
           * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
          */
         "htmlFor"?: string;
+    }
+    /**
+     * Marker — shadcn/ui parity. An inline conversation marker: a status line, a system note, a
+     * bordered row or a labelled separator between messages. Renders as a link when `href` is set.
+     * For streaming updates set `role="status"` on the host.
+     */
+    interface ArtMarker {
+        /**
+          * Renders the marker as an `<a>`.
+         */
+        "href"?: string;
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * `default`: inline line. `border`: with a bottom rule. `separator`: centred label between two rules.
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'border' | 'separator';
     }
     /**
      * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
@@ -1130,6 +1885,22 @@ declare namespace LocalJSX {
           * @default ''
          */
         "value"?: string;
+    }
+    /**
+     * Progress — shadcn/ui parity. A native `<progress>` styled on tokens: a muted track with a
+     * primary fill that animates between values. Omit `value` for the platform's indeterminate bar.
+     */
+    interface ArtProgress {
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default 100
+         */
+        "max"?: number;
+        /**
+          * Completed amount, 0–`max`. Omit for indeterminate.
+         */
+        "value"?: number;
     }
     /**
      * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
@@ -1210,6 +1981,29 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * Separator — shadcn/ui parity. A native `<hr>` drawn with the one border colour and width,
+     * horizontal or vertical. Decorative by default (`role="none"`); `semantic` exposes the
+     * `separator` role for rules that structure content.
+     */
+    interface ArtSeparator {
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * Announce the rule as a separator instead of hiding it from assistive tech.
+          * @default false
+         */
+        "semantic"?: boolean;
+    }
+    /**
+     * Skeleton — shadcn/ui parity. A pulsing placeholder that takes the size you give the host
+     * (`style="width: …; height: …"` or a class). Hidden from assistive tech: announce loading
+     * once with `aria-busy` on the region instead.
+     */
+    interface ArtSkeleton {
+    }
+    /**
      * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
      * provides drag, keyboard, screen-reader value announcements and form participation; artui
      * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
@@ -1263,6 +2057,22 @@ declare namespace LocalJSX {
         "value"?: number | string;
     }
     /**
+     * Spinner — shadcn/ui parity. An indeterminate loading indicator on the icon size scale.
+     * Announced as a `status` region named `label` (default "Loading").
+     */
+    interface ArtSpinner {
+        /**
+          * Accessible name.
+          * @default 'Loading'
+         */
+        "label"?: string;
+        /**
+          * Icon size scale.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+    }
+    /**
      * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
      * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
      */
@@ -1303,6 +2113,14 @@ declare namespace LocalJSX {
           * @default 'on'
          */
         "value"?: string;
+    }
+    /**
+     * Table — shadcn/ui parity. A scroll container that styles the native `<table>` inside it:
+     * header, body, footer, rows, cells and caption. Light DOM on purpose (ADR-0021): a table is
+     * deeply nested native markup that a shadow stylesheet could never reach, so the rules are
+     * scoped to `art-table` and the markup stays a real, accessible table.
+     */
+    interface ArtTable {
     }
     /**
      * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
@@ -1435,7 +2253,24 @@ declare namespace LocalJSX {
          */
         "variant"?: 'default' | 'outline';
     }
+    /**
+     * Typography — shadcn/ui parity. A prose container that styles the native elements inside it:
+     * headings, paragraphs, lists, blockquotes, inline code, links, rules and images, plus the
+     * `lead`, `large`, `small` and `muted` text classes. Light DOM on purpose (ADR-0021): prose is
+     * nested native markup a shadow stylesheet could never reach.
+     */
+    interface ArtTypography {
+    }
 
+    interface ArtAspectRatioAttributes {
+        "ratio": string;
+    }
+    interface ArtBadgeAttributes {
+        "variant": 'default' | 'secondary' | 'outline' | 'destructive';
+        "href": string;
+        "target": string;
+        "rel": string;
+    }
     interface ArtButtonAttributes {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
         "size": 'sm' | 'md' | 'lg';
@@ -1447,6 +2282,9 @@ declare namespace LocalJSX {
         "target": string;
         "rel": string;
         "hostAriaLabel": string | null;
+    }
+    interface ArtButtonGroupAttributes {
+        "orientation": 'horizontal' | 'vertical';
     }
     interface ArtCheckboxAttributes {
         "checked": boolean;
@@ -1460,6 +2298,13 @@ declare namespace LocalJSX {
         "hostAriaLabel": string | null;
         "hostAriaLabelledby": string | null;
         "hostAriaDescribedby": string | null;
+    }
+    interface ArtFieldAttributes {
+        "orientation": 'vertical' | 'horizontal';
+        "invalid": boolean;
+    }
+    interface ArtFieldSetAttributes {
+        "disabled": boolean;
     }
     interface ArtHelloAttributes {
         "name": string;
@@ -1492,9 +2337,35 @@ declare namespace LocalJSX {
         "hostAriaLabelledby": string | null;
         "hostAriaDescribedby": string | null;
     }
+    interface ArtInputOtpAttributes {
+        "length": number;
+        "groupSize": number;
+        "pattern": 'numeric' | 'alphanumeric';
+        "value": string;
+        "name": string;
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtItemAttributes {
+        "variant": 'default' | 'outline' | 'muted';
+        "size": 'sm' | 'md';
+        "href": string;
+        "target": string;
+        "rel": string;
+    }
     interface ArtLabelAttributes {
         "htmlFor": string;
         "disabled": boolean;
+    }
+    interface ArtMarkerAttributes {
+        "variant": 'default' | 'border' | 'separator';
+        "href": string;
+        "target": string;
+        "rel": string;
     }
     interface ArtNativeSelectAttributes {
         "value": string;
@@ -1506,6 +2377,12 @@ declare namespace LocalJSX {
         "hostAriaLabel": string | null;
         "hostAriaLabelledby": string | null;
         "hostAriaDescribedby": string | null;
+    }
+    interface ArtProgressAttributes {
+        "value": number;
+        "max": number;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
     }
     interface ArtRadioAttributes {
         "value": string;
@@ -1527,6 +2404,10 @@ declare namespace LocalJSX {
         "orientation": 'vertical' | 'horizontal';
         "size": 'sm' | 'md' | 'lg';
     }
+    interface ArtSeparatorAttributes {
+        "orientation": 'horizontal' | 'vertical';
+        "semantic": boolean;
+    }
     interface ArtSliderAttributes {
         "value": string;
         "min": number;
@@ -1539,6 +2420,10 @@ declare namespace LocalJSX {
         "hostAriaLabel": string | null;
         "hostAriaLabelledby": string | null;
         "hostAriaDescribedby": string | null;
+    }
+    interface ArtSpinnerAttributes {
+        "size": 'sm' | 'md' | 'lg';
+        "label": string;
     }
     interface ArtSwitchAttributes {
         "checked": boolean;
@@ -1591,26 +2476,58 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "art-aspect-ratio": Omit<ArtAspectRatio, keyof ArtAspectRatioAttributes> & { [K in keyof ArtAspectRatio & keyof ArtAspectRatioAttributes]?: ArtAspectRatio[K] } & { [K in keyof ArtAspectRatio & keyof ArtAspectRatioAttributes as `attr:${K}`]?: ArtAspectRatioAttributes[K] } & { [K in keyof ArtAspectRatio & keyof ArtAspectRatioAttributes as `prop:${K}`]?: ArtAspectRatio[K] };
+        "art-badge": Omit<ArtBadge, keyof ArtBadgeAttributes> & { [K in keyof ArtBadge & keyof ArtBadgeAttributes]?: ArtBadge[K] } & { [K in keyof ArtBadge & keyof ArtBadgeAttributes as `attr:${K}`]?: ArtBadgeAttributes[K] } & { [K in keyof ArtBadge & keyof ArtBadgeAttributes as `prop:${K}`]?: ArtBadge[K] };
         "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
+        "art-button-group": Omit<ArtButtonGroup, keyof ArtButtonGroupAttributes> & { [K in keyof ArtButtonGroup & keyof ArtButtonGroupAttributes]?: ArtButtonGroup[K] } & { [K in keyof ArtButtonGroup & keyof ArtButtonGroupAttributes as `attr:${K}`]?: ArtButtonGroupAttributes[K] } & { [K in keyof ArtButtonGroup & keyof ArtButtonGroupAttributes as `prop:${K}`]?: ArtButtonGroup[K] };
+        "art-button-group-text": ArtButtonGroupText;
+        "art-card": ArtCard;
         "art-checkbox": Omit<ArtCheckbox, keyof ArtCheckboxAttributes> & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes]?: ArtCheckbox[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `attr:${K}`]?: ArtCheckboxAttributes[K] } & { [K in keyof ArtCheckbox & keyof ArtCheckboxAttributes as `prop:${K}`]?: ArtCheckbox[K] };
+        "art-empty": ArtEmpty;
+        "art-field": Omit<ArtField, keyof ArtFieldAttributes> & { [K in keyof ArtField & keyof ArtFieldAttributes]?: ArtField[K] } & { [K in keyof ArtField & keyof ArtFieldAttributes as `attr:${K}`]?: ArtFieldAttributes[K] } & { [K in keyof ArtField & keyof ArtFieldAttributes as `prop:${K}`]?: ArtField[K] };
+        "art-field-group": ArtFieldGroup;
+        "art-field-set": Omit<ArtFieldSet, keyof ArtFieldSetAttributes> & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes]?: ArtFieldSet[K] } & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes as `attr:${K}`]?: ArtFieldSetAttributes[K] } & { [K in keyof ArtFieldSet & keyof ArtFieldSetAttributes as `prop:${K}`]?: ArtFieldSet[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
         "art-input": Omit<ArtInput, keyof ArtInputAttributes> & { [K in keyof ArtInput & keyof ArtInputAttributes]?: ArtInput[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `attr:${K}`]?: ArtInputAttributes[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `prop:${K}`]?: ArtInput[K] };
+        "art-input-group": ArtInputGroup;
+        "art-input-otp": Omit<ArtInputOtp, keyof ArtInputOtpAttributes> & { [K in keyof ArtInputOtp & keyof ArtInputOtpAttributes]?: ArtInputOtp[K] } & { [K in keyof ArtInputOtp & keyof ArtInputOtpAttributes as `attr:${K}`]?: ArtInputOtpAttributes[K] } & { [K in keyof ArtInputOtp & keyof ArtInputOtpAttributes as `prop:${K}`]?: ArtInputOtp[K] };
+        "art-item": Omit<ArtItem, keyof ArtItemAttributes> & { [K in keyof ArtItem & keyof ArtItemAttributes]?: ArtItem[K] } & { [K in keyof ArtItem & keyof ArtItemAttributes as `attr:${K}`]?: ArtItemAttributes[K] } & { [K in keyof ArtItem & keyof ArtItemAttributes as `prop:${K}`]?: ArtItem[K] };
+        "art-item-group": ArtItemGroup;
+        "art-kbd": ArtKbd;
+        "art-kbd-group": ArtKbdGroup;
         "art-label": Omit<ArtLabel, keyof ArtLabelAttributes> & { [K in keyof ArtLabel & keyof ArtLabelAttributes]?: ArtLabel[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `attr:${K}`]?: ArtLabelAttributes[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `prop:${K}`]?: ArtLabel[K] };
+        "art-marker": Omit<ArtMarker, keyof ArtMarkerAttributes> & { [K in keyof ArtMarker & keyof ArtMarkerAttributes]?: ArtMarker[K] } & { [K in keyof ArtMarker & keyof ArtMarkerAttributes as `attr:${K}`]?: ArtMarkerAttributes[K] } & { [K in keyof ArtMarker & keyof ArtMarkerAttributes as `prop:${K}`]?: ArtMarker[K] };
         "art-native-select": Omit<ArtNativeSelect, keyof ArtNativeSelectAttributes> & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes]?: ArtNativeSelect[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `attr:${K}`]?: ArtNativeSelectAttributes[K] } & { [K in keyof ArtNativeSelect & keyof ArtNativeSelectAttributes as `prop:${K}`]?: ArtNativeSelect[K] };
+        "art-progress": Omit<ArtProgress, keyof ArtProgressAttributes> & { [K in keyof ArtProgress & keyof ArtProgressAttributes]?: ArtProgress[K] } & { [K in keyof ArtProgress & keyof ArtProgressAttributes as `attr:${K}`]?: ArtProgressAttributes[K] } & { [K in keyof ArtProgress & keyof ArtProgressAttributes as `prop:${K}`]?: ArtProgress[K] };
         "art-radio": Omit<ArtRadio, keyof ArtRadioAttributes> & { [K in keyof ArtRadio & keyof ArtRadioAttributes]?: ArtRadio[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `attr:${K}`]?: ArtRadioAttributes[K] } & { [K in keyof ArtRadio & keyof ArtRadioAttributes as `prop:${K}`]?: ArtRadio[K] } & OneOf<"value", ArtRadio["value"], ArtRadioAttributes["value"]>;
         "art-radio-group": Omit<ArtRadioGroup, keyof ArtRadioGroupAttributes> & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes]?: ArtRadioGroup[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `attr:${K}`]?: ArtRadioGroupAttributes[K] } & { [K in keyof ArtRadioGroup & keyof ArtRadioGroupAttributes as `prop:${K}`]?: ArtRadioGroup[K] };
+        "art-separator": Omit<ArtSeparator, keyof ArtSeparatorAttributes> & { [K in keyof ArtSeparator & keyof ArtSeparatorAttributes]?: ArtSeparator[K] } & { [K in keyof ArtSeparator & keyof ArtSeparatorAttributes as `attr:${K}`]?: ArtSeparatorAttributes[K] } & { [K in keyof ArtSeparator & keyof ArtSeparatorAttributes as `prop:${K}`]?: ArtSeparator[K] };
+        "art-skeleton": ArtSkeleton;
         "art-slider": Omit<ArtSlider, keyof ArtSliderAttributes> & { [K in keyof ArtSlider & keyof ArtSliderAttributes]?: ArtSlider[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `attr:${K}`]?: ArtSliderAttributes[K] } & { [K in keyof ArtSlider & keyof ArtSliderAttributes as `prop:${K}`]?: ArtSlider[K] };
+        "art-spinner": Omit<ArtSpinner, keyof ArtSpinnerAttributes> & { [K in keyof ArtSpinner & keyof ArtSpinnerAttributes]?: ArtSpinner[K] } & { [K in keyof ArtSpinner & keyof ArtSpinnerAttributes as `attr:${K}`]?: ArtSpinnerAttributes[K] } & { [K in keyof ArtSpinner & keyof ArtSpinnerAttributes as `prop:${K}`]?: ArtSpinner[K] };
         "art-switch": Omit<ArtSwitch, keyof ArtSwitchAttributes> & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes]?: ArtSwitch[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `attr:${K}`]?: ArtSwitchAttributes[K] } & { [K in keyof ArtSwitch & keyof ArtSwitchAttributes as `prop:${K}`]?: ArtSwitch[K] };
+        "art-table": ArtTable;
         "art-textarea": Omit<ArtTextarea, keyof ArtTextareaAttributes> & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes]?: ArtTextarea[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `attr:${K}`]?: ArtTextareaAttributes[K] } & { [K in keyof ArtTextarea & keyof ArtTextareaAttributes as `prop:${K}`]?: ArtTextarea[K] };
         "art-toggle": Omit<ArtToggle, keyof ArtToggleAttributes> & { [K in keyof ArtToggle & keyof ArtToggleAttributes]?: ArtToggle[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `attr:${K}`]?: ArtToggleAttributes[K] } & { [K in keyof ArtToggle & keyof ArtToggleAttributes as `prop:${K}`]?: ArtToggle[K] };
         "art-toggle-group": Omit<ArtToggleGroup, keyof ArtToggleGroupAttributes> & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes]?: ArtToggleGroup[K] } & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes as `attr:${K}`]?: ArtToggleGroupAttributes[K] } & { [K in keyof ArtToggleGroup & keyof ArtToggleGroupAttributes as `prop:${K}`]?: ArtToggleGroup[K] };
+        "art-typography": ArtTypography;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Aspect Ratio — shadcn/ui parity. Constrains its content to a ratio (`16/9`, `1`, `4/3`)
+             * with the native `aspect-ratio` property; the slotted element fills the box.
+             */
+            "art-aspect-ratio": LocalJSX.IntrinsicElements["art-aspect-ratio"] & JSXBase.HTMLAttributes<HTMLArtAspectRatioElement>;
+            /**
+             * Badge — shadcn/ui parity. A small status label; renders as a link when `href` is set.
+             * Every variant keeps the same border box so filled and outline badges align.
+             */
+            "art-badge": LocalJSX.IntrinsicElements["art-badge"] & JSXBase.HTMLAttributes<HTMLArtBadgeElement>;
             /**
              * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
              * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
@@ -1619,12 +2536,52 @@ declare module "@stencil/core" {
              */
             "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;
             /**
+             * Button Group — shadcn/ui parity. Joins adjacent buttons (and inputs, selects, text
+             * addons, separators) into one control: only the outer corners stay rounded and neighbours
+             * share a single border. Nest groups to get spaced clusters of joined groups.
+             */
+            "art-button-group": LocalJSX.IntrinsicElements["art-button-group"] & JSXBase.HTMLAttributes<HTMLArtButtonGroupElement>;
+            /**
+             * Button Group Text — a muted, bordered label that joins a Button Group like a button
+             * (a unit, a prefix, an icon + word). Stretches to the height of its neighbours.
+             */
+            "art-button-group-text": LocalJSX.IntrinsicElements["art-button-group-text"] & JSXBase.HTMLAttributes<HTMLArtButtonGroupTextElement>;
+            /**
+             * Card — shadcn/ui parity. A bordered surface with an optional header (title, description,
+             * action), content and footer. Regions render only when their slot is filled, so a card with
+             * just content has no empty header or footer space.
+             */
+            "art-card": LocalJSX.IntrinsicElements["art-card"] & JSXBase.HTMLAttributes<HTMLArtCardElement>;
+            /**
              * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
              * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
              * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
              * `ngModel` work out of the box.
              */
             "art-checkbox": LocalJSX.IntrinsicElements["art-checkbox"] & JSXBase.HTMLAttributes<HTMLArtCheckboxElement>;
+            /**
+             * Empty — shadcn/ui parity. A centred empty state: media (an icon in a muted box, an image),
+             * title, description and content (actions, a search field).
+             */
+            "art-empty": LocalJSX.IntrinsicElements["art-empty"] & JSXBase.HTMLAttributes<HTMLArtEmptyElement>;
+            /**
+             * Field — shadcn/ui parity. Wires a label, a control, a description and an error message
+             * together: the label names the control, description and error become its accessible
+             * description, an error (or `invalid`) marks the control invalid, and a disabled control dims
+             * the label. Stack fields with `<art-field-group>`; group related fields with `<art-field-set>`.
+             */
+            "art-field": LocalJSX.IntrinsicElements["art-field"] & JSXBase.HTMLAttributes<HTMLArtFieldElement>;
+            /**
+             * Field Group — a vertical stack of `<art-field>`s (and `<art-field-set>`s) with form spacing.
+             */
+            "art-field-group": LocalJSX.IntrinsicElements["art-field-group"] & JSXBase.HTMLAttributes<HTMLArtFieldGroupElement>;
+            /**
+             * Field Set — a native `<fieldset>` with a legend, grouping related fields (a radio group with
+             * its question, an address block). `disabled` disables every control inside — the slotted
+             * controls are not DOM descendants of the shadow `<fieldset>`, so the component applies it
+             * (and restores only what it disabled).
+             */
+            "art-field-set": LocalJSX.IntrinsicElements["art-field-set"] & JSXBase.HTMLAttributes<HTMLArtFieldSetElement>;
             /**
              * Phase 0 proof component. Exercises tokens, Tailwind-in-shadow, the focus-ring
              * recipe, a native `click` passing through and a kebab-case custom event.
@@ -1646,17 +2603,59 @@ declare module "@stencil/core" {
              */
             "art-input": LocalJSX.IntrinsicElements["art-input"] & JSXBase.HTMLAttributes<HTMLArtInputElement>;
             /**
+             * Input Group — shadcn/ui parity. One field frame around an `<art-input>` or `<art-textarea>`
+             * and its addons: icons, text, kbd hints, buttons, or whole rows above / below the control.
+             * The group draws the border, focus ring, invalid ring and disabled state for everything inside.
+             */
+            "art-input-group": LocalJSX.IntrinsicElements["art-input-group"] & JSXBase.HTMLAttributes<HTMLArtInputGroupElement>;
+            /**
+             * Input OTP — shadcn/ui parity. A one-time-code field: one native `<input>` (so typing, paste,
+             * autofill, Backspace and arrows are all platform behaviour) laid invisibly over a row of
+             * character slots that render its value, with a caret in the active slot. Form-associated.
+             */
+            "art-input-otp": LocalJSX.IntrinsicElements["art-input-otp"] & JSXBase.HTMLAttributes<HTMLArtInputOtpElement>;
+            /**
+             * Item — shadcn/ui parity. A flexible row: media (icon or image), title, description and
+             * actions, with optional header and footer rows. Renders as a link when `href` is set. Stack
+             * items in `<art-item-group>` (a list) with `<art-separator>`s between them.
+             */
+            "art-item": LocalJSX.IntrinsicElements["art-item"] & JSXBase.HTMLAttributes<HTMLArtItemElement>;
+            /**
+             * Item Group — a list of `<art-item>`s, optionally divided by `<art-separator>`s.
+             */
+            "art-item-group": LocalJSX.IntrinsicElements["art-item-group"] & JSXBase.HTMLAttributes<HTMLArtItemGroupElement>;
+            /**
+             * Kbd — shadcn/ui parity. A keyboard key, on the native `<kbd>` element. Group several with
+             * `<art-kbd-group>` (⌘ + K).
+             */
+            "art-kbd": LocalJSX.IntrinsicElements["art-kbd"] & JSXBase.HTMLAttributes<HTMLArtKbdElement>;
+            /**
+             * Kbd Group — a row of `<art-kbd>` keys and separators (`⌘` `K`, `Ctrl` + `B`).
+             */
+            "art-kbd-group": LocalJSX.IntrinsicElements["art-kbd-group"] & JSXBase.HTMLAttributes<HTMLArtKbdGroupElement>;
+            /**
              * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
              * ids, `for` is resolved at click time: activating the label focuses the target control
              * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
              */
             "art-label": LocalJSX.IntrinsicElements["art-label"] & JSXBase.HTMLAttributes<HTMLArtLabelElement>;
             /**
+             * Marker — shadcn/ui parity. An inline conversation marker: a status line, a system note, a
+             * bordered row or a labelled separator between messages. Renders as a link when `href` is set.
+             * For streaming updates set `role="status"` on the host.
+             */
+            "art-marker": LocalJSX.IntrinsicElements["art-marker"] & JSXBase.HTMLAttributes<HTMLArtMarkerElement>;
+            /**
              * Native Select — shadcn/ui parity. A styled native `<select>`; write plain `<option>` /
              * `<optgroup>` children and they are mirrored into the control (and kept in sync).
              * Form-associated; `change` (and `input`) emitted from the host with `detail.value`.
              */
             "art-native-select": LocalJSX.IntrinsicElements["art-native-select"] & JSXBase.HTMLAttributes<HTMLArtNativeSelectElement>;
+            /**
+             * Progress — shadcn/ui parity. A native `<progress>` styled on tokens: a muted track with a
+             * primary fill that animates between values. Omit `value` for the platform's indeterminate bar.
+             */
+            "art-progress": LocalJSX.IntrinsicElements["art-progress"] & JSXBase.HTMLAttributes<HTMLArtProgressElement>;
             /**
              * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
              * which owns selection and keyboard navigation (native radio grouping does not cross shadow
@@ -1670,6 +2669,18 @@ declare module "@stencil/core" {
              */
             "art-radio-group": LocalJSX.IntrinsicElements["art-radio-group"] & JSXBase.HTMLAttributes<HTMLArtRadioGroupElement>;
             /**
+             * Separator — shadcn/ui parity. A native `<hr>` drawn with the one border colour and width,
+             * horizontal or vertical. Decorative by default (`role="none"`); `semantic` exposes the
+             * `separator` role for rules that structure content.
+             */
+            "art-separator": LocalJSX.IntrinsicElements["art-separator"] & JSXBase.HTMLAttributes<HTMLArtSeparatorElement>;
+            /**
+             * Skeleton — shadcn/ui parity. A pulsing placeholder that takes the size you give the host
+             * (`style="width: …; height: …"` or a class). Hidden from assistive tech: announce loading
+             * once with `aria-busy` on the region instead.
+             */
+            "art-skeleton": LocalJSX.IntrinsicElements["art-skeleton"] & JSXBase.HTMLAttributes<HTMLArtSkeletonElement>;
+            /**
              * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
              * provides drag, keyboard, screen-reader value announcements and form participation; artui
              * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
@@ -1677,10 +2688,22 @@ declare module "@stencil/core" {
              */
             "art-slider": LocalJSX.IntrinsicElements["art-slider"] & JSXBase.HTMLAttributes<HTMLArtSliderElement>;
             /**
+             * Spinner — shadcn/ui parity. An indeterminate loading indicator on the icon size scale.
+             * Announced as a `status` region named `label` (default "Loading").
+             */
+            "art-spinner": LocalJSX.IntrinsicElements["art-spinner"] & JSXBase.HTMLAttributes<HTMLArtSpinnerElement>;
+            /**
              * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
              * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
              */
             "art-switch": LocalJSX.IntrinsicElements["art-switch"] & JSXBase.HTMLAttributes<HTMLArtSwitchElement>;
+            /**
+             * Table — shadcn/ui parity. A scroll container that styles the native `<table>` inside it:
+             * header, body, footer, rows, cells and caption. Light DOM on purpose (ADR-0021): a table is
+             * deeply nested native markup that a shadow stylesheet could never reach, so the rules are
+             * scoped to `art-table` and the markup stays a real, accessible table.
+             */
+            "art-table": LocalJSX.IntrinsicElements["art-table"] & JSXBase.HTMLAttributes<HTMLArtTableElement>;
             /**
              * Textarea — shadcn/ui parity. Multi-line text field; grows with content (`field-sizing: content`),
              * form-associated, `input` / `change` emitted from the host with `detail.value` (§3a).
@@ -1698,6 +2721,13 @@ declare module "@stencil/core" {
              * `size` and `disabled` to its items, joins their edges, and moves focus with the arrows.
              */
             "art-toggle-group": LocalJSX.IntrinsicElements["art-toggle-group"] & JSXBase.HTMLAttributes<HTMLArtToggleGroupElement>;
+            /**
+             * Typography — shadcn/ui parity. A prose container that styles the native elements inside it:
+             * headings, paragraphs, lists, blockquotes, inline code, links, rules and images, plus the
+             * `lead`, `large`, `small` and `muted` text classes. Light DOM on purpose (ADR-0021): prose is
+             * nested native markup a shadow stylesheet could never reach.
+             */
+            "art-typography": LocalJSX.IntrinsicElements["art-typography"] & JSXBase.HTMLAttributes<HTMLArtTypographyElement>;
         }
     }
 }

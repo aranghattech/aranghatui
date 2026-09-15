@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Native <progress>, painted on tokens: appearance none, then the track/value pseudo-elements. */
+progress {
+  appearance: none;
+  border: 0;
+  color: var(--art-color-primary-solid); /* Safari ≤ 16 fill fallback */
+}
+progress::-webkit-progress-bar {
+  background: var(--art-color-bg-muted);
+  border-radius: var(--art-radius-full);
+}
+progress::-webkit-progress-value {
+  background: var(--art-color-primary-solid);
+  border-radius: var(--art-radius-full);
+  transition: inline-size var(--art-duration-base) var(--art-ease-out);
+}
+progress::-moz-progress-bar {
+  background: var(--art-color-primary-solid);
+  border-radius: var(--art-radius-full);
+}

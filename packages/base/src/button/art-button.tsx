@@ -91,7 +91,7 @@ export class ArtButton {
       link: 'text-link underline-offset-4 hover:underline',
     };
     const cls = {
-      'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-interactive motion-fast focus-ring select-none': true,
+      'inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-interactive motion-fast focus-ring select-none': true,
       'disabled:opacity-50 aria-disabled:opacity-50': true,
       // press feedback: scale(0.96) — a real active state, interruptible (CSS transition), reduced-motion collapses it
       'active:scale-96': !inactive,

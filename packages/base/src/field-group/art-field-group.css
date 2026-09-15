@@ -1,0 +1,6 @@
+:host {
+  @apply flex w-full flex-col gap-6;
+}
+:host([hidden]) {
+  display: none;
+}

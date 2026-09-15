@@ -1,5 +1,11 @@
 :host {
   display: block;
+  /* radius on the host, inherited by the select: a group rounds only the outer corners */
+  border-radius: var(--art-radius-md);
+}
+div,
+select {
+  border-radius: inherit;
 }
 :host([hidden]) {
   display: none;

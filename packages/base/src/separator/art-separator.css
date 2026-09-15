@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+/* A vertical rule stretches to its flex row (an explicit height would opt out of stretching);
+   outside a flex row, give the host a height. */
+:host([orientation='vertical']) {
+  display: inline-block;
+  align-self: stretch;
+}
+hr {
+  margin: 0;
+  border: 0;
+  width: 100%;
+  height: var(--art-border-width);
+}
+:host([orientation='vertical']) hr {
+  width: var(--art-border-width);
+  height: 100%;
+}

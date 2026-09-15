@@ -32,7 +32,7 @@ function toReact(html) {
   let out = html.replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}');
   out = out.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`);
   out = out.replace(VOID, '<$1$2 />');
-  out = out.replace(/\sclass=/g, ' className=').replace(/\sfor=/g, ' htmlFor=').replace(/\stabindex=/g, ' tabIndex=').replace(/\sreadonly\b/g, ' readOnly').replace(/\smaxlength=/g, ' maxLength=').replace(/\sautocomplete=/g, ' autoComplete=');
+  out = out.replace(/\sclass=/g, ' className=').replace(/\sfor=/g, ' htmlFor=').replace(/\stabindex=/g, ' tabIndex=').replace(/\sreadonly\b/g, ' readOnly').replace(/\smaxlength=/g, ' maxLength=').replace(/\sautocomplete=/g, ' autoComplete=').replace(/\scolspan=/g, ' colSpan=').replace(/\srowspan=/g, ' rowSpan=');
   for (const a of ['stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'clip-rule', 'stroke-dasharray']) out = out.replaceAll(` ${a}=`, ` ${camel(a)}=`);
   out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter(Boolean).map((decl) => { const [k, ...v] = decl.split(':'); return `${camel(k.trim())}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
   // kebab-case props on wrapped components → camelCase (aria-/data- stay)
@@ -64,7 +64,10 @@ for (const [key, ex] of Object.entries(stories.examples)) {
   const html = ex.render();
   if (writeIfAbsent(join(S, 'html/src/samples', slug, `${key}.html`), html + '\n')) written.push(`html/${key}`);
   if (ex.manual) continue;
-  const cmp = pascal(key);
+  // The React sample's function must not shadow a component it imports (`function FieldGroup()`
+  // rendering `<FieldGroup>` recurses forever — React builds an infinite tree until the tab OOMs).
+  const imported = artTags(html).map((t) => pascal(t.replace(/^art-/, '')));
+  const cmp = imported.includes(pascal(key)) ? `${pascal(key)}Example` : pascal(key);
   if (writeIfAbsent(join(S, 'react/src/samples', slug, `${key}.tsx`), `${imports(html, 'react')}\n\nexport default function ${cmp}() {\n  return (\n    <>\n${indent(toReact(html), 6)}\n    </>\n  );\n}\n`)) written.push(`react/${key}`);
   if (writeIfAbsent(join(S, 'vue/src/samples', slug, `${key}.vue`), `<script setup lang="ts">\n${imports(html, 'vue')}\n</script>\n\n<template>\n${indent(toVue(html), 2)}\n</template>\n`)) written.push(`vue/${key}`);
   if (writeIfAbsent(join(S, 'angular/src/app/samples', slug, `${key}.ts`), `import { Component } from '@angular/core';\n${imports(html, 'angular')}\n\n@Component({\n  selector: 'sample-${slug}-${key}',\n  imports: [${artTags(html).map(pascal).sort().join(', ')}],\n  template: \`\n${indent(html, 4)}\n  \`,\n})\nexport class ${pascal(slug)}${cmp} {}\n`)) written.push(`angular/${key}`);

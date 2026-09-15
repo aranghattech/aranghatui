@@ -1,6 +1,12 @@
 :host {
   display: inline-flex;
   vertical-align: middle;
+  /* The radius lives on the host and is inherited by the control, so a Button Group can
+     round only the outer corners from outside (shadcn button-group). */
+  border-radius: var(--art-radius-md);
+}
+[part='button'] {
+  border-radius: inherit;
 }
 :host([hidden]) {
   display: none;

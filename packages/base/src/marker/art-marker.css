@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+[part='marker'] {
+  text-decoration: none;
+  transition: color var(--art-duration-fast) var(--art-ease-out);
+}
+::slotted([slot='icon']) {
+  flex-shrink: 0;
+}
+::slotted(svg[slot='icon']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+/* border: a row with a bottom rule */
+:host([variant='border']) [part='marker'] {
+  border-bottom: var(--art-border-width) solid var(--art-color-border-default);
+  padding-bottom: var(--art-space-2);
+}
+/* separator: a centred label between two rules */
+:host([variant='separator']) [part='marker']::before,
+:host([variant='separator']) [part='marker']::after {
+  content: '';
+  flex: 1;
+  min-width: 0;
+  height: var(--art-border-width);
+  background: var(--art-color-border-default);
+}
+:host([variant='separator']) [part='content'] {
+  flex: none;
+  text-align: center;
+}

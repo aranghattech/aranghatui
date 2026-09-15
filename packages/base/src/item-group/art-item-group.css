@@ -1,0 +1,9 @@
+:host {
+  @apply flex w-full flex-col;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(art-separator) {
+  margin: 0;
+}

@@ -1,0 +1,16 @@
+:host {
+  @apply inline-flex items-center gap-2 border-default bg-muted px-4 text-sm font-medium text-fg shadow-raised whitespace-nowrap;
+  border-radius: var(--art-radius-md);
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}

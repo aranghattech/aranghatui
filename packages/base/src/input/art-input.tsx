@@ -118,7 +118,7 @@ export class ArtInput {
         <div
           part="field"
           class={{
-            'flex w-full items-center rounded-md border-default bg-transparent shadow-raised transition-interactive motion-fast focus-ring-within has-disabled:opacity-50 has-aria-invalid:invalid-ring': true,
+            'flex w-full items-center border-default bg-transparent shadow-raised transition-interactive motion-fast focus-ring-within has-disabled:opacity-50 has-aria-invalid:invalid-ring': true,
             // safelist for the scanner: field-frame-sm field-frame-md field-frame-lg
             [`field-frame-${this.size}`]: true,
           }}

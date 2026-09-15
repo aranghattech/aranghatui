@@ -1,0 +1,33 @@
+import { Component } from '@angular/core';
+import { ArtCheckbox, ArtTable } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-table-with-checkboxes',
+  imports: [ArtCheckbox, ArtTable],
+  template: `
+    <art-table>
+    <table>
+      <thead>
+        <tr>
+          <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+          <th>Invoice</th>
+          <th data-align="end">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><art-checkbox aria-label="Select INV001"></art-checkbox></td>
+          <td>INV001</td>
+          <td data-align="end">$250.00</td>
+        </tr>
+        <tr>
+          <td><art-checkbox aria-label="Select INV002" checked></art-checkbox></td>
+          <td>INV002</td>
+          <td data-align="end">$150.00</td>
+        </tr>
+      </tbody>
+    </table>
+    </art-table>
+  `,
+})
+export class TableWithCheckboxes {}

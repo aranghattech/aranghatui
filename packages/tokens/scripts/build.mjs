@@ -115,21 +115,28 @@ StyleDictionary.registerFormat({
     // functional motion only (loading indicators); duration from the motion tokens
     add('--animate-spin', `spin ${lit('duration.spin')} linear infinite`);
     lines.push('  @keyframes spin { to { transform: rotate(360deg); } }');
+    add('--animate-pulse', `pulse ${lit('duration.pulse')} cubic-bezier(0.4, 0, 0.6, 1) infinite`);
+    lines.push('  @keyframes pulse { 50% { opacity: 0.5; } }');
+    add('--animate-caret-blink', `caret-blink ${lit('duration.caret-blink')} ease-out infinite`);
+    lines.push('  @keyframes caret-blink { 0%, 70%, 100% { opacity: 1; } 20%, 50% { opacity: 0; } }');
 
+    const ringShadow = `0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent)`;
     const utilities = `
 /* ---- artui recipes: the ONLY place these patterns are written (CLAUDE.md §8) ---- */
 @utility focus-ring {
   outline: none;
   &:focus-visible {
-    box-shadow: 0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent);
+    box-shadow: ${ringShadow};
   }
 }
 /* focus-ring-within: the same ring, on a frame whose focusable control sits inside it */
 @utility focus-ring-within {
   &:has(:focus-visible) {
-    box-shadow: 0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent);
+    box-shadow: ${ringShadow};
   }
 }
+/* focus-ring-shadow: the ring itself, for a component that decides when to show it (Input OTP active slot, Input Group frame) */
+@utility focus-ring-shadow { box-shadow: ${ringShadow}; }
 @utility motion-fast { transition-duration: ${v('duration.fast')}; transition-timing-function: ${v('ease.out')}; }
 @utility motion-base { transition-duration: ${v('duration.base')}; transition-timing-function: ${v('ease.out')}; }
 @utility control-sm { height: ${v('control.height.sm')}; padding-inline: ${v('control.padding-x.sm')}; }

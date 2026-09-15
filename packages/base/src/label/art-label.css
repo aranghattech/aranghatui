@@ -5,6 +5,9 @@
   display: none;
 }
 /* Disabled = muted foreground (AA), not opacity: axe measures dimmed text as a contrast failure. */
+:host([disabled]) {
+  pointer-events: none;
+}
 :host([disabled]) label {
-  @apply pointer-events-none text-fg-muted;
+  @apply text-fg-muted;
 }
