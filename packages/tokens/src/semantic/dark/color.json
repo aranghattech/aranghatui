@@ -19,7 +19,9 @@
       },
       "overlay": {
         "$value": "#000000b3"
-      }
+      },
+      "sidebar": { "$value": "{color.neutral.900}", "$description": "Sidebar (SideNav) surface; slightly off the canvas so the main area reads as the page." },
+      "sidebar-accent": { "$value": "{color.neutral.800}", "$description": "Hover / active wash on sidebar items." }
     },
     "fg": {
       "default": {

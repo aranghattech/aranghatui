@@ -25,7 +25,9 @@
       "overlay": {
         "$value": "#00000080",
         "$description": "Modal scrim."
-      }
+      },
+      "sidebar": { "$value": "{color.neutral.50}", "$description": "Sidebar (SideNav) surface; slightly off the canvas so the main area reads as the page." },
+      "sidebar-accent": { "$value": "{color.neutral.100}", "$description": "Hover / active wash on sidebar items." }
     },
     "fg": {
       "default": {

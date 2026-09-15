@@ -41,7 +41,7 @@ const lum = ([r, g, b]) => { const f = (c) => { c /= 255; return c <= 0.03928 ? 
 const ratio = (a, b) => { const [l1, l2] = [lum(a), lum(b)].sort((x, y) => y - x); return (l1 + 0.05) / (l2 + 0.05); };
 
 const TEXT_PAIRS = [
-  ['fg-default', 'bg-canvas'], ['fg-default', 'bg-surface'], ['fg-default', 'bg-popover'], ['fg-default', 'bg-muted'], ['fg-default', 'bg-accent'],
+  ['fg-default', 'bg-canvas'], ['fg-default', 'bg-surface'], ['fg-default', 'bg-popover'], ['fg-default', 'bg-muted'], ['fg-default', 'bg-accent'], ['fg-default', 'bg-sidebar'], ['fg-default', 'bg-sidebar-accent'], ['fg-muted', 'bg-sidebar'],
   ['fg-muted', 'bg-canvas'], ['fg-muted', 'bg-surface'], ['fg-muted', 'bg-popover'],
   ['fg-on-primary', 'primary-solid'], ['fg-on-primary', 'primary-hover'],
   ['secondary-fg', 'secondary-solid'], ['secondary-fg', 'secondary-hover'],
