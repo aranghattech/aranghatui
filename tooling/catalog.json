@@ -156,37 +156,43 @@
         {
           "tag": "art-aspect-ratio",
           "name": "Aspect Ratio",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-card",
           "name": "Card",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-item",
           "name": "Item",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-item-group",
+          "name": "Item Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-empty",
           "name": "Empty",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-table",
           "name": "Table",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-typography",
           "name": "Typography",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-marker",
           "name": "Marker",
-          "status": "planned"
+          "status": "in-progress"
         }
       ]
     },

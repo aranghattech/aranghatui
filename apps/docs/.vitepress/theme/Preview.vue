@@ -18,7 +18,7 @@ const brand = ref<string>('');
       </select>
       <button type="button" @click="dir = dir === 'ltr' ? 'rtl' : 'ltr'">{{ dir === 'ltr' ? 'RTL' : 'LTR' }}</button>
     </div>
-    <div class="artui-preview__stage" :data-frame="props.frame ?? 'inline'"><slot /></div>
+    <div class="artui-preview__stage vp-raw" :data-frame="props.frame ?? 'inline'"><slot /></div>
   </div>
 </template>
 

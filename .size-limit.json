@@ -370,6 +370,110 @@
     "gzip": true
   },
   {
+    "name": "base/art-aspect-ratio",
+    "path": "packages/base/dist/components/art-aspect-ratio.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-card",
+    "path": "packages/base/dist/components/art-card.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-item",
+    "path": "packages/base/dist/components/art-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-item-group",
+    "path": "packages/base/dist/components/art-item-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-empty",
+    "path": "packages/base/dist/components/art-empty.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-table",
+    "path": "packages/base/dist/components/art-table.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-typography",
+    "path": "packages/base/dist/components/art-typography.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-marker",
+    "path": "packages/base/dist/components/art-marker.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base: whole tier",
     "path": "packages/base/dist/components/index.js",
     "import": "*",

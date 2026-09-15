@@ -1,0 +1,64 @@
+/* light-dom: styles are scoped by the tag, not a shadow root (ADR-0021) */
+art-table {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+}
+art-table[hidden] {
+  display: none;
+}
+art-table table {
+  width: 100%;
+  border-collapse: collapse;
+  caption-side: bottom;
+  font-size: var(--art-font-size-sm);
+  line-height: var(--art-font-line-height-sm);
+  color: var(--art-color-fg-default);
+}
+art-table caption {
+  margin-top: var(--art-space-4);
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-fg-muted);
+}
+art-table tr {
+  border-bottom: var(--art-border-width) solid var(--art-color-border-default);
+  transition: background-color var(--art-duration-fast) var(--art-ease-out);
+}
+art-table tbody tr:last-child {
+  border-bottom: 0;
+}
+art-table tbody tr:hover,
+art-table tr[aria-selected='true'] {
+  background: var(--art-color-bg-accent);
+}
+art-table tfoot {
+  border-top: var(--art-border-width) solid var(--art-color-border-default);
+  background: var(--art-color-bg-muted);
+  font-weight: var(--art-font-weight-medium);
+}
+art-table tfoot tr:last-child {
+  border-bottom: 0;
+}
+art-table th {
+  height: var(--art-space-10);
+  padding-inline: var(--art-space-2);
+  text-align: start;
+  vertical-align: middle;
+  font-weight: var(--art-font-weight-medium);
+  white-space: nowrap;
+  color: var(--art-color-fg-default);
+}
+art-table td {
+  padding: var(--art-space-2);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+art-table th:has(> art-checkbox),
+art-table td:has(> art-checkbox) {
+  padding-inline-end: 0;
+}
+art-table .numeric,
+art-table [data-align='end'] {
+  text-align: end;
+}

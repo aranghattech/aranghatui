@@ -1,0 +1,113 @@
+/* light-dom: styles are scoped by the tag, not a shadow root (ADR-0021) */
+art-typography {
+  display: block;
+  color: var(--art-color-fg-default);
+  font-family: var(--art-font-family-sans);
+  font-size: var(--art-font-size-md);
+  line-height: var(--art-font-line-height-md);
+}
+art-typography[hidden] {
+  display: none;
+}
+art-typography > :first-child {
+  margin-top: 0;
+}
+art-typography h1 {
+  margin: 0;
+  font-size: var(--art-font-size-4xl);
+  font-weight: var(--art-font-weight-bold);
+  line-height: var(--art-font-line-height-4xl);
+  letter-spacing: var(--art-font-tracking-tight);
+  text-wrap: balance;
+}
+art-typography h2 {
+  margin: var(--art-space-10) 0 0;
+  padding-bottom: var(--art-space-2);
+  border-bottom: var(--art-border-width) solid var(--art-color-border-default);
+  font-size: var(--art-font-size-3xl);
+  font-weight: var(--art-font-weight-semibold);
+  line-height: var(--art-font-line-height-3xl);
+  letter-spacing: var(--art-font-tracking-tight);
+}
+art-typography h3 {
+  margin: var(--art-space-8) 0 0;
+  font-size: var(--art-font-size-2xl);
+  font-weight: var(--art-font-weight-semibold);
+  line-height: var(--art-font-line-height-2xl);
+  letter-spacing: var(--art-font-tracking-tight);
+}
+art-typography h4 {
+  margin: var(--art-space-6) 0 0;
+  font-size: var(--art-font-size-xl);
+  font-weight: var(--art-font-weight-semibold);
+  line-height: var(--art-font-line-height-xl);
+  letter-spacing: var(--art-font-tracking-tight);
+}
+art-typography p {
+  margin: var(--art-space-6) 0 0;
+}
+art-typography h1 + p,
+art-typography h2 + p,
+art-typography h3 + p,
+art-typography h4 + p {
+  margin-top: var(--art-space-4);
+}
+art-typography blockquote {
+  margin: var(--art-space-6) 0 0;
+  padding-inline-start: var(--art-space-6);
+  border-inline-start: calc(2 * var(--art-border-width)) solid var(--art-color-border-default);
+  font-style: italic;
+}
+art-typography ul,
+art-typography ol {
+  margin: var(--art-space-6) 0 0;
+  padding-inline-start: var(--art-space-6);
+}
+art-typography ul {
+  list-style: disc;
+}
+art-typography ol {
+  list-style: decimal;
+}
+art-typography li + li {
+  margin-top: var(--art-space-2);
+}
+art-typography code {
+  border-radius: var(--art-radius-xs);
+  background: var(--art-color-bg-muted);
+  padding: var(--art-space-0-5) var(--art-space-1);
+  font-family: var(--art-font-family-mono);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-semibold);
+}
+art-typography a {
+  color: var(--art-color-fg-link);
+  text-decoration: underline;
+  text-underline-offset: var(--art-space-1);
+}
+art-typography hr {
+  margin: var(--art-space-6) 0 0;
+  border: 0;
+  border-top: var(--art-border-width) solid var(--art-color-border-default);
+}
+art-typography img {
+  max-width: 100%;
+  border-radius: var(--art-radius-md);
+}
+art-typography .lead {
+  font-size: var(--art-font-size-xl);
+  color: var(--art-color-fg-muted);
+}
+art-typography .large {
+  font-size: var(--art-font-size-lg);
+  font-weight: var(--art-font-weight-semibold);
+}
+art-typography .small {
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+  line-height: 1;
+}
+art-typography .muted {
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-fg-muted);
+}

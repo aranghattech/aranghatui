@@ -1,0 +1,27 @@
+import { Component } from '@angular/core';
+import { ArtButton, ArtCard, ArtField, ArtFieldGroup, ArtInput, ArtLabel } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-card-login',
+  imports: [ArtButton, ArtCard, ArtField, ArtFieldGroup, ArtInput, ArtLabel],
+  template: `
+    <art-card>
+      <h3 slot="title">Login to your account</h3>
+      <p slot="description">Enter your email below to login to your account</p>
+      <art-button slot="action" variant="link">Sign up</art-button>
+      <art-field-group>
+        <art-field>
+          <art-label slot="label">Email</art-label>
+          <art-input type="email" placeholder="m@example.com"></art-input>
+        </art-field>
+        <art-field>
+          <art-label slot="label">Password</art-label>
+          <art-input type="password"></art-input>
+        </art-field>
+      </art-field-group>
+      <art-button slot="footer">Login</art-button>
+      <art-button slot="footer" variant="outline">Login with Google</art-button>
+    </art-card>
+  `,
+})
+export class CardLogin {}

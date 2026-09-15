@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Same border box for every variant; only outline paints it. */
+[part='item'] {
+  border: var(--art-border-width) solid transparent;
+  text-decoration: none;
+}
+:host([variant='outline']) [part='item'] {
+  border-color: var(--art-color-border-default);
+}
+/* muted: half-strength fill (shadcn bg-muted/50) so muted text on it still clears AA */
+:host([variant='muted']) [part='item'] {
+  background: color-mix(in oklab, var(--art-color-bg-muted) 50%, transparent);
+}
+::slotted([slot='media']) {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: var(--art-space-2);
+}
+:host([data-description]) ::slotted([slot='media']) {
+  align-self: flex-start;
+}
+::slotted(art-icon[slot='media']),
+::slotted(svg[slot='media']) {
+  box-sizing: border-box;
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  border-radius: var(--art-radius-sm);
+  background: var(--art-color-bg-muted);
+}
+::slotted(img[slot='media']) {
+  box-sizing: border-box;
+  width: var(--art-space-10);
+  height: var(--art-space-10);
+  border-radius: var(--art-radius-sm);
+  object-fit: cover;
+}
+::slotted([slot='title']) {
+  display: flex;
+  align-items: center;
+  gap: var(--art-space-2);
+  margin: 0;
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+  line-height: var(--art-font-line-height-sm);
+}
+::slotted([slot='description']) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  font-size: var(--art-font-size-sm);
+  line-height: var(--art-font-line-height-md);
+  color: var(--art-color-fg-muted);
+  text-wrap: balance;
+}
+::slotted([slot='actions']) {
+  display: flex;
+  align-items: center;
+  gap: var(--art-space-2);
+}
+::slotted([slot='header']),
+::slotted([slot='footer']) {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--art-space-2);
+}

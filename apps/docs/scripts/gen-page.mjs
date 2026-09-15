@@ -32,7 +32,7 @@ function toReact(html) {
   let out = html.replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}');
   out = out.replace(/<(\/?)art-([a-z0-9-]+)/g, (_, c, t) => `<${c}${pascal(t)}`);
   out = out.replace(VOID, '<$1$2 />');
-  out = out.replace(/\sclass=/g, ' className=').replace(/\sfor=/g, ' htmlFor=').replace(/\stabindex=/g, ' tabIndex=').replace(/\sreadonly\b/g, ' readOnly').replace(/\smaxlength=/g, ' maxLength=').replace(/\sautocomplete=/g, ' autoComplete=');
+  out = out.replace(/\sclass=/g, ' className=').replace(/\sfor=/g, ' htmlFor=').replace(/\stabindex=/g, ' tabIndex=').replace(/\sreadonly\b/g, ' readOnly').replace(/\smaxlength=/g, ' maxLength=').replace(/\sautocomplete=/g, ' autoComplete=').replace(/\scolspan=/g, ' colSpan=').replace(/\srowspan=/g, ' rowSpan=');
   for (const a of ['stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'clip-rule', 'stroke-dasharray']) out = out.replaceAll(` ${a}=`, ` ${camel(a)}=`);
   out = out.replace(/\sstyle="([^"]*)"/g, (_, css) => ` style={{ ${css.split(';').filter(Boolean).map((decl) => { const [k, ...v] = decl.split(':'); return `${camel(k.trim())}: '${v.join(':').trim()}'`; }).join(', ')} }}`);
   // kebab-case props on wrapped components → camelCase (aria-/data- stay)

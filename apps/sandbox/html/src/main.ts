@@ -29,6 +29,14 @@ import { defineCustomElement as defineField } from '@aranghat/base/field';
 import { defineCustomElement as defineFieldSet } from '@aranghat/base/field-set';
 import { defineCustomElement as defineFieldGroup } from '@aranghat/base/field-group';
 import { defineCustomElement as defineInputOtp } from '@aranghat/base/input-otp';
+import { defineCustomElement as defineAspectRatio } from '@aranghat/base/aspect-ratio';
+import { defineCustomElement as defineCard } from '@aranghat/base/card';
+import { defineCustomElement as defineItem } from '@aranghat/base/item';
+import { defineCustomElement as defineItemGroup } from '@aranghat/base/item-group';
+import { defineCustomElement as defineEmpty } from '@aranghat/base/empty';
+import { defineCustomElement as defineMarker } from '@aranghat/base/marker';
+import { defineCustomElement as defineTable } from '@aranghat/base/table';
+import { defineCustomElement as defineTypography } from '@aranghat/base/typography';
 import './sandbox.css';
 
 defineButton();
@@ -59,6 +67,14 @@ defineField();
 defineFieldSet();
 defineFieldGroup();
 defineInputOtp();
+defineAspectRatio();
+defineCard();
+defineItem();
+defineItemGroup();
+defineEmpty();
+defineMarker();
+defineTable();
+defineTypography();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

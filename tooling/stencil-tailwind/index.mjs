@@ -40,6 +40,13 @@ export function artuiTailwind(options = {}) {
     pluginType: 'css',
     async transform(sourceText, fileName, context) {
       if (!fileName || !fileName.endsWith('.css')) return null;
+      // Light-DOM components (Table, Typography; ADR-0021) style native descendants with
+      // tag-scoped rules and ship as global CSS: no @theme, no recipes and — above all — no
+      // shadow-root base reset may leak into the document. Marked by a leading comment.
+      if (/^\s*\/\*\s*light-dom/.test(sourceText)) {
+        const dev = Boolean(context?.config?.devMode);
+        return { code: dev ? sourceText : optimize(sourceText, { minify: true }).code, id: fileName, dependencies: [], diagnostics: [] };
+      }
       const dir = dirname(fileName);
       const files = (await readdir(dir)).filter((f) => /\.(tsx|ts)$/.test(f) && !/\.(spec|e2e|stories|test)\./.test(f));
       const candidates = new Set();

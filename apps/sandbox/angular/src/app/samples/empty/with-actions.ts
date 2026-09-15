@@ -1,0 +1,19 @@
+import { Component } from '@angular/core';
+import { ArtButton, ArtButtonGroup, ArtEmpty, ArtIcon } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-empty-with-actions',
+  imports: [ArtButton, ArtButtonGroup, ArtEmpty, ArtIcon],
+  template: `
+    <art-empty>
+      <art-icon slot="media" size="lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></art-icon>
+      <h3 slot="title">No notifications</h3>
+      <p slot="description">You're all caught up. New notifications will appear here.</p>
+      <art-button-group>
+        <art-button variant="outline">Settings</art-button>
+        <art-button variant="outline">Learn more</art-button>
+      </art-button-group>
+    </art-empty>
+  `,
+})
+export class EmptyWithActions {}
