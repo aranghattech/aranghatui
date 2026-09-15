@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  overflow: hidden;
+  padding: var(--art-space-1);
+}
+:host([hidden]) {
+  display: none;
+}

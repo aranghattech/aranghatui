@@ -43,6 +43,30 @@
       "types": "./dist/components/art-collapsible.d.ts",
       "import": "./dist/components/art-collapsible.js"
     },
+    "./combobox": {
+      "types": "./dist/components/art-combobox.d.ts",
+      "import": "./dist/components/art-combobox.js"
+    },
+    "./combobox-group": {
+      "types": "./dist/components/art-combobox-group.d.ts",
+      "import": "./dist/components/art-combobox-group.js"
+    },
+    "./combobox-item": {
+      "types": "./dist/components/art-combobox-item.d.ts",
+      "import": "./dist/components/art-combobox-item.js"
+    },
+    "./command": {
+      "types": "./dist/components/art-command.d.ts",
+      "import": "./dist/components/art-command.js"
+    },
+    "./command-group": {
+      "types": "./dist/components/art-command-group.d.ts",
+      "import": "./dist/components/art-command-group.js"
+    },
+    "./command-item": {
+      "types": "./dist/components/art-command-item.d.ts",
+      "import": "./dist/components/art-command-item.js"
+    },
     "./hover-card": {
       "types": "./dist/components/art-hover-card.d.ts",
       "import": "./dist/components/art-hover-card.js"
@@ -66,6 +90,18 @@
     "./scroll-area": {
       "types": "./dist/components/art-scroll-area.d.ts",
       "import": "./dist/components/art-scroll-area.js"
+    },
+    "./select": {
+      "types": "./dist/components/art-select.d.ts",
+      "import": "./dist/components/art-select.js"
+    },
+    "./select-group": {
+      "types": "./dist/components/art-select-group.d.ts",
+      "import": "./dist/components/art-select-group.js"
+    },
+    "./select-item": {
+      "types": "./dist/components/art-select-item.d.ts",
+      "import": "./dist/components/art-select-item.js"
     },
     "./tab": {
       "types": "./dist/components/art-tab.d.ts",

@@ -69,6 +69,10 @@
     "./hover-intent": {
       "types": "./dist/hover-intent/index.d.ts",
       "import": "./dist/hover-intent/index.js"
+    },
+    "./listbox": {
+      "types": "./dist/listbox/index.d.ts",
+      "import": "./dist/listbox/index.js"
     }
   },
   "scripts": {

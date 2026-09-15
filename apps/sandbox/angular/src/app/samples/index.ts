@@ -188,9 +188,28 @@ import { ScrollAreaHorizontal } from './scroll-area/horizontal';
 import { ResizableBasic } from './resizable/basic';
 import { ResizableVertical } from './resizable/vertical';
 import { ResizableWithHandle } from './resizable/with-handle';
+import { SelectBasic } from './select/basic';
+import { SelectOpen } from './select/open';
+import { SelectGroups } from './select/groups';
+import { SelectRichItems } from './select/rich-items';
+import { SelectSizes } from './select/sizes';
+import { SelectDisabled } from './select/disabled';
+import { SelectForm } from './select/form';
+import { CommandBasic } from './command/basic';
+import { CommandFiltered } from './command/filtered';
+import { CommandEmpty } from './command/empty';
+import { ComboboxBasic } from './combobox/basic';
+import { ComboboxOpen } from './combobox/open';
+import { ComboboxGroups } from './combobox/groups';
+import { ComboboxRichItems } from './combobox/rich-items';
+import { ComboboxMultiple } from './combobox/multiple';
+import { ComboboxNoTrigger } from './combobox/no-trigger';
+import { ComboboxSizes } from './combobox/sizes';
+import { ComboboxDisabled } from './combobox/disabled';
+import { ComboboxForm } from './combobox/form';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -382,4 +401,23 @@ export const SAMPLES = [
   { id: 'resizable/basic', component: ResizableBasic },
   { id: 'resizable/vertical', component: ResizableVertical },
   { id: 'resizable/with-handle', component: ResizableWithHandle },
+  { id: 'select/basic', component: SelectBasic },
+  { id: 'select/open', component: SelectOpen },
+  { id: 'select/groups', component: SelectGroups },
+  { id: 'select/rich-items', component: SelectRichItems },
+  { id: 'select/sizes', component: SelectSizes },
+  { id: 'select/disabled', component: SelectDisabled },
+  { id: 'select/form', component: SelectForm },
+  { id: 'command/basic', component: CommandBasic },
+  { id: 'command/filtered', component: CommandFiltered },
+  { id: 'command/empty', component: CommandEmpty },
+  { id: 'combobox/basic', component: ComboboxBasic },
+  { id: 'combobox/open', component: ComboboxOpen },
+  { id: 'combobox/groups', component: ComboboxGroups },
+  { id: 'combobox/rich-items', component: ComboboxRichItems },
+  { id: 'combobox/multiple', component: ComboboxMultiple },
+  { id: 'combobox/no-trigger', component: ComboboxNoTrigger },
+  { id: 'combobox/sizes', component: ComboboxSizes },
+  { id: 'combobox/disabled', component: ComboboxDisabled },
+  { id: 'combobox/form', component: ComboboxForm },
 ];

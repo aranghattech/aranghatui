@@ -51,6 +51,15 @@ import { defineCustomElement as defineScrollArea } from '@aranghat/components/sc
 import { defineCustomElement as defineResizable } from '@aranghat/components/resizable';
 import { defineCustomElement as defineResizablePanel } from '@aranghat/components/resizable-panel';
 import { defineCustomElement as defineResizableHandle } from '@aranghat/components/resizable-handle';
+import { defineCustomElement as defineSelect } from '@aranghat/components/select';
+import { defineCustomElement as defineSelectItem } from '@aranghat/components/select-item';
+import { defineCustomElement as defineSelectGroup } from '@aranghat/components/select-group';
+import { defineCustomElement as defineCommand } from '@aranghat/components/command';
+import { defineCustomElement as defineCommandItem } from '@aranghat/components/command-item';
+import { defineCustomElement as defineCommandGroup } from '@aranghat/components/command-group';
+import { defineCustomElement as defineCombobox } from '@aranghat/components/combobox';
+import { defineCustomElement as defineComboboxItem } from '@aranghat/components/combobox-item';
+import { defineCustomElement as defineComboboxGroup } from '@aranghat/components/combobox-group';
 import './sandbox.css';
 
 defineButton();
@@ -103,6 +112,15 @@ defineScrollArea();
 defineResizable();
 defineResizablePanel();
 defineResizableHandle();
+defineSelect();
+defineSelectItem();
+defineSelectGroup();
+defineCommand();
+defineCommandItem();
+defineCommandGroup();
+defineCombobox();
+defineComboboxItem();
+defineComboboxGroup();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

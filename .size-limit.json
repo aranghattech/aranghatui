@@ -648,6 +648,123 @@
     "gzip": true
   },
   {
+    "name": "components/art-select",
+    "path": "packages/components/dist/components/art-select.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-select-item",
+    "path": "packages/components/dist/components/art-select-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-select-group",
+    "path": "packages/components/dist/components/art-select-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-command",
+    "path": "packages/components/dist/components/art-command.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "15 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-command-item",
+    "path": "packages/components/dist/components/art-command-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-command-group",
+    "path": "packages/components/dist/components/art-command-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-combobox",
+    "path": "packages/components/dist/components/art-combobox.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-combobox-item",
+    "path": "packages/components/dist/components/art-combobox-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-combobox-group",
+    "path": "packages/components/dist/components/art-combobox-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "components/art-resizable",
     "path": "packages/components/dist/components/art-resizable.js",
     "import": "{ defineCustomElement }",

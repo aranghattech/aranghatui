@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+/* the search row uses the one border colour; the recipe adds a full border, so keep only the bottom */
+[part='search'] {
+  border-inline-width: 0;
+  border-top-width: 0;
+}

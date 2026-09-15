@@ -33,6 +33,30 @@
       "types": "./dist/collapsible.d.ts",
       "import": "./dist/collapsible.js"
     },
+    "./combobox": {
+      "types": "./dist/combobox.d.ts",
+      "import": "./dist/combobox.js"
+    },
+    "./combobox-group": {
+      "types": "./dist/combobox-group.d.ts",
+      "import": "./dist/combobox-group.js"
+    },
+    "./combobox-item": {
+      "types": "./dist/combobox-item.d.ts",
+      "import": "./dist/combobox-item.js"
+    },
+    "./command": {
+      "types": "./dist/command.d.ts",
+      "import": "./dist/command.js"
+    },
+    "./command-group": {
+      "types": "./dist/command-group.d.ts",
+      "import": "./dist/command-group.js"
+    },
+    "./command-item": {
+      "types": "./dist/command-item.d.ts",
+      "import": "./dist/command-item.js"
+    },
     "./hover-card": {
       "types": "./dist/hover-card.d.ts",
       "import": "./dist/hover-card.js"
@@ -56,6 +80,18 @@
     "./scroll-area": {
       "types": "./dist/scroll-area.d.ts",
       "import": "./dist/scroll-area.js"
+    },
+    "./select": {
+      "types": "./dist/select.d.ts",
+      "import": "./dist/select.js"
+    },
+    "./select-group": {
+      "types": "./dist/select-group.d.ts",
+      "import": "./dist/select-group.js"
+    },
+    "./select-item": {
+      "types": "./dist/select-item.d.ts",
+      "import": "./dist/select-item.js"
     },
     "./tab": {
       "types": "./dist/tab.d.ts",
