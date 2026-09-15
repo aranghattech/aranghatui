@@ -1,0 +1,53 @@
+/* One border-width line with a wider invisible hit area, drawn per direction of the group. */
+:host {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--art-border-width);
+  background: var(--art-color-border-default);
+  outline: none;
+  touch-action: none;
+  cursor: col-resize;
+}
+:host::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: var(--art-space-1);
+  translate: -50% 0;
+}
+:host([data-direction='vertical']) {
+  width: 100%;
+  height: var(--art-border-width);
+  cursor: row-resize;
+}
+:host([data-direction='vertical'])::after {
+  inset-block: auto;
+  inset-inline: 0;
+  top: 50%;
+  left: auto;
+  width: auto;
+  height: var(--art-space-1);
+  translate: 0 -50%;
+}
+:host(:focus-visible) {
+  @apply focus-ring-shadow;
+}
+:host([hidden]) {
+  display: none;
+}
+.grip {
+  width: var(--art-space-3);
+  height: var(--art-space-4);
+  color: var(--art-color-fg-muted);
+}
+.grip svg {
+  width: var(--art-space-2-5);
+  height: var(--art-space-2-5);
+}
+:host([data-direction='vertical']) .grip {
+  rotate: 90deg;
+}

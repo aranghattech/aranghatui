@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { ArtCollapsible } from '@aranghat/components-angular';
+import { ArtIcon, ArtItem } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-collapsible-basic',
+  imports: [ArtCollapsible, ArtIcon, ArtItem],
+  template: `
+    <art-collapsible>
+      <art-item slot="trigger" variant="outline">
+        <p slot="title">@peduarte starred 3 repositories</p>
+        <art-icon slot="actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></art-icon>
+      </art-item>
+      <art-item variant="outline">
+        <p slot="title">@radix-ui/primitives</p>
+      </art-item>
+      <art-item variant="outline">
+        <p slot="title">@radix-ui/colors</p>
+      </art-item>
+    </art-collapsible>
+  `,
+})
+export class CollapsibleBasic {}

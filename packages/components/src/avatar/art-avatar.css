@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--art-radius-full);
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+  user-select: none;
+}
+:host([size='sm']) {
+  width: var(--art-space-6);
+  height: var(--art-space-6);
+}
+:host([size='lg']) {
+  width: var(--art-space-10);
+  height: var(--art-space-10);
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+/* shadcn text-muted-foreground; a 70 % foreground mix keeps AA on the muted fill */
+.fallback {
+  color: color-mix(in oklab, var(--art-color-fg-default) 70%, transparent);
+}

@@ -119,6 +119,13 @@ StyleDictionary.registerFormat({
     lines.push('  @keyframes pulse { 50% { opacity: 0.5; } }');
     add('--animate-caret-blink', `caret-blink ${lit('duration.caret-blink')} ease-out infinite`);
     lines.push('  @keyframes caret-blink { 0%, 70%, 100% { opacity: 1; } 20%, 50% { opacity: 0; } }');
+    // Overlay enter / exit (CLAUDE.md §8: user-triggered micro motion). Fade + 95 % zoom + a
+    // short slide from the anchored side; the slide vector is set per placement by the component
+    // (`--art-overlay-slide`), so one keyframe pair serves every side.
+    add('--animate-overlay-in', `overlay-in ${lit('duration.base')} ${lit('ease.out')}`);
+    add('--animate-overlay-out', `overlay-out ${lit('duration.fast')} ${lit('ease.out')} forwards`);
+    lines.push('  @keyframes overlay-in { from { opacity: 0; scale: 0.95; translate: var(--art-overlay-slide, 0 0); } }');
+    lines.push('  @keyframes overlay-out { to { opacity: 0; scale: 0.95; translate: var(--art-overlay-slide, 0 0); } }');
 
     const ringShadow = `0 0 0 ${v('ring.offset')} ${v('color.bg.canvas')}, 0 0 0 calc(${v('ring.width')} + ${v('ring.offset')}) color-mix(in oklab, ${v('color.ring')} 50%, transparent)`;
     const utilities = `

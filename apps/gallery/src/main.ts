@@ -2,10 +2,11 @@ import '@aranghat/tokens/aranghat.css';
 import './gallery.css';
 import type { ComponentStories, StoryContext, StoryState } from '@artui/stories';
 import * as base from '@aranghat/base';
+import * as components from '@aranghat/components';
 import * as modals from '@aranghat/modals';
 
 // Register every element of every tier (the gallery is allowed to pay for everything).
-for (const tier of [base, modals]) {
+for (const tier of [base, components, modals]) {
   for (const [name, fn] of Object.entries(tier)) {
     if (name.startsWith('defineCustomElement') && typeof fn === 'function') (fn as () => void)();
   }

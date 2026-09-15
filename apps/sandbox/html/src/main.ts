@@ -37,6 +37,20 @@ import { defineCustomElement as defineEmpty } from '@aranghat/base/empty';
 import { defineCustomElement as defineMarker } from '@aranghat/base/marker';
 import { defineCustomElement as defineTable } from '@aranghat/base/table';
 import { defineCustomElement as defineTypography } from '@aranghat/base/typography';
+import { defineCustomElement as defineTooltip } from '@aranghat/components/tooltip';
+import { defineCustomElement as definePopover } from '@aranghat/components/popover';
+import { defineCustomElement as defineHoverCard } from '@aranghat/components/hover-card';
+import { defineCustomElement as defineCollapsible } from '@aranghat/components/collapsible';
+import { defineCustomElement as defineAccordion } from '@aranghat/components/accordion';
+import { defineCustomElement as defineAccordionItem } from '@aranghat/components/accordion-item';
+import { defineCustomElement as defineTabs } from '@aranghat/components/tabs';
+import { defineCustomElement as defineTabPanel } from '@aranghat/components/tab-panel';
+import { defineCustomElement as defineAlert } from '@aranghat/components/alert';
+import { defineCustomElement as defineAvatar } from '@aranghat/components/avatar';
+import { defineCustomElement as defineScrollArea } from '@aranghat/components/scroll-area';
+import { defineCustomElement as defineResizable } from '@aranghat/components/resizable';
+import { defineCustomElement as defineResizablePanel } from '@aranghat/components/resizable-panel';
+import { defineCustomElement as defineResizableHandle } from '@aranghat/components/resizable-handle';
 import './sandbox.css';
 
 defineButton();
@@ -75,6 +89,20 @@ defineEmpty();
 defineMarker();
 defineTable();
 defineTypography();
+defineTooltip();
+definePopover();
+defineHoverCard();
+defineCollapsible();
+defineAccordion();
+defineAccordionItem();
+defineTabs();
+defineTabPanel();
+defineAlert();
+defineAvatar();
+defineScrollArea();
+defineResizable();
+defineResizablePanel();
+defineResizableHandle();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

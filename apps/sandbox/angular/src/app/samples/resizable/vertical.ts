@@ -1,0 +1,19 @@
+import { Component } from '@angular/core';
+import { ArtResizable, ArtResizableHandle, ArtResizablePanel } from '@aranghat/components-angular';
+
+@Component({
+  selector: 'sample-resizable-vertical',
+  imports: [ArtResizable, ArtResizableHandle, ArtResizablePanel],
+  template: `
+    <art-resizable direction="vertical" style="height: 12rem; border: var(--art-border-width) solid var(--art-color-border-default); border-radius: var(--art-radius-lg)">
+      <art-resizable-panel default-size="25">
+        <div style="display: flex; height: 100%; align-items: center; justify-content: center; font-size: var(--art-font-size-sm); font-weight: var(--art-font-weight-semibold)">Header</div>
+      </art-resizable-panel>
+      <art-resizable-handle></art-resizable-handle>
+      <art-resizable-panel default-size="75">
+        <div style="display: flex; height: 100%; align-items: center; justify-content: center; font-size: var(--art-font-size-sm); font-weight: var(--art-font-weight-semibold)">Content</div>
+      </art-resizable-panel>
+    </art-resizable>
+  `,
+})
+export class ResizableVertical {}

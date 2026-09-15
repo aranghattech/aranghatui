@@ -486,6 +486,219 @@
     "gzip": true
   },
   {
+    "name": "components: runtime chunk (index2.js)",
+    "path": "packages/components/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-popover",
+    "path": "packages/components/dist/components/art-popover.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-tooltip",
+    "path": "packages/components/dist/components/art-tooltip.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-hover-card",
+    "path": "packages/components/dist/components/art-hover-card.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-collapsible",
+    "path": "packages/components/dist/components/art-collapsible.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-accordion",
+    "path": "packages/components/dist/components/art-accordion.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-accordion-item",
+    "path": "packages/components/dist/components/art-accordion-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-tabs",
+    "path": "packages/components/dist/components/art-tabs.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-tab",
+    "path": "packages/components/dist/components/art-tab.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-tab-panel",
+    "path": "packages/components/dist/components/art-tab-panel.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-alert",
+    "path": "packages/components/dist/components/art-alert.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-avatar",
+    "path": "packages/components/dist/components/art-avatar.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-scroll-area",
+    "path": "packages/components/dist/components/art-scroll-area.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-resizable",
+    "path": "packages/components/dist/components/art-resizable.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-resizable-panel",
+    "path": "packages/components/dist/components/art-resizable-panel.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-resizable-handle",
+    "path": "packages/components/dist/components/art-resizable-handle.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components: whole tier",
+    "path": "packages/components/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "90 kB",
+    "gzip": true
+  },
+  {
     "name": "modals/art-hello-overlay (+ inlined runtime: single-component tier)",
     "path": "packages/modals/dist/components/art-hello-overlay.js",
     "import": "{ defineCustomElement }",

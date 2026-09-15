@@ -1,0 +1,65 @@
+/* The host is the tab: styles live on :host, per the parent's data-variant / data-orientation.
+   A light-DOM host has the page's box-sizing (content-box), so border-box is set explicitly:
+   otherwise padding and border push a 100 % tab out of its list. */
+:host {
+  @apply relative inline-flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-2 py-1 text-sm font-medium transition-interactive motion-fast select-none;
+  box-sizing: border-box;
+  /* shadcn text-foreground/60; 70 % keeps AA on the muted list */
+  color: color-mix(in oklab, var(--art-color-fg-default) 70%, transparent);
+  border: var(--art-border-width) solid transparent;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+:host(:hover) {
+  color: var(--art-color-fg-default);
+}
+:host(:focus-visible) {
+  @apply focus-ring-shadow;
+}
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 50%;
+}
+:host([data-orientation='vertical']) {
+  width: 100%;
+  justify-content: flex-start;
+}
+/* default variant: the selected tab is a raised card on the muted list */
+:host([selected]) {
+  @apply bg-canvas text-fg shadow-raised;
+}
+/* line variant: no card, an underline instead */
+:host([data-variant='line']) {
+  border-radius: 0;
+}
+:host([data-variant='line'][selected]) {
+  background: transparent;
+  box-shadow: none;
+  color: var(--art-color-fg-default);
+}
+:host([data-variant='line'][selected])::after {
+  content: '';
+  position: absolute;
+  background: var(--art-color-fg-default);
+  inset-inline: 0;
+  bottom: calc(-1 * var(--art-space-1));
+  height: var(--art-space-0-5);
+}
+:host([data-variant='line'][data-orientation='vertical'][selected])::after {
+  inset-inline: auto;
+  inset-inline-end: calc(-1 * var(--art-space-1));
+  inset-block: 0;
+  width: var(--art-space-0-5);
+  height: auto;
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}

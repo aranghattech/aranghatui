@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted([slot='icon']) {
+  flex-shrink: 0;
+  translate: 0 var(--art-space-0-5);
+  color: currentColor;
+}
+::slotted(svg[slot='icon']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+::slotted([slot='title']) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  margin: 0;
+  min-height: var(--art-space-4);
+  font-size: inherit;
+  font-weight: var(--art-font-weight-medium);
+  letter-spacing: var(--art-font-tracking-tight);
+}
+::slotted([slot='description']) {
+  margin: 0;
+  font-size: var(--art-font-size-sm);
+  line-height: var(--art-font-line-height-md);
+  color: var(--art-color-fg-muted);
+}
+:host([variant='destructive']) ::slotted([slot='description']) {
+  color: var(--art-color-destructive-fg);
+}

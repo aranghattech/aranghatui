@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  border-bottom: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host(:last-of-type) {
+  border-bottom: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.chevron {
+  transition: rotate var(--art-duration-base) var(--art-ease-out);
+}
+details[open] .chevron {
+  rotate: 180deg;
+}
+/* Height animation where the browser can interpolate to `auto` (progressive: elsewhere it just toggles). */
+details {
+  interpolate-size: allow-keywords;
+}
+details::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height var(--art-duration-base) var(--art-ease-out), content-visibility var(--art-duration-base) allow-discrete;
+}
+details[open]::details-content {
+  height: auto;
+}

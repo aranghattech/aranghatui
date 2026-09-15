@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) summary {
+  cursor: default;
+  opacity: 50%;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+/* Height animation where the browser can interpolate to `auto` (progressive: elsewhere it just toggles). */
+details {
+  interpolate-size: allow-keywords;
+}
+details::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height var(--art-duration-base) var(--art-ease-out), content-visibility var(--art-duration-base) allow-discrete;
+}
+details[open]::details-content {
+  height: auto;
+}

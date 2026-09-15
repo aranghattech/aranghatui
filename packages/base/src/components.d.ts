@@ -47,6 +47,12 @@ export namespace Components {
           * @default false
          */
         "disabled": boolean;
+        "hostAriaDescription"?: string | null;
+        /**
+          * Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them).
+         */
+        "hostAriaExpanded"?: string | null;
+        "hostAriaHaspopup"?: string | null;
         /**
           * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
          */
@@ -1437,6 +1443,12 @@ declare namespace LocalJSX {
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        "hostAriaDescription"?: string | null;
+        /**
+          * Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them).
+         */
+        "hostAriaExpanded"?: string | null;
+        "hostAriaHaspopup"?: string | null;
         /**
           * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
          */
@@ -2282,6 +2294,9 @@ declare namespace LocalJSX {
         "target": string;
         "rel": string;
         "hostAriaLabel": string | null;
+        "hostAriaExpanded": string | null;
+        "hostAriaHaspopup": string | null;
+        "hostAriaDescription": string | null;
     }
     interface ArtButtonGroupAttributes {
         "orientation": 'horizontal' | 'vertical';

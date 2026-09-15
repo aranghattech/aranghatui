@@ -70,7 +70,9 @@ for (const [key, ex] of Object.entries(stories.examples)) {
   const cmp = imported.includes(pascal(key)) ? `${pascal(key)}Example` : pascal(key);
   if (writeIfAbsent(join(S, 'react/src/samples', slug, `${key}.tsx`), `${imports(html, 'react')}\n\nexport default function ${cmp}() {\n  return (\n    <>\n${indent(toReact(html), 6)}\n    </>\n  );\n}\n`)) written.push(`react/${key}`);
   if (writeIfAbsent(join(S, 'vue/src/samples', slug, `${key}.vue`), `<script setup lang="ts">\n${imports(html, 'vue')}\n</script>\n\n<template>\n${indent(toVue(html), 2)}\n</template>\n`)) written.push(`vue/${key}`);
-  if (writeIfAbsent(join(S, 'angular/src/app/samples', slug, `${key}.ts`), `import { Component } from '@angular/core';\n${imports(html, 'angular')}\n\n@Component({\n  selector: 'sample-${slug}-${key}',\n  imports: [${artTags(html).map(pascal).sort().join(', ')}],\n  template: \`\n${indent(html, 4)}\n  \`,\n})\nexport class ${pascal(slug)}${cmp} {}\n`)) written.push(`angular/${key}`);
+  // the Angular template is a template literal: backticks and `${` in the sample must be escaped
+  const ngHtml = html.replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+  if (writeIfAbsent(join(S, 'angular/src/app/samples', slug, `${key}.ts`), `import { Component } from '@angular/core';\n${imports(html, 'angular')}\n\n@Component({\n  selector: 'sample-${slug}-${key}',\n  imports: [${artTags(html).map(pascal).sort().join(', ')}],\n  template: \`\n${indent(ngHtml, 4)}\n  \`,\n})\nexport class ${pascal(slug)}${cmp} {}\n`)) written.push(`angular/${key}`);
 }
 
 // Angular registry

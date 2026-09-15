@@ -1,0 +1,40 @@
+:host {
+  display: contents;
+}
+/* The bubble lives on the top layer via the Popover API; strip the UA popover chrome. */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+[part='content'] {
+  position: fixed;
+}
+/* Closed = gone. Idle (no data-state) covers the time before the first open and browsers without
+   the Popover API; the popover rule keeps a display utility from beating the UA's `:not(:popover-open)`. */
+[part='content']:not([data-state]),
+[part='content'][popover]:not(:popover-open) {
+  display: none;
+}
+[part='content'][data-state='open'] {
+  @apply animate-overlay-in;
+}
+[part='content'][data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+.arrow {
+  width: var(--art-space-2-5);
+  height: var(--art-space-2-5);
+  rotate: 45deg;
+  border-radius: var(--art-radius-xs);
+  background: var(--art-color-fg-default);
+}
