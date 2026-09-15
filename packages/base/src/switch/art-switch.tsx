@@ -75,7 +75,8 @@ export class ArtSwitch {
           aria-description={this.ariaDescription}
           disabled={this.disabled}
           class={{
-            'inline-flex shrink-0 items-center rounded-full border-default border-transparent shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
+            // p-0.5 (space token) is the thumb inset; no border utilities, so no cascade conflict
+            'inline-flex shrink-0 items-center rounded-full p-0.5 shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
             // safelist: h-4 w-7 h-5 w-9 h-6 w-11
             'h-4 w-7': this.size === 'sm',
             'h-5 w-9': this.size === 'md',
@@ -89,14 +90,14 @@ export class ArtSwitch {
             part="thumb"
             class={{
               'pointer-events-none block rounded-full bg-canvas shadow-raised transition-interactive motion-fast': true,
-              // safelist: size-3 size-4 size-5 translate-x-3 translate-x-4 translate-x-5 translate-x-0.5
+              // safelist: size-3 size-4 size-5 translate-x-3 translate-x-4 translate-x-5 translate-x-0
               'size-3': this.size === 'sm',
               'size-4': this.size === 'md',
               'size-5': this.size === 'lg',
               'translate-x-3': this.checked && this.size === 'sm',
               'translate-x-4': this.checked && this.size === 'md',
               'translate-x-5': this.checked && this.size === 'lg',
-              'translate-x-0.5': !this.checked,
+              'translate-x-0': !this.checked,
             }}
           />
         </button>

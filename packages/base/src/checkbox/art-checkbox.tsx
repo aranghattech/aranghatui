@@ -91,11 +91,13 @@ export class ArtCheckbox {
           aria-description={this.ariaDescription}
           disabled={this.disabled}
           class={{
-            'inline-flex shrink-0 items-center justify-center rounded-xs border-default bg-transparent shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
+            'inline-flex shrink-0 items-center justify-center rounded-xs shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true,
             // safelist: icon-sm icon-md icon-lg
             [`icon-${this.size}`]: true,
+            // exclusive pairs: a utility for the same property must never be unconditional next to a conditional one
+            // (`bg-transparent` beat `bg-primary` in the cascade and the checked fill never painted)
             'border-primary bg-primary text-primary-fg': on,
-            'text-transparent': !on,
+            'border-default bg-transparent text-transparent': !on,
           }}
           onClick={this.onControlClick}
           onKeyDown={this.onKeydown}

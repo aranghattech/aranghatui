@@ -21,6 +21,7 @@ Add the catalogue entry status `in-progress` in `tooling/catalog.json`. Angular 
 ## 2. Tokens
 - Every design value is a **semantic** token. Missing one? Add it in `packages/tokens` in its own commit (see `token-authoring`). Never a literal, never `px`, never `!important`, never arbitrary Tailwind values.
 - Use the recipes: `focus-ring`, `motion-fast|base`, `control-sm|md|lg`, `field-*`, `icon-*`.
+- **Conditional utilities must be exclusive pairs.** Never put `bg-transparent` (unconditional) next to `'bg-primary': checked` — Tailwind's emit order decides the winner, not your intent; write `'bg-transparent': !checked`. Checkbox shipped with an invisible checked state this way. Review baselines for BOTH states of every toggle.
 - **Interpolated class names are invisible to the Tailwind scanner.** Any `` `x-${size}` `` must be accompanied by a comment listing every literal (`// safelist: field-sm field-md field-lg`), or the utility is silently missing (Input's sizes shipped without heights once).
 
 ## 3. Implement (Stencil)
