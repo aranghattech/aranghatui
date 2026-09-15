@@ -2,7 +2,11 @@
 export { ArtAccordion as Accordion } from './components/art-accordion.js';
 export { ArtAccordionItem as AccordionItem } from './components/art-accordion-item.js';
 export { ArtAlert as Alert } from './components/art-alert.js';
+export { ArtAttachment as Attachment } from './components/art-attachment.js';
+export { ArtAttachmentGroup as AttachmentGroup } from './components/art-attachment-group.js';
 export { ArtAvatar as Avatar } from './components/art-avatar.js';
+export { ArtBubble as Bubble } from './components/art-bubble.js';
+export { ArtBubbleGroup as BubbleGroup } from './components/art-bubble-group.js';
 export { ArtCalendar as Calendar } from './components/art-calendar.js';
 export { ArtCarousel as Carousel } from './components/art-carousel.js';
 export { ArtCarouselItem as CarouselItem } from './components/art-carousel-item.js';
@@ -15,7 +19,12 @@ export { ArtCommandGroup as CommandGroup } from './components/art-command-group.
 export { ArtCommandItem as CommandItem } from './components/art-command-item.js';
 export { ArtDatePicker as DatePicker } from './components/art-date-picker.js';
 export { ArtHoverCard as HoverCard } from './components/art-hover-card.js';
+export { ArtMessage as Message } from './components/art-message.js';
+export { ArtMessageGroup as MessageGroup } from './components/art-message-group.js';
+export { ArtMessageScroller as MessageScroller } from './components/art-message-scroller.js';
+export { ArtMessageScrollerItem as MessageScrollerItem } from './components/art-message-scroller-item.js';
 export { ArtPopover as Popover } from './components/art-popover.js';
+export { ArtQuestionnaire as Questionnaire } from './components/art-questionnaire.js';
 export { ArtResizable as Resizable } from './components/art-resizable.js';
 export { ArtResizableHandle as ResizableHandle } from './components/art-resizable-handle.js';
 export { ArtResizablePanel as ResizablePanel } from './components/art-resizable-panel.js';

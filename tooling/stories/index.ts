@@ -8,8 +8,9 @@ export type Theme = 'light' | 'dark';
  * sample code shows only the component(s) — never wrapper divs developers would copy.
  * inline: row, wrapping, centred. stack: column at field width (label + control + text).
  * control-text: a control in the first column with label + text stacked beside it (checkbox / radio / switch with description).
+ * thread: a 20rem conversation column where each child keeps its own width (bubbles align start / end).
  */
-export type StoryFrame = 'inline' | 'stack' | 'control-text';
+export type StoryFrame = 'inline' | 'stack' | 'control-text' | 'thread';
 
 export interface StoryContext {
   variant: string;

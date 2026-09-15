@@ -8,9 +8,9 @@
 .toast {
   box-sizing: border-box;
 }
-/* Empty description / actions collapse so a one-line toast stays one line. */
-.description:not(:has(*)):empty,
-.actions:not(:has(*)) {
+/* Empty description / actions collapse so a one-line toast stays one line (slotted state is mirrored on the host). */
+.description[hidden],
+.actions[hidden] {
   display: none;
 }
 .close {

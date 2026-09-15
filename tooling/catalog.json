@@ -369,34 +369,58 @@
         {
           "tag": "data-table",
           "name": "Data Table",
-          "status": "planned",
+          "status": "in-progress",
           "recipe": true,
           "budgetKb": 15
         },
         {
           "tag": "art-bubble",
           "name": "Bubble",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-bubble-group",
+          "name": "Bubble Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-message",
           "name": "Message",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-message-group",
+          "name": "Message Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-message-scroller",
           "name": "Message Scroller",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-message-scroller-item",
+          "name": "Message Scroller Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-attachment",
           "name": "Attachment",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-attachment-group",
+          "name": "Attachment Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-questionnaire",
           "name": "Questionnaire",
-          "status": "planned"
+          "status": "in-progress"
         }
       ]
     },

@@ -3,3 +3,6 @@ export * from './components';
 // The imperative toast API (`toast('Saved')`, `toast.success(…)`, `toast.promise(…)`) ships with the tier: `import { toast } from '@aranghat/components'`.
 export { toast, toastStore } from './toast/toast-api';
 export type { ToastAction, ToastData, ToastOptions, ToastVariant } from './toast/toast-api';
+// Headless table state for the Data Table recipe (ADR-0006): `import { createTableState } from '@aranghat/components'`.
+export { createTableState } from './data-table/table-state';
+export type { ColumnDef, SortState, TableSnapshot, TableState, TableStateOptions } from './data-table/table-state';

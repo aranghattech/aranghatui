@@ -1,0 +1,39 @@
+:host {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: var(--art-space-2);
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-fg-default);
+}
+:host([hidden]) {
+  display: none;
+}
+:host([align='end']) {
+  flex-direction: row-reverse;
+}
+/* Empty regions collapse so a bare bubble stays a bare bubble (slotted state is mirrored as data attributes). */
+:host(:not([data-has-avatar])) .avatar,
+:host(:not([data-has-header])) .header,
+:host(:not([data-has-footer])) .footer {
+  display: none;
+}
+/* The avatar hugs the bubble's bottom; with a footer it lifts by one footer row (shadcn `-translate-y-8`). */
+:host([data-has-footer]) .avatar {
+  translate: 0 calc(-1 * var(--art-space-8));
+}
+:host([align='end']) .content {
+  align-items: flex-end;
+}
+:host([align='end']) .footer {
+  justify-content: flex-end;
+}
+/* A ghost bubble has no padding, so its header / footer align with the text. */
+:host([data-ghost]) .meta {
+  padding-inline: 0;
+}
+::slotted(art-bubble),
+::slotted(art-bubble-group) {
+  max-width: 100%;
+}

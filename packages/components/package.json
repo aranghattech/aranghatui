@@ -35,9 +35,25 @@
       "types": "./dist/components/art-alert.d.ts",
       "import": "./dist/components/art-alert.js"
     },
+    "./attachment": {
+      "types": "./dist/components/art-attachment.d.ts",
+      "import": "./dist/components/art-attachment.js"
+    },
+    "./attachment-group": {
+      "types": "./dist/components/art-attachment-group.d.ts",
+      "import": "./dist/components/art-attachment-group.js"
+    },
     "./avatar": {
       "types": "./dist/components/art-avatar.d.ts",
       "import": "./dist/components/art-avatar.js"
+    },
+    "./bubble": {
+      "types": "./dist/components/art-bubble.d.ts",
+      "import": "./dist/components/art-bubble.js"
+    },
+    "./bubble-group": {
+      "types": "./dist/components/art-bubble-group.d.ts",
+      "import": "./dist/components/art-bubble-group.js"
     },
     "./calendar": {
       "types": "./dist/components/art-calendar.d.ts",
@@ -87,9 +103,29 @@
       "types": "./dist/components/art-hover-card.d.ts",
       "import": "./dist/components/art-hover-card.js"
     },
+    "./message": {
+      "types": "./dist/components/art-message.d.ts",
+      "import": "./dist/components/art-message.js"
+    },
+    "./message-group": {
+      "types": "./dist/components/art-message-group.d.ts",
+      "import": "./dist/components/art-message-group.js"
+    },
+    "./message-scroller": {
+      "types": "./dist/components/art-message-scroller.d.ts",
+      "import": "./dist/components/art-message-scroller.js"
+    },
+    "./message-scroller-item": {
+      "types": "./dist/components/art-message-scroller-item.d.ts",
+      "import": "./dist/components/art-message-scroller-item.js"
+    },
     "./popover": {
       "types": "./dist/components/art-popover.d.ts",
       "import": "./dist/components/art-popover.js"
+    },
+    "./questionnaire": {
+      "types": "./dist/components/art-questionnaire.d.ts",
+      "import": "./dist/components/art-questionnaire.js"
     },
     "./resizable": {
       "types": "./dist/components/art-resizable.d.ts",

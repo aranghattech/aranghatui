@@ -39,6 +39,9 @@ export class ArtToast {
   @Prop({ attribute: 'action-label' }) actionLabel?: string;
   @Prop({ attribute: 'cancel-label' }) cancelLabel?: string;
   @State() private state: 'open' | 'closed' = 'open';
+  @State() private hasTitle = false;
+  @State() private hasDescription = false;
+  @State() private hasActions = false;
 
   /** Emitted after the exit motion; `detail.reason`. */
   @Event({ eventName: 'dismiss', bubbles: true, composed: true }) dismissEvent!: EventEmitter<{ reason: ToastDismissReason }>;
@@ -56,7 +59,18 @@ export class ArtToast {
     this.host.addEventListener('focusin', this.pause);
     this.host.addEventListener('focusout', this.resume);
   }
-  componentDidLoad() { this.start(); }
+  componentDidLoad() {
+    this.host.shadowRoot?.addEventListener('slotchange', this.sync);
+    this.sync();
+    this.start();
+  }
+  /** Slotted state drives the layout; it is read from the light DOM (a shadow stylesheet's `:has()` cannot see it) into state so the render follows. */
+  private sync = () => {
+    this.hasDescription = !!this.host.querySelector(':scope > [slot="description"]');
+    this.hasActions = !!this.host.querySelector(':scope > [slot="action"]');
+    // whitespace between child tags is assigned to the default slot and would hide the `label` fallback
+    this.hasTitle = Array.from(this.host.childNodes).some((n) => (n.nodeType === Node.TEXT_NODE && !!n.textContent?.trim()) || (n.nodeType === Node.ELEMENT_NODE && !(n as Element).hasAttribute('slot')));
+  };
   disconnectedCallback() {
     this.clear();
     this.host.removeEventListener('pointerenter', this.pause);
@@ -122,10 +136,10 @@ export class ArtToast {
         <div part="toast" class="toast relative flex w-full items-start gap-3 rounded-lg border-default bg-popover p-4 text-sm text-fg shadow-overlay" data-state={this.state}>
           <slot name="icon">{this.icon()}</slot>
           <div class="flex min-w-0 flex-1 flex-col gap-1">
-            <div class="title font-medium"><slot>{this.label}</slot></div>
-            <div class="description text-fg-muted"><slot name="description">{this.description}</slot></div>
+            <div class="title font-medium">{this.hasTitle ? <slot /> : this.label}</div>
+            <div class="description text-fg-muted" hidden={!this.description && !this.hasDescription}><slot name="description">{this.description}</slot></div>
           </div>
-          <div class="actions flex shrink-0 items-center gap-2 self-center">
+          <div class="actions flex shrink-0 items-center gap-2 self-center" hidden={!this.actionLabel && !this.cancelLabel && !this.hasActions}>
             <slot name="action">
               {this.cancelLabel && <art-button size="sm" variant="ghost" onClick={() => { this.cancelEvent.emit(); void this.close('cancel'); }}>{this.cancelLabel}</art-button>}
               {this.actionLabel && <art-button size="sm" onClick={() => { this.actionEvent.emit(); void this.close('action'); }}>{this.actionLabel}</art-button>}

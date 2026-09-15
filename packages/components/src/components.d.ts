@@ -5,15 +5,21 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AttachmentState } from "./attachment/art-attachment";
 import { CalendarChangeDetail, CalendarMode } from "./calendar/art-calendar";
 import { Placement } from "@aranghat/primitives/floating";
 import { CalendarChangeDetail as CalendarChangeDetail1 } from "./calendar/art-calendar";
+import { ScrollStateDetail } from "./message-scroller/art-message-scroller";
+import { QuestionnaireAnswers, QuestionnaireItem } from "./questionnaire/art-questionnaire";
 import { ToastVariant } from "./toast/toast-api";
 import { ToastDismissReason } from "./toast/art-toast";
 import { ToasterPosition } from "./toaster/art-toaster";
+export { AttachmentState } from "./attachment/art-attachment";
 export { CalendarChangeDetail, CalendarMode } from "./calendar/art-calendar";
 export { Placement } from "@aranghat/primitives/floating";
 export { CalendarChangeDetail as CalendarChangeDetail1 } from "./calendar/art-calendar";
+export { ScrollStateDetail } from "./message-scroller/art-message-scroller";
+export { QuestionnaireAnswers, QuestionnaireItem } from "./questionnaire/art-questionnaire";
 export { ToastVariant } from "./toast/toast-api";
 export { ToastDismissReason } from "./toast/art-toast";
 export { ToasterPosition } from "./toaster/art-toaster";
@@ -70,6 +76,59 @@ export namespace Components {
         "variant": 'default' | 'destructive';
     }
     /**
+     * Attachment — shadcn/ui parity. A file or image card: an icon or image, the file name, a
+     * line of metadata, end-aligned actions, and upload states. Horizontal for lists and
+     * composers, vertical for image grids. `href` or `trigger-label` make the whole card a target
+     * while the actions stay clickable.
+     */
+    interface ArtAttachment {
+        /**
+          * Metadata line (alternative to the `description` slot). Uploading shows `progress` instead.
+         */
+        "description"?: string;
+        /**
+          * Makes the card a link (a full-card `<a>` under the actions).
+         */
+        "href"?: string;
+        /**
+          * File name (alternative to the default slot).
+         */
+        "name"?: string;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Upload progress 0–100, shown while `uploading`.
+         */
+        "progress"?: number;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md';
+        /**
+          * Upload state: `idle` (dashed, not yet uploaded), `uploading`, `processing`, `error`, `done`.
+          * @default 'done'
+         */
+        "state": AttachmentState;
+        "target"?: string;
+        /**
+          * Makes the card a button with this accessible name; emits `trigger` on activation.
+         */
+        "triggerLabel"?: string;
+    }
+    /**
+     * Attachment Group — a horizontally scrolling row of attachments (a composer's file strip).
+     * Focusable so the strip can be scrolled with the keyboard.
+     */
+    interface ArtAttachmentGroup {
+        /**
+          * Accessible name of the group.
+          * @default 'Attachments'
+         */
+        "label": string;
+    }
+    /**
      * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
      * image has loaded, or instead of it when it fails.
      */
@@ -84,6 +143,44 @@ export namespace Components {
          */
         "size": 'sm' | 'md' | 'lg';
         "src"?: string;
+    }
+    /**
+     * Bubble — shadcn/ui parity. The visible surface of a conversational message: seven variants,
+     * start / end alignment, an optional reactions row anchored to an edge, and a link form
+     * (`href`) when the whole bubble is a target. Compose consecutive bubbles in
+     * `<art-bubble-group>`; put one inside `<art-message>` for avatar, header and footer.
+     */
+    interface ArtBubble {
+        /**
+          * `end` aligns the bubble to the end of its row (the sender's side).
+          * @default 'start'
+         */
+        "align": 'start' | 'end';
+        /**
+          * Renders the surface as a link.
+         */
+        "href"?: string;
+        /**
+          * Which end of that edge.
+          * @default 'end'
+         */
+        "reactionsAlign": 'start' | 'end';
+        /**
+          * Which edge the reactions pill hangs from.
+          * @default 'bottom'
+         */
+        "reactionsSide": 'top' | 'bottom';
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'secondary' | 'muted' | 'tinted' | 'outline' | 'ghost' | 'destructive';
+    }
+    /**
+     * Bubble Group — stacks consecutive bubbles from the same sender.
+     */
+    interface ArtBubbleGroup {
     }
     /**
      * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
@@ -514,6 +611,83 @@ export namespace Components {
         "placement": Placement;
     }
     /**
+     * Message — shadcn/ui parity. A row in a conversation: an avatar anchored to the bottom, then
+     * a column with an optional header (name, time), the bubble, and an optional footer (status,
+     * actions). `align="end"` mirrors the row for the current user.
+     */
+    interface ArtMessage {
+        /**
+          * `end` puts the avatar on the end side and right-aligns the column (the current user).
+          * @default 'start'
+         */
+        "align": 'start' | 'end';
+    }
+    /**
+     * Message Group — stacks consecutive messages from the same sender.
+     */
+    interface ArtMessageGroup {
+    }
+    /**
+     * Message Scroller — shadcn/ui parity. A transcript viewport for streaming conversations that
+     * never moves the reader against their intent: it follows the live edge while the reader is at
+     * the end and lets go when they scroll up; a new turn marked `scroll-anchor` is placed near the
+     * top with a peek of the previous one; older messages prepended above keep the visible row in
+     * place; a "jump to latest" button appears when the end is out of view.
+     */
+    interface ArtMessageScroller {
+        /**
+          * Keep the end in view as content streams in (until the reader scrolls away).
+          * @default true
+         */
+        "autoScroll": boolean;
+        /**
+          * Where to open: the latest message, the first one, or the last `scroll-anchor` row with context.
+          * @default 'end'
+         */
+        "defaultScrollPosition": 'start' | 'end' | 'last-anchor';
+        /**
+          * Whether the reader is at the end.
+         */
+        "isAtEnd": () => Promise<boolean>;
+        /**
+          * Accessible name of the viewport.
+          * @default 'Messages'
+         */
+        "label": string;
+        /**
+          * Pixels of the previous row kept visible above an anchored turn.
+          * @default 64
+         */
+        "scrollPreviousItemPeek": number;
+        /**
+          * Jump to the latest message and follow new ones.
+         */
+        "scrollToEnd": (behavior?: ScrollBehavior) => Promise<void>;
+        /**
+          * Bring a row (`message-id`) into view near the top (following stops).
+         */
+        "scrollToMessage": (id: string, behavior?: ScrollBehavior) => Promise<void>;
+        /**
+          * Jump to the first message (following stops).
+         */
+        "scrollToStart": (behavior?: ScrollBehavior) => Promise<void>;
+    }
+    /**
+     * Message Scroller Item — one row of the transcript. `message-id` makes it a jump target;
+     * `scroll-anchor` marks a turn boundary that the scroller places near the top when appended.
+     */
+    interface ArtMessageScrollerItem {
+        /**
+          * Stable id for `scrollToMessage()`.
+         */
+        "messageId"?: string;
+        /**
+          * A turn boundary: when appended while following, it is positioned near the top of the viewport.
+          * @default false
+         */
+        "scrollAnchor": boolean;
+    }
+    /**
      * Popover — shadcn/ui parity. Rich content anchored to a trigger, opened by click, closed by
      * Escape, an outside click or focus leaving. Rendered on the platform top layer (Popover API)
      * and positioned with the floating primitive. Focus moves into the panel on open and returns
@@ -538,6 +712,67 @@ export namespace Components {
           * @default 'bottom'
          */
         "placement": Placement;
+    }
+    /**
+     * Questionnaire — shadcn/ui parity. A multi-step form: one question at a time with single or
+     * multiple choice, a free-text answer, progress, previous / skip / next / submit, keyboard
+     * shortcuts and built-in validation (required, pattern, min / max, length). Questions come as
+     * data (`items`); answers leave as an object and as FormData (form-associated).
+     */
+    interface ArtQuestionnaire {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * The questions (array, or a JSON string attribute).
+          * @default []
+         */
+        "items": QuestionnaireItem[] | string;
+        "name"?: string;
+        /**
+          * Validate the visible question and move on (or complete on the last one).
+         */
+        "next": () => Promise<void>;
+        /**
+          * @default 'Next'
+         */
+        "nextLabel": string;
+        /**
+          * @default 'Previous'
+         */
+        "previousLabel": string;
+        /**
+          * Focus the active question.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Keyboard shortcuts on choices: `letters` (A, B, C…), `numbers` (1, 2, 3…) or `none`.
+          * @default 'letters'
+         */
+        "shortcuts": 'letters' | 'numbers' | 'none';
+        /**
+          * @default 'Skip'
+         */
+        "skipLabel": string;
+        /**
+          * Zero-based index of the visible question.
+          * @default 0
+         */
+        "step": number;
+        /**
+          * @default 'Submit'
+         */
+        "submitLabel": string;
+        /**
+          * Custom validation: return a message to block, or nothing to accept.
+         */
+        "validate"?: (item: QuestionnaireItem, answer: string | string[] | undefined) => string | undefined | void;
+        /**
+          * Answers by question name; `multiple` answers are arrays.
+          * @default {}
+         */
+        "value": QuestionnaireAnswers;
     }
     /**
      * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
@@ -866,6 +1101,10 @@ export interface ArtAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtAccordionItemElement;
 }
+export interface ArtAttachmentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtAttachmentElement;
+}
 export interface ArtCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtCalendarElement;
@@ -894,9 +1133,17 @@ export interface ArtHoverCardCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtHoverCardElement;
 }
+export interface ArtMessageScrollerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtMessageScrollerElement;
+}
 export interface ArtPopoverCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtPopoverElement;
+}
+export interface ArtQuestionnaireCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtQuestionnaireElement;
 }
 export interface ArtResizableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -973,6 +1220,39 @@ declare global {
         prototype: HTMLArtAlertElement;
         new (): HTMLArtAlertElement;
     };
+    interface HTMLArtAttachmentElementEventMap {
+        "trigger": void;
+    }
+    /**
+     * Attachment — shadcn/ui parity. A file or image card: an icon or image, the file name, a
+     * line of metadata, end-aligned actions, and upload states. Horizontal for lists and
+     * composers, vertical for image grids. `href` or `trigger-label` make the whole card a target
+     * while the actions stay clickable.
+     */
+    interface HTMLArtAttachmentElement extends Components.ArtAttachment, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtAttachmentElementEventMap>(type: K, listener: (this: HTMLArtAttachmentElement, ev: ArtAttachmentCustomEvent<HTMLArtAttachmentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtAttachmentElementEventMap>(type: K, listener: (this: HTMLArtAttachmentElement, ev: ArtAttachmentCustomEvent<HTMLArtAttachmentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtAttachmentElement: {
+        prototype: HTMLArtAttachmentElement;
+        new (): HTMLArtAttachmentElement;
+    };
+    /**
+     * Attachment Group — a horizontally scrolling row of attachments (a composer's file strip).
+     * Focusable so the strip can be scrolled with the keyboard.
+     */
+    interface HTMLArtAttachmentGroupElement extends Components.ArtAttachmentGroup, HTMLStencilElement {
+    }
+    var HTMLArtAttachmentGroupElement: {
+        prototype: HTMLArtAttachmentGroupElement;
+        new (): HTMLArtAttachmentGroupElement;
+    };
     /**
      * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
      * image has loaded, or instead of it when it fails.
@@ -982,6 +1262,27 @@ declare global {
     var HTMLArtAvatarElement: {
         prototype: HTMLArtAvatarElement;
         new (): HTMLArtAvatarElement;
+    };
+    /**
+     * Bubble — shadcn/ui parity. The visible surface of a conversational message: seven variants,
+     * start / end alignment, an optional reactions row anchored to an edge, and a link form
+     * (`href`) when the whole bubble is a target. Compose consecutive bubbles in
+     * `<art-bubble-group>`; put one inside `<art-message>` for avatar, header and footer.
+     */
+    interface HTMLArtBubbleElement extends Components.ArtBubble, HTMLStencilElement {
+    }
+    var HTMLArtBubbleElement: {
+        prototype: HTMLArtBubbleElement;
+        new (): HTMLArtBubbleElement;
+    };
+    /**
+     * Bubble Group — stacks consecutive bubbles from the same sender.
+     */
+    interface HTMLArtBubbleGroupElement extends Components.ArtBubbleGroup, HTMLStencilElement {
+    }
+    var HTMLArtBubbleGroupElement: {
+        prototype: HTMLArtBubbleGroupElement;
+        new (): HTMLArtBubbleGroupElement;
     };
     interface HTMLArtCalendarElementEventMap {
         "change": CalendarChangeDetail;
@@ -1197,6 +1498,60 @@ declare global {
         prototype: HTMLArtHoverCardElement;
         new (): HTMLArtHoverCardElement;
     };
+    /**
+     * Message — shadcn/ui parity. A row in a conversation: an avatar anchored to the bottom, then
+     * a column with an optional header (name, time), the bubble, and an optional footer (status,
+     * actions). `align="end"` mirrors the row for the current user.
+     */
+    interface HTMLArtMessageElement extends Components.ArtMessage, HTMLStencilElement {
+    }
+    var HTMLArtMessageElement: {
+        prototype: HTMLArtMessageElement;
+        new (): HTMLArtMessageElement;
+    };
+    /**
+     * Message Group — stacks consecutive messages from the same sender.
+     */
+    interface HTMLArtMessageGroupElement extends Components.ArtMessageGroup, HTMLStencilElement {
+    }
+    var HTMLArtMessageGroupElement: {
+        prototype: HTMLArtMessageGroupElement;
+        new (): HTMLArtMessageGroupElement;
+    };
+    interface HTMLArtMessageScrollerElementEventMap {
+        "scroll-state-change": ScrollStateDetail;
+    }
+    /**
+     * Message Scroller — shadcn/ui parity. A transcript viewport for streaming conversations that
+     * never moves the reader against their intent: it follows the live edge while the reader is at
+     * the end and lets go when they scroll up; a new turn marked `scroll-anchor` is placed near the
+     * top with a peek of the previous one; older messages prepended above keep the visible row in
+     * place; a "jump to latest" button appears when the end is out of view.
+     */
+    interface HTMLArtMessageScrollerElement extends Components.ArtMessageScroller, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMessageScrollerElementEventMap>(type: K, listener: (this: HTMLArtMessageScrollerElement, ev: ArtMessageScrollerCustomEvent<HTMLArtMessageScrollerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMessageScrollerElementEventMap>(type: K, listener: (this: HTMLArtMessageScrollerElement, ev: ArtMessageScrollerCustomEvent<HTMLArtMessageScrollerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtMessageScrollerElement: {
+        prototype: HTMLArtMessageScrollerElement;
+        new (): HTMLArtMessageScrollerElement;
+    };
+    /**
+     * Message Scroller Item — one row of the transcript. `message-id` makes it a jump target;
+     * `scroll-anchor` marks a turn boundary that the scroller places near the top when appended.
+     */
+    interface HTMLArtMessageScrollerItemElement extends Components.ArtMessageScrollerItem, HTMLStencilElement {
+    }
+    var HTMLArtMessageScrollerItemElement: {
+        prototype: HTMLArtMessageScrollerItemElement;
+        new (): HTMLArtMessageScrollerItemElement;
+    };
     interface HTMLArtPopoverElementEventMap {
         "open-change": { open: boolean };
     }
@@ -1219,6 +1574,31 @@ declare global {
     var HTMLArtPopoverElement: {
         prototype: HTMLArtPopoverElement;
         new (): HTMLArtPopoverElement;
+    };
+    interface HTMLArtQuestionnaireElementEventMap {
+        "answer-change": { name: string; value: string | string[] | undefined; answers: QuestionnaireAnswers };
+        "step-change": { step: number; item: QuestionnaireItem };
+        "complete": { answers: QuestionnaireAnswers };
+    }
+    /**
+     * Questionnaire — shadcn/ui parity. A multi-step form: one question at a time with single or
+     * multiple choice, a free-text answer, progress, previous / skip / next / submit, keyboard
+     * shortcuts and built-in validation (required, pattern, min / max, length). Questions come as
+     * data (`items`); answers leave as an object and as FormData (form-associated).
+     */
+    interface HTMLArtQuestionnaireElement extends Components.ArtQuestionnaire, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtQuestionnaireElementEventMap>(type: K, listener: (this: HTMLArtQuestionnaireElement, ev: ArtQuestionnaireCustomEvent<HTMLArtQuestionnaireElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtQuestionnaireElementEventMap>(type: K, listener: (this: HTMLArtQuestionnaireElement, ev: ArtQuestionnaireCustomEvent<HTMLArtQuestionnaireElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtQuestionnaireElement: {
+        prototype: HTMLArtQuestionnaireElement;
+        new (): HTMLArtQuestionnaireElement;
     };
     interface HTMLArtResizableElementEventMap {
         "layout-change": { sizes: number[] };
@@ -1421,7 +1801,11 @@ declare global {
         "art-accordion": HTMLArtAccordionElement;
         "art-accordion-item": HTMLArtAccordionItemElement;
         "art-alert": HTMLArtAlertElement;
+        "art-attachment": HTMLArtAttachmentElement;
+        "art-attachment-group": HTMLArtAttachmentGroupElement;
         "art-avatar": HTMLArtAvatarElement;
+        "art-bubble": HTMLArtBubbleElement;
+        "art-bubble-group": HTMLArtBubbleGroupElement;
         "art-calendar": HTMLArtCalendarElement;
         "art-carousel": HTMLArtCarouselElement;
         "art-carousel-item": HTMLArtCarouselItemElement;
@@ -1434,7 +1818,12 @@ declare global {
         "art-command-item": HTMLArtCommandItemElement;
         "art-date-picker": HTMLArtDatePickerElement;
         "art-hover-card": HTMLArtHoverCardElement;
+        "art-message": HTMLArtMessageElement;
+        "art-message-group": HTMLArtMessageGroupElement;
+        "art-message-scroller": HTMLArtMessageScrollerElement;
+        "art-message-scroller-item": HTMLArtMessageScrollerItemElement;
         "art-popover": HTMLArtPopoverElement;
+        "art-questionnaire": HTMLArtQuestionnaireElement;
         "art-resizable": HTMLArtResizableElement;
         "art-resizable-handle": HTMLArtResizableHandleElement;
         "art-resizable-panel": HTMLArtResizablePanelElement;
@@ -1511,6 +1900,63 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'destructive';
     }
     /**
+     * Attachment — shadcn/ui parity. A file or image card: an icon or image, the file name, a
+     * line of metadata, end-aligned actions, and upload states. Horizontal for lists and
+     * composers, vertical for image grids. `href` or `trigger-label` make the whole card a target
+     * while the actions stay clickable.
+     */
+    interface ArtAttachment {
+        /**
+          * Metadata line (alternative to the `description` slot). Uploading shows `progress` instead.
+         */
+        "description"?: string;
+        /**
+          * Makes the card a link (a full-card `<a>` under the actions).
+         */
+        "href"?: string;
+        /**
+          * File name (alternative to the default slot).
+         */
+        "name"?: string;
+        /**
+          * The full-card button (`trigger-label`) was activated.
+         */
+        "onTrigger"?: (event: ArtAttachmentCustomEvent<void>) => void;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * Upload progress 0–100, shown while `uploading`.
+         */
+        "progress"?: number;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md';
+        /**
+          * Upload state: `idle` (dashed, not yet uploaded), `uploading`, `processing`, `error`, `done`.
+          * @default 'done'
+         */
+        "state"?: AttachmentState;
+        "target"?: string;
+        /**
+          * Makes the card a button with this accessible name; emits `trigger` on activation.
+         */
+        "triggerLabel"?: string;
+    }
+    /**
+     * Attachment Group — a horizontally scrolling row of attachments (a composer's file strip).
+     * Focusable so the strip can be scrolled with the keyboard.
+     */
+    interface ArtAttachmentGroup {
+        /**
+          * Accessible name of the group.
+          * @default 'Attachments'
+         */
+        "label"?: string;
+    }
+    /**
      * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
      * image has loaded, or instead of it when it fails.
      */
@@ -1525,6 +1971,44 @@ declare namespace LocalJSX {
          */
         "size"?: 'sm' | 'md' | 'lg';
         "src"?: string;
+    }
+    /**
+     * Bubble — shadcn/ui parity. The visible surface of a conversational message: seven variants,
+     * start / end alignment, an optional reactions row anchored to an edge, and a link form
+     * (`href`) when the whole bubble is a target. Compose consecutive bubbles in
+     * `<art-bubble-group>`; put one inside `<art-message>` for avatar, header and footer.
+     */
+    interface ArtBubble {
+        /**
+          * `end` aligns the bubble to the end of its row (the sender's side).
+          * @default 'start'
+         */
+        "align"?: 'start' | 'end';
+        /**
+          * Renders the surface as a link.
+         */
+        "href"?: string;
+        /**
+          * Which end of that edge.
+          * @default 'end'
+         */
+        "reactionsAlign"?: 'start' | 'end';
+        /**
+          * Which edge the reactions pill hangs from.
+          * @default 'bottom'
+         */
+        "reactionsSide"?: 'top' | 'bottom';
+        "rel"?: string;
+        "target"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'secondary' | 'muted' | 'tinted' | 'outline' | 'ghost' | 'destructive';
+    }
+    /**
+     * Bubble Group — stacks consecutive bubbles from the same sender.
+     */
+    interface ArtBubbleGroup {
     }
     /**
      * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
@@ -1977,6 +2461,71 @@ declare namespace LocalJSX {
         "placement"?: Placement;
     }
     /**
+     * Message — shadcn/ui parity. A row in a conversation: an avatar anchored to the bottom, then
+     * a column with an optional header (name, time), the bubble, and an optional footer (status,
+     * actions). `align="end"` mirrors the row for the current user.
+     */
+    interface ArtMessage {
+        /**
+          * `end` puts the avatar on the end side and right-aligns the column (the current user).
+          * @default 'start'
+         */
+        "align"?: 'start' | 'end';
+    }
+    /**
+     * Message Group — stacks consecutive messages from the same sender.
+     */
+    interface ArtMessageGroup {
+    }
+    /**
+     * Message Scroller — shadcn/ui parity. A transcript viewport for streaming conversations that
+     * never moves the reader against their intent: it follows the live edge while the reader is at
+     * the end and lets go when they scroll up; a new turn marked `scroll-anchor` is placed near the
+     * top with a peek of the previous one; older messages prepended above keep the visible row in
+     * place; a "jump to latest" button appears when the end is out of view.
+     */
+    interface ArtMessageScroller {
+        /**
+          * Keep the end in view as content streams in (until the reader scrolls away).
+          * @default true
+         */
+        "autoScroll"?: boolean;
+        /**
+          * Where to open: the latest message, the first one, or the last `scroll-anchor` row with context.
+          * @default 'end'
+         */
+        "defaultScrollPosition"?: 'start' | 'end' | 'last-anchor';
+        /**
+          * Accessible name of the viewport.
+          * @default 'Messages'
+         */
+        "label"?: string;
+        /**
+          * Emitted when the reader reaches or leaves the start / end, or following turns on or off.
+         */
+        "onScroll-state-change"?: (event: ArtMessageScrollerCustomEvent<ScrollStateDetail>) => void;
+        /**
+          * Pixels of the previous row kept visible above an anchored turn.
+          * @default 64
+         */
+        "scrollPreviousItemPeek"?: number;
+    }
+    /**
+     * Message Scroller Item — one row of the transcript. `message-id` makes it a jump target;
+     * `scroll-anchor` marks a turn boundary that the scroller places near the top when appended.
+     */
+    interface ArtMessageScrollerItem {
+        /**
+          * Stable id for `scrollToMessage()`.
+         */
+        "messageId"?: string;
+        /**
+          * A turn boundary: when appended while following, it is positioned near the top of the viewport.
+          * @default false
+         */
+        "scrollAnchor"?: boolean;
+    }
+    /**
      * Popover — shadcn/ui parity. Rich content anchored to a trigger, opened by click, closed by
      * Escape, an outside click or focus leaving. Rendered on the platform top layer (Popover API)
      * and positioned with the floating primitive. Focus moves into the panel on open and returns
@@ -2005,6 +2554,75 @@ declare namespace LocalJSX {
           * @default 'bottom'
          */
         "placement"?: Placement;
+    }
+    /**
+     * Questionnaire — shadcn/ui parity. A multi-step form: one question at a time with single or
+     * multiple choice, a free-text answer, progress, previous / skip / next / submit, keyboard
+     * shortcuts and built-in validation (required, pattern, min / max, length). Questions come as
+     * data (`items`); answers leave as an object and as FormData (form-associated).
+     */
+    interface ArtQuestionnaire {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * The questions (array, or a JSON string attribute).
+          * @default []
+         */
+        "items"?: QuestionnaireItem[] | string;
+        "name"?: string;
+        /**
+          * @default 'Next'
+         */
+        "nextLabel"?: string;
+        /**
+          * Emitted when an answer changes; `detail.name`, `detail.value`, `detail.answers`.
+         */
+        "onAnswer-change"?: (event: ArtQuestionnaireCustomEvent<{ name: string; value: string | string[] | undefined; answers: QuestionnaireAnswers }>) => void;
+        /**
+          * Emitted on Submit once every question validates; `detail.answers`. (`submit` is the native form event.)
+         */
+        "onComplete"?: (event: ArtQuestionnaireCustomEvent<{ answers: QuestionnaireAnswers }>) => void;
+        /**
+          * Emitted when the visible question changes; `detail.step`, `detail.item`.
+         */
+        "onStep-change"?: (event: ArtQuestionnaireCustomEvent<{ step: number; item: QuestionnaireItem }>) => void;
+        /**
+          * @default 'Previous'
+         */
+        "previousLabel"?: string;
+        /**
+          * Keyboard shortcuts on choices: `letters` (A, B, C…), `numbers` (1, 2, 3…) or `none`.
+          * @default 'letters'
+         */
+        "shortcuts"?: 'letters' | 'numbers' | 'none';
+        /**
+          * @default 'Skip'
+         */
+        "skipLabel"?: string;
+        /**
+          * Zero-based index of the visible question.
+          * @default 0
+         */
+        "step"?: number;
+        /**
+          * @default 'Submit'
+         */
+        "submitLabel"?: string;
+        /**
+          * Custom validation: return a message to block, or nothing to accept.
+         */
+        "validate"?: (item: QuestionnaireItem, answer: string | string[] | undefined) => string | undefined | void;
+        /**
+          * Answers by question name; `multiple` answers are arrays.
+          * @default {}
+         */
+        "value"?: QuestionnaireAnswers;
     }
     /**
      * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
@@ -2359,10 +2977,33 @@ declare namespace LocalJSX {
     interface ArtAlertAttributes {
         "variant": 'default' | 'destructive';
     }
+    interface ArtAttachmentAttributes {
+        "state": AttachmentState;
+        "size": 'sm' | 'md';
+        "orientation": 'horizontal' | 'vertical';
+        "name": string;
+        "description": string;
+        "progress": number;
+        "href": string;
+        "target": string;
+        "triggerLabel": string;
+    }
+    interface ArtAttachmentGroupAttributes {
+        "label": string;
+    }
     interface ArtAvatarAttributes {
         "src": string;
         "alt": string;
         "size": 'sm' | 'md' | 'lg';
+    }
+    interface ArtBubbleAttributes {
+        "variant": 'default' | 'secondary' | 'muted' | 'tinted' | 'outline' | 'ghost' | 'destructive';
+        "align": 'start' | 'end';
+        "href": string;
+        "target": string;
+        "rel": string;
+        "reactionsSide": 'top' | 'bottom';
+        "reactionsAlign": 'start' | 'end';
     }
     interface ArtCalendarAttributes {
         "mode": CalendarMode;
@@ -2465,11 +3106,35 @@ declare namespace LocalJSX {
         "openDelay": number;
         "closeDelay": number;
     }
+    interface ArtMessageAttributes {
+        "align": 'start' | 'end';
+    }
+    interface ArtMessageScrollerAttributes {
+        "autoScroll": boolean;
+        "defaultScrollPosition": 'start' | 'end' | 'last-anchor';
+        "scrollPreviousItemPeek": number;
+        "label": string;
+    }
+    interface ArtMessageScrollerItemAttributes {
+        "messageId": string;
+        "scrollAnchor": boolean;
+    }
     interface ArtPopoverAttributes {
         "placement": Placement;
         "offset": number;
         "open": boolean;
         "label": string;
+    }
+    interface ArtQuestionnaireAttributes {
+        "items": QuestionnaireItem[] | string;
+        "step": number;
+        "shortcuts": 'letters' | 'numbers' | 'none';
+        "previousLabel": string;
+        "nextLabel": string;
+        "skipLabel": string;
+        "submitLabel": string;
+        "name": string;
+        "disabled": boolean;
     }
     interface ArtResizableAttributes {
         "direction": 'horizontal' | 'vertical';
@@ -2555,7 +3220,11 @@ declare namespace LocalJSX {
         "art-accordion": Omit<ArtAccordion, keyof ArtAccordionAttributes> & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes]?: ArtAccordion[K] } & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes as `attr:${K}`]?: ArtAccordionAttributes[K] } & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes as `prop:${K}`]?: ArtAccordion[K] };
         "art-accordion-item": Omit<ArtAccordionItem, keyof ArtAccordionItemAttributes> & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes]?: ArtAccordionItem[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `attr:${K}`]?: ArtAccordionItemAttributes[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `prop:${K}`]?: ArtAccordionItem[K] };
         "art-alert": Omit<ArtAlert, keyof ArtAlertAttributes> & { [K in keyof ArtAlert & keyof ArtAlertAttributes]?: ArtAlert[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `attr:${K}`]?: ArtAlertAttributes[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `prop:${K}`]?: ArtAlert[K] };
+        "art-attachment": Omit<ArtAttachment, keyof ArtAttachmentAttributes> & { [K in keyof ArtAttachment & keyof ArtAttachmentAttributes]?: ArtAttachment[K] } & { [K in keyof ArtAttachment & keyof ArtAttachmentAttributes as `attr:${K}`]?: ArtAttachmentAttributes[K] } & { [K in keyof ArtAttachment & keyof ArtAttachmentAttributes as `prop:${K}`]?: ArtAttachment[K] };
+        "art-attachment-group": Omit<ArtAttachmentGroup, keyof ArtAttachmentGroupAttributes> & { [K in keyof ArtAttachmentGroup & keyof ArtAttachmentGroupAttributes]?: ArtAttachmentGroup[K] } & { [K in keyof ArtAttachmentGroup & keyof ArtAttachmentGroupAttributes as `attr:${K}`]?: ArtAttachmentGroupAttributes[K] } & { [K in keyof ArtAttachmentGroup & keyof ArtAttachmentGroupAttributes as `prop:${K}`]?: ArtAttachmentGroup[K] };
         "art-avatar": Omit<ArtAvatar, keyof ArtAvatarAttributes> & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes]?: ArtAvatar[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `attr:${K}`]?: ArtAvatarAttributes[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `prop:${K}`]?: ArtAvatar[K] };
+        "art-bubble": Omit<ArtBubble, keyof ArtBubbleAttributes> & { [K in keyof ArtBubble & keyof ArtBubbleAttributes]?: ArtBubble[K] } & { [K in keyof ArtBubble & keyof ArtBubbleAttributes as `attr:${K}`]?: ArtBubbleAttributes[K] } & { [K in keyof ArtBubble & keyof ArtBubbleAttributes as `prop:${K}`]?: ArtBubble[K] };
+        "art-bubble-group": ArtBubbleGroup;
         "art-calendar": Omit<ArtCalendar, keyof ArtCalendarAttributes> & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes]?: ArtCalendar[K] } & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes as `attr:${K}`]?: ArtCalendarAttributes[K] } & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes as `prop:${K}`]?: ArtCalendar[K] };
         "art-carousel": Omit<ArtCarousel, keyof ArtCarouselAttributes> & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes]?: ArtCarousel[K] } & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes as `attr:${K}`]?: ArtCarouselAttributes[K] } & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes as `prop:${K}`]?: ArtCarousel[K] };
         "art-carousel-item": ArtCarouselItem;
@@ -2568,7 +3237,12 @@ declare namespace LocalJSX {
         "art-command-item": Omit<ArtCommandItem, keyof ArtCommandItemAttributes> & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes]?: ArtCommandItem[K] } & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes as `attr:${K}`]?: ArtCommandItemAttributes[K] } & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes as `prop:${K}`]?: ArtCommandItem[K] };
         "art-date-picker": Omit<ArtDatePicker, keyof ArtDatePickerAttributes> & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes]?: ArtDatePicker[K] } & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes as `attr:${K}`]?: ArtDatePickerAttributes[K] } & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes as `prop:${K}`]?: ArtDatePicker[K] };
         "art-hover-card": Omit<ArtHoverCard, keyof ArtHoverCardAttributes> & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes]?: ArtHoverCard[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `attr:${K}`]?: ArtHoverCardAttributes[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `prop:${K}`]?: ArtHoverCard[K] };
+        "art-message": Omit<ArtMessage, keyof ArtMessageAttributes> & { [K in keyof ArtMessage & keyof ArtMessageAttributes]?: ArtMessage[K] } & { [K in keyof ArtMessage & keyof ArtMessageAttributes as `attr:${K}`]?: ArtMessageAttributes[K] } & { [K in keyof ArtMessage & keyof ArtMessageAttributes as `prop:${K}`]?: ArtMessage[K] };
+        "art-message-group": ArtMessageGroup;
+        "art-message-scroller": Omit<ArtMessageScroller, keyof ArtMessageScrollerAttributes> & { [K in keyof ArtMessageScroller & keyof ArtMessageScrollerAttributes]?: ArtMessageScroller[K] } & { [K in keyof ArtMessageScroller & keyof ArtMessageScrollerAttributes as `attr:${K}`]?: ArtMessageScrollerAttributes[K] } & { [K in keyof ArtMessageScroller & keyof ArtMessageScrollerAttributes as `prop:${K}`]?: ArtMessageScroller[K] };
+        "art-message-scroller-item": Omit<ArtMessageScrollerItem, keyof ArtMessageScrollerItemAttributes> & { [K in keyof ArtMessageScrollerItem & keyof ArtMessageScrollerItemAttributes]?: ArtMessageScrollerItem[K] } & { [K in keyof ArtMessageScrollerItem & keyof ArtMessageScrollerItemAttributes as `attr:${K}`]?: ArtMessageScrollerItemAttributes[K] } & { [K in keyof ArtMessageScrollerItem & keyof ArtMessageScrollerItemAttributes as `prop:${K}`]?: ArtMessageScrollerItem[K] };
         "art-popover": Omit<ArtPopover, keyof ArtPopoverAttributes> & { [K in keyof ArtPopover & keyof ArtPopoverAttributes]?: ArtPopover[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `attr:${K}`]?: ArtPopoverAttributes[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `prop:${K}`]?: ArtPopover[K] };
+        "art-questionnaire": Omit<ArtQuestionnaire, keyof ArtQuestionnaireAttributes> & { [K in keyof ArtQuestionnaire & keyof ArtQuestionnaireAttributes]?: ArtQuestionnaire[K] } & { [K in keyof ArtQuestionnaire & keyof ArtQuestionnaireAttributes as `attr:${K}`]?: ArtQuestionnaireAttributes[K] } & { [K in keyof ArtQuestionnaire & keyof ArtQuestionnaireAttributes as `prop:${K}`]?: ArtQuestionnaire[K] };
         "art-resizable": Omit<ArtResizable, keyof ArtResizableAttributes> & { [K in keyof ArtResizable & keyof ArtResizableAttributes]?: ArtResizable[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `attr:${K}`]?: ArtResizableAttributes[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `prop:${K}`]?: ArtResizable[K] };
         "art-resizable-handle": Omit<ArtResizableHandle, keyof ArtResizableHandleAttributes> & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes]?: ArtResizableHandle[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `attr:${K}`]?: ArtResizableHandleAttributes[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `prop:${K}`]?: ArtResizableHandle[K] };
         "art-resizable-panel": Omit<ArtResizablePanel, keyof ArtResizablePanelAttributes> & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes]?: ArtResizablePanel[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `attr:${K}`]?: ArtResizablePanelAttributes[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `prop:${K}`]?: ArtResizablePanel[K] };
@@ -2606,10 +3280,33 @@ declare module "@stencil/core" {
              */
             "art-alert": LocalJSX.IntrinsicElements["art-alert"] & JSXBase.HTMLAttributes<HTMLArtAlertElement>;
             /**
+             * Attachment — shadcn/ui parity. A file or image card: an icon or image, the file name, a
+             * line of metadata, end-aligned actions, and upload states. Horizontal for lists and
+             * composers, vertical for image grids. `href` or `trigger-label` make the whole card a target
+             * while the actions stay clickable.
+             */
+            "art-attachment": LocalJSX.IntrinsicElements["art-attachment"] & JSXBase.HTMLAttributes<HTMLArtAttachmentElement>;
+            /**
+             * Attachment Group — a horizontally scrolling row of attachments (a composer's file strip).
+             * Focusable so the strip can be scrolled with the keyboard.
+             */
+            "art-attachment-group": LocalJSX.IntrinsicElements["art-attachment-group"] & JSXBase.HTMLAttributes<HTMLArtAttachmentGroupElement>;
+            /**
              * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
              * image has loaded, or instead of it when it fails.
              */
             "art-avatar": LocalJSX.IntrinsicElements["art-avatar"] & JSXBase.HTMLAttributes<HTMLArtAvatarElement>;
+            /**
+             * Bubble — shadcn/ui parity. The visible surface of a conversational message: seven variants,
+             * start / end alignment, an optional reactions row anchored to an edge, and a link form
+             * (`href`) when the whole bubble is a target. Compose consecutive bubbles in
+             * `<art-bubble-group>`; put one inside `<art-message>` for avatar, header and footer.
+             */
+            "art-bubble": LocalJSX.IntrinsicElements["art-bubble"] & JSXBase.HTMLAttributes<HTMLArtBubbleElement>;
+            /**
+             * Bubble Group — stacks consecutive bubbles from the same sender.
+             */
+            "art-bubble-group": LocalJSX.IntrinsicElements["art-bubble-group"] & JSXBase.HTMLAttributes<HTMLArtBubbleGroupElement>;
             /**
              * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
              * navigation or month + year dropdowns, single, multiple or range selection, min / max and
@@ -2683,12 +3380,42 @@ declare module "@stencil/core" {
              */
             "art-hover-card": LocalJSX.IntrinsicElements["art-hover-card"] & JSXBase.HTMLAttributes<HTMLArtHoverCardElement>;
             /**
+             * Message — shadcn/ui parity. A row in a conversation: an avatar anchored to the bottom, then
+             * a column with an optional header (name, time), the bubble, and an optional footer (status,
+             * actions). `align="end"` mirrors the row for the current user.
+             */
+            "art-message": LocalJSX.IntrinsicElements["art-message"] & JSXBase.HTMLAttributes<HTMLArtMessageElement>;
+            /**
+             * Message Group — stacks consecutive messages from the same sender.
+             */
+            "art-message-group": LocalJSX.IntrinsicElements["art-message-group"] & JSXBase.HTMLAttributes<HTMLArtMessageGroupElement>;
+            /**
+             * Message Scroller — shadcn/ui parity. A transcript viewport for streaming conversations that
+             * never moves the reader against their intent: it follows the live edge while the reader is at
+             * the end and lets go when they scroll up; a new turn marked `scroll-anchor` is placed near the
+             * top with a peek of the previous one; older messages prepended above keep the visible row in
+             * place; a "jump to latest" button appears when the end is out of view.
+             */
+            "art-message-scroller": LocalJSX.IntrinsicElements["art-message-scroller"] & JSXBase.HTMLAttributes<HTMLArtMessageScrollerElement>;
+            /**
+             * Message Scroller Item — one row of the transcript. `message-id` makes it a jump target;
+             * `scroll-anchor` marks a turn boundary that the scroller places near the top when appended.
+             */
+            "art-message-scroller-item": LocalJSX.IntrinsicElements["art-message-scroller-item"] & JSXBase.HTMLAttributes<HTMLArtMessageScrollerItemElement>;
+            /**
              * Popover — shadcn/ui parity. Rich content anchored to a trigger, opened by click, closed by
              * Escape, an outside click or focus leaving. Rendered on the platform top layer (Popover API)
              * and positioned with the floating primitive. Focus moves into the panel on open and returns
              * to the trigger on close.
              */
             "art-popover": LocalJSX.IntrinsicElements["art-popover"] & JSXBase.HTMLAttributes<HTMLArtPopoverElement>;
+            /**
+             * Questionnaire — shadcn/ui parity. A multi-step form: one question at a time with single or
+             * multiple choice, a free-text answer, progress, previous / skip / next / submit, keyboard
+             * shortcuts and built-in validation (required, pattern, min / max, length). Questions come as
+             * data (`items`); answers leave as an object and as FormData (form-associated).
+             */
+            "art-questionnaire": LocalJSX.IntrinsicElements["art-questionnaire"] & JSXBase.HTMLAttributes<HTMLArtQuestionnaireElement>;
             /**
              * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
              * `<art-resizable-handle>`s that can be dragged with a pointer or moved with the keyboard.

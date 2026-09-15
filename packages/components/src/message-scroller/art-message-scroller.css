@@ -1,0 +1,49 @@
+:host {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+}
+:host([hidden]) {
+  display: none;
+}
+.viewport {
+  overflow-anchor: none; /* the component keeps the reader's row itself (native anchoring gives up at the top) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--art-color-border-default) transparent;
+  scrollbar-gutter: stable;
+  contain: content;
+}
+/* Hidden until the initial position is applied, so the reader never sees a jump. */
+.viewport[data-pending-scroll] {
+  visibility: hidden;
+}
+.viewport[data-autoscrolling] {
+  scrollbar-width: none;
+}
+.content {
+  height: max-content;
+  box-sizing: border-box;
+}
+/* The jump button rises from the bottom edge when the end is out of view. */
+.jump {
+  inset-inline-start: 50%;
+  bottom: var(--art-space-4);
+  translate: -50% 0;
+  transition-property: translate, scale, opacity, background-color, color;
+}
+:host(:dir(rtl)) .jump {
+  translate: 50% 0;
+}
+.jump[data-active='false'] {
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.95;
+  translate: -50% 100%;
+}
+:host(:dir(rtl)) .jump[data-active='false'] {
+  translate: 50% 100%;
+}

@@ -29,6 +29,7 @@ const brand = ref<string>('');
 .artui-preview__stage { padding: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; min-height: 120px; font-family: var(--art-font-family-sans); }
 .artui-preview__stage[data-frame='stack'] { flex-direction: column; align-items: stretch; gap: 8px; }
 .artui-preview__stage[data-frame='stack'] > * { width: 20rem; max-width: 100%; margin-inline: auto; }
+.artui-preview__stage[data-frame='thread'] { flex-direction: column; align-items: stretch; gap: 8px; width: 20rem; max-width: 100%; margin-inline: auto; }
 .artui-preview__stage[data-frame='control-text'] { display: grid; grid-template-columns: auto 1fr; align-items: start; column-gap: 12px; row-gap: 6px; width: 20rem; max-width: 100%; margin-inline: auto; justify-content: start; }
 .artui-preview__stage[data-frame='control-text'] > :first-child { grid-row: span 2; }
 .artui-preview__stage[data-frame='control-text'] p { width: auto; }

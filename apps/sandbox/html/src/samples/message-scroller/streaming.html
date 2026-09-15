@@ -1,0 +1,17 @@
+<art-message-scroller id="stream" style="height: calc(var(--art-space-20) * 4)"></art-message-scroller>
+<art-button variant="outline" id="ask">Ask a question</art-button>
+<script type="module">
+  const scroller = document.getElementById('stream');
+  let n = 0;
+  const row = (id, anchor, align, text) => { const item = document.createElement('art-message-scroller-item'); item.setAttribute('message-id', id); if (anchor) item.setAttribute('scroll-anchor', ''); item.innerHTML = `<art-message${align ? ' align="end"' : ''}><art-bubble${align ? '' : ' variant="muted"'}>${text}</art-bubble></art-message>`; return item; };
+  document.getElementById('ask').addEventListener('click', () => {
+    n++;
+    scroller.append(row(`q${n}`, true, true, `Question ${n}: what happens next?`)); // a new turn: anchored near the top
+    const reply = row(`a${n}`, false, false, '');
+    scroller.append(reply);
+    const bubble = reply.querySelector('art-bubble');
+    const words = 'The reply streams in word by word while the scroller keeps the end in view as long as you are following it.'.split(' ');
+    let i = 0;
+    const tick = setInterval(() => { bubble.textContent += (i ? ' ' : '') + words[i++]; if (i >= words.length) clearInterval(tick); }, 120);
+  });
+</script>

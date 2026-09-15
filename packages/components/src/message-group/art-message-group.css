@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--art-space-2);
+}
+:host([hidden]) {
+  display: none;
+}

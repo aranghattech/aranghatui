@@ -233,9 +233,38 @@ import { CarouselMultiplePerView } from './carousel/multiple-per-view';
 import { CarouselLoop } from './carousel/loop';
 import { CarouselVertical } from './carousel/vertical';
 import { CarouselNoControls } from './carousel/no-controls';
+import { BubbleBasic } from './bubble/basic';
+import { BubbleVariants } from './bubble/variants';
+import { BubbleAlignment } from './bubble/alignment';
+import { BubbleGroup } from './bubble/group';
+import { BubbleLinks } from './bubble/links';
+import { BubbleReactions } from './bubble/reactions';
+import { MessageBasic } from './message/basic';
+import { MessageGroup } from './message/group';
+import { MessageHeaderFooter } from './message/header-footer';
+import { MessageActions } from './message/actions';
+import { MessageAttachments } from './message/attachments';
+import { AttachmentBasic } from './attachment/basic';
+import { AttachmentImages } from './attachment/images';
+import { AttachmentStates } from './attachment/states';
+import { AttachmentSizes } from './attachment/sizes';
+import { AttachmentGroup } from './attachment/group';
+import { AttachmentTrigger } from './attachment/trigger';
+import { MessageScrollerBasic } from './message-scroller/basic';
+import { MessageScrollerOpenAtStart } from './message-scroller/open-at-start';
+import { MessageScrollerStreaming } from './message-scroller/streaming';
+import { MessageScrollerLoadEarlier } from './message-scroller/load-earlier';
+import { QuestionnaireBasic } from './questionnaire/basic';
+import { QuestionnaireMultiple } from './questionnaire/multiple';
+import { QuestionnaireFreeText } from './questionnaire/free-text';
+import { QuestionnaireOptional } from './questionnaire/optional';
+import { QuestionnaireShortcuts } from './questionnaire/shortcuts';
+import { QuestionnaireInvalid } from './questionnaire/invalid';
+import { QuestionnaireDisabled } from './questionnaire/disabled';
+import { DataTableBasic } from './data-table/basic';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm, CalendarBasic, CalendarRange, CalendarMultiple, CalendarDropdown, CalendarMinMax, CalendarDisabledDays, CalendarWeekStartsMonday, CalendarDisabled, DatePickerBasic, DatePickerOpen, DatePickerRange, DatePickerDateOfBirth, DatePickerSizes, DatePickerDisabled, DatePickerForm, ToasterBasic, ToasterVariants, ToasterRichColors, ToasterWithAction, ToasterCloseButton, ToasterPromise, CarouselBasic, CarouselMultiplePerView, CarouselLoop, CarouselVertical, CarouselNoControls];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm, CalendarBasic, CalendarRange, CalendarMultiple, CalendarDropdown, CalendarMinMax, CalendarDisabledDays, CalendarWeekStartsMonday, CalendarDisabled, DatePickerBasic, DatePickerOpen, DatePickerRange, DatePickerDateOfBirth, DatePickerSizes, DatePickerDisabled, DatePickerForm, ToasterBasic, ToasterVariants, ToasterRichColors, ToasterWithAction, ToasterCloseButton, ToasterPromise, CarouselBasic, CarouselMultiplePerView, CarouselLoop, CarouselVertical, CarouselNoControls, BubbleBasic, BubbleVariants, BubbleAlignment, BubbleGroup, BubbleLinks, BubbleReactions, MessageBasic, MessageGroup, MessageHeaderFooter, MessageActions, MessageAttachments, AttachmentBasic, AttachmentImages, AttachmentStates, AttachmentSizes, AttachmentGroup, AttachmentTrigger, MessageScrollerBasic, MessageScrollerOpenAtStart, MessageScrollerStreaming, MessageScrollerLoadEarlier, QuestionnaireBasic, QuestionnaireMultiple, QuestionnaireFreeText, QuestionnaireOptional, QuestionnaireShortcuts, QuestionnaireInvalid, QuestionnaireDisabled, DataTableBasic];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -472,4 +501,33 @@ export const SAMPLES = [
   { id: 'carousel/loop', component: CarouselLoop },
   { id: 'carousel/vertical', component: CarouselVertical },
   { id: 'carousel/no-controls', component: CarouselNoControls },
+  { id: 'bubble/basic', component: BubbleBasic },
+  { id: 'bubble/variants', component: BubbleVariants },
+  { id: 'bubble/alignment', component: BubbleAlignment },
+  { id: 'bubble/group', component: BubbleGroup },
+  { id: 'bubble/links', component: BubbleLinks },
+  { id: 'bubble/reactions', component: BubbleReactions },
+  { id: 'message/basic', component: MessageBasic },
+  { id: 'message/group', component: MessageGroup },
+  { id: 'message/header-footer', component: MessageHeaderFooter },
+  { id: 'message/actions', component: MessageActions },
+  { id: 'message/attachments', component: MessageAttachments },
+  { id: 'attachment/basic', component: AttachmentBasic },
+  { id: 'attachment/images', component: AttachmentImages },
+  { id: 'attachment/states', component: AttachmentStates },
+  { id: 'attachment/sizes', component: AttachmentSizes },
+  { id: 'attachment/group', component: AttachmentGroup },
+  { id: 'attachment/trigger', component: AttachmentTrigger },
+  { id: 'message-scroller/basic', component: MessageScrollerBasic },
+  { id: 'message-scroller/open-at-start', component: MessageScrollerOpenAtStart },
+  { id: 'message-scroller/streaming', component: MessageScrollerStreaming },
+  { id: 'message-scroller/load-earlier', component: MessageScrollerLoadEarlier },
+  { id: 'questionnaire/basic', component: QuestionnaireBasic },
+  { id: 'questionnaire/multiple', component: QuestionnaireMultiple },
+  { id: 'questionnaire/free-text', component: QuestionnaireFreeText },
+  { id: 'questionnaire/optional', component: QuestionnaireOptional },
+  { id: 'questionnaire/shortcuts', component: QuestionnaireShortcuts },
+  { id: 'questionnaire/invalid', component: QuestionnaireInvalid },
+  { id: 'questionnaire/disabled', component: QuestionnaireDisabled },
+  { id: 'data-table/basic', component: DataTableBasic },
 ];

@@ -1,0 +1,108 @@
+:host {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+:host([hidden]) {
+  display: none;
+}
+.card {
+  box-sizing: border-box;
+  isolation: isolate;
+}
+/* Sizes: md is shadcn's default, sm its compact form. */
+:host([size='md']) .card {
+  gap: var(--art-space-2);
+  padding: var(--art-space-2);
+  font-size: var(--art-font-size-sm);
+}
+:host([size='md']) .content {
+  padding-inline: var(--art-space-0-5);
+}
+:host([size='md']) .media {
+  width: var(--art-space-10);
+  height: var(--art-space-10);
+}
+:host([size='sm']) .card {
+  gap: var(--art-space-2);
+  padding: var(--art-space-1-5);
+  font-size: var(--art-font-size-xs);
+}
+:host([size='sm']) .media {
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+}
+/* Orientation. */
+:host([orientation='horizontal']) .card {
+  min-width: var(--art-space-40, calc(var(--art-space-20) * 2));
+  align-items: center;
+}
+:host([orientation='vertical']) .card {
+  width: calc(var(--art-space-24) + var(--art-space-6));
+  flex-direction: column;
+  align-items: stretch;
+}
+:host([orientation='vertical']) .media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+:host([orientation='vertical']) .actions {
+  position: absolute;
+  inset-inline-end: var(--art-space-3);
+  top: var(--art-space-3);
+}
+:host([orientation='vertical']) .content {
+  padding-inline: var(--art-space-0-5);
+}
+/* Image media fills its box; dims until the upload is done. */
+::slotted(img[slot='media']),
+::slotted(picture[slot='media']) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+:host([data-image]) .media {
+  background: transparent;
+}
+:host([data-image]:is([state='uploading'], [state='processing'], [state='error'])) .media {
+  opacity: 60%;
+}
+::slotted(svg[slot='media']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+/* States. */
+:host([state='idle']) .card {
+  border-style: dashed;
+}
+:host([state='error']) .card {
+  border-color: color-mix(in oklab, var(--art-color-destructive-solid) 30%, transparent);
+}
+:host([state='error']) .description {
+  color: var(--art-color-destructive-fg);
+}
+:host(:is([state='uploading'], [state='processing'])) .title {
+  @apply animate-pulse;
+}
+/* Empty parts collapse (slotted state is mirrored on the host). */
+:host(:not([data-has-actions])) .actions,
+.description[hidden] {
+  display: none;
+}
+/* A full-card link / button sits under the actions; the card shows the hover tint and the focus ring. */
+.trigger {
+  z-index: 1;
+  color: transparent;
+}
+.actions {
+  position: relative;
+  z-index: 2;
+}
+.card:has(.trigger:hover) {
+  background: color-mix(in oklab, var(--art-color-bg-muted) 50%, var(--art-color-bg-surface));
+}
+.card:has(.trigger:focus-visible) {
+  box-shadow: 0 0 0 var(--art-border-width) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+}

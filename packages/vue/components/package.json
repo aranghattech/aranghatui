@@ -25,9 +25,25 @@
       "types": "./dist/alert.d.ts",
       "import": "./dist/alert.js"
     },
+    "./attachment": {
+      "types": "./dist/attachment.d.ts",
+      "import": "./dist/attachment.js"
+    },
+    "./attachment-group": {
+      "types": "./dist/attachment-group.d.ts",
+      "import": "./dist/attachment-group.js"
+    },
     "./avatar": {
       "types": "./dist/avatar.d.ts",
       "import": "./dist/avatar.js"
+    },
+    "./bubble": {
+      "types": "./dist/bubble.d.ts",
+      "import": "./dist/bubble.js"
+    },
+    "./bubble-group": {
+      "types": "./dist/bubble-group.d.ts",
+      "import": "./dist/bubble-group.js"
     },
     "./calendar": {
       "types": "./dist/calendar.d.ts",
@@ -77,9 +93,29 @@
       "types": "./dist/hover-card.d.ts",
       "import": "./dist/hover-card.js"
     },
+    "./message": {
+      "types": "./dist/message.d.ts",
+      "import": "./dist/message.js"
+    },
+    "./message-group": {
+      "types": "./dist/message-group.d.ts",
+      "import": "./dist/message-group.js"
+    },
+    "./message-scroller": {
+      "types": "./dist/message-scroller.d.ts",
+      "import": "./dist/message-scroller.js"
+    },
+    "./message-scroller-item": {
+      "types": "./dist/message-scroller-item.d.ts",
+      "import": "./dist/message-scroller-item.js"
+    },
     "./popover": {
       "types": "./dist/popover.d.ts",
       "import": "./dist/popover.js"
+    },
+    "./questionnaire": {
+      "types": "./dist/questionnaire.d.ts",
+      "import": "./dist/questionnaire.js"
     },
     "./resizable": {
       "types": "./dist/resizable.d.ts",

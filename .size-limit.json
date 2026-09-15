@@ -882,6 +882,123 @@
     "gzip": true
   },
   {
+    "name": "components/art-bubble",
+    "path": "packages/components/dist/components/art-bubble.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-bubble-group",
+    "path": "packages/components/dist/components/art-bubble-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-message",
+    "path": "packages/components/dist/components/art-message.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-message-group",
+    "path": "packages/components/dist/components/art-message-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-message-scroller",
+    "path": "packages/components/dist/components/art-message-scroller.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-message-scroller-item",
+    "path": "packages/components/dist/components/art-message-scroller-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-attachment",
+    "path": "packages/components/dist/components/art-attachment.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-attachment-group",
+    "path": "packages/components/dist/components/art-attachment-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "components/art-questionnaire",
+    "path": "packages/components/dist/components/art-questionnaire.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "components: whole tier",
     "path": "packages/components/dist/components/index.js",
     "import": "*",
