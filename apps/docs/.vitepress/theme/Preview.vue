@@ -4,7 +4,7 @@ import { ref } from 'vue';
  * Live preview frame (CLAUDE.md §10.2). Follows the page's light/dark mode (VitePress `html.dark`
  * is mirrored onto `data-theme` by the theme). RTL and brand toggles are scoped to the frame.
  */
-const props = defineProps<{ brands?: string[]; frame?: 'inline' | 'stack' | 'control-text' }>();
+const props = defineProps<{ brands?: string[]; frame?: 'inline' | 'stack' | 'control-text' | 'thread' | 'block' | 'shell' }>();
 const dir = ref<'ltr' | 'rtl'>('ltr');
 const brand = ref<string>('');
 </script>
@@ -33,5 +33,8 @@ const brand = ref<string>('');
 .artui-preview__stage[data-frame='control-text'] { display: grid; grid-template-columns: auto 1fr; align-items: start; column-gap: 12px; row-gap: 6px; width: 20rem; max-width: 100%; margin-inline: auto; justify-content: start; }
 .artui-preview__stage[data-frame='control-text'] > :first-child { grid-row: span 2; }
 .artui-preview__stage[data-frame='control-text'] p { width: auto; }
+.artui-preview__stage[data-frame='block'] { display: block; padding: 0; }
+.artui-preview__stage[data-frame='shell'] { display: block; padding: 0; height: 32rem; overflow: hidden; border-radius: 0 0 var(--art-radius-lg) var(--art-radius-lg); }
+.artui-preview__stage[data-frame='shell'] > art-sidebar-provider { height: 100%; min-height: 0; }
 .artui-preview__stage > p { margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); width: 20rem; max-width: 100%; }
 </style>

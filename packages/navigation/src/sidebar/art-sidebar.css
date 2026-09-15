@@ -1,0 +1,219 @@
+:host {
+  display: block;
+  position: relative;
+  flex: none;
+  width: var(--art-sidebar-width);
+  transition: width var(--art-duration-base) var(--art-ease-out);
+}
+:host([hidden]) {
+  display: none;
+}
+:host([data-collapsible='offcanvas']) {
+  width: 0;
+}
+:host([data-collapsible='icon']) {
+  width: var(--art-sidebar-width-icon);
+}
+:host([data-collapsible='icon'][data-variant='floating']),
+:host([data-collapsible='icon'][data-variant='inset']) {
+  width: calc(var(--art-sidebar-width-icon) + var(--art-space-4) + 2 * var(--art-border-width));
+}
+
+/* The column sticks to the top of the scroll container and is as tall as the viewport. */
+.container {
+  position: sticky;
+  top: 0;
+  z-index: var(--art-z-sticky);
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  max-height: 100%;
+  width: var(--art-sidebar-width);
+  transition:
+    width var(--art-duration-base) var(--art-ease-out),
+    translate var(--art-duration-base) var(--art-ease-out);
+}
+:host([data-collapsible='icon']) .container {
+  width: var(--art-sidebar-width-icon);
+}
+:host([data-collapsible='icon'][data-variant='floating']) .container,
+:host([data-collapsible='icon'][data-variant='inset']) .container {
+  width: calc(var(--art-sidebar-width-icon) + var(--art-space-4) + 2 * var(--art-border-width));
+}
+/* Off-canvas: slide out towards the edge, then stop painting. */
+:host([data-collapsible='offcanvas']) .container {
+  visibility: hidden;
+  transition:
+    translate var(--art-duration-base) var(--art-ease-out),
+    visibility 0s linear var(--art-duration-base);
+}
+:host([data-collapsible='offcanvas'][data-side='left']:dir(ltr)) .container,
+:host([data-collapsible='offcanvas'][data-side='right']:dir(rtl)) .container {
+  translate: -100% 0;
+}
+:host([data-collapsible='offcanvas'][data-side='left']:dir(rtl)) .container,
+:host([data-collapsible='offcanvas'][data-side='right']:dir(ltr)) .container {
+  translate: 100% 0;
+}
+:host([data-variant='floating']) .container,
+:host([data-variant='inset']) .container {
+  padding: var(--art-space-2);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: var(--art-color-bg-sidebar);
+  color: var(--art-color-fg-default);
+}
+:host([data-variant='sidebar'][data-side='left']) .inner {
+  border-inline-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([data-variant='sidebar'][data-side='right']) .inner {
+  border-inline-start: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([data-variant='floating']) .inner {
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  border-radius: var(--art-radius-lg);
+  box-shadow: var(--art-shadow-raised);
+}
+.header,
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--art-space-2);
+  padding: var(--art-space-2);
+}
+.content {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  gap: var(--art-space-2);
+  min-height: 0;
+  overflow: auto;
+}
+:host([data-collapsible='icon']) .content {
+  overflow: hidden;
+}
+
+/* Rail: a thin strip centred on the outer edge; the line shows on hover. */
+.rail {
+  position: absolute;
+  inset-block: 0;
+  width: var(--art-space-4);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  cursor: w-resize;
+}
+:host([data-side='left']) .rail {
+  inset-inline-end: calc(-1 * var(--art-space-2));
+}
+:host([data-side='right']) .rail {
+  inset-inline-start: calc(-1 * var(--art-space-2));
+  cursor: e-resize;
+}
+:host([data-side='left'][data-state='collapsed']) .rail {
+  cursor: e-resize;
+}
+:host([data-side='right'][data-state='collapsed']) .rail {
+  cursor: w-resize;
+}
+.rail::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 50%;
+  width: calc(2 * var(--art-border-width));
+  translate: -50% 0;
+  transition: background-color var(--art-duration-fast) var(--art-ease-out);
+}
+.rail:hover::after {
+  background: var(--art-color-border-default);
+}
+
+/* Off-canvas sheet below the md breakpoint: the column leaves the flow and becomes a top-layer dialog. */
+:host([data-mobile]) {
+  width: 0;
+  transition: none;
+}
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+:host([data-mobile]) .container {
+  position: fixed;
+  inset-block: 0;
+  z-index: var(--art-z-modal);
+  width: var(--art-sidebar-width-mobile);
+  height: auto;
+  max-height: none;
+  padding: 0;
+  translate: none;
+  visibility: visible;
+  outline: none;
+  transition: none;
+}
+:host([data-mobile][data-side='left']) .container {
+  inset-inline-start: 0;
+}
+:host([data-mobile][data-side='right']) .container {
+  inset-inline-end: 0;
+}
+:host([data-mobile]) .inner {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.container[popover]:not(:popover-open) {
+  display: none;
+}
+.container[data-state='open'] {
+  animation: sheet-in var(--art-duration-slow) var(--art-ease-out);
+}
+.container[data-state='closed'] {
+  animation: sheet-out var(--art-duration-base) var(--art-ease-out) forwards;
+  pointer-events: none;
+}
+.container::backdrop {
+  background: var(--art-color-bg-overlay);
+}
+.container[data-state='open']::backdrop {
+  animation: backdrop-in var(--art-duration-slow) var(--art-ease-out);
+}
+.container[data-state='closed']::backdrop {
+  animation: backdrop-out var(--art-duration-base) var(--art-ease-out) forwards;
+}
+@keyframes sheet-in {
+  from {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes sheet-out {
+  to {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}

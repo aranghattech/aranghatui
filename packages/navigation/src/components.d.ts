@@ -302,6 +302,240 @@ export namespace Components {
          */
         "total": number;
     }
+    /**
+     * Sidebar (SideNav) — shadcn/ui parity. A collapsible app sidebar inside an
+     * `art-sidebar-provider`: `side`, `variant` (`sidebar | floating | inset`) and `collapsible`
+     * (`offcanvas | icon | none`). Below the md breakpoint it becomes an off-canvas sheet
+     * (focus-trapped, dismissed by Escape or a tap outside), built on the primitives (ADR-0019).
+     */
+    interface ArtSidebar {
+        /**
+          * How it collapses: slide away, shrink to icons, or not at all.
+          * @default 'offcanvas'
+         */
+        "collapsible": 'offcanvas' | 'icon' | 'none';
+        /**
+          * Accessible name of the navigation landmark (and of the off-canvas sheet).
+          * @default 'Sidebar'
+         */
+        "label": string;
+        /**
+          * Show the edge rail that toggles the sidebar on click.
+          * @default false
+         */
+        "rail": boolean;
+        /**
+          * Which edge; `left` is the inline start (mirrored in RTL).
+          * @default 'left'
+         */
+        "side": 'left' | 'right';
+        /**
+          * @default 'Toggle sidebar'
+         */
+        "toggleLabel": string;
+        /**
+          * @default 'sidebar'
+         */
+        "variant": 'sidebar' | 'floating' | 'inset';
+    }
+    /**
+     * Sidebar Group — a titled section of the sidebar with an optional action button.
+     */
+    interface ArtSidebarGroup {
+        /**
+          * Heading text.
+         */
+        "label"?: string;
+    }
+    /**
+     * Sidebar Inset — the `main` area beside an `art-sidebar`. With the `inset` sidebar variant it
+     * floats as a rounded card on the sidebar-coloured frame.
+     */
+    interface ArtSidebarInset {
+    }
+    /**
+     * Sidebar Menu — a list of `art-sidebar-menu-item`s.
+     */
+    interface ArtSidebarMenu {
+    }
+    /**
+     * Sidebar Menu Button — the control of an `art-sidebar-menu-item`: a button, or a link with
+     * `href`; `active` marks the current page. While the sidebar is collapsed to icons it becomes a
+     * square that clips its label and shows `tooltip` beside it on hover / focus. Inside an
+     * `art-sidebar-menu-sub` it renders in the smaller sub style.
+     */
+    interface ArtSidebarMenuButton {
+        /**
+          * Marks the current page (`aria-current="page"` on a link).
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Disclosure state of the item's nested list — set by `art-sidebar-menu-item`; renders the chevron and `aria-expanded`.
+         */
+        "expanded"?: boolean;
+        /**
+          * Renders a link instead of a button.
+         */
+        "href"?: string;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        "target"?: string;
+        /**
+          * Text shown beside the button while the sidebar is collapsed to icons.
+         */
+        "tooltip"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'outline';
+    }
+    /**
+     * Sidebar Menu Item — one row of an `art-sidebar-menu`: an `art-sidebar-menu-button`, optionally
+     * with an `action` button, a `badge`, and a nested `art-sidebar-menu-sub` that the button
+     * toggles (`open`).
+     */
+    interface ArtSidebarMenuItem {
+        /**
+          * Show the `action` only while the row is hovered or focused (pointer devices).
+          * @default false
+         */
+        "actionOnHover": boolean;
+        /**
+          * Whether the nested `art-sidebar-menu-sub` is shown.
+          * @default false
+         */
+        "open": boolean;
+    }
+    /**
+     * Sidebar Menu Sub — a nested list under an `art-sidebar-menu-item` (shown while the item is
+     * `open`; hidden when the sidebar collapses to icons). Holds `art-sidebar-menu-item`s whose
+     * buttons render in the smaller sub style.
+     */
+    interface ArtSidebarMenuSub {
+    }
+    /**
+     * Sidebar Provider — the app frame around an `art-sidebar` and its `art-sidebar-inset`: a
+     * full-height row that owns the sidebar state (`open` on desktop, `open-mobile` below the md
+     * breakpoint) and the ⌘ / Ctrl + B shortcut. Override `--art-sidebar-width` here.
+     */
+    interface ArtSidebarProvider {
+        /**
+          * Expanded (desktop).
+          * @default true
+         */
+        "open": boolean;
+        /**
+          * Off-canvas sidebar shown (below the md breakpoint).
+          * @default false
+         */
+        "openMobile": boolean;
+        /**
+          * Set the state for the current mode (desktop `open`, mobile `open-mobile`).
+         */
+        "setOpen": (open: boolean) => Promise<void>;
+        /**
+          * Key of the toggle shortcut (pressed with ⌘ / Ctrl); empty disables it.
+          * @default 'b'
+         */
+        "shortcut": string;
+        /**
+          * Expand / collapse the sidebar (open / close the off-canvas one on mobile).
+         */
+        "toggle": () => Promise<void>;
+    }
+    /**
+     * Sidebar Trigger — a ghost icon button that toggles the nearest `art-sidebar-provider`
+     * (expand / collapse on desktop, open / close the off-canvas sheet on mobile).
+     */
+    interface ArtSidebarTrigger {
+        /**
+          * Accessible name.
+          * @default 'Toggle sidebar'
+         */
+        "label": string;
+    }
+    /**
+     * TopNav — an app header bar: a brand at the start, a row of links, actions at the end. Below
+     * the md breakpoint (or always, `collapse="always"`) the links fold into a panel under the bar
+     * behind a menu button. Links are plain `<a>`s (or router links); `aria-current="page"` marks
+     * the current one.
+     */
+    interface ArtTopNav {
+        /**
+          * When the links fold behind the menu button: below the md breakpoint, always, or never.
+          * @default 'auto'
+         */
+        "collapse": 'auto' | 'always' | 'never';
+        /**
+          * Accessible name of the `nav`.
+          * @default 'Main'
+         */
+        "label": string;
+        /**
+          * The collapsed menu is shown.
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Stick to the top of the scroll container.
+          * @default false
+         */
+        "sticky": boolean;
+        /**
+          * @default 'Toggle menu'
+         */
+        "toggleLabel": string;
+    }
+    /**
+     * Tree Item — a node of an `art-tree-view`: `label`, optional `icon`, and nested
+     * `art-tree-item`s in the default slot (shown while `expanded`). The host is the
+     * `role="treeitem"` element (focus, `aria-expanded`, `aria-selected`, `aria-level`); only the
+     * tree's current item is a tab stop.
+     */
+    interface ArtTreeItem {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "expanded": boolean;
+        /**
+          * @default ''
+         */
+        "label": string;
+        /**
+          * Value reported by `select` and held by the tree's `value`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Tree View — a hierarchical list of `art-tree-item`s (files, pages, an outline) following the
+     * WAI-ARIA tree pattern: one tab stop, arrows move and expand / collapse, Home / End, `*` opens
+     * the siblings, typing jumps, Enter / Space or a click selects. Single selection: the selected
+     * item's `value` is the tree's `value`.
+     */
+    interface ArtTreeView {
+        /**
+          * Accessible name of the tree.
+          * @default 'Tree'
+         */
+        "label": string;
+        /**
+          * `value` of the selected item.
+          * @default ''
+         */
+        "value": string;
+    }
 }
 export interface ArtContextMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -334,6 +568,30 @@ export interface ArtNavigationMenuItemCustomEvent<T> extends CustomEvent<T> {
 export interface ArtPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtPaginationElement;
+}
+export interface ArtSidebarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSidebarElement;
+}
+export interface ArtSidebarMenuItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSidebarMenuItemElement;
+}
+export interface ArtSidebarProviderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSidebarProviderElement;
+}
+export interface ArtTopNavCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTopNavElement;
+}
+export interface ArtTreeItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTreeItemElement;
+}
+export interface ArtTreeViewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTreeViewElement;
 }
 declare global {
     /**
@@ -593,6 +851,206 @@ declare global {
         prototype: HTMLArtPaginationElement;
         new (): HTMLArtPaginationElement;
     };
+    interface HTMLArtSidebarElementEventMap {
+        "sidebar-state": void;
+    }
+    /**
+     * Sidebar (SideNav) — shadcn/ui parity. A collapsible app sidebar inside an
+     * `art-sidebar-provider`: `side`, `variant` (`sidebar | floating | inset`) and `collapsible`
+     * (`offcanvas | icon | none`). Below the md breakpoint it becomes an off-canvas sheet
+     * (focus-trapped, dismissed by Escape or a tap outside), built on the primitives (ADR-0019).
+     */
+    interface HTMLArtSidebarElement extends Components.ArtSidebar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSidebarElementEventMap>(type: K, listener: (this: HTMLArtSidebarElement, ev: ArtSidebarCustomEvent<HTMLArtSidebarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSidebarElementEventMap>(type: K, listener: (this: HTMLArtSidebarElement, ev: ArtSidebarCustomEvent<HTMLArtSidebarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSidebarElement: {
+        prototype: HTMLArtSidebarElement;
+        new (): HTMLArtSidebarElement;
+    };
+    /**
+     * Sidebar Group — a titled section of the sidebar with an optional action button.
+     */
+    interface HTMLArtSidebarGroupElement extends Components.ArtSidebarGroup, HTMLStencilElement {
+    }
+    var HTMLArtSidebarGroupElement: {
+        prototype: HTMLArtSidebarGroupElement;
+        new (): HTMLArtSidebarGroupElement;
+    };
+    /**
+     * Sidebar Inset — the `main` area beside an `art-sidebar`. With the `inset` sidebar variant it
+     * floats as a rounded card on the sidebar-coloured frame.
+     */
+    interface HTMLArtSidebarInsetElement extends Components.ArtSidebarInset, HTMLStencilElement {
+    }
+    var HTMLArtSidebarInsetElement: {
+        prototype: HTMLArtSidebarInsetElement;
+        new (): HTMLArtSidebarInsetElement;
+    };
+    /**
+     * Sidebar Menu — a list of `art-sidebar-menu-item`s.
+     */
+    interface HTMLArtSidebarMenuElement extends Components.ArtSidebarMenu, HTMLStencilElement {
+    }
+    var HTMLArtSidebarMenuElement: {
+        prototype: HTMLArtSidebarMenuElement;
+        new (): HTMLArtSidebarMenuElement;
+    };
+    /**
+     * Sidebar Menu Button — the control of an `art-sidebar-menu-item`: a button, or a link with
+     * `href`; `active` marks the current page. While the sidebar is collapsed to icons it becomes a
+     * square that clips its label and shows `tooltip` beside it on hover / focus. Inside an
+     * `art-sidebar-menu-sub` it renders in the smaller sub style.
+     */
+    interface HTMLArtSidebarMenuButtonElement extends Components.ArtSidebarMenuButton, HTMLStencilElement {
+    }
+    var HTMLArtSidebarMenuButtonElement: {
+        prototype: HTMLArtSidebarMenuButtonElement;
+        new (): HTMLArtSidebarMenuButtonElement;
+    };
+    interface HTMLArtSidebarMenuItemElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Sidebar Menu Item — one row of an `art-sidebar-menu`: an `art-sidebar-menu-button`, optionally
+     * with an `action` button, a `badge`, and a nested `art-sidebar-menu-sub` that the button
+     * toggles (`open`).
+     */
+    interface HTMLArtSidebarMenuItemElement extends Components.ArtSidebarMenuItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSidebarMenuItemElementEventMap>(type: K, listener: (this: HTMLArtSidebarMenuItemElement, ev: ArtSidebarMenuItemCustomEvent<HTMLArtSidebarMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSidebarMenuItemElementEventMap>(type: K, listener: (this: HTMLArtSidebarMenuItemElement, ev: ArtSidebarMenuItemCustomEvent<HTMLArtSidebarMenuItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSidebarMenuItemElement: {
+        prototype: HTMLArtSidebarMenuItemElement;
+        new (): HTMLArtSidebarMenuItemElement;
+    };
+    /**
+     * Sidebar Menu Sub — a nested list under an `art-sidebar-menu-item` (shown while the item is
+     * `open`; hidden when the sidebar collapses to icons). Holds `art-sidebar-menu-item`s whose
+     * buttons render in the smaller sub style.
+     */
+    interface HTMLArtSidebarMenuSubElement extends Components.ArtSidebarMenuSub, HTMLStencilElement {
+    }
+    var HTMLArtSidebarMenuSubElement: {
+        prototype: HTMLArtSidebarMenuSubElement;
+        new (): HTMLArtSidebarMenuSubElement;
+    };
+    interface HTMLArtSidebarProviderElementEventMap {
+        "open-change": { open: boolean };
+        "sidebar-state": void;
+    }
+    /**
+     * Sidebar Provider — the app frame around an `art-sidebar` and its `art-sidebar-inset`: a
+     * full-height row that owns the sidebar state (`open` on desktop, `open-mobile` below the md
+     * breakpoint) and the ⌘ / Ctrl + B shortcut. Override `--art-sidebar-width` here.
+     */
+    interface HTMLArtSidebarProviderElement extends Components.ArtSidebarProvider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSidebarProviderElementEventMap>(type: K, listener: (this: HTMLArtSidebarProviderElement, ev: ArtSidebarProviderCustomEvent<HTMLArtSidebarProviderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSidebarProviderElementEventMap>(type: K, listener: (this: HTMLArtSidebarProviderElement, ev: ArtSidebarProviderCustomEvent<HTMLArtSidebarProviderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSidebarProviderElement: {
+        prototype: HTMLArtSidebarProviderElement;
+        new (): HTMLArtSidebarProviderElement;
+    };
+    /**
+     * Sidebar Trigger — a ghost icon button that toggles the nearest `art-sidebar-provider`
+     * (expand / collapse on desktop, open / close the off-canvas sheet on mobile).
+     */
+    interface HTMLArtSidebarTriggerElement extends Components.ArtSidebarTrigger, HTMLStencilElement {
+    }
+    var HTMLArtSidebarTriggerElement: {
+        prototype: HTMLArtSidebarTriggerElement;
+        new (): HTMLArtSidebarTriggerElement;
+    };
+    interface HTMLArtTopNavElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * TopNav — an app header bar: a brand at the start, a row of links, actions at the end. Below
+     * the md breakpoint (or always, `collapse="always"`) the links fold into a panel under the bar
+     * behind a menu button. Links are plain `<a>`s (or router links); `aria-current="page"` marks
+     * the current one.
+     */
+    interface HTMLArtTopNavElement extends Components.ArtTopNav, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTopNavElementEventMap>(type: K, listener: (this: HTMLArtTopNavElement, ev: ArtTopNavCustomEvent<HTMLArtTopNavElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTopNavElementEventMap>(type: K, listener: (this: HTMLArtTopNavElement, ev: ArtTopNavCustomEvent<HTMLArtTopNavElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTopNavElement: {
+        prototype: HTMLArtTopNavElement;
+        new (): HTMLArtTopNavElement;
+    };
+    interface HTMLArtTreeItemElementEventMap {
+        "select": { value: string };
+        "expand": { value: string };
+        "collapse": { value: string };
+    }
+    /**
+     * Tree Item — a node of an `art-tree-view`: `label`, optional `icon`, and nested
+     * `art-tree-item`s in the default slot (shown while `expanded`). The host is the
+     * `role="treeitem"` element (focus, `aria-expanded`, `aria-selected`, `aria-level`); only the
+     * tree's current item is a tab stop.
+     */
+    interface HTMLArtTreeItemElement extends Components.ArtTreeItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTreeItemElementEventMap>(type: K, listener: (this: HTMLArtTreeItemElement, ev: ArtTreeItemCustomEvent<HTMLArtTreeItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTreeItemElementEventMap>(type: K, listener: (this: HTMLArtTreeItemElement, ev: ArtTreeItemCustomEvent<HTMLArtTreeItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTreeItemElement: {
+        prototype: HTMLArtTreeItemElement;
+        new (): HTMLArtTreeItemElement;
+    };
+    interface HTMLArtTreeViewElementEventMap {
+        "value-change": { value: string };
+    }
+    /**
+     * Tree View — a hierarchical list of `art-tree-item`s (files, pages, an outline) following the
+     * WAI-ARIA tree pattern: one tab stop, arrows move and expand / collapse, Home / End, `*` opens
+     * the siblings, typing jumps, Enter / Space or a click selects. Single selection: the selected
+     * item's `value` is the tree's `value`.
+     */
+    interface HTMLArtTreeViewElement extends Components.ArtTreeView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTreeViewElementEventMap>(type: K, listener: (this: HTMLArtTreeViewElement, ev: ArtTreeViewCustomEvent<HTMLArtTreeViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTreeViewElementEventMap>(type: K, listener: (this: HTMLArtTreeViewElement, ev: ArtTreeViewCustomEvent<HTMLArtTreeViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTreeViewElement: {
+        prototype: HTMLArtTreeViewElement;
+        new (): HTMLArtTreeViewElement;
+    };
     interface HTMLElementTagNameMap {
         "art-breadcrumb": HTMLArtBreadcrumbElement;
         "art-breadcrumb-item": HTMLArtBreadcrumbItemElement;
@@ -610,6 +1068,18 @@ declare global {
         "art-navigation-menu-item": HTMLArtNavigationMenuItemElement;
         "art-navigation-menu-link": HTMLArtNavigationMenuLinkElement;
         "art-pagination": HTMLArtPaginationElement;
+        "art-sidebar": HTMLArtSidebarElement;
+        "art-sidebar-group": HTMLArtSidebarGroupElement;
+        "art-sidebar-inset": HTMLArtSidebarInsetElement;
+        "art-sidebar-menu": HTMLArtSidebarMenuElement;
+        "art-sidebar-menu-button": HTMLArtSidebarMenuButtonElement;
+        "art-sidebar-menu-item": HTMLArtSidebarMenuItemElement;
+        "art-sidebar-menu-sub": HTMLArtSidebarMenuSubElement;
+        "art-sidebar-provider": HTMLArtSidebarProviderElement;
+        "art-sidebar-trigger": HTMLArtSidebarTriggerElement;
+        "art-top-nav": HTMLArtTopNavElement;
+        "art-tree-item": HTMLArtTreeItemElement;
+        "art-tree-view": HTMLArtTreeViewElement;
     }
 }
 declare namespace LocalJSX {
@@ -924,6 +1394,268 @@ declare namespace LocalJSX {
          */
         "total"?: number;
     }
+    /**
+     * Sidebar (SideNav) — shadcn/ui parity. A collapsible app sidebar inside an
+     * `art-sidebar-provider`: `side`, `variant` (`sidebar | floating | inset`) and `collapsible`
+     * (`offcanvas | icon | none`). Below the md breakpoint it becomes an off-canvas sheet
+     * (focus-trapped, dismissed by Escape or a tap outside), built on the primitives (ADR-0019).
+     */
+    interface ArtSidebar {
+        /**
+          * How it collapses: slide away, shrink to icons, or not at all.
+          * @default 'offcanvas'
+         */
+        "collapsible"?: 'offcanvas' | 'icon' | 'none';
+        /**
+          * Accessible name of the navigation landmark (and of the off-canvas sheet).
+          * @default 'Sidebar'
+         */
+        "label"?: string;
+        /**
+          * Internal: state fan-out to groups, menus and buttons.
+         */
+        "onSidebar-state"?: (event: ArtSidebarCustomEvent<void>) => void;
+        /**
+          * Show the edge rail that toggles the sidebar on click.
+          * @default false
+         */
+        "rail"?: boolean;
+        /**
+          * Which edge; `left` is the inline start (mirrored in RTL).
+          * @default 'left'
+         */
+        "side"?: 'left' | 'right';
+        /**
+          * @default 'Toggle sidebar'
+         */
+        "toggleLabel"?: string;
+        /**
+          * @default 'sidebar'
+         */
+        "variant"?: 'sidebar' | 'floating' | 'inset';
+    }
+    /**
+     * Sidebar Group — a titled section of the sidebar with an optional action button.
+     */
+    interface ArtSidebarGroup {
+        /**
+          * Heading text.
+         */
+        "label"?: string;
+    }
+    /**
+     * Sidebar Inset — the `main` area beside an `art-sidebar`. With the `inset` sidebar variant it
+     * floats as a rounded card on the sidebar-coloured frame.
+     */
+    interface ArtSidebarInset {
+    }
+    /**
+     * Sidebar Menu — a list of `art-sidebar-menu-item`s.
+     */
+    interface ArtSidebarMenu {
+    }
+    /**
+     * Sidebar Menu Button — the control of an `art-sidebar-menu-item`: a button, or a link with
+     * `href`; `active` marks the current page. While the sidebar is collapsed to icons it becomes a
+     * square that clips its label and shows `tooltip` beside it on hover / focus. Inside an
+     * `art-sidebar-menu-sub` it renders in the smaller sub style.
+     */
+    interface ArtSidebarMenuButton {
+        /**
+          * Marks the current page (`aria-current="page"` on a link).
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Disclosure state of the item's nested list — set by `art-sidebar-menu-item`; renders the chevron and `aria-expanded`.
+         */
+        "expanded"?: boolean;
+        /**
+          * Renders a link instead of a button.
+         */
+        "href"?: string;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        "target"?: string;
+        /**
+          * Text shown beside the button while the sidebar is collapsed to icons.
+         */
+        "tooltip"?: string;
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'outline';
+    }
+    /**
+     * Sidebar Menu Item — one row of an `art-sidebar-menu`: an `art-sidebar-menu-button`, optionally
+     * with an `action` button, a `badge`, and a nested `art-sidebar-menu-sub` that the button
+     * toggles (`open`).
+     */
+    interface ArtSidebarMenuItem {
+        /**
+          * Show the `action` only while the row is hovered or focused (pointer devices).
+          * @default false
+         */
+        "actionOnHover"?: boolean;
+        /**
+          * Emitted when the user opens or closes the nested list; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtSidebarMenuItemCustomEvent<{ open: boolean }>) => void;
+        /**
+          * Whether the nested `art-sidebar-menu-sub` is shown.
+          * @default false
+         */
+        "open"?: boolean;
+    }
+    /**
+     * Sidebar Menu Sub — a nested list under an `art-sidebar-menu-item` (shown while the item is
+     * `open`; hidden when the sidebar collapses to icons). Holds `art-sidebar-menu-item`s whose
+     * buttons render in the smaller sub style.
+     */
+    interface ArtSidebarMenuSub {
+    }
+    /**
+     * Sidebar Provider — the app frame around an `art-sidebar` and its `art-sidebar-inset`: a
+     * full-height row that owns the sidebar state (`open` on desktop, `open-mobile` below the md
+     * breakpoint) and the ⌘ / Ctrl + B shortcut. Override `--art-sidebar-width` here.
+     */
+    interface ArtSidebarProvider {
+        /**
+          * Emitted when the user expands or collapses the sidebar; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtSidebarProviderCustomEvent<{ open: boolean }>) => void;
+        /**
+          * Internal: state fan-out to the sidebar and its triggers.
+         */
+        "onSidebar-state"?: (event: ArtSidebarProviderCustomEvent<void>) => void;
+        /**
+          * Expanded (desktop).
+          * @default true
+         */
+        "open"?: boolean;
+        /**
+          * Off-canvas sidebar shown (below the md breakpoint).
+          * @default false
+         */
+        "openMobile"?: boolean;
+        /**
+          * Key of the toggle shortcut (pressed with ⌘ / Ctrl); empty disables it.
+          * @default 'b'
+         */
+        "shortcut"?: string;
+    }
+    /**
+     * Sidebar Trigger — a ghost icon button that toggles the nearest `art-sidebar-provider`
+     * (expand / collapse on desktop, open / close the off-canvas sheet on mobile).
+     */
+    interface ArtSidebarTrigger {
+        /**
+          * Accessible name.
+          * @default 'Toggle sidebar'
+         */
+        "label"?: string;
+    }
+    /**
+     * TopNav — an app header bar: a brand at the start, a row of links, actions at the end. Below
+     * the md breakpoint (or always, `collapse="always"`) the links fold into a panel under the bar
+     * behind a menu button. Links are plain `<a>`s (or router links); `aria-current="page"` marks
+     * the current one.
+     */
+    interface ArtTopNav {
+        /**
+          * When the links fold behind the menu button: below the md breakpoint, always, or never.
+          * @default 'auto'
+         */
+        "collapse"?: 'auto' | 'always' | 'never';
+        /**
+          * Accessible name of the `nav`.
+          * @default 'Main'
+         */
+        "label"?: string;
+        /**
+          * Emitted when the user opens or closes the collapsed menu; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtTopNavCustomEvent<{ open: boolean }>) => void;
+        /**
+          * The collapsed menu is shown.
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * Stick to the top of the scroll container.
+          * @default false
+         */
+        "sticky"?: boolean;
+        /**
+          * @default 'Toggle menu'
+         */
+        "toggleLabel"?: string;
+    }
+    /**
+     * Tree Item — a node of an `art-tree-view`: `label`, optional `icon`, and nested
+     * `art-tree-item`s in the default slot (shown while `expanded`). The host is the
+     * `role="treeitem"` element (focus, `aria-expanded`, `aria-selected`, `aria-level`); only the
+     * tree's current item is a tab stop.
+     */
+    interface ArtTreeItem {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "expanded"?: boolean;
+        /**
+          * @default ''
+         */
+        "label"?: string;
+        /**
+          * Emitted when `expanded` turns off; `detail.value`.
+         */
+        "onCollapse"?: (event: ArtTreeItemCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted when `expanded` turns on; `detail.value`.
+         */
+        "onExpand"?: (event: ArtTreeItemCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted when the item is activated (click, Enter, Space); `detail.value`.
+         */
+        "onSelect"?: (event: ArtTreeItemCustomEvent<{ value: string }>) => void;
+        /**
+          * Value reported by `select` and held by the tree's `value`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Tree View — a hierarchical list of `art-tree-item`s (files, pages, an outline) following the
+     * WAI-ARIA tree pattern: one tab stop, arrows move and expand / collapse, Home / End, `*` opens
+     * the siblings, typing jumps, Enter / Space or a click selects. Single selection: the selected
+     * item's `value` is the tree's `value`.
+     */
+    interface ArtTreeView {
+        /**
+          * Accessible name of the tree.
+          * @default 'Tree'
+         */
+        "label"?: string;
+        /**
+          * Emitted when the user selects an item; `detail.value`.
+         */
+        "onValue-change"?: (event: ArtTreeViewCustomEvent<{ value: string }>) => void;
+        /**
+          * `value` of the selected item.
+          * @default ''
+         */
+        "value"?: string;
+    }
 
     interface ArtBreadcrumbAttributes {
         "separator": 'chevron' | 'slash';
@@ -997,6 +1729,56 @@ declare namespace LocalJSX {
         "previousLabel": string;
         "nextLabel": string;
     }
+    interface ArtSidebarAttributes {
+        "side": 'left' | 'right';
+        "variant": 'sidebar' | 'floating' | 'inset';
+        "collapsible": 'offcanvas' | 'icon' | 'none';
+        "rail": boolean;
+        "label": string;
+        "toggleLabel": string;
+    }
+    interface ArtSidebarGroupAttributes {
+        "label": string;
+    }
+    interface ArtSidebarMenuButtonAttributes {
+        "href": string;
+        "target": string;
+        "active": boolean;
+        "disabled": boolean;
+        "size": 'sm' | 'md' | 'lg';
+        "variant": 'default' | 'outline';
+        "tooltip": string;
+        "expanded": boolean;
+    }
+    interface ArtSidebarMenuItemAttributes {
+        "open": boolean;
+        "actionOnHover": boolean;
+    }
+    interface ArtSidebarProviderAttributes {
+        "open": boolean;
+        "openMobile": boolean;
+        "shortcut": string;
+    }
+    interface ArtSidebarTriggerAttributes {
+        "label": string;
+    }
+    interface ArtTopNavAttributes {
+        "label": string;
+        "sticky": boolean;
+        "collapse": 'auto' | 'always' | 'never';
+        "open": boolean;
+        "toggleLabel": string;
+    }
+    interface ArtTreeItemAttributes {
+        "value": string;
+        "label": string;
+        "expanded": boolean;
+        "disabled": boolean;
+    }
+    interface ArtTreeViewAttributes {
+        "label": string;
+        "value": string;
+    }
 
     interface IntrinsicElements {
         "art-breadcrumb": Omit<ArtBreadcrumb, keyof ArtBreadcrumbAttributes> & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes]?: ArtBreadcrumb[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `attr:${K}`]?: ArtBreadcrumbAttributes[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `prop:${K}`]?: ArtBreadcrumb[K] };
@@ -1015,6 +1797,18 @@ declare namespace LocalJSX {
         "art-navigation-menu-item": Omit<ArtNavigationMenuItem, keyof ArtNavigationMenuItemAttributes> & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes]?: ArtNavigationMenuItem[K] } & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes as `attr:${K}`]?: ArtNavigationMenuItemAttributes[K] } & { [K in keyof ArtNavigationMenuItem & keyof ArtNavigationMenuItemAttributes as `prop:${K}`]?: ArtNavigationMenuItem[K] };
         "art-navigation-menu-link": Omit<ArtNavigationMenuLink, keyof ArtNavigationMenuLinkAttributes> & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes]?: ArtNavigationMenuLink[K] } & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes as `attr:${K}`]?: ArtNavigationMenuLinkAttributes[K] } & { [K in keyof ArtNavigationMenuLink & keyof ArtNavigationMenuLinkAttributes as `prop:${K}`]?: ArtNavigationMenuLink[K] };
         "art-pagination": Omit<ArtPagination, keyof ArtPaginationAttributes> & { [K in keyof ArtPagination & keyof ArtPaginationAttributes]?: ArtPagination[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `attr:${K}`]?: ArtPaginationAttributes[K] } & { [K in keyof ArtPagination & keyof ArtPaginationAttributes as `prop:${K}`]?: ArtPagination[K] };
+        "art-sidebar": Omit<ArtSidebar, keyof ArtSidebarAttributes> & { [K in keyof ArtSidebar & keyof ArtSidebarAttributes]?: ArtSidebar[K] } & { [K in keyof ArtSidebar & keyof ArtSidebarAttributes as `attr:${K}`]?: ArtSidebarAttributes[K] } & { [K in keyof ArtSidebar & keyof ArtSidebarAttributes as `prop:${K}`]?: ArtSidebar[K] };
+        "art-sidebar-group": Omit<ArtSidebarGroup, keyof ArtSidebarGroupAttributes> & { [K in keyof ArtSidebarGroup & keyof ArtSidebarGroupAttributes]?: ArtSidebarGroup[K] } & { [K in keyof ArtSidebarGroup & keyof ArtSidebarGroupAttributes as `attr:${K}`]?: ArtSidebarGroupAttributes[K] } & { [K in keyof ArtSidebarGroup & keyof ArtSidebarGroupAttributes as `prop:${K}`]?: ArtSidebarGroup[K] };
+        "art-sidebar-inset": ArtSidebarInset;
+        "art-sidebar-menu": ArtSidebarMenu;
+        "art-sidebar-menu-button": Omit<ArtSidebarMenuButton, keyof ArtSidebarMenuButtonAttributes> & { [K in keyof ArtSidebarMenuButton & keyof ArtSidebarMenuButtonAttributes]?: ArtSidebarMenuButton[K] } & { [K in keyof ArtSidebarMenuButton & keyof ArtSidebarMenuButtonAttributes as `attr:${K}`]?: ArtSidebarMenuButtonAttributes[K] } & { [K in keyof ArtSidebarMenuButton & keyof ArtSidebarMenuButtonAttributes as `prop:${K}`]?: ArtSidebarMenuButton[K] };
+        "art-sidebar-menu-item": Omit<ArtSidebarMenuItem, keyof ArtSidebarMenuItemAttributes> & { [K in keyof ArtSidebarMenuItem & keyof ArtSidebarMenuItemAttributes]?: ArtSidebarMenuItem[K] } & { [K in keyof ArtSidebarMenuItem & keyof ArtSidebarMenuItemAttributes as `attr:${K}`]?: ArtSidebarMenuItemAttributes[K] } & { [K in keyof ArtSidebarMenuItem & keyof ArtSidebarMenuItemAttributes as `prop:${K}`]?: ArtSidebarMenuItem[K] };
+        "art-sidebar-menu-sub": ArtSidebarMenuSub;
+        "art-sidebar-provider": Omit<ArtSidebarProvider, keyof ArtSidebarProviderAttributes> & { [K in keyof ArtSidebarProvider & keyof ArtSidebarProviderAttributes]?: ArtSidebarProvider[K] } & { [K in keyof ArtSidebarProvider & keyof ArtSidebarProviderAttributes as `attr:${K}`]?: ArtSidebarProviderAttributes[K] } & { [K in keyof ArtSidebarProvider & keyof ArtSidebarProviderAttributes as `prop:${K}`]?: ArtSidebarProvider[K] };
+        "art-sidebar-trigger": Omit<ArtSidebarTrigger, keyof ArtSidebarTriggerAttributes> & { [K in keyof ArtSidebarTrigger & keyof ArtSidebarTriggerAttributes]?: ArtSidebarTrigger[K] } & { [K in keyof ArtSidebarTrigger & keyof ArtSidebarTriggerAttributes as `attr:${K}`]?: ArtSidebarTriggerAttributes[K] } & { [K in keyof ArtSidebarTrigger & keyof ArtSidebarTriggerAttributes as `prop:${K}`]?: ArtSidebarTrigger[K] };
+        "art-top-nav": Omit<ArtTopNav, keyof ArtTopNavAttributes> & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes]?: ArtTopNav[K] } & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes as `attr:${K}`]?: ArtTopNavAttributes[K] } & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes as `prop:${K}`]?: ArtTopNav[K] };
+        "art-tree-item": Omit<ArtTreeItem, keyof ArtTreeItemAttributes> & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes]?: ArtTreeItem[K] } & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes as `attr:${K}`]?: ArtTreeItemAttributes[K] } & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes as `prop:${K}`]?: ArtTreeItem[K] };
+        "art-tree-view": Omit<ArtTreeView, keyof ArtTreeViewAttributes> & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes]?: ArtTreeView[K] } & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes as `attr:${K}`]?: ArtTreeViewAttributes[K] } & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes as `prop:${K}`]?: ArtTreeView[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -1107,6 +1901,77 @@ declare module "@stencil/core" {
              * with `href-template` (`?page={page}`) for crawlable pages.
              */
             "art-pagination": LocalJSX.IntrinsicElements["art-pagination"] & JSXBase.HTMLAttributes<HTMLArtPaginationElement>;
+            /**
+             * Sidebar (SideNav) — shadcn/ui parity. A collapsible app sidebar inside an
+             * `art-sidebar-provider`: `side`, `variant` (`sidebar | floating | inset`) and `collapsible`
+             * (`offcanvas | icon | none`). Below the md breakpoint it becomes an off-canvas sheet
+             * (focus-trapped, dismissed by Escape or a tap outside), built on the primitives (ADR-0019).
+             */
+            "art-sidebar": LocalJSX.IntrinsicElements["art-sidebar"] & JSXBase.HTMLAttributes<HTMLArtSidebarElement>;
+            /**
+             * Sidebar Group — a titled section of the sidebar with an optional action button.
+             */
+            "art-sidebar-group": LocalJSX.IntrinsicElements["art-sidebar-group"] & JSXBase.HTMLAttributes<HTMLArtSidebarGroupElement>;
+            /**
+             * Sidebar Inset — the `main` area beside an `art-sidebar`. With the `inset` sidebar variant it
+             * floats as a rounded card on the sidebar-coloured frame.
+             */
+            "art-sidebar-inset": LocalJSX.IntrinsicElements["art-sidebar-inset"] & JSXBase.HTMLAttributes<HTMLArtSidebarInsetElement>;
+            /**
+             * Sidebar Menu — a list of `art-sidebar-menu-item`s.
+             */
+            "art-sidebar-menu": LocalJSX.IntrinsicElements["art-sidebar-menu"] & JSXBase.HTMLAttributes<HTMLArtSidebarMenuElement>;
+            /**
+             * Sidebar Menu Button — the control of an `art-sidebar-menu-item`: a button, or a link with
+             * `href`; `active` marks the current page. While the sidebar is collapsed to icons it becomes a
+             * square that clips its label and shows `tooltip` beside it on hover / focus. Inside an
+             * `art-sidebar-menu-sub` it renders in the smaller sub style.
+             */
+            "art-sidebar-menu-button": LocalJSX.IntrinsicElements["art-sidebar-menu-button"] & JSXBase.HTMLAttributes<HTMLArtSidebarMenuButtonElement>;
+            /**
+             * Sidebar Menu Item — one row of an `art-sidebar-menu`: an `art-sidebar-menu-button`, optionally
+             * with an `action` button, a `badge`, and a nested `art-sidebar-menu-sub` that the button
+             * toggles (`open`).
+             */
+            "art-sidebar-menu-item": LocalJSX.IntrinsicElements["art-sidebar-menu-item"] & JSXBase.HTMLAttributes<HTMLArtSidebarMenuItemElement>;
+            /**
+             * Sidebar Menu Sub — a nested list under an `art-sidebar-menu-item` (shown while the item is
+             * `open`; hidden when the sidebar collapses to icons). Holds `art-sidebar-menu-item`s whose
+             * buttons render in the smaller sub style.
+             */
+            "art-sidebar-menu-sub": LocalJSX.IntrinsicElements["art-sidebar-menu-sub"] & JSXBase.HTMLAttributes<HTMLArtSidebarMenuSubElement>;
+            /**
+             * Sidebar Provider — the app frame around an `art-sidebar` and its `art-sidebar-inset`: a
+             * full-height row that owns the sidebar state (`open` on desktop, `open-mobile` below the md
+             * breakpoint) and the ⌘ / Ctrl + B shortcut. Override `--art-sidebar-width` here.
+             */
+            "art-sidebar-provider": LocalJSX.IntrinsicElements["art-sidebar-provider"] & JSXBase.HTMLAttributes<HTMLArtSidebarProviderElement>;
+            /**
+             * Sidebar Trigger — a ghost icon button that toggles the nearest `art-sidebar-provider`
+             * (expand / collapse on desktop, open / close the off-canvas sheet on mobile).
+             */
+            "art-sidebar-trigger": LocalJSX.IntrinsicElements["art-sidebar-trigger"] & JSXBase.HTMLAttributes<HTMLArtSidebarTriggerElement>;
+            /**
+             * TopNav — an app header bar: a brand at the start, a row of links, actions at the end. Below
+             * the md breakpoint (or always, `collapse="always"`) the links fold into a panel under the bar
+             * behind a menu button. Links are plain `<a>`s (or router links); `aria-current="page"` marks
+             * the current one.
+             */
+            "art-top-nav": LocalJSX.IntrinsicElements["art-top-nav"] & JSXBase.HTMLAttributes<HTMLArtTopNavElement>;
+            /**
+             * Tree Item — a node of an `art-tree-view`: `label`, optional `icon`, and nested
+             * `art-tree-item`s in the default slot (shown while `expanded`). The host is the
+             * `role="treeitem"` element (focus, `aria-expanded`, `aria-selected`, `aria-level`); only the
+             * tree's current item is a tab stop.
+             */
+            "art-tree-item": LocalJSX.IntrinsicElements["art-tree-item"] & JSXBase.HTMLAttributes<HTMLArtTreeItemElement>;
+            /**
+             * Tree View — a hierarchical list of `art-tree-item`s (files, pages, an outline) following the
+             * WAI-ARIA tree pattern: one tab stop, arrows move and expand / collapse, Home / End, `*` opens
+             * the siblings, typing jumps, Enter / Space or a click selects. Single selection: the selected
+             * item's `value` is the tree's `value`.
+             */
+            "art-tree-view": LocalJSX.IntrinsicElements["art-tree-view"] & JSXBase.HTMLAttributes<HTMLArtTreeViewElement>;
         }
     }
 }

@@ -84,6 +84,7 @@ StyleDictionary.registerFormat({
       warning: 'color.warning.solid', 'warning-muted': 'color.warning.muted', 'warning-fg': 'color.warning.fg',
       info: 'color.info.solid', 'info-muted': 'color.info.muted', 'info-fg': 'color.info.fg',
       border: 'color.border.default', 'border-strong': 'color.border.strong', ring: 'color.ring',
+      sidebar: 'color.bg.sidebar', 'sidebar-accent': 'color.bg.sidebar-accent',
     };
     for (const [k, p] of Object.entries(colours)) add(`--color-${k}`, v(p));
     add('--color-transparent', 'transparent');

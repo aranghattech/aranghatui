@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+}
+:host([hidden]) {
+  display: none;
+}
+/* The inset variant paints the frame in the sidebar colour; the main area floats on it as a card. */
+:host([data-variant='inset']) {
+  background: var(--art-color-bg-sidebar);
+}

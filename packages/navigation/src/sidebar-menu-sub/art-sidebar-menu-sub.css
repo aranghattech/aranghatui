@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+:host([hidden]),
+:host([data-icon]) {
+  display: none;
+}
+.list {
+  margin-inline: var(--art-space-3-5);
+  border-inline-start: var(--art-border-width) solid var(--art-color-border-default);
+}

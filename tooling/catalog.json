@@ -522,17 +522,71 @@
         {
           "tag": "art-sidebar",
           "name": "Sidebar",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-sidebar-provider",
+          "name": "Sidebar Provider",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-trigger",
+          "name": "Sidebar Trigger",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-inset",
+          "name": "Sidebar Inset",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-group",
+          "name": "Sidebar Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-menu",
+          "name": "Sidebar Menu",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-menu-item",
+          "name": "Sidebar Menu Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-menu-button",
+          "name": "Sidebar Menu Button",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-sidebar-menu-sub",
+          "name": "Sidebar Menu Sub",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-top-nav",
           "name": "TopNav",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-tree-view",
           "name": "Tree View",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-tree-item",
+          "name": "Tree Item",
+          "status": "in-progress",
+          "internal": true
         }
       ]
     },

@@ -1,0 +1,17 @@
+{
+  "sidebar": {
+    "$type": "dimension",
+    "width": {
+      "$value": "{space.64}",
+      "$description": "Sidebar (SideNav) expanded width; override on the provider."
+    },
+    "width-mobile": {
+      "$value": "{space.72}",
+      "$description": "Off-canvas sidebar width below the md breakpoint."
+    },
+    "width-icon": {
+      "$value": "{space.12}",
+      "$description": "Sidebar width when collapsed to icons."
+    }
+  }
+}

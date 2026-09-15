@@ -22,7 +22,9 @@
     "14": { "$value": "3.5rem" },
     "16": { "$value": "4rem" },
     "20": { "$value": "5rem" },
-    "24": { "$value": "6rem" }
+    "24": { "$value": "6rem" },
+    "64": { "$value": "16rem" },
+    "72": { "$value": "18rem" }
   },
   "size": {
     "$type": "dimension",
