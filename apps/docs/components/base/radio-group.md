@@ -150,7 +150,7 @@ Items are `<art-radio value="…">Label</art-radio>` with the label as the defau
 | `Home / End` | First / last item |
 | `Space` | Select the focused item |
 
-`role="radiogroup"` on the host (`aria-label` / `aria-labelledby` go there), `role="radio"` + `aria-checked` on each item; each item is named by its slotted label. Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/radio/).
+`role="radiogroup"` on the host (`aria-label` / `aria-labelledby` go there); each item is a native `<input type="radio">` named by its slotted label. Native radio grouping cannot cross shadow roots, so the group provides exclusivity and arrow-key navigation. Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/radio/).
 
 States: All six on items: hover, active, focus-visible, disabled (per item or whole group), invalid (`aria-invalid` on the group). `loading` is not applicable.
 

@@ -1,18 +1,19 @@
-import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { Component, Element, Host, Prop, Watch, h } from '@stencil/core';
 import { resolveAria } from '@aranghat/primitives/aria';
 
 /**
- * Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
- * default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
- * and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+ * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+ * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+ * roots). The label is the default slot, so no wrapper markup is needed.
  *
  * @slot - Label text.
- * @part control - The `role="radio"` button.
+ * @part control - The native `<input type="radio">`.
  * @part label - The wrapping `<label>`.
  */
 @Component({ tag: 'art-radio', styleUrl: 'art-radio.css', shadow: { delegatesFocus: true } })
 export class ArtRadio {
   @Element() host!: HTMLElement;
+  private input?: HTMLInputElement;
 
   /** Value reported by the group when this item is selected. */
   @Prop() value!: string;
@@ -37,33 +38,33 @@ export class ArtRadio {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
     this.ariaLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
   }
+  @Watch('checked')
+  syncChecked() { if (this.input) this.input.checked = this.checked; }
+  componentDidLoad() { this.syncChecked(); }
 
-  private onKeydown = (e: KeyboardEvent) => { if (e.key === 'Enter') e.preventDefault(); };
+  // A lone native radio can be un-toggled by nothing but the group; stop its change from leaking.
+  private onChange = (e: Event) => { e.stopPropagation(); this.syncChecked(); };
 
   render() {
     const disabled = this.disabled || this.groupDisabled;
     return (
       <Host>
         <label part="label" class={{ 'inline-flex items-center gap-2 text-sm font-medium select-none': true, 'text-fg-muted': disabled }}>
-          <button
+          <input
             part="control"
-            type="button"
-            role="radio"
-            aria-checked={this.checked ? 'true' : 'false'}
-            aria-label={this.ariaLabel}
+            type="radio"
+            ref={(el) => (this.input = el)}
+            checked={this.checked}
             disabled={disabled}
             tabindex={this.tabbable ? 0 : -1}
+            aria-label={this.ariaLabel}
             class={{
-              'inline-flex shrink-0 items-center justify-center rounded-full shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50': true,
+              'appearance-none shrink-0 rounded-full border-default bg-transparent text-transparent shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 checked:border-primary checked:text-primary': true,
               // safelist: icon-sm icon-md icon-lg
               [`icon-${this.size}`]: true,
-              'border-primary bg-transparent text-primary': this.checked,
-              'border-default bg-transparent text-transparent': !this.checked,
             }}
-            onKeyDown={this.onKeydown}
-          >
-            <svg class="size-1/2" viewBox="0 0 8 8" aria-hidden="true" focusable="false"><circle cx="4" cy="4" r="4" fill="currentColor" /></svg>
-          </button>
+            onChange={this.onChange}
+          />
           <slot />
         </label>
       </Host>

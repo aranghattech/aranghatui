@@ -158,7 +158,7 @@
       "embla-carousel",
       "./index*.js"
     ],
-    "limit": "4 kB",
+    "limit": "3 kB",
     "gzip": true
   },
   {

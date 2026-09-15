@@ -63,9 +63,10 @@ export namespace Components {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
-     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
-     * form-associated (submits `value` when checked). `change` is emitted from the host with
-     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
      */
     interface ArtCheckbox {
         /**
@@ -257,9 +258,9 @@ export namespace Components {
         "value": string;
     }
     /**
-     * Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
-     * default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
-     * and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
      */
     interface ArtRadio {
         /**
@@ -327,16 +328,17 @@ export namespace Components {
         "value"?: string;
     }
     /**
-     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
-     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
-     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
-     * for one thumb and a number[] for a range.
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
      */
     interface ArtSlider {
         /**
           * @default false
          */
         "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
         "hostAriaLabel"?: string | null;
         "hostAriaLabelledby"?: string | null;
         /**
@@ -362,14 +364,13 @@ export namespace Components {
          */
         "step": number;
         /**
-          * Current value: a number, an array for a range, or the attribute form `"25,75"`.
           * @default 0
          */
-        "value": number | number[] | string;
+        "value": number | string;
     }
     /**
-     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
-     * `change` is emitted from the host with `detail.checked`.
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
      */
     interface ArtSwitch {
         /**
@@ -573,9 +574,10 @@ declare global {
         "change": { checked: boolean };
     }
     /**
-     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
-     * form-associated (submits `value` when checked). `change` is emitted from the host with
-     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
      */
     interface HTMLArtCheckboxElement extends Components.ArtCheckbox, HTMLStencilElement {
         addEventListener<K extends keyof HTMLArtCheckboxElementEventMap>(type: K, listener: (this: HTMLArtCheckboxElement, ev: ArtCheckboxCustomEvent<HTMLArtCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -682,9 +684,9 @@ declare global {
         new (): HTMLArtNativeSelectElement;
     };
     /**
-     * Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
-     * default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
-     * and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
      */
     interface HTMLArtRadioElement extends Components.ArtRadio, HTMLStencilElement {
     }
@@ -715,14 +717,14 @@ declare global {
         new (): HTMLArtRadioGroupElement;
     };
     interface HTMLArtSliderElementEventMap {
-        "input": { value: number | number[] };
-        "change": { value: number | number[] };
+        "input": { value: number };
+        "change": { value: number };
     }
     /**
-     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
-     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
-     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
-     * for one thumb and a number[] for a range.
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
      */
     interface HTMLArtSliderElement extends Components.ArtSlider, HTMLStencilElement {
         addEventListener<K extends keyof HTMLArtSliderElementEventMap>(type: K, listener: (this: HTMLArtSliderElement, ev: ArtSliderCustomEvent<HTMLArtSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -742,8 +744,8 @@ declare global {
         "change": { checked: boolean };
     }
     /**
-     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
-     * `change` is emitted from the host with `detail.checked`.
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
      */
     interface HTMLArtSwitchElement extends Components.ArtSwitch, HTMLStencilElement {
         addEventListener<K extends keyof HTMLArtSwitchElementEventMap>(type: K, listener: (this: HTMLArtSwitchElement, ev: ArtSwitchCustomEvent<HTMLArtSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -908,9 +910,10 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
     }
     /**
-     * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
-     * form-associated (submits `value` when checked). `change` is emitted from the host with
-     * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+     * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+     * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+     * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+     * `ngModel` work out of the box.
      */
     interface ArtCheckbox {
         /**
@@ -1123,9 +1126,9 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
-     * Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
-     * default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
-     * and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+     * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+     * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+     * roots). The label is the default slot, so no wrapper markup is needed.
      */
     interface ArtRadio {
         /**
@@ -1201,10 +1204,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
-     * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
-     * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
-     * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
-     * for one thumb and a number[] for a range.
+     * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+     * provides drag, keyboard, screen-reader value announcements and form participation; artui
+     * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+     * `change` on commit; `detail.value` is a number.
      */
     interface ArtSlider {
         /**
@@ -1215,6 +1218,7 @@ declare namespace LocalJSX {
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        "hostAriaDescribedby"?: string | null;
         "hostAriaLabel"?: string | null;
         "hostAriaLabelledby"?: string | null;
         /**
@@ -1227,13 +1231,13 @@ declare namespace LocalJSX {
         "min"?: number;
         "name"?: string;
         /**
-          * Emitted when a drag or key interaction ends.
+          * Emitted when the interaction ends.
          */
-        "onChange"?: (event: ArtSliderCustomEvent<{ value: number | number[] }>) => void;
+        "onChange"?: (event: ArtSliderCustomEvent<{ value: number }>) => void;
         /**
           * Emitted while the value changes (drag, keys); `detail.value` mirrors `target.value`.
          */
-        "onInput"?: (event: ArtSliderCustomEvent<{ value: number | number[] }>) => void;
+        "onInput"?: (event: ArtSliderCustomEvent<{ value: number }>) => void;
         /**
           * @default 'horizontal'
          */
@@ -1248,14 +1252,13 @@ declare namespace LocalJSX {
          */
         "step"?: number;
         /**
-          * Current value: a number, an array for a range, or the attribute form `"25,75"`.
           * @default 0
          */
-        "value"?: number | number[] | string;
+        "value"?: number | string;
     }
     /**
-     * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
-     * `change` is emitted from the host with `detail.checked`.
+     * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+     * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
      */
     interface ArtSwitch {
         /**
@@ -1529,6 +1532,7 @@ declare namespace LocalJSX {
         "name": string;
         "hostAriaLabel": string | null;
         "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
     }
     interface ArtSwitchAttributes {
         "checked": boolean;
@@ -1609,9 +1613,10 @@ declare module "@stencil/core" {
              */
             "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;
             /**
-             * Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
-             * form-associated (submits `value` when checked). `change` is emitted from the host with
-             * `detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+             * Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+             * styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+             * `change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+             * `ngModel` work out of the box.
              */
             "art-checkbox": LocalJSX.IntrinsicElements["art-checkbox"] & JSXBase.HTMLAttributes<HTMLArtCheckboxElement>;
             /**
@@ -1645,9 +1650,9 @@ declare module "@stencil/core" {
              */
             "art-native-select": LocalJSX.IntrinsicElements["art-native-select"] & JSXBase.HTMLAttributes<HTMLArtNativeSelectElement>;
             /**
-             * Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
-             * default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
-             * and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+             * Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+             * which owns selection and keyboard navigation (native radio grouping does not cross shadow
+             * roots). The label is the default slot, so no wrapper markup is needed.
              */
             "art-radio": LocalJSX.IntrinsicElements["art-radio"] & JSXBase.HTMLAttributes<HTMLArtRadioElement>;
             /**
@@ -1657,15 +1662,15 @@ declare module "@stencil/core" {
              */
             "art-radio-group": LocalJSX.IntrinsicElements["art-radio-group"] & JSXBase.HTMLAttributes<HTMLArtRadioGroupElement>;
             /**
-             * Slider — shadcn/ui (Radix) parity. One or two thumbs (`value="50"` or `value="25,75"`),
-             * pointer drag, keyboard steps, horizontal or vertical, RTL-aware, form-associated.
-             * `input` fires while dragging / stepping, `change` on commit; `detail.value` is a number
-             * for one thumb and a number[] for a range.
+             * Slider — shadcn/ui parity on a native `<input type="range">` (ADR-0021): the platform
+             * provides drag, keyboard, screen-reader value announcements and form participation; artui
+             * only styles the track, filled range and thumb. Form-associated. `input` fires while moving,
+             * `change` on commit; `detail.value` is a number.
              */
             "art-slider": LocalJSX.IntrinsicElements["art-slider"] & JSXBase.HTMLAttributes<HTMLArtSliderElement>;
             /**
-             * Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
-             * `change` is emitted from the host with `detail.checked`.
+             * Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+             * Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
              */
             "art-switch": LocalJSX.IntrinsicElements["art-switch"] & JSXBase.HTMLAttributes<HTMLArtSwitchElement>;
             /**

@@ -7,9 +7,10 @@
 
 ## Overview
 
-Checkbox — shadcn/ui parity. A `role="checkbox"` button with checked / indeterminate states,
-form-associated (submits `value` when checked). `change` is emitted from the host with
-`detail.checked`; Vue `v-model:checked`, Angular `ngModel` (boolean) work out of the box.
+Checkbox — shadcn/ui parity on a native `<input type="checkbox">` (ADR-0021: native controls,
+styled). Checked / indeterminate states, form-associated (submits `value` when checked).
+`change` is emitted from the host with `detail.checked`; Vue `v-model:checked` and Angular
+`ngModel` work out of the box.
 
 ## Properties
 
@@ -37,9 +38,9 @@ form-associated (submits `value` when checked). `change` is emitted from the hos
 
 ## Shadow Parts
 
-| Part        | Description                   |
-| ----------- | ----------------------------- |
-| `"control"` | The `role="checkbox"` button. |
+| Part        | Description                           |
+| ----------- | ------------------------------------- |
+| `"control"` | The native `<input type="checkbox">`. |
 
 
 ----------------------------------------------

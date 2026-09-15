@@ -2,17 +2,18 @@ import { describe, expect, h, it, render } from '@stencil/vitest';
 import { vi } from 'vitest';
 
 describe('art-switch', () => {
-  it('renders role=switch and toggles emitting change', async () => {
+  it('renders a native checkbox with role=switch and toggles emitting change', async () => {
     const { root, waitForChanges } = await render(<art-switch aria-label="Wi-Fi"></art-switch>);
-    const btn = root.shadowRoot!.querySelector('button')!;
-    expect(btn.getAttribute('role')).toBe('switch');
-    expect(btn.getAttribute('aria-checked')).toBe('false');
+    const input = root.shadowRoot!.querySelector('input')!;
+    expect(input.getAttribute('role')).toBe('switch');
+    expect(input.checked).toBe(false);
     const spy = vi.fn();
     root.addEventListener('change', spy);
-    btn.click();
+    input.click();
     await waitForChanges();
-    expect(btn.getAttribute('aria-checked')).toBe('true');
+    expect(input.checked).toBe(true);
+    expect((root as any).checked).toBe(true);
+    expect(input.className).toContain('checked:bg-primary');
     expect(spy.mock.calls[0]![0].detail).toEqual({ checked: true });
-    expect(root.shadowRoot!.querySelector('[part="thumb"]')!.className).toContain('translate-x-4');
   });
 });

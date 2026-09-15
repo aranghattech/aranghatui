@@ -9,6 +9,6 @@ test.describe('art-switch', () => {
     expect(await page.evaluate(() => Object.fromEntries(new FormData(document.getElementById('f') as HTMLFormElement)))).toEqual({ wifi: 'on' });
     await page.locator('art-label').click();
     expect(await page.locator('art-switch').evaluate((el: any) => el.checked)).toBe(false);
-    await expect(page.locator('art-switch button')).toHaveAccessibleName('Wi-Fi');
+    await expect(page.locator('art-switch input')).toHaveAccessibleName('Wi-Fi');
   });
 });

@@ -7,9 +7,9 @@
 
 ## Overview
 
-Radio item — used inside `<art-radio-group>`, which owns selection. The label is the
-default slot: `<art-radio value="a">Option A</art-radio>` — clicking the text selects,
-and the control is named by it (native `<label>`), so no wrapper markup is ever needed.
+Radio item — a native `<input type="radio">` (ADR-0021) used inside `<art-radio-group>`,
+which owns selection and keyboard navigation (native radio grouping does not cross shadow
+roots). The label is the default slot, so no wrapper markup is needed.
 
 ## Properties
 
@@ -32,10 +32,10 @@ and the control is named by it (native `<label>`), so no wrapper markup is ever 
 
 ## Shadow Parts
 
-| Part        | Description                |
-| ----------- | -------------------------- |
-| `"control"` | The `role="radio"` button. |
-| `"label"`   | The wrapping `<label>`.    |
+| Part        | Description                        |
+| ----------- | ---------------------------------- |
+| `"control"` | The native `<input type="radio">`. |
+| `"label"`   | The wrapping `<label>`.            |
 
 
 ----------------------------------------------

@@ -5,7 +5,7 @@ test.describe('art-checkbox', () => {
     await page.setContent(`<form id="f"><art-checkbox id="c" name="agree" value="yes"></art-checkbox><art-label for="c">Agree</art-label></form>`);
     const change = await page.spyOnEvent('change');
     await page.keyboard.press('Tab');
-    await expect(page.locator('art-checkbox button')).toBeFocused();
+    await expect(page.locator('art-checkbox input')).toBeFocused();
     await page.keyboard.press('Space');
     expect(await page.locator('art-checkbox').evaluate((el: any) => el.checked)).toBe(true);
     await page.keyboard.press('Enter');
@@ -15,6 +15,6 @@ test.describe('art-checkbox', () => {
     await page.locator('art-label').click();
     expect(await page.locator('art-checkbox').evaluate((el: any) => el.checked)).toBe(false);
     expect(await page.evaluate(() => Object.fromEntries(new FormData(document.getElementById('f') as HTMLFormElement)))).toEqual({});
-    await expect(page.locator('art-checkbox button')).toHaveAccessibleName('Agree');
+    await expect(page.locator('art-checkbox input')).toHaveAccessibleName('Agree');
   });
 });

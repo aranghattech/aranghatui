@@ -1,6 +1,6 @@
 # Slider
 
-An input where the user selects a value from within a given range. shadcn/ui parity, one or two thumbs, form-associated.
+An input where the user selects a value from within a given range. A styled native `<input type="range">`, form-associated.
 
 ## Preview
 
@@ -36,7 +36,7 @@ pnpm add @aranghat/tokens @aranghat/base @aranghat/base-angular
 <<< ../../../sandbox/angular/src/app/samples/slider/basic.ts [Angular]
 :::
 
-`input` fires continuously while dragging or stepping, `change` when the interaction ends; both bubble from the host with `detail.value` (a number, or a number[] for a range). `v-model` and `ngModel` (single value) work out of the box.
+`input` fires continuously while dragging or stepping, `change` when the interaction ends; both bubble from the host with `detail.value` (a number). `v-model` and `ngModel` work out of the box. A two-thumb range is not part of this control.
 
 ## Examples
 
@@ -51,21 +51,6 @@ pnpm add @aranghat/tokens @aranghat/base @aranghat/base-angular
 <<< ../../../sandbox/react/src/samples/slider/basic.tsx [React]
 <<< ../../../sandbox/vue/src/samples/slider/basic.vue [Vue]
 <<< ../../../sandbox/angular/src/app/samples/slider/basic.ts [Angular]
-:::
-
-### Range
-
-Two thumbs: `value="25,75"` (an array as a property). Thumbs cannot cross; each thumb announces its own bounds.
-
-<Preview frame="stack">
-  <art-slider value="25,75" aria-label="Price"></art-slider>
-</Preview>
-
-::: code-group
-<<< ../../../sandbox/html/src/samples/slider/range.html [HTML]
-<<< ../../../sandbox/react/src/samples/slider/range.tsx [React]
-<<< ../../../sandbox/vue/src/samples/slider/range.vue [Vue]
-<<< ../../../sandbox/angular/src/app/samples/slider/range.ts [Angular]
 :::
 
 ### Steps
@@ -130,25 +115,22 @@ Two thumbs: `value="25,75"` (an array as a property). Thumbs cannot cross; each 
 
 | Key | Action |
 |---|---|
-| `Tab` | Focus a thumb |
-| `Arrow Right / Up` | Increase by `step` (Right/Left swap in RTL) |
-| `Arrow Left / Down` | Decrease by `step` |
-| `Page Up / Page Down` | Increase / decrease by a tenth of the range |
-| `Home / End` | Minimum / maximum |
+| `Tab` | Focus the slider |
+| `Arrow keys, Page Up / Down, Home / End` | Native range-input behaviour (Left/Right swap in RTL) |
 
-Each thumb is `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow` and `aria-orientation`; the host `aria-label` names each thumb (suffixed "minimum" / "maximum" for a range). Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/).
+A native `<input type="range">`: value announcements, keyboard and touch behaviour come from the platform. `aria-label`, `aria-labelledby` and `aria-describedby` are resolved across the shadow boundary; vertical sliders set `aria-orientation`.
 
-States: hover (thumb grows), active (dragging), focus-visible, disabled are implemented; `invalid` and `loading` are not applicable.
+States: hover (thumb grows), active (dragging), focus-visible (ring on the thumb) and disabled are implemented; `invalid` and `loading` are not applicable.
 
 ## Tokens used
 
 | Token | Used for |
 |---|---|
 | ``--art-space-*`` | track thickness (1 / 1.5 / 2) and thumb size (3 / 4 / 5) |
-| ``--art-color-bg-muted`, `--art-color-primary-solid`` | track and range |
-| ``--art-color-bg-canvas`, `--art-color-primary-solid`` | thumb fill and border |
+| ``--art-color-bg-muted`, `--art-color-primary-solid`` | track and filled range |
+| ``--art-color-bg-canvas`, `--art-color-primary-solid`, `--art-border-width`` | thumb |
 | ``--art-radius-full`` | shape |
-| ``--art-ring-*`` | focus ring |
+| ``--art-ring-*`` | focus ring on the thumb |
 | ``--art-shadow-raised`` | thumb elevation |
 | ``--art-duration-fast`, `--art-ease-out`` | thumb motion |
 

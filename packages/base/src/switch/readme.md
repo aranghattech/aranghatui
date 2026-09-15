@@ -7,8 +7,8 @@
 
 ## Overview
 
-Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits `value` when on).
-`change` is emitted from the host with `detail.checked`.
+Switch — shadcn/ui parity on a native `<input type="checkbox" role="switch">` (ADR-0021).
+Form-associated (submits `value` when on); `change` is emitted from the host with `detail.checked`.
 
 ## Properties
 
@@ -35,10 +35,9 @@ Switch — shadcn/ui parity. A `role="switch"` toggle, form-associated (submits 
 
 ## Shadow Parts
 
-| Part        | Description                         |
-| ----------- | ----------------------------------- |
-| `"control"` | The `role="switch"` button (track). |
-| `"thumb"`   | The thumb.                          |
+| Part        | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| `"control"` | The native input (the track); the thumb is its `::before`. |
 
 
 ----------------------------------------------

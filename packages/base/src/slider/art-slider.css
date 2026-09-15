@@ -1,15 +1,107 @@
 :host {
   display: block;
   width: 100%;
+  --track: var(--art-space-1-5);
+  --thumb: var(--art-space-4);
 }
-:host([orientation='vertical']) {
-  display: inline-block;
-  width: auto;
-  height: 100%;
+:host([size='sm']) {
+  --track: var(--art-space-1);
+  --thumb: var(--art-space-3);
+}
+:host([size='lg']) {
+  --track: var(--art-space-2);
+  --thumb: var(--art-space-5);
 }
 :host([hidden]) {
   display: none;
 }
 :host([disabled]) {
   pointer-events: none;
+}
+
+input {
+  display: block;
+  width: 100%;
+  height: var(--thumb);
+  margin: 0;
+  outline: none;
+  touch-action: none;
+}
+/* ---- track (filled up to --fill, set from the value) ---- */
+input::-webkit-slider-runnable-track {
+  height: var(--track);
+  border-radius: var(--art-radius-full);
+  background: linear-gradient(to right, var(--art-color-primary-solid) var(--fill), var(--art-color-bg-muted) var(--fill));
+}
+input:dir(rtl)::-webkit-slider-runnable-track {
+  background: linear-gradient(to left, var(--art-color-primary-solid) var(--fill), var(--art-color-bg-muted) var(--fill));
+}
+input::-moz-range-track {
+  height: var(--track);
+  border-radius: var(--art-radius-full);
+  background: var(--art-color-bg-muted);
+}
+input::-moz-range-progress {
+  height: var(--track);
+  border-radius: var(--art-radius-full);
+  background: var(--art-color-primary-solid);
+}
+/* ---- thumb ---- */
+input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: calc((var(--track) - var(--thumb)) / 2);
+  border-radius: var(--art-radius-full);
+  border: var(--art-border-width) solid var(--art-color-primary-solid);
+  background: var(--art-color-bg-canvas);
+  box-shadow: var(--art-shadow-raised);
+  transition: scale var(--art-duration-fast) var(--art-ease-out), box-shadow var(--art-duration-fast) var(--art-ease-out);
+}
+input::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: var(--art-radius-full);
+  border: var(--art-border-width) solid var(--art-color-primary-solid);
+  background: var(--art-color-bg-canvas);
+  box-shadow: var(--art-shadow-raised);
+  transition: scale var(--art-duration-fast) var(--art-ease-out), box-shadow var(--art-duration-fast) var(--art-ease-out);
+}
+input:hover::-webkit-slider-thumb,
+input:active::-webkit-slider-thumb {
+  scale: 1.1;
+}
+input:hover::-moz-range-thumb,
+input:active::-moz-range-thumb {
+  scale: 1.1;
+}
+/* focus ring on the thumb (same recipe as focus-ring) */
+input:focus-visible::-webkit-slider-thumb {
+  box-shadow: var(--art-shadow-raised), 0 0 0 calc(var(--art-ring-width) + var(--art-ring-offset)) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+}
+input:focus-visible::-moz-range-thumb {
+  box-shadow: var(--art-shadow-raised), 0 0 0 calc(var(--art-ring-width) + var(--art-ring-offset)) color-mix(in oklab, var(--art-color-ring) 50%, transparent);
+}
+/* ---- vertical ---- */
+:host([orientation='vertical']) {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  min-height: var(--art-space-24);
+}
+:host([orientation='vertical']) input {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: var(--thumb);
+  height: 100%;
+}
+:host([orientation='vertical']) input::-webkit-slider-runnable-track {
+  width: var(--track);
+  height: 100%;
+  background: linear-gradient(to top, var(--art-color-primary-solid) var(--fill), var(--art-color-bg-muted) var(--fill));
+}
+:host([orientation='vertical']) input::-webkit-slider-thumb {
+  margin-top: 0;
+  margin-left: calc((var(--track) - var(--thumb)) / 2);
 }

@@ -152,9 +152,9 @@ Pair it with `art-label for="…"`: the label names the control and toggles it o
 | Key | Action |
 |---|---|
 | `Tab` | Focus the checkbox |
-| `Space` | Toggle (Enter does nothing, per APG) |
+| `Space` | Toggle (native) |
 
-`role="checkbox"` with `aria-checked` (`mixed` when indeterminate), `aria-required`, `aria-invalid`; name from `aria-label` / `art-label`. Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/).
+A native `<input type="checkbox">` — checked, indeterminate, required and disabled are platform semantics; the name comes from `aria-label` or `art-label` (resolved across the shadow boundary). Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/).
 
 States: All six: hover (border), active (press), focus-visible (ring), disabled, invalid (destructive ring). `loading` is not applicable.
 

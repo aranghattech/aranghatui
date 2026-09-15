@@ -1,37 +1,36 @@
 import { describe, expect, h, it, render } from '@stencil/vitest';
 import { vi } from 'vitest';
 
+const ev = (root: Element, type: string) => { const e = root.ownerDocument.createEvent('Event'); e.initEvent(type, true, false); return e; };
+
 describe('art-slider', () => {
-  it('renders a slider thumb with ARIA values and positions the range', async () => {
-    const { root } = await render(<art-slider value="40" min={0} max={200} aria-label="Volume"></art-slider>);
-    const thumb = root.shadowRoot!.querySelector('[role="slider"]')!;
-    expect(thumb.getAttribute('aria-valuenow')).toBe('40');
-    expect(thumb.getAttribute('aria-valuemax')).toBe('200');
-    expect(thumb.getAttribute('aria-label')).toBe('Volume');
-    expect((thumb as HTMLElement).style.insetInlineStart).toBe('20%');
+  it('renders a native range input with min/max/step/value and the fill variable', async () => {
+    const { root } = await render(<art-slider value="40" min={0} max={200} step={5} aria-label="Volume"></art-slider>);
+    const input = root.shadowRoot!.querySelector('input')!;
+    expect(input.type).toBe('range');
+    expect(input.getAttribute('max')).toBe('200');
+    expect(input.getAttribute('step')).toBe('5');
+    expect(input.value).toBe('40');
+    expect(input.getAttribute('aria-label')).toBe('Volume');
+    expect(input.style.getPropertyValue('--fill')).toBe('20%');
   });
-
-  it('parses a range attribute, keeps thumbs ordered and emits input/change on keys', async () => {
-    const { root, waitForChanges } = await render(<art-slider value="25,75" step={5} aria-label="Price"></art-slider>);
-    const thumbs = root.shadowRoot!.querySelectorAll<HTMLElement>('[role="slider"]');
-    expect(thumbs.length).toBe(2);
-    expect(thumbs[0]!.getAttribute('aria-label')).toBe('Price minimum');
-    expect(thumbs[0]!.getAttribute('aria-valuemax')).toBe('75');
-    const input = vi.fn(); const change = vi.fn();
-    root.addEventListener('input', input); root.addEventListener('change', change);
-    const key = (el: Element, k: string) => el.dispatchEvent(new (root.ownerDocument.defaultView as any).KeyboardEvent('keydown', { key: k, bubbles: true, cancelable: true }));
-    key(thumbs[0]!, 'ArrowRight');
+  it('emits input/change from the host with a numeric detail and clamps', async () => {
+    const { root, waitForChanges } = await render(<art-slider value="103" max={100}></art-slider>);
+    const input = root.shadowRoot!.querySelector('input')!;
+    expect(input.value).toBe('100');
+    const spy = vi.fn(); const change = vi.fn();
+    root.addEventListener('input', spy); root.addEventListener('change', change);
+    input.value = '30';
+    input.dispatchEvent(ev(root, 'input'));
+    input.dispatchEvent(ev(root, 'change'));
     await waitForChanges();
-    expect((root as any).value).toEqual([30, 75]);
-    expect(input.mock.calls[0]![0].detail).toEqual({ value: [30, 75] });
+    expect((root as any).value).toBe(30);
+    expect(spy.mock.calls[0]![0].detail).toEqual({ value: 30 });
     expect(change).toHaveBeenCalledTimes(1);
-    key(thumbs[0]!, 'End'); // clamped to the other thumb
-    await waitForChanges();
-    expect((root as any).value).toEqual([75, 75]);
+    expect(input.style.getPropertyValue('--fill')).toBe('30%');
   });
-
-  it('snaps to step and clamps to min/max', async () => {
-    const { root } = await render(<art-slider value="103" step={10} max={100}></art-slider>);
-    expect(root.shadowRoot!.querySelector('[role="slider"]')!.getAttribute('aria-valuenow')).toBe('100');
+  it('vertical sets aria-orientation', async () => {
+    const { root } = await render(<art-slider orientation="vertical" value="10"></art-slider>);
+    expect(root.shadowRoot!.querySelector('input')!.getAttribute('aria-orientation')).toBe('vertical');
   });
 });

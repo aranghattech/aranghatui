@@ -107,9 +107,9 @@ Same contract as Checkbox: `art-label for="…"` names and toggles it; `change` 
 | Key | Action |
 |---|---|
 | `Tab` | Focus the switch |
-| `Space / Enter` | Toggle |
+| `Space` | Toggle (native) |
 
-`role="switch"` with `aria-checked`; name from `aria-label` / `art-label`. Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/switch/).
+A native `<input type="checkbox" role="switch">`; the name comes from `aria-label` or `art-label`. Pattern: [APG](https://www.w3.org/WAI/ARIA/apg/patterns/switch/).
 
 States: All six: hover, active, focus-visible, disabled, invalid. `loading` is not applicable.
 

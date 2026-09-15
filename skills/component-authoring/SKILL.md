@@ -26,6 +26,7 @@ Add the catalogue entry status `in-progress` in `tooling/catalog.json`. Angular 
 - **Interpolated class names are invisible to the Tailwind scanner.** Any `` `x-${size}` `` must be accompanied by a comment listing every literal (`// safelist: field-sm field-md field-lg`), or the utility is silently missing (Input's sizes shipped without heights once).
 
 ## 3. Implement (Stencil)
+- **Native first (ADR-0020).** If HTML has the element, wrap it and style it (`appearance: none` + pseudo-elements on tokens); do not rebuild its behaviour. Custom logic only where no native element exists or to orchestrate natives across shadow roots.
 - `shadow: true`; document `::part()` and CSS custom property hooks in JSDoc (`@part`, `@slot`).
 - Props camelCase + reflect where styling depends on them; booleans default `false`.
 - Native events: re-dispatch `input|change|reset|submit` with `redispatch(host, e)`.
