@@ -81,8 +81,8 @@ export class ArtTextarea {
           class={{
             'field-sizing-content block min-h-16 w-full min-w-0 rounded-md border-default bg-transparent py-2 text-md md:text-sm text-fg shadow-raised transition-interactive motion-fast focus-ring': true,
             'placeholder:text-fg-muted selection:bg-primary selection:text-primary-fg disabled:opacity-50 aria-invalid:invalid-ring': true,
-            // safelist for the scanner: textarea-sm textarea-md textarea-lg
-            [`textarea-${this.size}`]: true,
+            // safelist for the scanner: field-pad-sm field-pad-md field-pad-lg
+            [`field-pad-${this.size}`]: true,
           }}
           placeholder={this.placeholder}
           name={this.name}
