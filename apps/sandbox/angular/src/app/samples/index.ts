@@ -13,9 +13,17 @@ import { ButtonLink } from './button/link';
 import { ButtonForm } from './button/form';
 import { LabelBasic } from './label/basic';
 import { LabelDisabled } from './label/disabled';
+import { InputBasic } from './input/basic';
+import { InputSizes } from './input/sizes';
+import { InputWithLabel } from './input/with-label';
+import { InputWithButton } from './input/with-button';
+import { InputDisabled } from './input/disabled';
+import { InputInvalid } from './input/invalid';
+import { InputFile } from './input/file';
+import { InputForm } from './input/form';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -32,4 +40,12 @@ export const SAMPLES = [
   { id: 'button/form', component: ButtonForm },
   { id: 'label/basic', component: LabelBasic },
   { id: 'label/disabled', component: LabelDisabled },
+  { id: 'input/basic', component: InputBasic },
+  { id: 'input/sizes', component: InputSizes },
+  { id: 'input/with-label', component: InputWithLabel },
+  { id: 'input/with-button', component: InputWithButton },
+  { id: 'input/disabled', component: InputDisabled },
+  { id: 'input/invalid', component: InputInvalid },
+  { id: 'input/file', component: InputFile },
+  { id: 'input/form', component: InputForm },
 ];

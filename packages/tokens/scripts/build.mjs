@@ -140,6 +140,10 @@ StyleDictionary.registerFormat({
 @utility control-icon-end-sm { padding-inline-end: ${v('control.padding-x-icon.sm')}; }
 @utility control-icon-end-md { padding-inline-end: ${v('control.padding-x-icon.md')}; }
 @utility control-icon-end-lg { padding-inline-end: ${v('control.padding-x-icon.lg')}; }
+@utility field-sm { height: ${v('control.height.sm')}; padding-inline: ${v('control.padding-x-field.sm')}; }
+@utility field-md { height: ${v('control.height.md')}; padding-inline: ${v('control.padding-x-field.md')}; }
+@utility field-lg { height: ${v('control.height.lg')}; padding-inline: ${v('control.padding-x-field.lg')}; }
+@utility invalid-ring { border-color: ${v('color.destructive.solid')}; box-shadow: 0 0 0 ${v('ring.width')} color-mix(in oklab, ${v('color.destructive.solid')} 20%, transparent); }
 @utility control-icon-sm { height: ${v('control.height.sm')}; width: ${v('control.height.sm')}; padding: 0; }
 @utility control-icon-md { height: ${v('control.height.md')}; width: ${v('control.height.md')}; padding: 0; }
 @utility control-icon-lg { height: ${v('control.height.lg')}; width: ${v('control.height.lg')}; padding: 0; }

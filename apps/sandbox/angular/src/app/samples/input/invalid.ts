@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+import { ArtInput, ArtLabel } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-input-invalid',
+  imports: [ArtInput, ArtLabel],
+  template: `
+    <div style="display:flex;flex-direction:column;gap:var(--art-space-2);width:20rem;max-width:100%"><art-label for="email-2">Email</art-label><art-input id="email-2" type="email" value="not-an-email" invalid aria-describedby="email-2-error"></art-input><p id="email-2-error" style="margin:0;font-size:var(--art-font-size-sm);color:var(--art-color-destructive-fg)">Enter a valid email address.</p></div>
+  `,
+})
+export class InputInvalid {}

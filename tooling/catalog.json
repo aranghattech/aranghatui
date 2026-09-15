@@ -31,7 +31,7 @@
         {
           "tag": "art-input",
           "name": "Input",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-textarea",

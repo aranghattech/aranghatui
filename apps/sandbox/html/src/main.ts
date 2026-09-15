@@ -6,6 +6,7 @@ import { defineCustomElement as defineHello } from '@aranghat/base/hello';
 import { defineCustomElement as defineIcon } from '@aranghat/base/icon';
 import { defineCustomElement as defineHelloOverlay } from '@aranghat/modals/hello-overlay';
 import { defineCustomElement as defineLabel } from '@aranghat/base/label';
+import { defineCustomElement as defineInput } from '@aranghat/base/input';
 import './sandbox.css';
 
 defineButton();
@@ -13,6 +14,7 @@ defineHello();
 defineIcon();
 defineHelloOverlay();
 defineLabel();
+defineInput();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

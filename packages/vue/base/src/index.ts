@@ -2,4 +2,5 @@
 export { ArtButton as Button } from './components/index.js';
 export { ArtHello as Hello } from './components/index.js';
 export { ArtIcon as Icon } from './components/index.js';
+export { ArtInput as Input } from './components/index.js';
 export { ArtLabel as Label } from './components/index.js';

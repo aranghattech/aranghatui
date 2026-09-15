@@ -58,6 +58,19 @@
     "gzip": true
   },
   {
+    "name": "base/art-input",
+    "path": "packages/base/dist/components/art-input.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base: whole tier",
     "path": "packages/base/dist/components/index.js",
     "import": "*",

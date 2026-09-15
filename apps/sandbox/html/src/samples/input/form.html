@@ -1,0 +1,14 @@
+<form id="profile">
+  <art-label for="username">Username</art-label>
+  <art-input id="username" name="username" placeholder="shadcn" required minlength="2"></art-input>
+  <art-button type="submit">Submit</art-button>
+  <art-button type="reset" variant="ghost">Reset</art-button>
+</form>
+<script type="module">
+  const form = document.getElementById('profile');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('submitted', Object.fromEntries(new FormData(form)));
+  });
+  form.querySelector('art-input').addEventListener('input', (e) => console.log('value', e.target.value));
+</script>

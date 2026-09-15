@@ -104,6 +104,70 @@ export namespace Components {
         "size": 'sm' | 'md' | 'lg';
     }
     /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons.
+     */
+    interface ArtInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "inputmode"?: string;
+        /**
+          * Marks the field invalid (`aria-invalid` + destructive ring). Field sets it from validation.
+          * @default false
+         */
+        "invalid": boolean;
+        "max"?: string | number;
+        "maxlength"?: number;
+        "min"?: string | number;
+        "minlength"?: number;
+        /**
+          * Form field name (submitted with the value).
+         */
+        "name"?: string;
+        "pattern"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Select all text.
+         */
+        "select": () => Promise<void>;
+        /**
+          * Focus the native input.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Control size; aligns with Button.
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        "step"?: string | number;
+        /**
+          * Native input type.
+          * @default 'text'
+         */
+        "type": 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        /**
+          * Current value.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
      * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
@@ -123,6 +187,10 @@ export namespace Components {
 export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtHelloElement;
+}
+export interface ArtInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtInputElement;
 }
 declare global {
     /**
@@ -169,6 +237,30 @@ declare global {
         prototype: HTMLArtIconElement;
         new (): HTMLArtIconElement;
     };
+    interface HTMLArtInputElementEventMap {
+        "input": { value: string };
+        "change": { value: string };
+    }
+    /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons.
+     */
+    interface HTMLArtInputElement extends Components.ArtInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtInputElementEventMap>(type: K, listener: (this: HTMLArtInputElement, ev: ArtInputCustomEvent<HTMLArtInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtInputElementEventMap>(type: K, listener: (this: HTMLArtInputElement, ev: ArtInputCustomEvent<HTMLArtInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtInputElement: {
+        prototype: HTMLArtInputElement;
+        new (): HTMLArtInputElement;
+    };
     /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
@@ -184,6 +276,7 @@ declare global {
         "art-button": HTMLArtButtonElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
+        "art-input": HTMLArtInputElement;
         "art-label": HTMLArtLabelElement;
     }
 }
@@ -296,6 +389,74 @@ declare namespace LocalJSX {
         "size"?: 'sm' | 'md' | 'lg';
     }
     /**
+     * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+     * reset); `input` / `change` are emitted from the host in response to the native events with
+     * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+     * share the control-height tokens so inputs align with buttons.
+     */
+    interface ArtInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        "inputmode"?: string;
+        /**
+          * Marks the field invalid (`aria-invalid` + destructive ring). Field sets it from validation.
+          * @default false
+         */
+        "invalid"?: boolean;
+        "max"?: string | number;
+        "maxlength"?: number;
+        "min"?: string | number;
+        "minlength"?: number;
+        /**
+          * Form field name (submitted with the value).
+         */
+        "name"?: string;
+        /**
+          * Emitted when the value is committed (blur / Enter).
+         */
+        "onChange"?: (event: ArtInputCustomEvent<{ value: string }>) => void;
+        /**
+          * Emitted on every keystroke; `detail.value` mirrors `target.value`. Kept native-named so `addEventListener('input')`, `onInput`, `@input` and `(input)` all work.
+         */
+        "onInput"?: (event: ArtInputCustomEvent<{ value: string }>) => void;
+        "pattern"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Control size; aligns with Button.
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        "step"?: string | number;
+        /**
+          * Native input type.
+          * @default 'text'
+         */
+        "type"?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        /**
+          * Current value.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
      * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
      * ids, `for` is resolved at click time: activating the label focuses the target control
      * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
@@ -333,6 +494,28 @@ declare namespace LocalJSX {
         "size": 'sm' | 'md' | 'lg';
         "label": string;
     }
+    interface ArtInputAttributes {
+        "value": string;
+        "type": 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'time' | 'file';
+        "size": 'sm' | 'md' | 'lg';
+        "placeholder": string;
+        "name": string;
+        "disabled": boolean;
+        "readonly": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "autocomplete": string;
+        "inputmode": string;
+        "pattern": string;
+        "min": string;
+        "max": string;
+        "step": string;
+        "minlength": number;
+        "maxlength": number;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
     interface ArtLabelAttributes {
         "htmlFor": string;
         "disabled": boolean;
@@ -342,6 +525,7 @@ declare namespace LocalJSX {
         "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
+        "art-input": Omit<ArtInput, keyof ArtInputAttributes> & { [K in keyof ArtInput & keyof ArtInputAttributes]?: ArtInput[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `attr:${K}`]?: ArtInputAttributes[K] } & { [K in keyof ArtInput & keyof ArtInputAttributes as `prop:${K}`]?: ArtInput[K] };
         "art-label": Omit<ArtLabel, keyof ArtLabelAttributes> & { [K in keyof ArtLabel & keyof ArtLabelAttributes]?: ArtLabel[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `attr:${K}`]?: ArtLabelAttributes[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `prop:${K}`]?: ArtLabel[K] };
     }
 }
@@ -367,6 +551,13 @@ declare module "@stencil/core" {
              * into components: import the icon module you need and pass it as `icon`.
              */
             "art-icon": LocalJSX.IntrinsicElements["art-icon"] & JSXBase.HTMLAttributes<HTMLArtIconElement>;
+            /**
+             * Input — shadcn/ui parity. Wraps a native `<input>`; form-associated (FormData, validation,
+             * reset); `input` / `change` are emitted from the host in response to the native events with
+             * `event.target` being `<art-input>` and `detail.value` mirroring `target.value` (§3a). Sizes
+             * share the control-height tokens so inputs align with buttons.
+             */
+            "art-input": LocalJSX.IntrinsicElements["art-input"] & JSXBase.HTMLAttributes<HTMLArtInputElement>;
             /**
              * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
              * ids, `for` is resolved at click time: activating the label focuses the target control

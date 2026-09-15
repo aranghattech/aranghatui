@@ -25,6 +25,10 @@
       "types": "./dist/icon.d.ts",
       "import": "./dist/icon.js"
     },
+    "./input": {
+      "types": "./dist/input.d.ts",
+      "import": "./dist/input.js"
+    },
     "./label": {
       "types": "./dist/label.d.ts",
       "import": "./dist/label.js"
