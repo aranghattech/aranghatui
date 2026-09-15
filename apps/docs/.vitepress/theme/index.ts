@@ -24,7 +24,7 @@ export default {
       const sync = () => root.setAttribute('data-theme', root.classList.contains('dark') ? 'dark' : 'light');
       sync();
       new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['class'] });
-      Promise.all([import('@aranghat/base'), import('@aranghat/components'), import('@aranghat/modals')]).then((tiers) => {
+      Promise.all([import('@aranghat/base'), import('@aranghat/components'), import('@aranghat/navigation'), import('@aranghat/modals')]).then((tiers) => {
         for (const tier of tiers) for (const [k, fn] of Object.entries(tier)) if (k.startsWith('defineCustomElement') && typeof fn === 'function') (fn as () => void)();
       });
     });

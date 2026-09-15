@@ -47,10 +47,14 @@ export function createDismissable(el: Element, options: DismissableOptions): Dis
     if (containsAcrossShadow(el, e.target as Node, path) || ignored(path)) return;
     options.onDismiss('pointer-outside', e);
   };
+  // Focus outside dismisses only once focus has actually been inside (or on an ignored element such as
+  // the trigger): a layer open at page load must not close because the page focused something else.
+  let hadFocus = containsAcrossShadow(el, document.activeElement as Node) || ignored([document.activeElement as EventTarget]);
   const onFocusin = (e: FocusEvent) => {
     if (!focusOutside || !isTop()) return;
     const path = e.composedPath();
-    if (containsAcrossShadow(el, e.target as Node, path) || ignored(path)) return;
+    if (containsAcrossShadow(el, e.target as Node, path) || ignored(path)) { hadFocus = true; return; }
+    if (!hadFocus) return;
     options.onDismiss('focus-outside', e);
   };
 

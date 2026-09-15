@@ -13,6 +13,7 @@
     "@aranghat/components": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
     "@aranghat/tokens": "workspace:*"
   },
   "devDependencies": {

@@ -432,17 +432,59 @@
         {
           "tag": "art-breadcrumb",
           "name": "Breadcrumb",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-breadcrumb-item",
+          "name": "Breadcrumb Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-pagination",
           "name": "Pagination",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-dropdown-menu",
           "name": "Dropdown Menu",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-dropdown-menu-item",
+          "name": "Dropdown Menu Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-dropdown-menu-radio-group",
+          "name": "Dropdown Menu Radio Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-dropdown-menu-label",
+          "name": "Dropdown Menu Label",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-dropdown-menu-separator",
+          "name": "Dropdown Menu Separator",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-dropdown-menu-group",
+          "name": "Dropdown Menu Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-dropdown-menu-sub",
+          "name": "Dropdown Menu Sub",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-context-menu",
