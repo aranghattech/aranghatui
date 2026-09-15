@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  flex: 1;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+:host(:focus-visible) {
+  @apply focus-ring-shadow rounded-md;
+}

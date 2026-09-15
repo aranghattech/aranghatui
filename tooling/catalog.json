@@ -204,47 +204,65 @@
         {
           "tag": "art-popover",
           "name": "Popover",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-tooltip",
           "name": "Tooltip",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-hover-card",
           "name": "Hover Card",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-collapsible",
           "name": "Collapsible",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-accordion",
           "name": "Accordion",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-accordion-item",
+          "name": "Accordion Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-tabs",
           "name": "Tabs",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-tab",
+          "name": "Tab",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-tab-panel",
+          "name": "Tab Panel",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-alert",
           "name": "Alert",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-avatar",
           "name": "Avatar",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-scroll-area",
           "name": "Scroll Area",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-toast",
@@ -281,7 +299,19 @@
         {
           "tag": "art-resizable",
           "name": "Resizable",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-resizable-panel",
+          "name": "Resizable Panel",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-resizable-handle",
+          "name": "Resizable Handle",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-carousel",

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+}
+:host([hidden]) {
+  display: none;
+}
+.viewport {
+  border-radius: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* thin, token-coloured scrollbars (standard properties; WebKit pseudo-elements below for older Safari) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--art-color-border-default) transparent;
+}
+:host([orientation='horizontal']) .viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+:host([orientation='both']) .viewport {
+  overflow: auto;
+}
+.viewport::-webkit-scrollbar {
+  width: var(--art-space-2-5);
+  height: var(--art-space-2-5);
+}
+.viewport::-webkit-scrollbar-thumb {
+  background: var(--art-color-border-default);
+  border-radius: var(--art-radius-full);
+  border: var(--art-space-0-5) solid transparent;
+  background-clip: content-box;
+}
+.viewport::-webkit-scrollbar-track {
+  background: transparent;
+}

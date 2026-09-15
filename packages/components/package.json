@@ -23,6 +23,26 @@
       "import": "./dist/components/index.js"
     },
     "./dist/components/*": "./dist/components/*",
+    "./accordion": {
+      "types": "./dist/components/art-accordion.d.ts",
+      "import": "./dist/components/art-accordion.js"
+    },
+    "./accordion-item": {
+      "types": "./dist/components/art-accordion-item.d.ts",
+      "import": "./dist/components/art-accordion-item.js"
+    },
+    "./alert": {
+      "types": "./dist/components/art-alert.d.ts",
+      "import": "./dist/components/art-alert.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/art-avatar.d.ts",
+      "import": "./dist/components/art-avatar.js"
+    },
+    "./collapsible": {
+      "types": "./dist/components/art-collapsible.d.ts",
+      "import": "./dist/components/art-collapsible.js"
+    },
     "./hover-card": {
       "types": "./dist/components/art-hover-card.d.ts",
       "import": "./dist/components/art-hover-card.js"
@@ -30,6 +50,34 @@
     "./popover": {
       "types": "./dist/components/art-popover.d.ts",
       "import": "./dist/components/art-popover.js"
+    },
+    "./resizable": {
+      "types": "./dist/components/art-resizable.d.ts",
+      "import": "./dist/components/art-resizable.js"
+    },
+    "./resizable-handle": {
+      "types": "./dist/components/art-resizable-handle.d.ts",
+      "import": "./dist/components/art-resizable-handle.js"
+    },
+    "./resizable-panel": {
+      "types": "./dist/components/art-resizable-panel.d.ts",
+      "import": "./dist/components/art-resizable-panel.js"
+    },
+    "./scroll-area": {
+      "types": "./dist/components/art-scroll-area.d.ts",
+      "import": "./dist/components/art-scroll-area.js"
+    },
+    "./tab": {
+      "types": "./dist/components/art-tab.d.ts",
+      "import": "./dist/components/art-tab.js"
+    },
+    "./tab-panel": {
+      "types": "./dist/components/art-tab-panel.d.ts",
+      "import": "./dist/components/art-tab-panel.js"
+    },
+    "./tabs": {
+      "types": "./dist/components/art-tabs.d.ts",
+      "import": "./dist/components/art-tabs.js"
     },
     "./tooltip": {
       "types": "./dist/components/art-tooltip.d.ts",

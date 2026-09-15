@@ -9,6 +9,88 @@ import { Placement } from "@aranghat/primitives/floating";
 export { Placement } from "@aranghat/primitives/floating";
 export namespace Components {
     /**
+     * Accordion — shadcn/ui parity. A stack of `<art-accordion-item>`s, each a native `<details>`.
+     * `type="single"` keeps one item open (the accordion closes the others: the native `name`
+     * grouping only works within one tree, and each item's `<details>` sits in its own shadow
+     * root); `type="multiple"` lets any number open. Arrow keys move between the triggers.
+     */
+    interface ArtAccordion {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * `single`: one item open at a time. `multiple`: any number.
+          * @default 'single'
+         */
+        "type": 'single' | 'multiple';
+        /**
+          * Open value(s). As an attribute, `multiple` values are comma-separated.
+          * @default ''
+         */
+        "value": string | string[];
+    }
+    /**
+     * Accordion Item — one section of an `<art-accordion>`: a native `<details>` whose `<summary>`
+     * is the trigger (with a chevron) and whose content is slotted.
+     */
+    interface ArtAccordionItem {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Identifies the item in the accordion's `value`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Alert — shadcn/ui parity. A callout that draws attention: optional icon, a title and a
+     * description. `role="alert"` so assistive tech announces it when it appears.
+     */
+    interface ArtAlert {
+        /**
+          * @default 'default'
+         */
+        "variant": 'default' | 'destructive';
+    }
+    /**
+     * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
+     * image has loaded, or instead of it when it fails.
+     */
+    interface ArtAvatar {
+        /**
+          * Alternative text for the image; leave empty when the avatar is decorative next to a name.
+          * @default ''
+         */
+        "alt": string;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        "src"?: string;
+    }
+    /**
+     * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
+     * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
+     * platform behaviour. Height animates where the browser can interpolate `::details-content`.
+     */
+    interface ArtCollapsible {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "open": boolean;
+    }
+    /**
      * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
      * a link: opens after a longer hover intent than a tooltip (it is content, not a label), stays
      * open while the pointer is on the card, also opens on keyboard focus. Rendered on the platform
@@ -65,6 +147,124 @@ export namespace Components {
         "placement": Placement;
     }
     /**
+     * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
+     * `<art-resizable-handle>`s that can be dragged with a pointer or moved with the keyboard.
+     * Sizes are percentages of the group.
+     */
+    interface ArtResizable {
+        /**
+          * @default 'horizontal'
+         */
+        "direction": 'horizontal' | 'vertical';
+    }
+    /**
+     * Resizable Handle — the draggable, keyboard-operable divider between two panels
+     * (`role="separator"` with the preceding panel's size as its value).
+     */
+    interface ArtResizableHandle {
+        /**
+          * Show a grip in the middle of the divider.
+          * @default false
+         */
+        "withHandle": boolean;
+    }
+    /**
+     * Resizable Panel — one pane of an `<art-resizable>` group. Sizes are percentages.
+     */
+    interface ArtResizablePanel {
+        /**
+          * Initial size in %; panels without one share what is left.
+         */
+        "defaultSize"?: number;
+        /**
+          * @default 100
+         */
+        "maxSize": number;
+        /**
+          * @default 10
+         */
+        "minSize": number;
+        /**
+          * Current size in %, kept by the group.
+          * @default 0
+         */
+        "size": number;
+    }
+    /**
+     * Scroll Area — shadcn/ui parity on native overflow: a scroll container with thin, token-
+     * coloured scrollbars. Scrolling, wheel, touch and keyboard behaviour stay platform
+     * behaviour; size the host and the content scrolls inside it.
+     */
+    interface ArtScrollArea {
+        /**
+          * Which axis scrolls.
+          * @default 'vertical'
+         */
+        "orientation": 'vertical' | 'horizontal' | 'both';
+    }
+    /**
+     * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
+     * panel can reference it by id), styled per the parent's variant and orientation.
+     */
+    interface ArtTab {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Set by the parent.
+          * @default false
+         */
+        "selected": boolean;
+        /**
+          * Roving tabindex, set by the parent.
+          * @default false
+         */
+        "tabbable": boolean;
+        /**
+          * Identifies the tab in the parent's `value`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Tab Panel — the content for one `<art-tab>`; the parent shows the panel whose `value`
+     * matches and links it to its tab.
+     */
+    interface ArtTabPanel {
+        /**
+          * Matches the `value` of its tab.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Tabs — shadcn/ui parity. `<art-tab>`s form the tab list (they assign themselves to the
+     * `tab` slot), `<art-tab-panel>`s are the panels; the shared `value` selects one of each.
+     * Tabs and panels are light-DOM siblings, so `aria-controls` / `aria-labelledby` can link them.
+     */
+    interface ArtTabs {
+        /**
+          * `automatic`: arrow keys select as they move. `manual`: arrows move focus, Enter / Space selects.
+          * @default 'automatic'
+         */
+        "activation": 'automatic' | 'manual';
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Value of the selected tab.
+          * @default ''
+         */
+        "value": string;
+        /**
+          * `default`: filled list with a raised active tab. `line`: bare tabs with an underline.
+          * @default 'default'
+         */
+        "variant": 'default' | 'line';
+    }
+    /**
      * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
      * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the
      * platform top layer (Popover API) and positioned with the floating primitive; the trigger is
@@ -95,6 +295,18 @@ export namespace Components {
         "placement": Placement;
     }
 }
+export interface ArtAccordionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtAccordionElement;
+}
+export interface ArtAccordionItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtAccordionItemElement;
+}
+export interface ArtCollapsibleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCollapsibleElement;
+}
 export interface ArtHoverCardCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtHoverCardElement;
@@ -103,11 +315,105 @@ export interface ArtPopoverCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtPopoverElement;
 }
+export interface ArtResizableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtResizableElement;
+}
+export interface ArtTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtTabsElement;
+}
 export interface ArtTooltipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtTooltipElement;
 }
 declare global {
+    interface HTMLArtAccordionElementEventMap {
+        "value-change": { value: string | string[] };
+    }
+    /**
+     * Accordion — shadcn/ui parity. A stack of `<art-accordion-item>`s, each a native `<details>`.
+     * `type="single"` keeps one item open (the accordion closes the others: the native `name`
+     * grouping only works within one tree, and each item's `<details>` sits in its own shadow
+     * root); `type="multiple"` lets any number open. Arrow keys move between the triggers.
+     */
+    interface HTMLArtAccordionElement extends Components.ArtAccordion, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtAccordionElementEventMap>(type: K, listener: (this: HTMLArtAccordionElement, ev: ArtAccordionCustomEvent<HTMLArtAccordionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtAccordionElementEventMap>(type: K, listener: (this: HTMLArtAccordionElement, ev: ArtAccordionCustomEvent<HTMLArtAccordionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtAccordionElement: {
+        prototype: HTMLArtAccordionElement;
+        new (): HTMLArtAccordionElement;
+    };
+    interface HTMLArtAccordionItemElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Accordion Item — one section of an `<art-accordion>`: a native `<details>` whose `<summary>`
+     * is the trigger (with a chevron) and whose content is slotted.
+     */
+    interface HTMLArtAccordionItemElement extends Components.ArtAccordionItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtAccordionItemElementEventMap>(type: K, listener: (this: HTMLArtAccordionItemElement, ev: ArtAccordionItemCustomEvent<HTMLArtAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtAccordionItemElementEventMap>(type: K, listener: (this: HTMLArtAccordionItemElement, ev: ArtAccordionItemCustomEvent<HTMLArtAccordionItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtAccordionItemElement: {
+        prototype: HTMLArtAccordionItemElement;
+        new (): HTMLArtAccordionItemElement;
+    };
+    /**
+     * Alert — shadcn/ui parity. A callout that draws attention: optional icon, a title and a
+     * description. `role="alert"` so assistive tech announces it when it appears.
+     */
+    interface HTMLArtAlertElement extends Components.ArtAlert, HTMLStencilElement {
+    }
+    var HTMLArtAlertElement: {
+        prototype: HTMLArtAlertElement;
+        new (): HTMLArtAlertElement;
+    };
+    /**
+     * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
+     * image has loaded, or instead of it when it fails.
+     */
+    interface HTMLArtAvatarElement extends Components.ArtAvatar, HTMLStencilElement {
+    }
+    var HTMLArtAvatarElement: {
+        prototype: HTMLArtAvatarElement;
+        new (): HTMLArtAvatarElement;
+    };
+    interface HTMLArtCollapsibleElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
+     * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
+     * platform behaviour. Height animates where the browser can interpolate `::details-content`.
+     */
+    interface HTMLArtCollapsibleElement extends Components.ArtCollapsible, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCollapsibleElementEventMap>(type: K, listener: (this: HTMLArtCollapsibleElement, ev: ArtCollapsibleCustomEvent<HTMLArtCollapsibleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCollapsibleElementEventMap>(type: K, listener: (this: HTMLArtCollapsibleElement, ev: ArtCollapsibleCustomEvent<HTMLArtCollapsibleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCollapsibleElement: {
+        prototype: HTMLArtCollapsibleElement;
+        new (): HTMLArtCollapsibleElement;
+    };
     interface HTMLArtHoverCardElementEventMap {
         "open-change": { open: boolean };
     }
@@ -154,6 +460,100 @@ declare global {
         prototype: HTMLArtPopoverElement;
         new (): HTMLArtPopoverElement;
     };
+    interface HTMLArtResizableElementEventMap {
+        "layout-change": { sizes: number[] };
+    }
+    /**
+     * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
+     * `<art-resizable-handle>`s that can be dragged with a pointer or moved with the keyboard.
+     * Sizes are percentages of the group.
+     */
+    interface HTMLArtResizableElement extends Components.ArtResizable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtResizableElementEventMap>(type: K, listener: (this: HTMLArtResizableElement, ev: ArtResizableCustomEvent<HTMLArtResizableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtResizableElementEventMap>(type: K, listener: (this: HTMLArtResizableElement, ev: ArtResizableCustomEvent<HTMLArtResizableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtResizableElement: {
+        prototype: HTMLArtResizableElement;
+        new (): HTMLArtResizableElement;
+    };
+    /**
+     * Resizable Handle — the draggable, keyboard-operable divider between two panels
+     * (`role="separator"` with the preceding panel's size as its value).
+     */
+    interface HTMLArtResizableHandleElement extends Components.ArtResizableHandle, HTMLStencilElement {
+    }
+    var HTMLArtResizableHandleElement: {
+        prototype: HTMLArtResizableHandleElement;
+        new (): HTMLArtResizableHandleElement;
+    };
+    /**
+     * Resizable Panel — one pane of an `<art-resizable>` group. Sizes are percentages.
+     */
+    interface HTMLArtResizablePanelElement extends Components.ArtResizablePanel, HTMLStencilElement {
+    }
+    var HTMLArtResizablePanelElement: {
+        prototype: HTMLArtResizablePanelElement;
+        new (): HTMLArtResizablePanelElement;
+    };
+    /**
+     * Scroll Area — shadcn/ui parity on native overflow: a scroll container with thin, token-
+     * coloured scrollbars. Scrolling, wheel, touch and keyboard behaviour stay platform
+     * behaviour; size the host and the content scrolls inside it.
+     */
+    interface HTMLArtScrollAreaElement extends Components.ArtScrollArea, HTMLStencilElement {
+    }
+    var HTMLArtScrollAreaElement: {
+        prototype: HTMLArtScrollAreaElement;
+        new (): HTMLArtScrollAreaElement;
+    };
+    /**
+     * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
+     * panel can reference it by id), styled per the parent's variant and orientation.
+     */
+    interface HTMLArtTabElement extends Components.ArtTab, HTMLStencilElement {
+    }
+    var HTMLArtTabElement: {
+        prototype: HTMLArtTabElement;
+        new (): HTMLArtTabElement;
+    };
+    /**
+     * Tab Panel — the content for one `<art-tab>`; the parent shows the panel whose `value`
+     * matches and links it to its tab.
+     */
+    interface HTMLArtTabPanelElement extends Components.ArtTabPanel, HTMLStencilElement {
+    }
+    var HTMLArtTabPanelElement: {
+        prototype: HTMLArtTabPanelElement;
+        new (): HTMLArtTabPanelElement;
+    };
+    interface HTMLArtTabsElementEventMap {
+        "value-change": { value: string };
+    }
+    /**
+     * Tabs — shadcn/ui parity. `<art-tab>`s form the tab list (they assign themselves to the
+     * `tab` slot), `<art-tab-panel>`s are the panels; the shared `value` selects one of each.
+     * Tabs and panels are light-DOM siblings, so `aria-controls` / `aria-labelledby` can link them.
+     */
+    interface HTMLArtTabsElement extends Components.ArtTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtTabsElementEventMap>(type: K, listener: (this: HTMLArtTabsElement, ev: ArtTabsCustomEvent<HTMLArtTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtTabsElementEventMap>(type: K, listener: (this: HTMLArtTabsElement, ev: ArtTabsCustomEvent<HTMLArtTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtTabsElement: {
+        prototype: HTMLArtTabsElement;
+        new (): HTMLArtTabsElement;
+    };
     interface HTMLArtTooltipElementEventMap {
         "open-change": { open: boolean };
     }
@@ -178,12 +578,118 @@ declare global {
         new (): HTMLArtTooltipElement;
     };
     interface HTMLElementTagNameMap {
+        "art-accordion": HTMLArtAccordionElement;
+        "art-accordion-item": HTMLArtAccordionItemElement;
+        "art-alert": HTMLArtAlertElement;
+        "art-avatar": HTMLArtAvatarElement;
+        "art-collapsible": HTMLArtCollapsibleElement;
         "art-hover-card": HTMLArtHoverCardElement;
         "art-popover": HTMLArtPopoverElement;
+        "art-resizable": HTMLArtResizableElement;
+        "art-resizable-handle": HTMLArtResizableHandleElement;
+        "art-resizable-panel": HTMLArtResizablePanelElement;
+        "art-scroll-area": HTMLArtScrollAreaElement;
+        "art-tab": HTMLArtTabElement;
+        "art-tab-panel": HTMLArtTabPanelElement;
+        "art-tabs": HTMLArtTabsElement;
         "art-tooltip": HTMLArtTooltipElement;
     }
 }
 declare namespace LocalJSX {
+    /**
+     * Accordion — shadcn/ui parity. A stack of `<art-accordion-item>`s, each a native `<details>`.
+     * `type="single"` keeps one item open (the accordion closes the others: the native `name`
+     * grouping only works within one tree, and each item's `<details>` sits in its own shadow
+     * root); `type="multiple"` lets any number open. Arrow keys move between the triggers.
+     */
+    interface ArtAccordion {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Emitted after a user toggle; `detail.value` is a string (`single`) or string[] (`multiple`).
+         */
+        "onValue-change"?: (event: ArtAccordionCustomEvent<{ value: string | string[] }>) => void;
+        /**
+          * `single`: one item open at a time. `multiple`: any number.
+          * @default 'single'
+         */
+        "type"?: 'single' | 'multiple';
+        /**
+          * Open value(s). As an attribute, `multiple` values are comma-separated.
+          * @default ''
+         */
+        "value"?: string | string[];
+    }
+    /**
+     * Accordion Item — one section of an `<art-accordion>`: a native `<details>` whose `<summary>`
+     * is the trigger (with a chevron) and whose content is slotted.
+     */
+    interface ArtAccordionItem {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Emitted when the user toggles the item; the accordion swallows it and emits `value-change`.
+         */
+        "onOpen-change"?: (event: ArtAccordionItemCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * Identifies the item in the accordion's `value`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Alert — shadcn/ui parity. A callout that draws attention: optional icon, a title and a
+     * description. `role="alert"` so assistive tech announces it when it appears.
+     */
+    interface ArtAlert {
+        /**
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'destructive';
+    }
+    /**
+     * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
+     * image has loaded, or instead of it when it fails.
+     */
+    interface ArtAvatar {
+        /**
+          * Alternative text for the image; leave empty when the avatar is decorative next to a name.
+          * @default ''
+         */
+        "alt"?: string;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        "src"?: string;
+    }
+    /**
+     * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
+     * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
+     * platform behaviour. Height animates where the browser can interpolate `::details-content`.
+     */
+    interface ArtCollapsible {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Emitted when the user toggles the content; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtCollapsibleCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+    }
     /**
      * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
      * a link: opens after a longer hover intent than a tooltip (it is content, not a label), stays
@@ -249,6 +755,132 @@ declare namespace LocalJSX {
         "placement"?: Placement;
     }
     /**
+     * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
+     * `<art-resizable-handle>`s that can be dragged with a pointer or moved with the keyboard.
+     * Sizes are percentages of the group.
+     */
+    interface ArtResizable {
+        /**
+          * @default 'horizontal'
+         */
+        "direction"?: 'horizontal' | 'vertical';
+        /**
+          * Emitted after a resize; `detail.sizes` are the panel percentages in order.
+         */
+        "onLayout-change"?: (event: ArtResizableCustomEvent<{ sizes: number[] }>) => void;
+    }
+    /**
+     * Resizable Handle — the draggable, keyboard-operable divider between two panels
+     * (`role="separator"` with the preceding panel's size as its value).
+     */
+    interface ArtResizableHandle {
+        /**
+          * Show a grip in the middle of the divider.
+          * @default false
+         */
+        "withHandle"?: boolean;
+    }
+    /**
+     * Resizable Panel — one pane of an `<art-resizable>` group. Sizes are percentages.
+     */
+    interface ArtResizablePanel {
+        /**
+          * Initial size in %; panels without one share what is left.
+         */
+        "defaultSize"?: number;
+        /**
+          * @default 100
+         */
+        "maxSize"?: number;
+        /**
+          * @default 10
+         */
+        "minSize"?: number;
+        /**
+          * Current size in %, kept by the group.
+          * @default 0
+         */
+        "size"?: number;
+    }
+    /**
+     * Scroll Area — shadcn/ui parity on native overflow: a scroll container with thin, token-
+     * coloured scrollbars. Scrolling, wheel, touch and keyboard behaviour stay platform
+     * behaviour; size the host and the content scrolls inside it.
+     */
+    interface ArtScrollArea {
+        /**
+          * Which axis scrolls.
+          * @default 'vertical'
+         */
+        "orientation"?: 'vertical' | 'horizontal' | 'both';
+    }
+    /**
+     * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
+     * panel can reference it by id), styled per the parent's variant and orientation.
+     */
+    interface ArtTab {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Set by the parent.
+          * @default false
+         */
+        "selected"?: boolean;
+        /**
+          * Roving tabindex, set by the parent.
+          * @default false
+         */
+        "tabbable"?: boolean;
+        /**
+          * Identifies the tab in the parent's `value`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Tab Panel — the content for one `<art-tab>`; the parent shows the panel whose `value`
+     * matches and links it to its tab.
+     */
+    interface ArtTabPanel {
+        /**
+          * Matches the `value` of its tab.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Tabs — shadcn/ui parity. `<art-tab>`s form the tab list (they assign themselves to the
+     * `tab` slot), `<art-tab-panel>`s are the panels; the shared `value` selects one of each.
+     * Tabs and panels are light-DOM siblings, so `aria-controls` / `aria-labelledby` can link them.
+     */
+    interface ArtTabs {
+        /**
+          * `automatic`: arrow keys select as they move. `manual`: arrows move focus, Enter / Space selects.
+          * @default 'automatic'
+         */
+        "activation"?: 'automatic' | 'manual';
+        /**
+          * Emitted when the user selects a tab; `detail.value`.
+         */
+        "onValue-change"?: (event: ArtTabsCustomEvent<{ value: string }>) => void;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+        /**
+          * Value of the selected tab.
+          * @default ''
+         */
+        "value"?: string;
+        /**
+          * `default`: filled list with a raised active tab. `line`: bare tabs with an underline.
+          * @default 'default'
+         */
+        "variant"?: 'default' | 'line';
+    }
+    /**
      * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
      * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the
      * platform top layer (Popover API) and positioned with the floating primitive; the trigger is
@@ -283,6 +915,28 @@ declare namespace LocalJSX {
         "placement"?: Placement;
     }
 
+    interface ArtAccordionAttributes {
+        "type": 'single' | 'multiple';
+        "value": string | string[];
+        "disabled": boolean;
+    }
+    interface ArtAccordionItemAttributes {
+        "value": string;
+        "open": boolean;
+        "disabled": boolean;
+    }
+    interface ArtAlertAttributes {
+        "variant": 'default' | 'destructive';
+    }
+    interface ArtAvatarAttributes {
+        "src": string;
+        "alt": string;
+        "size": 'sm' | 'md' | 'lg';
+    }
+    interface ArtCollapsibleAttributes {
+        "open": boolean;
+        "disabled": boolean;
+    }
     interface ArtHoverCardAttributes {
         "placement": Placement;
         "offset": number;
@@ -296,6 +950,36 @@ declare namespace LocalJSX {
         "open": boolean;
         "label": string;
     }
+    interface ArtResizableAttributes {
+        "direction": 'horizontal' | 'vertical';
+    }
+    interface ArtResizableHandleAttributes {
+        "withHandle": boolean;
+    }
+    interface ArtResizablePanelAttributes {
+        "defaultSize": number;
+        "minSize": number;
+        "maxSize": number;
+        "size": number;
+    }
+    interface ArtScrollAreaAttributes {
+        "orientation": 'vertical' | 'horizontal' | 'both';
+    }
+    interface ArtTabAttributes {
+        "value": string;
+        "disabled": boolean;
+        "selected": boolean;
+        "tabbable": boolean;
+    }
+    interface ArtTabPanelAttributes {
+        "value": string;
+    }
+    interface ArtTabsAttributes {
+        "value": string;
+        "orientation": 'horizontal' | 'vertical';
+        "variant": 'default' | 'line';
+        "activation": 'automatic' | 'manual';
+    }
     interface ArtTooltipAttributes {
         "placement": Placement;
         "offset": number;
@@ -305,8 +989,20 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "art-accordion": Omit<ArtAccordion, keyof ArtAccordionAttributes> & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes]?: ArtAccordion[K] } & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes as `attr:${K}`]?: ArtAccordionAttributes[K] } & { [K in keyof ArtAccordion & keyof ArtAccordionAttributes as `prop:${K}`]?: ArtAccordion[K] };
+        "art-accordion-item": Omit<ArtAccordionItem, keyof ArtAccordionItemAttributes> & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes]?: ArtAccordionItem[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `attr:${K}`]?: ArtAccordionItemAttributes[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `prop:${K}`]?: ArtAccordionItem[K] };
+        "art-alert": Omit<ArtAlert, keyof ArtAlertAttributes> & { [K in keyof ArtAlert & keyof ArtAlertAttributes]?: ArtAlert[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `attr:${K}`]?: ArtAlertAttributes[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `prop:${K}`]?: ArtAlert[K] };
+        "art-avatar": Omit<ArtAvatar, keyof ArtAvatarAttributes> & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes]?: ArtAvatar[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `attr:${K}`]?: ArtAvatarAttributes[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `prop:${K}`]?: ArtAvatar[K] };
+        "art-collapsible": Omit<ArtCollapsible, keyof ArtCollapsibleAttributes> & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes]?: ArtCollapsible[K] } & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes as `attr:${K}`]?: ArtCollapsibleAttributes[K] } & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes as `prop:${K}`]?: ArtCollapsible[K] };
         "art-hover-card": Omit<ArtHoverCard, keyof ArtHoverCardAttributes> & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes]?: ArtHoverCard[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `attr:${K}`]?: ArtHoverCardAttributes[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `prop:${K}`]?: ArtHoverCard[K] };
         "art-popover": Omit<ArtPopover, keyof ArtPopoverAttributes> & { [K in keyof ArtPopover & keyof ArtPopoverAttributes]?: ArtPopover[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `attr:${K}`]?: ArtPopoverAttributes[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `prop:${K}`]?: ArtPopover[K] };
+        "art-resizable": Omit<ArtResizable, keyof ArtResizableAttributes> & { [K in keyof ArtResizable & keyof ArtResizableAttributes]?: ArtResizable[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `attr:${K}`]?: ArtResizableAttributes[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `prop:${K}`]?: ArtResizable[K] };
+        "art-resizable-handle": Omit<ArtResizableHandle, keyof ArtResizableHandleAttributes> & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes]?: ArtResizableHandle[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `attr:${K}`]?: ArtResizableHandleAttributes[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `prop:${K}`]?: ArtResizableHandle[K] };
+        "art-resizable-panel": Omit<ArtResizablePanel, keyof ArtResizablePanelAttributes> & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes]?: ArtResizablePanel[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `attr:${K}`]?: ArtResizablePanelAttributes[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `prop:${K}`]?: ArtResizablePanel[K] };
+        "art-scroll-area": Omit<ArtScrollArea, keyof ArtScrollAreaAttributes> & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes]?: ArtScrollArea[K] } & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes as `attr:${K}`]?: ArtScrollAreaAttributes[K] } & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes as `prop:${K}`]?: ArtScrollArea[K] };
+        "art-tab": Omit<ArtTab, keyof ArtTabAttributes> & { [K in keyof ArtTab & keyof ArtTabAttributes]?: ArtTab[K] } & { [K in keyof ArtTab & keyof ArtTabAttributes as `attr:${K}`]?: ArtTabAttributes[K] } & { [K in keyof ArtTab & keyof ArtTabAttributes as `prop:${K}`]?: ArtTab[K] };
+        "art-tab-panel": Omit<ArtTabPanel, keyof ArtTabPanelAttributes> & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes]?: ArtTabPanel[K] } & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes as `attr:${K}`]?: ArtTabPanelAttributes[K] } & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes as `prop:${K}`]?: ArtTabPanel[K] };
+        "art-tabs": Omit<ArtTabs, keyof ArtTabsAttributes> & { [K in keyof ArtTabs & keyof ArtTabsAttributes]?: ArtTabs[K] } & { [K in keyof ArtTabs & keyof ArtTabsAttributes as `attr:${K}`]?: ArtTabsAttributes[K] } & { [K in keyof ArtTabs & keyof ArtTabsAttributes as `prop:${K}`]?: ArtTabs[K] };
         "art-tooltip": Omit<ArtTooltip, keyof ArtTooltipAttributes> & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes]?: ArtTooltip[K] } & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes as `attr:${K}`]?: ArtTooltipAttributes[K] } & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes as `prop:${K}`]?: ArtTooltip[K] };
     }
 }
@@ -314,6 +1010,34 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Accordion — shadcn/ui parity. A stack of `<art-accordion-item>`s, each a native `<details>`.
+             * `type="single"` keeps one item open (the accordion closes the others: the native `name`
+             * grouping only works within one tree, and each item's `<details>` sits in its own shadow
+             * root); `type="multiple"` lets any number open. Arrow keys move between the triggers.
+             */
+            "art-accordion": LocalJSX.IntrinsicElements["art-accordion"] & JSXBase.HTMLAttributes<HTMLArtAccordionElement>;
+            /**
+             * Accordion Item — one section of an `<art-accordion>`: a native `<details>` whose `<summary>`
+             * is the trigger (with a chevron) and whose content is slotted.
+             */
+            "art-accordion-item": LocalJSX.IntrinsicElements["art-accordion-item"] & JSXBase.HTMLAttributes<HTMLArtAccordionItemElement>;
+            /**
+             * Alert — shadcn/ui parity. A callout that draws attention: optional icon, a title and a
+             * description. `role="alert"` so assistive tech announces it when it appears.
+             */
+            "art-alert": LocalJSX.IntrinsicElements["art-alert"] & JSXBase.HTMLAttributes<HTMLArtAlertElement>;
+            /**
+             * Avatar — shadcn/ui parity. An image with a fallback (initials, an icon) shown until the
+             * image has loaded, or instead of it when it fails.
+             */
+            "art-avatar": LocalJSX.IntrinsicElements["art-avatar"] & JSXBase.HTMLAttributes<HTMLArtAvatarElement>;
+            /**
+             * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
+             * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
+             * platform behaviour. Height animates where the browser can interpolate `::details-content`.
+             */
+            "art-collapsible": LocalJSX.IntrinsicElements["art-collapsible"] & JSXBase.HTMLAttributes<HTMLArtCollapsibleElement>;
             /**
              * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
              * a link: opens after a longer hover intent than a tooltip (it is content, not a label), stays
@@ -328,6 +1052,43 @@ declare module "@stencil/core" {
              * to the trigger on close.
              */
             "art-popover": LocalJSX.IntrinsicElements["art-popover"] & JSXBase.HTMLAttributes<HTMLArtPopoverElement>;
+            /**
+             * Resizable — shadcn/ui parity. A group of `<art-resizable-panel>`s split by
+             * `<art-resizable-handle>`s that can be dragged with a pointer or moved with the keyboard.
+             * Sizes are percentages of the group.
+             */
+            "art-resizable": LocalJSX.IntrinsicElements["art-resizable"] & JSXBase.HTMLAttributes<HTMLArtResizableElement>;
+            /**
+             * Resizable Handle — the draggable, keyboard-operable divider between two panels
+             * (`role="separator"` with the preceding panel's size as its value).
+             */
+            "art-resizable-handle": LocalJSX.IntrinsicElements["art-resizable-handle"] & JSXBase.HTMLAttributes<HTMLArtResizableHandleElement>;
+            /**
+             * Resizable Panel — one pane of an `<art-resizable>` group. Sizes are percentages.
+             */
+            "art-resizable-panel": LocalJSX.IntrinsicElements["art-resizable-panel"] & JSXBase.HTMLAttributes<HTMLArtResizablePanelElement>;
+            /**
+             * Scroll Area — shadcn/ui parity on native overflow: a scroll container with thin, token-
+             * coloured scrollbars. Scrolling, wheel, touch and keyboard behaviour stay platform
+             * behaviour; size the host and the content scrolls inside it.
+             */
+            "art-scroll-area": LocalJSX.IntrinsicElements["art-scroll-area"] & JSXBase.HTMLAttributes<HTMLArtScrollAreaElement>;
+            /**
+             * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
+             * panel can reference it by id), styled per the parent's variant and orientation.
+             */
+            "art-tab": LocalJSX.IntrinsicElements["art-tab"] & JSXBase.HTMLAttributes<HTMLArtTabElement>;
+            /**
+             * Tab Panel — the content for one `<art-tab>`; the parent shows the panel whose `value`
+             * matches and links it to its tab.
+             */
+            "art-tab-panel": LocalJSX.IntrinsicElements["art-tab-panel"] & JSXBase.HTMLAttributes<HTMLArtTabPanelElement>;
+            /**
+             * Tabs — shadcn/ui parity. `<art-tab>`s form the tab list (they assign themselves to the
+             * `tab` slot), `<art-tab-panel>`s are the panels; the shared `value` selects one of each.
+             * Tabs and panels are light-DOM siblings, so `aria-controls` / `aria-labelledby` can link them.
+             */
+            "art-tabs": LocalJSX.IntrinsicElements["art-tabs"] & JSXBase.HTMLAttributes<HTMLArtTabsElement>;
             /**
              * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
              * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the

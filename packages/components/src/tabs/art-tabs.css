@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  gap: var(--art-space-2);
+  flex-direction: column;
+}
+:host([orientation='vertical']) {
+  flex-direction: row;
+}
+:host([hidden]) {
+  display: none;
+}
+/* line variant: the list has no fill and no radius */
+:host([variant='line']) [part='list'] {
+  border-radius: 0;
+}

@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { ArtItem } from '@aranghat/base-angular';
+import { ArtAvatar } from '@aranghat/components-angular';
+
+@Component({
+  selector: 'sample-avatar-with-item',
+  imports: [ArtAvatar, ArtItem],
+  template: `
+    <art-item variant="outline">
+      <art-avatar slot="media" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23737373'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23f5f5f5'/%3E%3Cpath d='M6 38c2-9 8-13 14-13s12 4 14 13Z' fill='%23f5f5f5'/%3E%3C/svg%3E" alt="">CT</art-avatar>
+      <p slot="title">Colm Tuite</p>
+      <p slot="description">colm@example.com</p>
+    </art-item>
+  `,
+})
+export class AvatarWithItem {}

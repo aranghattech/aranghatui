@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { ArtTab, ArtTabPanel, ArtTabs } from '@aranghat/components-angular';
+import { ArtButton, ArtCard, ArtField, ArtInput, ArtLabel } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-tabs-basic',
+  imports: [ArtButton, ArtCard, ArtField, ArtInput, ArtLabel, ArtTab, ArtTabPanel, ArtTabs],
+  template: `
+    <art-tabs value="account">
+      <art-tab value="account">Account</art-tab>
+      <art-tab value="password">Password</art-tab>
+      <art-tab-panel value="account">
+        <art-card>
+          <h3 slot="title">Account</h3>
+          <p slot="description">Make changes to your account here. Click save when you're done.</p>
+          <art-field>
+            <art-label slot="label">Name</art-label>
+            <art-input value="Pedro Duarte"></art-input>
+          </art-field>
+          <art-button slot="footer">Save changes</art-button>
+        </art-card>
+      </art-tab-panel>
+      <art-tab-panel value="password">
+        <art-card>
+          <h3 slot="title">Password</h3>
+          <p slot="description">Change your password here. After saving, you'll be logged out.</p>
+          <art-field>
+            <art-label slot="label">Current password</art-label>
+            <art-input type="password"></art-input>
+          </art-field>
+          <art-button slot="footer">Save password</art-button>
+        </art-card>
+      </art-tab-panel>
+    </art-tabs>
+  `,
+})
+export class TabsBasic {}
