@@ -29,8 +29,14 @@ export class ArtItem {
     if (this.host.parentElement?.tagName === 'ART-ITEM-GROUP') this.host.setAttribute('role', 'listitem');
   }
   componentWillRender() {
-    // media aligns to the first line when there is a description (shadcn group-has-[description]:self-start)
-    this.host.toggleAttribute('data-description', Array.from(this.host.children).some((c) => c.getAttribute('slot') === 'description'));
+    // With a description the media sits on the title line; the content column is offset so the
+    // media box and the title's line box share a centre (the offset depends on the media size).
+    const kids = Array.from(this.host.children);
+    this.host.toggleAttribute('data-description', kids.some((c) => c.getAttribute('slot') === 'description'));
+    const media = kids.find((c) => c.getAttribute('slot') === 'media');
+    const kind = !media ? null : media.tagName === 'IMG' ? 'image' : media.tagName === 'ART-ICON' || media.tagName === 'SVG' ? 'icon' : null;
+    if (kind) this.host.setAttribute('data-media', kind);
+    else this.host.removeAttribute('data-media');
   }
 
   render() {

@@ -4,6 +4,11 @@
 :host([hidden]) {
   display: none;
 }
+/* Slotted children bring user-agent margins (a <p> has 1em above and below); the card's own
+   gaps set the rhythm, so block margins of direct children are zeroed. */
+::slotted(*) {
+  margin-block: 0;
+}
 ::slotted([slot='title']) {
   margin: 0;
   font-size: inherit;

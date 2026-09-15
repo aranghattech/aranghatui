@@ -23,8 +23,17 @@
   justify-content: center;
   gap: var(--art-space-2);
 }
+/* With a description the media is top-aligned and the content column starts half the
+   difference between the media box and the title's line box lower, so both centres coincide
+   and the item's padding stays intact. */
 :host([data-description]) ::slotted([slot='media']) {
   align-self: flex-start;
+}
+:host([data-description][data-media='icon']) [part='content'] {
+  padding-block-start: calc((var(--art-space-8) - var(--art-font-size-sm) * var(--art-font-line-height-sm)) / 2);
+}
+:host([data-description][data-media='image']) [part='content'] {
+  padding-block-start: calc((var(--art-space-10) - var(--art-font-size-sm) * var(--art-font-line-height-sm)) / 2);
 }
 ::slotted(art-icon[slot='media']),
 ::slotted(svg[slot='media']) {
