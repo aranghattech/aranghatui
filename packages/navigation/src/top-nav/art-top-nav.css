@@ -4,6 +4,10 @@
 :host([hidden]) {
   display: none;
 }
+/* `hidden` must beat the display utilities (`flex`, `grid`) on the same element: the shadow reset has no preflight. */
+[hidden] {
+  display: none;
+}
 :host([sticky]) {
   position: sticky;
   top: 0;

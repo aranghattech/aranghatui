@@ -1,0 +1,10 @@
+<art-button variant="outline" id="alert-button">Show alert</art-button>
+<p id="alert-result"></p>
+<script type="module">
+  import { alert } from '@aranghat/modals';
+  const result = document.getElementById('alert-result');
+  document.getElementById('alert-button').addEventListener('click', async () => {
+  await alert({ title: 'Export finished', description: 'Your report is ready to download.' });
+  result.textContent = 'Acknowledged.';
+  });
+</script>

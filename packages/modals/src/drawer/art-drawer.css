@@ -1,0 +1,153 @@
+:host {
+  display: contents;
+}
+:host([hidden]) {
+  display: none;
+}
+/* `hidden` must beat the display utilities (`flex`, `grid`) on the same element: the shadow reset has no preflight. */
+[hidden] {
+  display: none;
+}
+@layer base {
+  dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
+.content {
+  position: fixed;
+  inset: unset;
+  display: flex;
+  flex-direction: column;
+  background: var(--art-color-bg-popover);
+  color: var(--art-color-fg-default);
+  box-shadow: var(--art-shadow-popover);
+  overflow: hidden;
+  transition: translate var(--art-duration-base) var(--art-ease-out);
+}
+.content[data-dragging] {
+  transition: none;
+}
+.content:not([open]) {
+  display: none;
+}
+/* vertical drawers size to their content, capped below the top of the page, and round towards the page */
+:host([side='bottom']) .content,
+:host([side='top']) .content {
+  inset-inline: 0;
+  width: 100%;
+  max-height: calc(100svh - var(--art-space-24));
+}
+:host([side='bottom']) .content {
+  bottom: 0;
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+  border-start-start-radius: var(--art-radius-lg);
+  border-start-end-radius: var(--art-radius-lg);
+}
+:host([side='top']) .content {
+  top: 0;
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+  border-end-start-radius: var(--art-radius-lg);
+  border-end-end-radius: var(--art-radius-lg);
+}
+:host([side='right']) .content,
+:host([side='left']) .content {
+  inset-block: 0;
+  width: 75%;
+  max-width: var(--art-container-sm);
+  height: 100%;
+}
+:host([side='right']) .content {
+  inset-inline-end: 0;
+  border-inline-start: var(--art-border-width) solid var(--art-color-border-default);
+}
+:host([side='left']) .content {
+  inset-inline-start: 0;
+  border-inline-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+/* the swipe handle: a pill at the edge facing the page */
+.handle {
+  width: var(--art-space-24);
+  height: var(--art-space-2);
+  margin: var(--art-space-4) auto 0;
+  border-radius: var(--art-radius-full);
+  background: var(--art-color-bg-muted);
+  touch-action: none;
+  cursor: grab;
+}
+:host([side='top']) .handle {
+  order: 1;
+  margin: 0 auto var(--art-space-4);
+}
+:host([side='left']) .handle,
+:host([side='right']) .handle {
+  position: absolute;
+  top: 50%;
+  width: var(--art-space-2);
+  height: var(--art-space-24);
+  margin: 0;
+  translate: 0 -50%;
+}
+:host([side='right']) .handle {
+  inset-inline-start: var(--art-space-2);
+}
+:host([side='left']) .handle {
+  inset-inline-end: var(--art-space-2);
+}
+:host([side='left']) .header,
+:host([side='right']) .header,
+:host([side='left']) .body,
+:host([side='right']) .body,
+:host([side='left']) .footer,
+:host([side='right']) .footer {
+  padding-inline: var(--art-space-6);
+}
+.header,
+.footer {
+  touch-action: none;
+}
+/* motion shared with Sheet and the Sidebar's off-canvas mode */
+.content[data-state='open'] {
+  animation: sheet-in var(--art-duration-slow) var(--art-ease-out);
+}
+.content[data-state='closed'] {
+  animation: sheet-out var(--art-duration-base) var(--art-ease-out) forwards;
+  pointer-events: none;
+}
+.content::backdrop {
+  background: var(--art-color-bg-overlay);
+}
+.content[data-state='open']::backdrop {
+  animation: backdrop-in var(--art-duration-slow) var(--art-ease-out);
+}
+.content[data-state='closed']::backdrop {
+  animation: backdrop-out var(--art-duration-base) var(--art-ease-out) forwards;
+}
+@keyframes sheet-in {
+  from {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes sheet-out {
+  to {
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}

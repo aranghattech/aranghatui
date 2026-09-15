@@ -115,6 +115,9 @@ importers:
       '@aranghat/icons':
         specifier: workspace:*
         version: link:../../../packages/icons
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../../../packages/modals
       '@aranghat/modals-angular':
         specifier: workspace:*
         version: link:../../../packages/angular/modals
@@ -189,6 +192,9 @@ importers:
       '@aranghat/icons':
         specifier: workspace:*
         version: link:../../../packages/icons
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../../../packages/modals
       '@aranghat/modals-react':
         specifier: workspace:*
         version: link:../../../packages/react/modals
@@ -238,6 +244,9 @@ importers:
       '@aranghat/icons':
         specifier: workspace:*
         version: link:../../../packages/icons
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../../../packages/modals
       '@aranghat/modals-vue':
         specifier: workspace:*
         version: link:../../../packages/vue/modals

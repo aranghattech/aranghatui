@@ -4,6 +4,10 @@
 :host([hidden]) {
   display: none;
 }
+/* `hidden` must beat the display utilities (`flex`, `grid`) on the same element: the shadow reset has no preflight. */
+[hidden] {
+  display: none;
+}
 @layer base {
   dialog {
     margin: 0;
@@ -22,6 +26,7 @@
   position: fixed;
   inset: 0;
   margin: auto;
+  height: fit-content;
   display: grid;
   gap: var(--art-space-4);
   width: calc(100% - 2 * var(--art-space-4));

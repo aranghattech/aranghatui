@@ -1,0 +1,10 @@
+<art-button variant="outline" id="prompt-button">Rename</art-button>
+<p id="prompt-result"></p>
+<script type="module">
+  import { prompt } from '@aranghat/modals';
+  const result = document.getElementById('prompt-result');
+  document.getElementById('prompt-button').addEventListener('click', async () => {
+  const name = await prompt({ title: 'Rename project', description: 'Pick a short, memorable name.', label: 'Name', defaultValue: 'Design system', required: true });
+  result.textContent = name === null ? 'Cancelled.' : `Renamed to ${name}.`;
+  });
+</script>

@@ -607,12 +607,12 @@
         {
           "tag": "art-drawer",
           "name": "Drawer",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "common-dialogs",
           "name": "Common Dialogs",
-          "status": "planned",
+          "status": "in-progress",
           "imperative": true
         }
       ]

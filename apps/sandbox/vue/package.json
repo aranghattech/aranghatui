@@ -13,6 +13,7 @@
     "@aranghat/components": "workspace:*",
     "@aranghat/components-vue": "workspace:*",
     "@aranghat/icons": "workspace:*",
+    "@aranghat/modals": "workspace:*",
     "@aranghat/modals-vue": "workspace:*",
     "@aranghat/navigation": "workspace:*",
     "@aranghat/navigation-vue": "workspace:*",
