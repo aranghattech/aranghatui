@@ -645,17 +645,17 @@
         {
           "tag": "art-settings-page",
           "name": "Settings Page",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-data-table-page",
           "name": "Data Table Page",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-state-page",
           "name": "Empty / 404 / 500 States",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-onboarding-wizard",

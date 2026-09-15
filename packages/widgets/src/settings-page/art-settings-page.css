@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  width: 100%;
+  padding: var(--art-space-6);
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+.section {
+  max-width: var(--art-container-2xl);
+  min-width: 0;
+}
+/* The nav scrolls sideways on narrow screens instead of wrapping. */
+.nav {
+  overflow-x: auto;
+  flex: none;
+}
+::slotted([slot='nav']) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: var(--art-space-9);
+  padding-inline: var(--art-space-4);
+  border-radius: var(--art-radius-md);
+  font-size: var(--art-font-size-sm);
+  font-weight: var(--art-font-weight-medium);
+  color: var(--art-color-fg-default);
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  transition: background-color var(--art-duration-fast) var(--art-ease-out);
+}
+::slotted([slot='nav']:hover) {
+  background: var(--art-color-bg-accent);
+}
+::slotted([slot='nav'][aria-current='page']) {
+  background: var(--art-color-bg-muted);
+}
+::slotted([slot='nav']:focus-visible) {
+  @apply focus-ring-shadow;
+}

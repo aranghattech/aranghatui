@@ -109,6 +109,10 @@ import { defineCustomElement as defineAppShell } from '@aranghat/widgets/app-she
 import { defineCustomElement as defineLogin } from '@aranghat/widgets/login';
 import { defineCustomElement as defineSignup } from '@aranghat/widgets/signup';
 import { defineCustomElement as defineForgotPassword } from '@aranghat/widgets/forgot-password';
+import { defineCustomElement as defineStatePage } from '@aranghat/widgets/state-page';
+import { defineCustomElement as defineSettingsPage } from '@aranghat/widgets/settings-page';
+import { defineCustomElement as defineRadio } from '@aranghat/base/radio';
+import { defineCustomElement as defineDataTablePage } from '@aranghat/widgets/data-table-page';
 import './sandbox.css';
 
 defineButton();
@@ -219,6 +223,10 @@ defineAppShell();
 defineLogin();
 defineSignup();
 defineForgotPassword();
+defineStatePage();
+defineSettingsPage();
+defineRadio();
+defineDataTablePage();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

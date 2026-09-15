@@ -1,0 +1,38 @@
+import { Component } from '@angular/core';
+import { ArtSettingsPage } from '@aranghat/widgets-angular';
+import { ArtButton, ArtField, ArtLabel, ArtNativeSelect, ArtRadio, ArtRadioGroup } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-settings-page-appearance',
+  imports: [ArtButton, ArtField, ArtLabel, ArtNativeSelect, ArtRadio, ArtRadioGroup, ArtSettingsPage],
+  template: `
+    <art-settings-page section-heading="Appearance" section-description="Customize the appearance of the app. Automatically switch between day and night themes.">
+      <a slot="nav" href="#profile">Profile</a>
+      <a slot="nav" href="#account">Account</a>
+      <a slot="nav" href="#appearance" aria-current="page">Appearance</a>
+      <a slot="nav" href="#notifications">Notifications</a>
+      <a slot="nav" href="#display">Display</a>
+      <art-field>
+        <art-label slot="label">Font</art-label>
+        <art-native-select value="inter">
+          <option value="inter">Inter</option>
+          <option value="manrope">Manrope</option>
+          <option value="system">System</option>
+        </art-native-select>
+        <p slot="description">Set the font you want to use in the dashboard.</p>
+      </art-field>
+      <art-field>
+        <art-label slot="label">Theme</art-label>
+        <art-radio-group value="light">
+          <art-radio value="light">Light</art-radio>
+          <art-radio value="dark">Dark</art-radio>
+        </art-radio-group>
+        <p slot="description">Select the theme for the dashboard.</p>
+      </art-field>
+      <div>
+        <art-button>Update preferences</art-button>
+      </div>
+    </art-settings-page>
+  `,
+})
+export class SettingsPageAppearance {}

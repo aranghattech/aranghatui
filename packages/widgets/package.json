@@ -59,6 +59,10 @@
       "types": "./dist/components/art-app-shell.d.ts",
       "import": "./dist/components/art-app-shell.js"
     },
+    "./data-table-page": {
+      "types": "./dist/components/art-data-table-page.d.ts",
+      "import": "./dist/components/art-data-table-page.js"
+    },
     "./forgot-password": {
       "types": "./dist/components/art-forgot-password.d.ts",
       "import": "./dist/components/art-forgot-password.js"
@@ -67,9 +71,17 @@
       "types": "./dist/components/art-login.d.ts",
       "import": "./dist/components/art-login.js"
     },
+    "./settings-page": {
+      "types": "./dist/components/art-settings-page.d.ts",
+      "import": "./dist/components/art-settings-page.js"
+    },
     "./signup": {
       "types": "./dist/components/art-signup.d.ts",
       "import": "./dist/components/art-signup.js"
+    },
+    "./state-page": {
+      "types": "./dist/components/art-state-page.d.ts",
+      "import": "./dist/components/art-state-page.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"

@@ -39,6 +39,65 @@ export namespace Components {
         "variant": 'sidebar' | 'floating' | 'inset';
     }
     /**
+     * Data Table Page — the chrome around a data table (shadcn "tasks" example): page heading and
+     * actions, a toolbar with the filter field, faceted filters, a reset and the view menu, the
+     * table itself, and a footer with the selection count, rows-per-page, the page position and
+     * first / previous / next / last. The page owns no data: drive it from `createTableState`
+     * (`@aranghat/components`) — feed `selected`, `total`, `page`, `page-count`, `page-size` from the
+     * snapshot and listen to `filter-change`, `page-change`, `page-size-change`.
+     */
+    interface ArtDataTablePage {
+        /**
+          * @default "Here's a list of your tasks for this month."
+         */
+        "description": string;
+        /**
+          * Current filter text (mirror it from your state to keep the field in sync).
+          * @default ''
+         */
+        "filter": string;
+        /**
+          * @default 'Filter…'
+         */
+        "filterPlaceholder": string;
+        /**
+          * @default 'Welcome back!'
+         */
+        "heading": string;
+        /**
+          * Drop the filter field (keep `filters` / `view` slots).
+          * @default false
+         */
+        "hideFilter": boolean;
+        /**
+          * @default 1
+         */
+        "page": number;
+        /**
+          * @default 1
+         */
+        "pageCount": number;
+        /**
+          * @default 10
+         */
+        "pageSize": number;
+        /**
+          * Choices for rows per page, comma-separated.
+          * @default '10,20,30,40,50'
+         */
+        "pageSizes": string;
+        /**
+          * Selected rows (over every page).
+          * @default 0
+         */
+        "selected": number;
+        /**
+          * Rows after filtering.
+          * @default 0
+         */
+        "total": number;
+    }
+    /**
      * Forgot Password — a card that asks for the account email and, once `sent`, confirms that the
      * reset link is on its way. You own what happens on `submit` (`detail.email`).
      */
@@ -152,6 +211,32 @@ export namespace Components {
         "submitLabel": string;
     }
     /**
+     * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
+     * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
+     * description and content. Links are plain `<a slot="nav">`s (or router links) and
+     * `aria-current="page"` marks the open section.
+     */
+    interface ArtSettingsPage {
+        /**
+          * @default 'Manage your account settings and set e-mail preferences.'
+         */
+        "description": string;
+        /**
+          * @default 'Settings'
+         */
+        "heading": string;
+        /**
+          * Accessible name of the section nav.
+          * @default 'Settings sections'
+         */
+        "navLabel": string;
+        "sectionDescription"?: string;
+        /**
+          * The open section's heading.
+         */
+        "sectionHeading"?: string;
+    }
+    /**
      * Signup — the shadcn signup block as one element: name, email, password and confirmation in a
      * card, the create-account button, optional social buttons and a sign-in link. The widget checks
      * that the passwords match; you own what happens on `submit` (`detail.name`, `detail.email`,
@@ -217,6 +302,28 @@ export namespace Components {
          */
         "submitLabel": string;
     }
+    /**
+     * State Page — a full-page empty / 404 / 500 state: a centred `art-empty` with an optional
+     * status code, default copy per `kind` (override with `heading` / `description`), media and
+     * actions. Fill the viewport (or a docs frame) and put the way out in `actions`.
+     */
+    interface ArtStatePage {
+        /**
+          * Status code shown above the heading (`404`, `500`).
+         */
+        "code"?: string;
+        "description"?: string;
+        "heading"?: string;
+        /**
+          * Which state; picks the default copy.
+          * @default 'empty'
+         */
+        "kind": 'empty' | 'not-found' | 'error';
+    }
+}
+export interface ArtDataTablePageCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtDataTablePageElement;
 }
 export interface ArtForgotPasswordCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -243,6 +350,33 @@ declare global {
     var HTMLArtAppShellElement: {
         prototype: HTMLArtAppShellElement;
         new (): HTMLArtAppShellElement;
+    };
+    interface HTMLArtDataTablePageElementEventMap {
+        "filter-change": { value: string };
+        "page-change": { page: number };
+        "page-size-change": { pageSize: number };
+    }
+    /**
+     * Data Table Page — the chrome around a data table (shadcn "tasks" example): page heading and
+     * actions, a toolbar with the filter field, faceted filters, a reset and the view menu, the
+     * table itself, and a footer with the selection count, rows-per-page, the page position and
+     * first / previous / next / last. The page owns no data: drive it from `createTableState`
+     * (`@aranghat/components`) — feed `selected`, `total`, `page`, `page-count`, `page-size` from the
+     * snapshot and listen to `filter-change`, `page-change`, `page-size-change`.
+     */
+    interface HTMLArtDataTablePageElement extends Components.ArtDataTablePage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtDataTablePageElementEventMap>(type: K, listener: (this: HTMLArtDataTablePageElement, ev: ArtDataTablePageCustomEvent<HTMLArtDataTablePageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtDataTablePageElementEventMap>(type: K, listener: (this: HTMLArtDataTablePageElement, ev: ArtDataTablePageCustomEvent<HTMLArtDataTablePageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtDataTablePageElement: {
+        prototype: HTMLArtDataTablePageElement;
+        new (): HTMLArtDataTablePageElement;
     };
     interface HTMLArtForgotPasswordElementEventMap {
         "submit": { email: string };
@@ -287,6 +421,18 @@ declare global {
         prototype: HTMLArtLoginElement;
         new (): HTMLArtLoginElement;
     };
+    /**
+     * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
+     * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
+     * description and content. Links are plain `<a slot="nav">`s (or router links) and
+     * `aria-current="page"` marks the open section.
+     */
+    interface HTMLArtSettingsPageElement extends Components.ArtSettingsPage, HTMLStencilElement {
+    }
+    var HTMLArtSettingsPageElement: {
+        prototype: HTMLArtSettingsPageElement;
+        new (): HTMLArtSettingsPageElement;
+    };
     interface HTMLArtSignupElementEventMap {
         "submit": { name: string; email: string; password: string };
     }
@@ -310,11 +456,25 @@ declare global {
         prototype: HTMLArtSignupElement;
         new (): HTMLArtSignupElement;
     };
+    /**
+     * State Page — a full-page empty / 404 / 500 state: a centred `art-empty` with an optional
+     * status code, default copy per `kind` (override with `heading` / `description`), media and
+     * actions. Fill the viewport (or a docs frame) and put the way out in `actions`.
+     */
+    interface HTMLArtStatePageElement extends Components.ArtStatePage, HTMLStencilElement {
+    }
+    var HTMLArtStatePageElement: {
+        prototype: HTMLArtStatePageElement;
+        new (): HTMLArtStatePageElement;
+    };
     interface HTMLElementTagNameMap {
         "art-app-shell": HTMLArtAppShellElement;
+        "art-data-table-page": HTMLArtDataTablePageElement;
         "art-forgot-password": HTMLArtForgotPasswordElement;
         "art-login": HTMLArtLoginElement;
+        "art-settings-page": HTMLArtSettingsPageElement;
         "art-signup": HTMLArtSignupElement;
+        "art-state-page": HTMLArtStatePageElement;
     }
 }
 declare namespace LocalJSX {
@@ -349,6 +509,77 @@ declare namespace LocalJSX {
           * @default 'sidebar'
          */
         "variant"?: 'sidebar' | 'floating' | 'inset';
+    }
+    /**
+     * Data Table Page — the chrome around a data table (shadcn "tasks" example): page heading and
+     * actions, a toolbar with the filter field, faceted filters, a reset and the view menu, the
+     * table itself, and a footer with the selection count, rows-per-page, the page position and
+     * first / previous / next / last. The page owns no data: drive it from `createTableState`
+     * (`@aranghat/components`) — feed `selected`, `total`, `page`, `page-count`, `page-size` from the
+     * snapshot and listen to `filter-change`, `page-change`, `page-size-change`.
+     */
+    interface ArtDataTablePage {
+        /**
+          * @default "Here's a list of your tasks for this month."
+         */
+        "description"?: string;
+        /**
+          * Current filter text (mirror it from your state to keep the field in sync).
+          * @default ''
+         */
+        "filter"?: string;
+        /**
+          * @default 'Filter…'
+         */
+        "filterPlaceholder"?: string;
+        /**
+          * @default 'Welcome back!'
+         */
+        "heading"?: string;
+        /**
+          * Drop the filter field (keep `filters` / `view` slots).
+          * @default false
+         */
+        "hideFilter"?: boolean;
+        /**
+          * The filter field changed; `detail.value`.
+         */
+        "onFilter-change"?: (event: ArtDataTablePageCustomEvent<{ value: string }>) => void;
+        /**
+          * A pagination control was used; `detail.page`.
+         */
+        "onPage-change"?: (event: ArtDataTablePageCustomEvent<{ page: number }>) => void;
+        /**
+          * Rows per page changed; `detail.pageSize`.
+         */
+        "onPage-size-change"?: (event: ArtDataTablePageCustomEvent<{ pageSize: number }>) => void;
+        /**
+          * @default 1
+         */
+        "page"?: number;
+        /**
+          * @default 1
+         */
+        "pageCount"?: number;
+        /**
+          * @default 10
+         */
+        "pageSize"?: number;
+        /**
+          * Choices for rows per page, comma-separated.
+          * @default '10,20,30,40,50'
+         */
+        "pageSizes"?: string;
+        /**
+          * Selected rows (over every page).
+          * @default 0
+         */
+        "selected"?: number;
+        /**
+          * Rows after filtering.
+          * @default 0
+         */
+        "total"?: number;
     }
     /**
      * Forgot Password — a card that asks for the account email and, once `sent`, confirms that the
@@ -472,6 +703,32 @@ declare namespace LocalJSX {
         "submitLabel"?: string;
     }
     /**
+     * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
+     * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
+     * description and content. Links are plain `<a slot="nav">`s (or router links) and
+     * `aria-current="page"` marks the open section.
+     */
+    interface ArtSettingsPage {
+        /**
+          * @default 'Manage your account settings and set e-mail preferences.'
+         */
+        "description"?: string;
+        /**
+          * @default 'Settings'
+         */
+        "heading"?: string;
+        /**
+          * Accessible name of the section nav.
+          * @default 'Settings sections'
+         */
+        "navLabel"?: string;
+        "sectionDescription"?: string;
+        /**
+          * The open section's heading.
+         */
+        "sectionHeading"?: string;
+    }
+    /**
      * Signup — the shadcn signup block as one element: name, email, password and confirmation in a
      * card, the create-account button, optional social buttons and a sign-in link. The widget checks
      * that the passwords match; you own what happens on `submit` (`detail.name`, `detail.email`,
@@ -541,6 +798,24 @@ declare namespace LocalJSX {
          */
         "submitLabel"?: string;
     }
+    /**
+     * State Page — a full-page empty / 404 / 500 state: a centred `art-empty` with an optional
+     * status code, default copy per `kind` (override with `heading` / `description`), media and
+     * actions. Fill the viewport (or a docs frame) and put the way out in `actions`.
+     */
+    interface ArtStatePage {
+        /**
+          * Status code shown above the heading (`404`, `500`).
+         */
+        "code"?: string;
+        "description"?: string;
+        "heading"?: string;
+        /**
+          * Which state; picks the default copy.
+          * @default 'empty'
+         */
+        "kind"?: 'empty' | 'not-found' | 'error';
+    }
 
     interface ArtAppShellAttributes {
         "open": boolean;
@@ -548,6 +823,19 @@ declare namespace LocalJSX {
         "variant": 'sidebar' | 'floating' | 'inset';
         "collapsible": 'offcanvas' | 'icon' | 'none';
         "sidebarLabel": string;
+    }
+    interface ArtDataTablePageAttributes {
+        "heading": string;
+        "description": string;
+        "filter": string;
+        "filterPlaceholder": string;
+        "hideFilter": boolean;
+        "selected": number;
+        "total": number;
+        "page": number;
+        "pageCount": number;
+        "pageSize": number;
+        "pageSizes": string;
     }
     interface ArtForgotPasswordAttributes {
         "heading": string;
@@ -577,6 +865,13 @@ declare namespace LocalJSX {
         "loading": boolean;
         "error": string;
     }
+    interface ArtSettingsPageAttributes {
+        "heading": string;
+        "description": string;
+        "navLabel": string;
+        "sectionHeading": string;
+        "sectionDescription": string;
+    }
     interface ArtSignupAttributes {
         "heading": string;
         "description": string;
@@ -593,12 +888,21 @@ declare namespace LocalJSX {
         "loading": boolean;
         "error": string;
     }
+    interface ArtStatePageAttributes {
+        "kind": 'empty' | 'not-found' | 'error';
+        "code": string;
+        "heading": string;
+        "description": string;
+    }
 
     interface IntrinsicElements {
         "art-app-shell": Omit<ArtAppShell, keyof ArtAppShellAttributes> & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes]?: ArtAppShell[K] } & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes as `attr:${K}`]?: ArtAppShellAttributes[K] } & { [K in keyof ArtAppShell & keyof ArtAppShellAttributes as `prop:${K}`]?: ArtAppShell[K] };
+        "art-data-table-page": Omit<ArtDataTablePage, keyof ArtDataTablePageAttributes> & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes]?: ArtDataTablePage[K] } & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes as `attr:${K}`]?: ArtDataTablePageAttributes[K] } & { [K in keyof ArtDataTablePage & keyof ArtDataTablePageAttributes as `prop:${K}`]?: ArtDataTablePage[K] };
         "art-forgot-password": Omit<ArtForgotPassword, keyof ArtForgotPasswordAttributes> & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes]?: ArtForgotPassword[K] } & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes as `attr:${K}`]?: ArtForgotPasswordAttributes[K] } & { [K in keyof ArtForgotPassword & keyof ArtForgotPasswordAttributes as `prop:${K}`]?: ArtForgotPassword[K] };
         "art-login": Omit<ArtLogin, keyof ArtLoginAttributes> & { [K in keyof ArtLogin & keyof ArtLoginAttributes]?: ArtLogin[K] } & { [K in keyof ArtLogin & keyof ArtLoginAttributes as `attr:${K}`]?: ArtLoginAttributes[K] } & { [K in keyof ArtLogin & keyof ArtLoginAttributes as `prop:${K}`]?: ArtLogin[K] };
+        "art-settings-page": Omit<ArtSettingsPage, keyof ArtSettingsPageAttributes> & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes]?: ArtSettingsPage[K] } & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes as `attr:${K}`]?: ArtSettingsPageAttributes[K] } & { [K in keyof ArtSettingsPage & keyof ArtSettingsPageAttributes as `prop:${K}`]?: ArtSettingsPage[K] };
         "art-signup": Omit<ArtSignup, keyof ArtSignupAttributes> & { [K in keyof ArtSignup & keyof ArtSignupAttributes]?: ArtSignup[K] } & { [K in keyof ArtSignup & keyof ArtSignupAttributes as `attr:${K}`]?: ArtSignupAttributes[K] } & { [K in keyof ArtSignup & keyof ArtSignupAttributes as `prop:${K}`]?: ArtSignup[K] };
+        "art-state-page": Omit<ArtStatePage, keyof ArtStatePageAttributes> & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes]?: ArtStatePage[K] } & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes as `attr:${K}`]?: ArtStatePageAttributes[K] } & { [K in keyof ArtStatePage & keyof ArtStatePageAttributes as `prop:${K}`]?: ArtStatePage[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -614,6 +918,15 @@ declare module "@stencil/core" {
              */
             "art-app-shell": LocalJSX.IntrinsicElements["art-app-shell"] & JSXBase.HTMLAttributes<HTMLArtAppShellElement>;
             /**
+             * Data Table Page — the chrome around a data table (shadcn "tasks" example): page heading and
+             * actions, a toolbar with the filter field, faceted filters, a reset and the view menu, the
+             * table itself, and a footer with the selection count, rows-per-page, the page position and
+             * first / previous / next / last. The page owns no data: drive it from `createTableState`
+             * (`@aranghat/components`) — feed `selected`, `total`, `page`, `page-count`, `page-size` from the
+             * snapshot and listen to `filter-change`, `page-change`, `page-size-change`.
+             */
+            "art-data-table-page": LocalJSX.IntrinsicElements["art-data-table-page"] & JSXBase.HTMLAttributes<HTMLArtDataTablePageElement>;
+            /**
              * Forgot Password — a card that asks for the account email and, once `sent`, confirms that the
              * reset link is on its way. You own what happens on `submit` (`detail.email`).
              */
@@ -625,12 +938,25 @@ declare module "@stencil/core" {
              */
             "art-login": LocalJSX.IntrinsicElements["art-login"] & JSXBase.HTMLAttributes<HTMLArtLoginElement>;
             /**
+             * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
+             * content on wide screens, a scrolling row above it on narrow ones) and the section's heading,
+             * description and content. Links are plain `<a slot="nav">`s (or router links) and
+             * `aria-current="page"` marks the open section.
+             */
+            "art-settings-page": LocalJSX.IntrinsicElements["art-settings-page"] & JSXBase.HTMLAttributes<HTMLArtSettingsPageElement>;
+            /**
              * Signup — the shadcn signup block as one element: name, email, password and confirmation in a
              * card, the create-account button, optional social buttons and a sign-in link. The widget checks
              * that the passwords match; you own what happens on `submit` (`detail.name`, `detail.email`,
              * `detail.password`).
              */
             "art-signup": LocalJSX.IntrinsicElements["art-signup"] & JSXBase.HTMLAttributes<HTMLArtSignupElement>;
+            /**
+             * State Page — a full-page empty / 404 / 500 state: a centred `art-empty` with an optional
+             * status code, default copy per `kind` (override with `heading` / `description`), media and
+             * actions. Fill the viewport (or a docs frame) and put the way out in `actions`.
+             */
+            "art-state-page": LocalJSX.IntrinsicElements["art-state-page"] & JSXBase.HTMLAttributes<HTMLArtStatePageElement>;
         }
     }
 }

@@ -1502,6 +1502,45 @@
     "gzip": true
   },
   {
+    "name": "widgets/art-settings-page",
+    "path": "packages/widgets/dist/components/art-settings-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-data-table-page",
+    "path": "packages/widgets/dist/components/art-data-table-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-state-page",
+    "path": "packages/widgets/dist/components/art-state-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "widgets: whole tier",
     "path": "packages/widgets/dist/components/index.js",
     "import": "*",

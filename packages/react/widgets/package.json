@@ -17,6 +17,10 @@
       "types": "./dist/app-shell.d.ts",
       "import": "./dist/app-shell.js"
     },
+    "./data-table-page": {
+      "types": "./dist/data-table-page.d.ts",
+      "import": "./dist/data-table-page.js"
+    },
     "./forgot-password": {
       "types": "./dist/forgot-password.d.ts",
       "import": "./dist/forgot-password.js"
@@ -25,9 +29,17 @@
       "types": "./dist/login.d.ts",
       "import": "./dist/login.js"
     },
+    "./settings-page": {
+      "types": "./dist/settings-page.d.ts",
+      "import": "./dist/settings-page.js"
+    },
     "./signup": {
       "types": "./dist/signup.d.ts",
       "import": "./dist/signup.js"
+    },
+    "./state-page": {
+      "types": "./dist/state-page.d.ts",
+      "import": "./dist/state-page.js"
     },
     "./package.json": "./package.json"
   },
