@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { ArtDrawer } from '@aranghat/modals-angular';
+import { ArtButton } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-drawer-basic',
+  imports: [ArtButton, ArtDrawer],
+  template: `
+    <art-drawer>
+      <art-button slot="trigger" variant="outline">Open drawer</art-button>
+      <span slot="title">Move Goal</span>
+      <span slot="description">Set your daily activity goal.</span>
+      <div style="display: flex; align-items: center; justify-content: center; gap: var(--art-space-4)">
+        <art-button variant="outline" icon aria-label="Decrease">−</art-button>
+        <span style="font-size: var(--art-font-size-4xl); font-weight: var(--art-font-weight-bold); letter-spacing: var(--art-font-tracking-tight); font-variant-numeric: tabular-nums">350</span>
+        <art-button variant="outline" icon aria-label="Increase">+</art-button>
+      </div>
+      <art-button slot="footer">Submit</art-button>
+      <art-button slot="footer" variant="outline" dialog-close>Cancel</art-button>
+    </art-drawer>
+  `,
+})
+export class DrawerBasic {}

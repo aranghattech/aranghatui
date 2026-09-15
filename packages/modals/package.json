@@ -31,6 +31,10 @@
       "types": "./dist/components/art-dialog.d.ts",
       "import": "./dist/components/art-dialog.js"
     },
+    "./drawer": {
+      "types": "./dist/components/art-drawer.d.ts",
+      "import": "./dist/components/art-drawer.js"
+    },
     "./sheet": {
       "types": "./dist/components/art-sheet.d.ts",
       "import": "./dist/components/art-sheet.js"

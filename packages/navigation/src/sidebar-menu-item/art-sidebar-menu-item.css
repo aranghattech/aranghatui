@@ -5,6 +5,10 @@
 :host([hidden]) {
   display: none;
 }
+/* `hidden` must beat the display utilities (`flex`, `grid`) on the same element: the shadow reset has no preflight. */
+[hidden] {
+  display: none;
+}
 .action {
   top: var(--art-space-1);
   inset-inline-end: var(--art-space-1);

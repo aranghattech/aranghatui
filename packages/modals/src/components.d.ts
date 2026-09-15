@@ -52,6 +52,38 @@ export namespace Components {
         "open": boolean;
     }
     /**
+     * Drawer — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`, bottom by default) with a swipe handle; drag it towards its edge to dismiss. Same
+     * modal behaviour as Dialog (page inert, scroll locked, Escape / backdrop / `dialog-close`
+     * elements close it, focus returns to the trigger); `persistent` keeps it open until a
+     * `dialog-close` element or `open` says otherwise.
+     */
+    interface ArtDrawer {
+        /**
+          * Remove the swipe handle (swiping still works from the header and footer).
+          * @default false
+         */
+        "hideHandle": boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * No dismissal by Escape, the backdrop or a swipe — only `dialog-close` elements or `open`.
+          * @default false
+         */
+        "persistent": boolean;
+        /**
+          * Edge the drawer slides in from; `left` / `right` follow the writing direction.
+          * @default 'bottom'
+         */
+        "side": 'bottom' | 'top' | 'left' | 'right';
+    }
+    /**
      * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
      * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
      * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
@@ -90,6 +122,10 @@ export interface ArtAlertDialogCustomEvent<T> extends CustomEvent<T> {
 export interface ArtDialogCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtDialogElement;
+}
+export interface ArtDrawerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtDrawerElement;
 }
 export interface ArtSheetCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -142,6 +178,30 @@ declare global {
         prototype: HTMLArtDialogElement;
         new (): HTMLArtDialogElement;
     };
+    interface HTMLArtDrawerElementEventMap {
+        "open-change": { open: boolean };
+    }
+    /**
+     * Drawer — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`, bottom by default) with a swipe handle; drag it towards its edge to dismiss. Same
+     * modal behaviour as Dialog (page inert, scroll locked, Escape / backdrop / `dialog-close`
+     * elements close it, focus returns to the trigger); `persistent` keeps it open until a
+     * `dialog-close` element or `open` says otherwise.
+     */
+    interface HTMLArtDrawerElement extends Components.ArtDrawer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtDrawerElementEventMap>(type: K, listener: (this: HTMLArtDrawerElement, ev: ArtDrawerCustomEvent<HTMLArtDrawerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtDrawerElementEventMap>(type: K, listener: (this: HTMLArtDrawerElement, ev: ArtDrawerCustomEvent<HTMLArtDrawerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtDrawerElement: {
+        prototype: HTMLArtDrawerElement;
+        new (): HTMLArtDrawerElement;
+    };
     interface HTMLArtSheetElementEventMap {
         "open-change": { open: boolean };
     }
@@ -169,6 +229,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "art-alert-dialog": HTMLArtAlertDialogElement;
         "art-dialog": HTMLArtDialogElement;
+        "art-drawer": HTMLArtDrawerElement;
         "art-sheet": HTMLArtSheetElement;
     }
 }
@@ -231,6 +292,42 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     /**
+     * Drawer — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+     * (`side`, bottom by default) with a swipe handle; drag it towards its edge to dismiss. Same
+     * modal behaviour as Dialog (page inert, scroll locked, Escape / backdrop / `dialog-close`
+     * elements close it, focus returns to the trigger); `persistent` keeps it open until a
+     * `dialog-close` element or `open` says otherwise.
+     */
+    interface ArtDrawer {
+        /**
+          * Remove the swipe handle (swiping still works from the header and footer).
+          * @default false
+         */
+        "hideHandle"?: boolean;
+        /**
+          * Accessible name when there is no `title` slot.
+         */
+        "label"?: string;
+        /**
+          * Emitted when the user opens or closes the drawer; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtDrawerCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * No dismissal by Escape, the backdrop or a swipe — only `dialog-close` elements or `open`.
+          * @default false
+         */
+        "persistent"?: boolean;
+        /**
+          * Edge the drawer slides in from; `left` / `right` follow the writing direction.
+          * @default 'bottom'
+         */
+        "side"?: 'bottom' | 'top' | 'left' | 'right';
+    }
+    /**
      * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
      * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile
      * menu). Same modal behaviour as Dialog: page inert, scroll locked, Escape / backdrop / close
@@ -277,6 +374,13 @@ declare namespace LocalJSX {
         "hideClose": boolean;
         "closeLabel": string;
     }
+    interface ArtDrawerAttributes {
+        "open": boolean;
+        "side": 'bottom' | 'top' | 'left' | 'right';
+        "label": string;
+        "persistent": boolean;
+        "hideHandle": boolean;
+    }
     interface ArtSheetAttributes {
         "open": boolean;
         "side": 'top' | 'right' | 'bottom' | 'left';
@@ -288,6 +392,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "art-alert-dialog": Omit<ArtAlertDialog, keyof ArtAlertDialogAttributes> & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes]?: ArtAlertDialog[K] } & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes as `attr:${K}`]?: ArtAlertDialogAttributes[K] } & { [K in keyof ArtAlertDialog & keyof ArtAlertDialogAttributes as `prop:${K}`]?: ArtAlertDialog[K] };
         "art-dialog": Omit<ArtDialog, keyof ArtDialogAttributes> & { [K in keyof ArtDialog & keyof ArtDialogAttributes]?: ArtDialog[K] } & { [K in keyof ArtDialog & keyof ArtDialogAttributes as `attr:${K}`]?: ArtDialogAttributes[K] } & { [K in keyof ArtDialog & keyof ArtDialogAttributes as `prop:${K}`]?: ArtDialog[K] };
+        "art-drawer": Omit<ArtDrawer, keyof ArtDrawerAttributes> & { [K in keyof ArtDrawer & keyof ArtDrawerAttributes]?: ArtDrawer[K] } & { [K in keyof ArtDrawer & keyof ArtDrawerAttributes as `attr:${K}`]?: ArtDrawerAttributes[K] } & { [K in keyof ArtDrawer & keyof ArtDrawerAttributes as `prop:${K}`]?: ArtDrawer[K] };
         "art-sheet": Omit<ArtSheet, keyof ArtSheetAttributes> & { [K in keyof ArtSheet & keyof ArtSheetAttributes]?: ArtSheet[K] } & { [K in keyof ArtSheet & keyof ArtSheetAttributes as `attr:${K}`]?: ArtSheetAttributes[K] } & { [K in keyof ArtSheet & keyof ArtSheetAttributes as `prop:${K}`]?: ArtSheet[K] };
     }
 }
@@ -308,6 +413,14 @@ declare module "@stencil/core" {
              * attribute. Focus moves into the dialog and returns to the trigger on close.
              */
             "art-dialog": LocalJSX.IntrinsicElements["art-dialog"] & JSXBase.HTMLAttributes<HTMLArtDialogElement>;
+            /**
+             * Drawer — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
+             * (`side`, bottom by default) with a swipe handle; drag it towards its edge to dismiss. Same
+             * modal behaviour as Dialog (page inert, scroll locked, Escape / backdrop / `dialog-close`
+             * elements close it, focus returns to the trigger); `persistent` keeps it open until a
+             * `dialog-close` element or `open` says otherwise.
+             */
+            "art-drawer": LocalJSX.IntrinsicElements["art-drawer"] & JSXBase.HTMLAttributes<HTMLArtDrawerElement>;
             /**
              * Sheet — shadcn/ui parity on the native `<dialog>`: a panel that slides in from an edge
              * (`side`) over a scrim, for content that complements the page (filters, a form, a mobile

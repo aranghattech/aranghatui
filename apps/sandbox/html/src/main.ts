@@ -104,6 +104,7 @@ import { defineCustomElement as defineSidebar } from '@aranghat/navigation/sideb
 import { defineCustomElement as defineDialog } from '@aranghat/modals/dialog';
 import { defineCustomElement as defineAlertDialog } from '@aranghat/modals/alert-dialog';
 import { defineCustomElement as defineSheet } from '@aranghat/modals/sheet';
+import { defineCustomElement as defineDrawer } from '@aranghat/modals/drawer';
 import './sandbox.css';
 
 defineButton();
@@ -209,6 +210,7 @@ defineSidebar();
 defineDialog();
 defineAlertDialog();
 defineSheet();
+defineDrawer();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

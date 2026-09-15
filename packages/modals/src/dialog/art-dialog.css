@@ -4,6 +4,10 @@
 :host([hidden]) {
   display: none;
 }
+/* `hidden` must beat the display utilities (`flex`, `grid`) on the same element: the shadow reset has no preflight. */
+[hidden] {
+  display: none;
+}
 /* the native dialog on the top layer (ADR-0020 / ADR-0022): reset the UA box, keep the modal semantics */
 @layer base {
   dialog {
@@ -23,6 +27,7 @@
   position: fixed;
   inset: 0;
   margin: auto;
+  height: fit-content;
   display: grid;
   gap: var(--art-space-4);
   width: calc(100% - 2 * var(--art-space-4));

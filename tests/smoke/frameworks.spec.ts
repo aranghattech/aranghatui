@@ -14,7 +14,7 @@ const ids = readdirSync(htmlSamples, { withFileTypes: true })
 const apps = { html: 4001, react: 4002, vue: 4003, angular: 4004 } as const;
 const catalog = JSON.parse(readFileSync(resolve(import.meta.dirname, '../../tooling/catalog.json'), 'utf8'));
 
-const recipes = new Set<string>(Object.values(catalog.tiers as Record<string, { components: { tag: string; recipe?: boolean }[] }>).flatMap((t) => t.components.filter((c) => c.recipe).map((c) => c.tag)));
+const recipes = new Set<string>(Object.values(catalog.tiers as Record<string, { components: { tag: string; recipe?: boolean; imperative?: boolean }[] }>).flatMap((t) => t.components.filter((c) => c.recipe || c.imperative).map((c) => c.tag)));
 
 for (const [framework, port] of Object.entries(apps)) {
   test.describe(framework, () => {
@@ -25,7 +25,7 @@ for (const [framework, port] of Object.entries(apps)) {
         await page.goto(`http://localhost:${port}/`);
         const section = page.locator(`[data-sample="${id}"]`);
         await expect(section).toBeVisible();
-        // A recipe (Data Table, ADR-0006) has no element of its own: its first upgraded component stands in.
+        // A recipe (Data Table, ADR-0006) or an imperative API (Common Dialogs) has no element of its own: its first upgraded component stands in.
         const tag = `art-${id.split('/')[0]}`;
         const el = recipes.has(id.split('/')[0]!) ? section.locator('.hydrated').first() : section.locator(tag).first();
         await expect(el).toBeAttached();

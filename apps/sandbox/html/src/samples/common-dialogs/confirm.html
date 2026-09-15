@@ -1,0 +1,10 @@
+<art-button variant="outline" id="confirm-button">Delete account</art-button>
+<p id="confirm-result"></p>
+<script type="module">
+  import { confirm } from '@aranghat/modals';
+  const result = document.getElementById('confirm-result');
+  document.getElementById('confirm-button').addEventListener('click', async () => {
+  const ok = await confirm({ title: 'Delete account?', description: 'This permanently removes your account and all of its data.', actionLabel: 'Delete', destructive: true });
+  result.textContent = ok ? 'Deleted.' : 'Kept.';
+  });
+</script>

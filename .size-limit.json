@@ -1419,6 +1419,19 @@
     "gzip": true
   },
   {
+    "name": "modals/art-drawer (+ inlined runtime: single-component tier)",
+    "path": "packages/modals/dist/components/art-drawer.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "28 kB",
+    "gzip": true
+  },
+  {
     "name": "modals: whole tier",
     "path": "packages/modals/dist/components/index.js",
     "import": "*",
