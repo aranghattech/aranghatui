@@ -58,7 +58,12 @@ export class ArtToaster {
     for (const id of Array.from(this.known.keys())) if (!next.some((t) => t.id === id)) this.known.delete(id);
     this.sync(next.length > (this.host.shadowRoot?.querySelectorAll('art-toast').length ?? 0));
   }
-  componentDidRender() { this.sync(); }
+  componentDidRender() {
+    // Toasts slide in from the edge they sit on (the overlay motion reads this variable; the
+    // component cannot declare it in CSS — tokens are born in packages/tokens only).
+    this.region?.style.setProperty('--art-overlay-slide', this.position.startsWith('top') ? `0 calc(-1 * var(--art-space-4))` : `0 var(--art-space-4)`);
+    this.sync();
+  }
 
   /** Top layer while there is something to show; re-shown on each addition so it stays above newer overlays. */
   private sync(reshow = false) {

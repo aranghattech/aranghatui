@@ -22,9 +22,7 @@
 .region {
   box-sizing: border-box;
   width: var(--art-container-xs);
-  max-width: calc(100vw - 2 * var(--art-space-4));
-  /* toasts slide in from the edge they sit on */
-  --art-overlay-slide: 0 var(--art-space-4);
+  max-width: 100%;
 }
 :host(:not([inline])) .region {
   position: fixed;
@@ -41,7 +39,6 @@
 }
 .region[data-position^='top'] {
   top: 0;
-  --art-overlay-slide: 0 calc(-1 * var(--art-space-4));
 }
 .region[data-position^='bottom'] {
   bottom: 0;
