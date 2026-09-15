@@ -97,8 +97,73 @@
     "gzip": true
   },
   {
+    "name": "base/art-radio-group",
+    "path": "packages/base/dist/components/art-radio-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-radio",
+    "path": "packages/base/dist/components/art-radio.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base/art-switch",
     "path": "packages/base/dist/components/art-switch.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-native-select",
+    "path": "packages/base/dist/components/art-native-select.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-toggle",
+    "path": "packages/base/dist/components/art-toggle.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-toggle-group",
+    "path": "packages/base/dist/components/art-toggle-group.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",

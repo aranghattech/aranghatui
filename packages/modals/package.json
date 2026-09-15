@@ -53,6 +53,7 @@
     "@stencil/core": "4.45.0",
     "@stencil/playwright": "0.5.1",
     "@stencil/vitest": "1.15.1",
+    "jsdom": "28.1.0",
     "vitest": "4.1.11"
   }
 }

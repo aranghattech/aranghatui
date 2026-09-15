@@ -46,7 +46,13 @@
         {
           "tag": "art-radio-group",
           "name": "Radio Group",
-          "status": "planned"
+          "status": "done"
+        },
+        {
+          "tag": "art-radio",
+          "name": "Radio (item)",
+          "status": "done",
+          "internal": true
         },
         {
           "tag": "art-switch",
@@ -56,7 +62,7 @@
         {
           "tag": "art-native-select",
           "name": "Native Select",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-slider",
@@ -66,12 +72,12 @@
         {
           "tag": "art-toggle",
           "name": "Toggle",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-toggle-group",
           "name": "Toggle Group",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-button-group",

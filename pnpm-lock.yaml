@@ -317,6 +317,9 @@ importers:
       '@stencil/vitest':
         specifier: 1.15.1
         version: 1.15.1(@playwright/test@1.63.0)(@stencil/core@4.45.0)(jsdom@28.1.0)(vitest@4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1)))
+      jsdom:
+        specifier: 28.1.0
+        version: 28.1.0
       vitest:
         specifier: 4.1.11
         version: 4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1))
@@ -365,6 +368,9 @@ importers:
       '@stencil/vitest':
         specifier: 1.15.1
         version: 1.15.1(@playwright/test@1.63.0)(@stencil/core@4.45.0)(jsdom@28.1.0)(vitest@4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1)))
+      jsdom:
+        specifier: 28.1.0
+        version: 28.1.0
       vitest:
         specifier: 4.1.11
         version: 4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1))

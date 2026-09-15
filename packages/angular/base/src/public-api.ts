@@ -2,4 +2,5 @@
 export * from './directives/proxies';
 export { DIRECTIVES } from './directives/index';
 export * from './directives/boolean-value-accessor';
+export * from './directives/select-value-accessor';
 export * from './directives/text-value-accessor';

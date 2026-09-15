@@ -10,6 +10,10 @@ import { defineCustomElement as defineInput } from '@aranghat/base/input';
 import { defineCustomElement as defineTextarea } from '@aranghat/base/textarea';
 import { defineCustomElement as defineCheckbox } from '@aranghat/base/checkbox';
 import { defineCustomElement as defineSwitch } from '@aranghat/base/switch';
+import { defineCustomElement as defineRadioGroup } from '@aranghat/base/radio-group';
+import { defineCustomElement as defineNativeSelect } from '@aranghat/base/native-select';
+import { defineCustomElement as defineToggle } from '@aranghat/base/toggle';
+import { defineCustomElement as defineToggleGroup } from '@aranghat/base/toggle-group';
 import './sandbox.css';
 
 defineButton();
@@ -21,6 +25,10 @@ defineInput();
 defineTextarea();
 defineCheckbox();
 defineSwitch();
+defineRadioGroup();
+defineNativeSelect();
+defineToggle();
+defineToggleGroup();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

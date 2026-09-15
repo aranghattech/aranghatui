@@ -1,0 +1,28 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+::slotted(*) {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+/* Inside a group: the group sets data-position so items share edges (shadcn toggle-group). */
+:host([data-position='first']) button {
+  @apply rounded-e-none;
+}
+:host([data-position='middle']) button {
+  @apply rounded-none;
+}
+:host([data-position='last']) button {
+  @apply rounded-s-none;
+}
+:host([variant='outline'][data-position='middle']) button,
+:host([variant='outline'][data-position='last']) button {
+  @apply border-s-0;
+}

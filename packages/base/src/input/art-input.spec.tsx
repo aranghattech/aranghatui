@@ -1,6 +1,8 @@
 import { describe, expect, h, it, render } from '@stencil/vitest';
 import { vi } from 'vitest';
 
+const ev = (root: Element, type: string) => { const e = root.ownerDocument.createEvent('Event'); e.initEvent(type, true, false); return e; };
+
 describe('art-input', () => {
   it('renders a native input with size, placeholder and type', async () => {
     const { root } = await render(<art-input type="email" placeholder="Email" size="lg"></art-input>);
@@ -18,8 +20,8 @@ describe('art-input', () => {
     root.addEventListener('input', onInput);
     root.addEventListener('change', onChange);
     input.value = 'hi';
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
+    input.dispatchEvent(ev(root, 'input'));
+    input.dispatchEvent(ev(root, 'change'));
     expect((root as any).value).toBe('hi');
     expect(onInput.mock.calls[0]![0].detail).toEqual({ value: 'hi' });
     expect(onInput.mock.calls[0]![0].target).toBe(root);

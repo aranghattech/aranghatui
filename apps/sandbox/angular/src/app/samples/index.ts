@@ -38,9 +38,31 @@ import { SwitchBasic } from './switch/basic';
 import { SwitchChecked } from './switch/checked';
 import { SwitchSizes } from './switch/sizes';
 import { SwitchDisabled } from './switch/disabled';
+import { RadioGroupBasic } from './radio-group/basic';
+import { RadioGroupHorizontal } from './radio-group/horizontal';
+import { RadioGroupDisabledItem } from './radio-group/disabled-item';
+import { RadioGroupSizes } from './radio-group/sizes';
+import { RadioGroupForm } from './radio-group/form';
+import { NativeSelectBasic } from './native-select/basic';
+import { NativeSelectWithLabel } from './native-select/with-label';
+import { NativeSelectGroups } from './native-select/groups';
+import { NativeSelectSizes } from './native-select/sizes';
+import { NativeSelectDisabled } from './native-select/disabled';
+import { NativeSelectInvalid } from './native-select/invalid';
+import { ToggleBasic } from './toggle/basic';
+import { ToggleOutline } from './toggle/outline';
+import { ToggleWithText } from './toggle/with-text';
+import { ToggleSizes } from './toggle/sizes';
+import { TogglePressed } from './toggle/pressed';
+import { ToggleDisabled } from './toggle/disabled';
+import { ToggleGroupBasic } from './toggle-group/basic';
+import { ToggleGroupSingle } from './toggle-group/single';
+import { ToggleGroupOutline } from './toggle-group/outline';
+import { ToggleGroupSizes } from './toggle-group/sizes';
+import { ToggleGroupDisabled } from './toggle-group/disabled';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -82,4 +104,26 @@ export const SAMPLES = [
   { id: 'switch/checked', component: SwitchChecked },
   { id: 'switch/sizes', component: SwitchSizes },
   { id: 'switch/disabled', component: SwitchDisabled },
+  { id: 'radio-group/basic', component: RadioGroupBasic },
+  { id: 'radio-group/horizontal', component: RadioGroupHorizontal },
+  { id: 'radio-group/disabled-item', component: RadioGroupDisabledItem },
+  { id: 'radio-group/sizes', component: RadioGroupSizes },
+  { id: 'radio-group/form', component: RadioGroupForm },
+  { id: 'native-select/basic', component: NativeSelectBasic },
+  { id: 'native-select/with-label', component: NativeSelectWithLabel },
+  { id: 'native-select/groups', component: NativeSelectGroups },
+  { id: 'native-select/sizes', component: NativeSelectSizes },
+  { id: 'native-select/disabled', component: NativeSelectDisabled },
+  { id: 'native-select/invalid', component: NativeSelectInvalid },
+  { id: 'toggle/basic', component: ToggleBasic },
+  { id: 'toggle/outline', component: ToggleOutline },
+  { id: 'toggle/with-text', component: ToggleWithText },
+  { id: 'toggle/sizes', component: ToggleSizes },
+  { id: 'toggle/pressed', component: TogglePressed },
+  { id: 'toggle/disabled', component: ToggleDisabled },
+  { id: 'toggle-group/basic', component: ToggleGroupBasic },
+  { id: 'toggle-group/single', component: ToggleGroupSingle },
+  { id: 'toggle-group/outline', component: ToggleGroupOutline },
+  { id: 'toggle-group/sizes', component: ToggleGroupSizes },
+  { id: 'toggle-group/disabled', component: ToggleGroupDisabled },
 ];

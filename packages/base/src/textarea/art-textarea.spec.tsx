@@ -1,6 +1,8 @@
 import { describe, expect, h, it, render } from '@stencil/vitest';
 import { vi } from 'vitest';
 
+const ev = (root: Element, type: string) => { const e = root.ownerDocument.createEvent('Event'); e.initEvent(type, true, false); return e; };
+
 describe('art-textarea', () => {
   it('renders a native textarea with size padding and value', async () => {
     const { root } = await render(<art-textarea size="lg" value="hi"></art-textarea>);
@@ -14,7 +16,7 @@ describe('art-textarea', () => {
     const spy = vi.fn();
     root.addEventListener('input', spy);
     ta.value = 'x';
-    ta.dispatchEvent(new Event('input', { bubbles: true }));
+    ta.dispatchEvent(ev(root, 'input'));
     expect(spy.mock.calls[0]![0].detail).toEqual({ value: 'x' });
     expect((root as any).value).toBe('x');
   });

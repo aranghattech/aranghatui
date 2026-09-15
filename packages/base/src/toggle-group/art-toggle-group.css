@@ -1,0 +1,11 @@
+:host {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: var(--art-radius-md);
+}
+:host([variant='outline']) {
+  box-shadow: var(--art-shadow-raised);
+}
+:host([hidden]) {
+  display: none;
+}
