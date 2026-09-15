@@ -11,9 +11,11 @@ import { ButtonLoading } from './button/loading';
 import { ButtonDisabled } from './button/disabled';
 import { ButtonLink } from './button/link';
 import { ButtonForm } from './button/form';
+import { LabelBasic } from './label/basic';
+import { LabelDisabled } from './label/disabled';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm];
+export const SAMPLE_COMPONENTS = [HelloBasic, HelloOutline, HelloOverlayBasic, ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled];
 
 export const SAMPLES = [
   { id: 'hello/basic', component: HelloBasic },
@@ -28,4 +30,6 @@ export const SAMPLES = [
   { id: 'button/disabled', component: ButtonDisabled },
   { id: 'button/link', component: ButtonLink },
   { id: 'button/form', component: ButtonForm },
+  { id: 'label/basic', component: LabelBasic },
+  { id: 'label/disabled', component: LabelDisabled },
 ];

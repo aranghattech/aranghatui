@@ -1,0 +1,9 @@
+:host {
+  display: inline-flex;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) label {
+  @apply pointer-events-none opacity-50;
+}

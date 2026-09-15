@@ -1,3 +1,4 @@
+<!-- hand-written -->
 # Hello Overlay
 
 Phase 0 proof overlay from `@aranghat/modals` that renders `<art-hello>` from `@aranghat/base` inside its shadow root — cross-tier composition without bundling the lower tier. Removed when Dialog lands.

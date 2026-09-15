@@ -18,7 +18,7 @@ const fail = (m) => { errors++; console.error('✖ ' + m); };
 
 for (const [tier, def] of Object.entries(catalog.tiers)) {
   for (const c of def.components) {
-    if (c.status === 'planned') continue;
+    if (c.status === 'planned' || c.internal) continue;
     const slug = c.tag.replace(/^art-/, '');
     const page = join(repo, 'apps/docs/components', tier, `${slug}.md`);
     if (!existsSync(page)) { fail(`${c.tag}: missing docs page ${page}`); continue; }

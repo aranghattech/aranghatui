@@ -13,6 +13,12 @@
           "phase0": true
         },
         {
+          "tag": "art-icon",
+          "name": "Icon",
+          "status": "done",
+          "internal": true
+        },
+        {
           "tag": "art-button",
           "name": "Button",
           "status": "done"
@@ -20,7 +26,7 @@
         {
           "tag": "art-label",
           "name": "Label",
-          "status": "planned"
+          "status": "done"
         },
         {
           "tag": "art-input",

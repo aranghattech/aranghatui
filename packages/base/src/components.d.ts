@@ -103,6 +103,22 @@ export namespace Components {
          */
         "size": 'sm' | 'md' | 'lg';
     }
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface ArtLabel {
+        /**
+          * Dimmed and inert; Field sets this when its control is disabled.
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
+         */
+        "htmlFor"?: string;
+    }
 }
 export interface ArtHelloCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -153,10 +169,22 @@ declare global {
         prototype: HTMLArtIconElement;
         new (): HTMLArtIconElement;
     };
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface HTMLArtLabelElement extends Components.ArtLabel, HTMLStencilElement {
+    }
+    var HTMLArtLabelElement: {
+        prototype: HTMLArtLabelElement;
+        new (): HTMLArtLabelElement;
+    };
     interface HTMLElementTagNameMap {
         "art-button": HTMLArtButtonElement;
         "art-hello": HTMLArtHelloElement;
         "art-icon": HTMLArtIconElement;
+        "art-label": HTMLArtLabelElement;
     }
 }
 declare namespace LocalJSX {
@@ -267,6 +295,22 @@ declare namespace LocalJSX {
          */
         "size"?: 'sm' | 'md' | 'lg';
     }
+    /**
+     * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+     * ids, `for` is resolved at click time: activating the label focuses the target control
+     * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+     */
+    interface ArtLabel {
+        /**
+          * Dimmed and inert; Field sets this when its control is disabled.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * id of the control this label describes (looked up in the label's own DOM tree, then the document). Attribute: `for`.
+         */
+        "htmlFor"?: string;
+    }
 
     interface ArtButtonAttributes {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
@@ -289,11 +333,16 @@ declare namespace LocalJSX {
         "size": 'sm' | 'md' | 'lg';
         "label": string;
     }
+    interface ArtLabelAttributes {
+        "htmlFor": string;
+        "disabled": boolean;
+    }
 
     interface IntrinsicElements {
         "art-button": Omit<ArtButton, keyof ArtButtonAttributes> & { [K in keyof ArtButton & keyof ArtButtonAttributes]?: ArtButton[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `attr:${K}`]?: ArtButtonAttributes[K] } & { [K in keyof ArtButton & keyof ArtButtonAttributes as `prop:${K}`]?: ArtButton[K] };
         "art-hello": Omit<ArtHello, keyof ArtHelloAttributes> & { [K in keyof ArtHello & keyof ArtHelloAttributes]?: ArtHello[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `attr:${K}`]?: ArtHelloAttributes[K] } & { [K in keyof ArtHello & keyof ArtHelloAttributes as `prop:${K}`]?: ArtHello[K] };
         "art-icon": Omit<ArtIcon, keyof ArtIconAttributes> & { [K in keyof ArtIcon & keyof ArtIconAttributes]?: ArtIcon[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `attr:${K}`]?: ArtIconAttributes[K] } & { [K in keyof ArtIcon & keyof ArtIconAttributes as `prop:${K}`]?: ArtIcon[K] };
+        "art-label": Omit<ArtLabel, keyof ArtLabelAttributes> & { [K in keyof ArtLabel & keyof ArtLabelAttributes]?: ArtLabel[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `attr:${K}`]?: ArtLabelAttributes[K] } & { [K in keyof ArtLabel & keyof ArtLabelAttributes as `prop:${K}`]?: ArtLabel[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -318,6 +367,12 @@ declare module "@stencil/core" {
              * into components: import the icon module you need and pass it as `icon`.
              */
             "art-icon": LocalJSX.IntrinsicElements["art-icon"] & JSXBase.HTMLAttributes<HTMLArtIconElement>;
+            /**
+             * Label — shadcn/ui parity. A styled `<label>` for any control. Because shadow roots scope
+             * ids, `for` is resolved at click time: activating the label focuses the target control
+             * (or toggles it for checkbox-like controls), matching native label behaviour across tiers.
+             */
+            "art-label": LocalJSX.IntrinsicElements["art-label"] & JSXBase.HTMLAttributes<HTMLArtLabelElement>;
         }
     }
 }

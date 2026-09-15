@@ -2,4 +2,5 @@
 export { ArtButton as Button } from './components/art-button.js';
 export { ArtHello as Hello } from './components/art-hello.js';
 export { ArtIcon as Icon } from './components/art-icon.js';
+export { ArtLabel as Label } from './components/art-label.js';
 export type { StencilReactComponent } from '@stencil/react-output-target/runtime';

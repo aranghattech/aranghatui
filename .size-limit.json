@@ -19,8 +19,34 @@
     "gzip": true
   },
   {
+    "name": "base/art-icon",
+    "path": "packages/base/dist/components/art-icon.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
     "name": "base/art-button",
     "path": "packages/base/dist/components/art-button.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "3 kB",
+    "gzip": true
+  },
+  {
+    "name": "base/art-label",
+    "path": "packages/base/dist/components/art-label.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",

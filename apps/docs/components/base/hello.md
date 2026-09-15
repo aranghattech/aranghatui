@@ -1,3 +1,4 @@
+<!-- hand-written -->
 # Hello
 
 Phase 0 proof component: exercises tokens, Tailwind-in-shadow, the focus-ring recipe, a native `click` and a kebab-case custom event. Removed when Button lands.

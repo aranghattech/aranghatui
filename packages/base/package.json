@@ -35,6 +35,10 @@
       "types": "./dist/components/art-icon.d.ts",
       "import": "./dist/components/art-icon.js"
     },
+    "./label": {
+      "types": "./dist/components/art-label.d.ts",
+      "import": "./dist/components/art-label.js"
+    },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
