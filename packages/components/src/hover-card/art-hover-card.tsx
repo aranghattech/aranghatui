@@ -82,7 +82,7 @@ export class ArtHoverCard {
     if (!this.panel || !t) return;
     if (open) {
       this.overlay ??= createOverlay(t, this.panel, { placement: this.placement, offset: this.offset });
-      this.overlay.open();
+      void this.overlay.open();
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: false, focusOutside: false, onDismiss: () => this.set(false) });
     } else {
       this.hover?.cancel();

@@ -38,5 +38,11 @@ The `portal` primitive remains for the rare case where a node genuinely has to m
   or fixed elements outside the top layer (toasts, sticky bars).
 - A display utility on a panel (`flex`) must not outrank the UA's `:not(:popover-open)` rule —
   every overlay stylesheet carries the explicit hidden rules.
+- Positioning is `left` / `top`, never a `transform`: the enter and exit motion uses the
+  individual `scale` / `translate` properties, which compose *before* the transform property
+  and would scale the positioning translation too — the panel visibly drifted towards the
+  viewport origin on wide screens. The panel is shown `visibility: hidden` until the first
+  position lands, then revealed with the motion starting from the anchored edge
+  (`transform-origin` per side); `open()` resolves at that point so focus can move in.
 - Native light-dismiss (`popover="auto"`) is deliberately not used: it would hide without the
   exit animation and bypass the shared dismiss stack.

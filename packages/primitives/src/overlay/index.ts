@@ -13,8 +13,8 @@ export interface OverlayOptions {
 
 export interface Overlay {
   readonly isOpen: boolean;
-  /** Show the panel in the top layer and start positioning. */
-  open(): void;
+  /** Show the panel in the top layer and position it. Resolves once the panel is placed and visible (focus it then). */
+  open(): Promise<void>;
   /** Play the exit animation (if the panel defines one), then hide. Resolves when hidden. */
   close(): Promise<void>;
   update(): Promise<void>;
@@ -28,6 +28,8 @@ const SLIDE: Record<string, string> = {
   left: 'var(--art-space-2) 0',
   right: 'calc(-1 * var(--art-space-2)) 0',
 };
+/** The zoom grows out of the anchored edge (shadcn `origin-(--radix-*-transform-origin)`). */
+const ORIGIN: Record<string, string> = { top: 'bottom center', bottom: 'top center', left: 'right center', right: 'left center' };
 
 /**
  * Floating panel on the platform's top layer (Popover API, `popover="manual"`): the panel
@@ -53,19 +55,40 @@ export function createOverlay(anchor: Element, panel: HTMLElement, options: Over
   return {
     get isOpen() { return isOpen; },
     open() {
-      if (isOpen) return;
+      if (isOpen) return Promise.resolve();
       isOpen = true;
+      // The panel has to be rendered before it can be measured, but it must not be seen at the
+      // viewport origin for that frame: show it hidden, then reveal and start the enter motion
+      // from the computed position.
+      panel.style.visibility = 'hidden';
       show();
-      panel.dataset.state = 'open';
       stopFloating();
-      floating = createFloating(anchor, panel, {
-        placement, offset, arrow, matchReferenceWidth, strategy: 'fixed',
-        onPositioned: ({ placement: p }) => panel.style.setProperty('--art-overlay-slide', SLIDE[p.split('-')[0] ?? ''] ?? '0 0'),
+      return new Promise<void>((resolve) => {
+        floating = createFloating(anchor, panel, {
+          placement, offset, arrow, matchReferenceWidth, strategy: 'fixed',
+          onPositioned: ({ placement: p }) => {
+            const side = p.split('-')[0] ?? '';
+            panel.style.setProperty('--art-overlay-slide', SLIDE[side] ?? '0 0');
+            panel.style.transformOrigin = ORIGIN[side] ?? 'center';
+            if (panel.style.visibility) {
+              panel.style.visibility = '';
+              if (isOpen) panel.dataset.state = 'open';
+              resolve();
+            }
+          },
+        });
       });
     },
     close() {
       if (!isOpen) return Promise.resolve();
       isOpen = false;
+      if (panel.style.visibility) { // never became visible: nothing to animate
+        panel.style.visibility = '';
+        stopFloating();
+        hide();
+        delete panel.dataset.state;
+        return Promise.resolve();
+      }
       panel.dataset.state = 'closed';
       return new Promise<void>((resolve) => {
         const done = () => {

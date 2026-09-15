@@ -88,9 +88,9 @@ export class ArtPopover {
     this.reason = undefined;
     if (open) {
       this.overlay ??= createOverlay(t, this.panel, { placement: this.placement, offset: this.offset });
-      this.overlay.open();
+      const placed = this.overlay.open();
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: true, focusOutside: true, ignore: () => [t], onDismiss: (r) => this.set(false, r) });
-      if (byUser) queueMicrotask(() => this.panel?.focus({ preventScroll: true }));
+      if (byUser) void placed.then(() => { if (this.open) this.panel?.focus({ preventScroll: true }); });
     } else {
       this.dismiss?.destroy();
       this.dismiss = undefined;

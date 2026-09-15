@@ -83,7 +83,7 @@ export class ArtTooltip {
     if (!this.panel || !t) return;
     if (open) {
       this.overlay ??= createOverlay(t, this.panel, { placement: this.placement, offset: this.offset, arrow: this.arrowEl });
-      this.overlay.open();
+      void this.overlay.open();
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: false, focusOutside: false, onDismiss: () => this.set(false) });
     } else {
       this.hover?.cancel();
@@ -97,7 +97,7 @@ export class ArtTooltip {
     return (
       <Host>
         <slot name="trigger" />
-        <div part="content" role="tooltip" popover="manual" ref={(el) => (this.panel = el)} class="w-fit rounded-md bg-fg px-3 py-1.5 text-xs text-balance text-canvas">
+        <div part="content" role="tooltip" popover="manual" ref={(el) => (this.panel = el)} class="w-max max-w-xs rounded-md bg-fg px-3 py-1.5 text-xs text-balance text-canvas">
           <slot />
           <div part="arrow" ref={(el) => (this.arrowEl = el)} class="arrow" />
         </div>

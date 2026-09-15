@@ -50,8 +50,8 @@ export interface FloatingController {
 /**
  * Positions `floating` relative to `reference` with @floating-ui/dom (the only approved
  * positioning dependency, CLAUDE.md §6). Sets `data-placement` on the floating element
- * so components can style arrows/animations per side. Uses translate() with rounded
- * coordinates so text stays crisp.
+ * so components can style arrows/animations per side. Uses rounded left/top coordinates so
+ * text stays crisp and transform animations on the panel stay independent of positioning.
  */
 export function createFloating(reference: Element | VirtualElement, floating: HTMLElement, options: FloatingOptions = {}): FloatingController {
   const {
@@ -79,7 +79,10 @@ export function createFloating(reference: Element | VirtualElement, floating: HT
 
     const result = await computePosition(reference, floating, { placement, strategy, middleware });
     if (destroyed) return;
-    Object.assign(floating.style, { position: strategy, left: '0', top: '0', transform: `translate(${Math.round(result.x)}px, ${Math.round(result.y)}px)` });
+    // left/top, not a transform: individual `scale` / `translate` animations on the panel compose
+    // before the transform property and would scale the positioning translation too, making the
+    // panel drift towards the viewport origin while it zooms in (ADR-0022).
+    Object.assign(floating.style, { position: strategy, left: `${Math.round(result.x)}px`, top: `${Math.round(result.y)}px`, transform: '' });
     floating.dataset.placement = result.placement;
     if (arrow && result.middlewareData.arrow) {
       const { x, y } = result.middlewareData.arrow;
