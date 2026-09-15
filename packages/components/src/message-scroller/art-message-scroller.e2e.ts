@@ -13,10 +13,13 @@ test.describe('art-message-scroller', () => {
     await expect(s.locator('[part="button"]')).toHaveAttribute('data-active', 'false');
     await s.evaluate((el) => el.insertAdjacentHTML('beforeend', `<art-message-scroller-item message-id="m11"><div style="height:60px">Message 11</div></art-message-scroller-item>`));
     await expect.poll(atEnd).toBe(true); // followed
-    await vp.evaluate((el) => { el.scrollTop = 0; });
+    // the reader scrolls up with the wheel (only real input may stop following)
+    const box = (await vp.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.wheel(0, -2000);
     await expect.poll(() => vp.evaluate((el) => el.scrollTop)).toBe(0);
     await expect(s.locator('[part="button"]')).toHaveAttribute('data-active', 'true');
-    expect(state.lastEvent.detail.following).toBe(false);
+    await expect.poll(() => state.lastEvent?.detail.following).toBe(false);
     await s.evaluate((el) => el.insertAdjacentHTML('beforeend', `<art-message-scroller-item message-id="m12"><div style="height:60px">Message 12</div></art-message-scroller-item>`));
     await page.waitForTimeout(150);
     expect(await vp.evaluate((el) => el.scrollTop)).toBe(0); // not moved against the reader
@@ -29,7 +32,7 @@ test.describe('art-message-scroller', () => {
     await page.setContent(`<art-message-scroller id="s" default-scroll-position="start" style="height:240px">${rows(5, 14)}</art-message-scroller>`);
     const s = page.locator('#s');
     const vp = s.locator('[part="viewport"]');
-    await vp.evaluate((el) => { el.scrollTop = 120; });
+    await vp.evaluate((el) => { el.scrollTop = 120; }); // a programmatic position (the host app restoring one) does not change following
     await expect.poll(() => vp.evaluate((el) => el.scrollTop)).toBe(120);
     const before = await s.locator('[message-id="m7"]').boundingBox();
     await s.evaluate((el) => el.insertAdjacentHTML('afterbegin', `<art-message-scroller-item message-id="m3"><div style="height:60px">Message 3</div></art-message-scroller-item><art-message-scroller-item message-id="m4"><div style="height:60px">Message 4</div></art-message-scroller-item>`));

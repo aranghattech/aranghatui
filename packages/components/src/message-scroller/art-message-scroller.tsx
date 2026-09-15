@@ -26,9 +26,9 @@ export class ArtMessageScroller {
   private content?: HTMLDivElement;
   private mo?: MutationObserver;
   private ro?: ResizeObserver;
-  private lastHeight = 0;
-  /** Scroll events before this time were caused by the component, not the reader. */
-  private programmaticUntil = 0;
+  /** Scroll events until this time come from the reader (wheel, touch, keys, scrollbar) and may change `following`. */
+  private userInputUntil = 0;
+  private draggingScrollbar = false;
   private following = true;
   private firstChild: Element | null = null;
   /** Offset of the first row, tracked continuously so a prepend can be measured against the layout before it. */
@@ -58,7 +58,6 @@ export class ArtMessageScroller {
     if (!this.viewport || !this.content) return;
     this.firstChild = this.host.firstElementChild;
     this.trackFirst();
-    this.lastHeight = this.viewport.scrollHeight;
     this.mo = new MutationObserver(this.onMutate);
     this.mo.observe(this.host, { childList: true });
     if (typeof ResizeObserver !== 'undefined') {
@@ -68,6 +67,9 @@ export class ArtMessageScroller {
     }
     this.viewport.addEventListener('scroll', this.onScroll, { passive: true });
     this.viewport.addEventListener('scrollend', this.onScrollEnd);
+    for (const type of ['wheel', 'touchmove', 'keydown'] as const) this.viewport.addEventListener(type, this.onUserInput, { passive: true });
+    this.viewport.addEventListener('pointerdown', this.onPointerDown);
+    this.viewport.addEventListener('pointerup', this.onPointerUp);
     // Initial position, before the first paint of the transcript.
     if (this.defaultScrollPosition === 'start') this.viewport.scrollTop = 0;
     else if (this.defaultScrollPosition === 'last-anchor' && this.anchors().length) this.anchorTo(this.anchors()[this.anchors().length - 1]!, 'instant');
@@ -81,6 +83,9 @@ export class ArtMessageScroller {
     this.ro?.disconnect();
     this.viewport?.removeEventListener('scroll', this.onScroll);
     this.viewport?.removeEventListener('scrollend', this.onScrollEnd);
+    for (const type of ['wheel', 'touchmove', 'keydown'] as const) this.viewport?.removeEventListener(type, this.onUserInput);
+    this.viewport?.removeEventListener('pointerdown', this.onPointerDown);
+    this.viewport?.removeEventListener('pointerup', this.onPointerUp);
   }
 
   private distanceFromEnd(): number {
@@ -102,24 +107,24 @@ export class ArtMessageScroller {
     this.following = f;
     this.scrollStateChange.emit({ atStart: this.atStart, atEnd: this.atEnd, following: f });
   }
+  /** Only the reader's own input may change `following`; scrolls caused by the component or by layout never do. */
+  private onUserInput = () => { this.userInputUntil = Date.now() + 300; };
+  private onPointerDown = (e: PointerEvent) => { const v = this.viewport!; this.draggingScrollbar = e.offsetX >= v.clientWidth || e.offsetY >= v.clientHeight; };
+  private onPointerUp = () => { this.draggingScrollbar = false; };
   private onScroll = () => {
-    const v = this.viewport!;
-    this.lastHeight = v.scrollHeight;
     this.trackFirst();
-    if (Date.now() > this.programmaticUntil) {
+    if (this.draggingScrollbar || Date.now() < this.userInputUntil) {
       this.keep = undefined;
-      // The reader's own scrolling engages or disengages following.
       if (this.distanceFromEnd() <= 1) this.setFollowing(this.autoScroll);
       else if (this.following) this.setFollowing(false);
     }
     this.measure();
   };
   private onScrollEnd = () => {
-    if (this.programmaticUntil) { this.programmaticUntil = 0; this.viewport?.removeAttribute('data-autoscrolling'); this.measure(); }
+    this.viewport?.removeAttribute('data-autoscrolling');
+    this.measure();
   };
   private onMutate = (records: MutationRecord[]) => {
-    const v = this.viewport!;
-    const delta = v.scrollHeight - this.lastHeight;
     const oldFirst = this.firstChild as HTMLElement | null;
     const oldFirstTop = this.keep?.el === oldFirst ? this.keep.top : this.firstTop;
     let prepended = false;
@@ -140,14 +145,20 @@ export class ArtMessageScroller {
     } else if (anchored && this.following) {
       this.keep = undefined;
       this.anchorTo(anchored, 'smooth');
-    } else if (this.following && delta !== 0) {
+    } else if (this.following) {
       this.keep = undefined;
       this.toEnd('instant');
+      this.settle(); // rows finish laying out (upgrade, images, fonts) a frame or two later
     }
-    this.lastHeight = v.scrollHeight;
     this.trackFirst();
     this.measure();
   };
+  /** Re-check the end over the next frames: a row appended while following must end up in view even if its height arrived late. */
+  private settle() {
+    let n = 3;
+    const tick = () => { if (this.following && this.distanceFromEnd() > 1) this.toEnd('instant'); if (--n > 0) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
   private trackFirst() { this.firstTop = (this.host.firstElementChild as HTMLElement | null)?.offsetTop ?? 0; }
   private holdPosition() {
     const v = this.viewport!, k = this.keep;
@@ -156,15 +167,13 @@ export class ArtMessageScroller {
     const shift = now - k.top;
     if (!shift) return;
     k.top = now;
-    this.programmaticUntil = Date.now() + 100;
     v.scrollTop += shift;
   }
   private onResize = () => {
     const v = this.viewport;
     if (!v) return;
     if (this.keep) this.holdPosition();
-    else if (this.following && v.scrollHeight !== this.lastHeight) this.toEnd('instant'); // streaming text grows the last row
-    this.lastHeight = v.scrollHeight;
+    else if (this.following && this.distanceFromEnd() > 1) this.toEnd('instant'); // streaming text grows the last row
     this.trackFirst();
     this.measure();
   };
@@ -180,12 +189,9 @@ export class ArtMessageScroller {
     const target = Math.max(0, Math.min(top, v.scrollHeight - v.clientHeight));
     if (Math.abs(target - v.scrollTop) < 1) return; // nothing to move: no scroll events would follow
     const smooth = behavior === 'smooth' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // The scroll events this causes must not read as the reader scrolling away (a smooth scroll keeps
-    // firing them for a while); `scrollend` (or the safety timeout) closes the window.
-    this.programmaticUntil = Date.now() + (smooth ? 1000 : 100);
     v.setAttribute('data-autoscrolling', '');
     v.scrollTo({ top: target, behavior: smooth ? 'smooth' : 'instant' });
-    if (smooth) setTimeout(this.onScrollEnd, 1000); else requestAnimationFrame(() => requestAnimationFrame(this.onScrollEnd));
+    if (smooth) setTimeout(this.onScrollEnd, 1000); else requestAnimationFrame(() => requestAnimationFrame(this.onScrollEnd)); // where `scrollend` never fires
   }
   private toEnd(behavior: ScrollBehavior) { this.scrollTo(this.viewport!.scrollHeight, behavior); }
 
