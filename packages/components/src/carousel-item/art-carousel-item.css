@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  flex: 0 0 var(--art-carousel-basis, 100%);
+  min-width: 0;
+  box-sizing: border-box;
+  padding-inline-start: var(--art-space-4);
+}
+:host([hidden]) {
+  display: none;
+}
+:host([data-orientation='vertical']) {
+  padding-inline-start: 0;
+  padding-top: var(--art-space-4);
+}

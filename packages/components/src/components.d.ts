@@ -5,8 +5,18 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { CalendarChangeDetail, CalendarMode } from "./calendar/art-calendar";
 import { Placement } from "@aranghat/primitives/floating";
+import { CalendarChangeDetail as CalendarChangeDetail1 } from "./calendar/art-calendar";
+import { ToastVariant } from "./toast/toast-api";
+import { ToastDismissReason } from "./toast/art-toast";
+import { ToasterPosition } from "./toaster/art-toaster";
+export { CalendarChangeDetail, CalendarMode } from "./calendar/art-calendar";
 export { Placement } from "@aranghat/primitives/floating";
+export { CalendarChangeDetail as CalendarChangeDetail1 } from "./calendar/art-calendar";
+export { ToastVariant } from "./toast/toast-api";
+export { ToastDismissReason } from "./toast/art-toast";
+export { ToasterPosition } from "./toaster/art-toaster";
 export namespace Components {
     /**
      * Accordion — shadcn/ui parity. A stack of `<art-accordion-item>`s, each a native `<details>`.
@@ -76,6 +86,137 @@ export namespace Components {
         "src"?: string;
     }
     /**
+     * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
+     * navigation or month + year dropdowns, single, multiple or range selection, min / max and
+     * custom disabled days, several months side by side, locale-aware weekday names and first
+     * day of the week. Dates cross the API as ISO strings; `change` also carries `Date` objects.
+     * Form-associated so it can sit inline in a form.
+     */
+    interface ArtCalendar {
+        /**
+          * `label` shows "September 2026" with arrows; `dropdown` adds month and year selects (date of birth).
+          * @default 'label'
+         */
+        "captionLayout": 'label' | 'dropdown';
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Return true for a day that cannot be selected (weekends, booked dates…).
+         */
+        "disabledDates"?: (date: Date) => boolean;
+        /**
+          * Always render six weeks so the height never changes.
+          * @default false
+         */
+        "fixedWeeks": boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * BCP 47 tag for names and the first day of the week; defaults to the document language.
+         */
+        "locale"?: string;
+        "max"?: string;
+        /**
+          * Earliest / latest selectable day (`YYYY-MM-DD`).
+         */
+        "min"?: string;
+        /**
+          * Selection mode.
+          * @default 'single'
+         */
+        "mode": CalendarMode;
+        /**
+          * Displayed month (`YYYY-MM`); follows the selection, then today.
+         */
+        "month"?: string;
+        "name"?: string;
+        /**
+          * Months shown side by side (ranges usually show two).
+          * @default 1
+         */
+        "numberOfMonths": number;
+        /**
+          * Clicking the selected day keeps it selected instead of clearing (single mode).
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Move keyboard focus onto the calendar (the selected day, else today, else the 1st).
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Fill the first and last rows with the neighbouring months' days.
+          * @default true
+         */
+        "showOutsideDays": boolean;
+        /**
+          * Selected day(s): `YYYY-MM-DD`; comma-separated for `multiple`; `start/end` for `range`.
+          * @default ''
+         */
+        "value": string;
+        /**
+          * 0 = Sunday … 6 = Saturday; overrides the locale's first day.
+         */
+        "weekStartsOn"?: number;
+    }
+    /**
+     * Carousel — shadcn/ui parity on Embla (ADR-0005). Slides are `<art-carousel-item>`s in the
+     * light DOM; the viewport, track and the previous / next buttons live here. Drag / swipe,
+     * arrow keys, `loop`, `align`, horizontal or vertical.
+     */
+    interface ArtCarousel {
+        /**
+          * Where a slide settles in the viewport.
+          * @default 'start'
+         */
+        "align": 'start' | 'center' | 'end';
+        /**
+          * Show the previous / next buttons.
+          * @default true
+         */
+        "controls": boolean;
+        /**
+          * Free-scrolling momentum instead of snapping.
+          * @default false
+         */
+        "dragFree": boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Wrap around at the ends.
+          * @default false
+         */
+        "loop": boolean;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation": 'horizontal' | 'vertical';
+        /**
+          * Go to the next slide.
+         */
+        "scrollNext": () => Promise<void>;
+        /**
+          * Go to the previous slide.
+         */
+        "scrollPrev": () => Promise<void>;
+        /**
+          * Go to a slide by zero-based index (`scrollTo` is taken by the DOM).
+         */
+        "scrollToSlide": (index: number) => Promise<void>;
+        /**
+          * Index of the selected slide.
+         */
+        "selectedIndex": () => Promise<number>;
+    }
+    /**
+     * Carousel Item — one slide of an `<art-carousel>`. Its width is `--art-carousel-basis`
+     * (100 % by default; set `33.333%` for three slides per view).
+     */
+    interface ArtCarouselItem {
+    }
+    /**
      * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
      * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
      * platform behaviour. Height animates where the browser can interpolate `::details-content`.
@@ -89,6 +230,258 @@ export namespace Components {
           * @default false
          */
         "open": boolean;
+    }
+    /**
+     * Combobox — shadcn/ui parity. A text field that filters a list of `<art-combobox-item>`s as
+     * the user types; single choice (the field shows the chosen label) or `multiple` (chips in
+     * the field). Items live in the light DOM so they can be any template and carry a data object
+     * in `item`. Rendered on the platform top layer. Form-associated.
+     */
+    interface ArtCombobox {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Custom match: return true to keep an item for the query. Defaults to a case-insensitive substring match on the item's text, `label` and `keywords`.
+         */
+        "filter"?: (text: string, query: string, item: HTMLElement) => boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        /**
+          * Select several items; they show as chips in the field.
+          * @default false
+         */
+        "multiple": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        "placeholder"?: string;
+        /**
+          * Preferred side of the list.
+          * @default 'bottom-start'
+         */
+        "placement": Placement;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Focus the text field.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Turn off the built-in filter when the consumer filters the items itself (async search).
+          * @default true
+         */
+        "shouldFilter": boolean;
+        /**
+          * Show a clear button while something is selected.
+          * @default false
+         */
+        "showClear": boolean;
+        /**
+          * Show the chevron button.
+          * @default true
+         */
+        "showTrigger": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * The chosen item's value; an array of values when `multiple`.
+          * @default ''
+         */
+        "value": string | string[];
+    }
+    /**
+     * Combobox Group — a labelled group of `<art-combobox-item>`s; hides itself when none of its
+     * items match the query.
+     */
+    interface ArtComboboxGroup {
+        "label"?: string;
+    }
+    /**
+     * Combobox Item — one option of an `<art-combobox>`. Any content; `item` carries the data
+     * object handed back in the combobox's `change` event.
+     */
+    interface ArtComboboxItem {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Data object for this option; reported as `detail.item`.
+         */
+        "item"?: unknown;
+        /**
+          * Extra words the filter should match.
+         */
+        "keywords"?: string;
+        /**
+          * Plain-text label shown in the field when chosen (defaults to the content's text); also matched by the filter.
+         */
+        "label"?: string;
+        /**
+          * Set by the combobox.
+          * @default false
+         */
+        "selected": boolean;
+        /**
+          * The option's value.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Command — shadcn/ui parity. A command palette body: a search field over a filtered list of
+     * `<art-command-item>`s (optionally in `<art-command-group>`s) with an empty state. Typing
+     * filters, the arrows move the highlight, Enter runs the highlighted item. No dialog of its
+     * own (ADR-0019): compose it with Dialog for a ⌘K palette.
+     */
+    interface ArtCommand {
+        /**
+          * Custom match: return true to keep an item for the query. Defaults to a case-insensitive substring match on the item's text and `keywords`.
+         */
+        "filter"?: (text: string, query: string, item: HTMLElement) => boolean;
+        /**
+          * Accessible name of the list.
+          * @default 'Suggestions'
+         */
+        "label": string;
+        /**
+          * @default 'Type a command or search…'
+         */
+        "placeholder": string;
+        /**
+          * Current search text.
+          * @default ''
+         */
+        "query": string;
+        /**
+          * Focus the search field.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Turn off the built-in filter when the consumer filters the items itself.
+          * @default true
+         */
+        "shouldFilter": boolean;
+    }
+    /**
+     * Command Group — a headed group of `<art-command-item>`s; hides itself when none of its
+     * items match the search.
+     */
+    interface ArtCommandGroup {
+        "label"?: string;
+    }
+    /**
+     * Command Item — one entry of an `<art-command>`: an optional leading icon, the label and an
+     * optional shortcut. `item` carries the data object handed back in the command's `select` event.
+     */
+    interface ArtCommandItem {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Data object for this entry; reported as `detail.item`.
+         */
+        "item"?: unknown;
+        /**
+          * Extra words the filter should match besides the visible text.
+         */
+        "keywords"?: string;
+        /**
+          * Reported as `detail.value` when run.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Date Picker — shadcn/ui parity: a field-height trigger showing the chosen date (or range)
+     * that opens a Calendar in a popover on the platform top layer. Single day or range;
+     * form-associated with an ISO `value`.
+     */
+    interface ArtDatePicker {
+        /**
+          * Month and year dropdowns in the calendar caption (date of birth).
+          * @default 'label'
+         */
+        "captionLayout": 'label' | 'dropdown';
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Passed to the calendar: return true for a day that cannot be selected.
+         */
+        "disabledDates"?: (date: Date) => boolean;
+        /**
+          * How the chosen date reads in the trigger (`Intl.DateTimeFormat` `dateStyle`).
+          * @default 'long'
+         */
+        "format": 'full' | 'long' | 'medium' | 'short';
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "locale"?: string;
+        "max"?: string;
+        /**
+          * Earliest / latest selectable day.
+         */
+        "min"?: string;
+        /**
+          * `single` (a day) or `range` (`start/end`).
+          * @default 'single'
+         */
+        "mode": 'single' | 'range';
+        "name"?: string;
+        /**
+          * Months shown side by side; ranges default to two.
+         */
+        "numberOfMonths"?: number;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * @default 'Pick a date'
+         */
+        "placeholder": string;
+        /**
+          * @default 'bottom-start'
+         */
+        "placement": Placement;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Focus the trigger.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * `YYYY-MM-DD`, or `start/end` for a range.
+          * @default ''
+         */
+        "value": string;
     }
     /**
      * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
@@ -203,6 +596,86 @@ export namespace Components {
         "orientation": 'vertical' | 'horizontal' | 'both';
     }
     /**
+     * Select — shadcn/ui parity. A trigger styled like Native Select and a listbox on the platform
+     * top layer, filled with `<art-select-item>`s from the light DOM — so an item can be any
+     * template (an avatar with a name and email) and carry a data object in `item`. The trigger
+     * shows a copy of the chosen item's content (or its `label`). Form-associated.
+     */
+    interface ArtSelect {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid": boolean;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        "placeholder"?: string;
+        /**
+          * Preferred side of the listbox.
+          * @default 'bottom-start'
+         */
+        "placement": Placement;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * Focus the trigger.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * @default 'md'
+         */
+        "size": 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * Select Group — a labelled group of `<art-select-item>`s inside an `<art-select>`.
+     */
+    interface ArtSelectGroup {
+        "label"?: string;
+    }
+    /**
+     * Select Item — one option of an `<art-select>`. Any content (text, an avatar with name and
+     * email); `item` carries the data object handed back in the select's `change` event.
+     */
+    interface ArtSelectItem {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Data object for this option; reported as `detail.item` on selection.
+         */
+        "item"?: unknown;
+        /**
+          * Plain-text label: shown in the trigger instead of a copy of the content, and used for type-ahead.
+         */
+        "label"?: string;
+        /**
+          * Set by the select.
+          * @default false
+         */
+        "selected": boolean;
+        /**
+          * The option's value (what the select's `value` becomes).
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
      * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
      * panel can reference it by id), styled per the parent's variant and orientation.
      */
@@ -265,6 +738,96 @@ export namespace Components {
         "variant": 'default' | 'line';
     }
     /**
+     * Toast — one notification, shadcn/ui (Sonner) parity: an icon per variant, a title, a
+     * description, optional action / cancel buttons and a close button. Auto-dismisses after
+     * `duration` (paused while hovered or focused), then plays the exit motion and emits `dismiss`.
+     * Usually created by `<art-toaster>` from `toast()`; can also be written declaratively.
+     */
+    interface ArtToast {
+        /**
+          * Action / cancel button labels (imperative use); the `action` slot is the declarative form.
+         */
+        "actionLabel"?: string;
+        "cancelLabel"?: string;
+        /**
+          * Close now: plays the exit motion, then emits `dismiss`. (`dismiss` is the event's name.)
+         */
+        "close": (reason?: ToastDismissReason) => Promise<void>;
+        /**
+          * Show the close button.
+          * @default false
+         */
+        "closeButton": boolean;
+        /**
+          * Description text (alternative to the `description` slot).
+         */
+        "description"?: string;
+        /**
+          * ms before auto-dismiss; `0` or `Infinity` keeps the toast (loading toasts always stay).
+          * @default 4000
+         */
+        "duration": number;
+        /**
+          * Title text (alternative to the default slot).
+         */
+        "label"?: string;
+        /**
+          * Restart the auto-dismiss timer (the toaster calls it when a toast is updated).
+         */
+        "restart": () => Promise<void>;
+        /**
+          * Coloured backgrounds per variant (Sonner `richColors`).
+          * @default false
+         */
+        "richColors": boolean;
+        /**
+          * @default 'default'
+         */
+        "variant": ToastVariant;
+    }
+    /**
+     * Toaster — shadcn/ui (Sonner) parity: the region that shows toasts. Put one on the page and
+     * call `toast('Saved')` / `toast.success(…)` / `toast.promise(…)` (exported from
+     * `@aranghat/components`) anywhere; `<art-toast>` children work declaratively too.
+     * Fixed in a corner on the platform top layer (above later overlays) unless `inline`.
+     */
+    interface ArtToaster {
+        /**
+          * Close button on every toast.
+          * @default false
+         */
+        "closeButton": boolean;
+        /**
+          * Default auto-dismiss (ms) for toasts that do not set their own.
+          * @default 4000
+         */
+        "duration": number;
+        /**
+          * Render in the page flow instead of a fixed corner (docs, previews).
+          * @default false
+         */
+        "inline": boolean;
+        /**
+          * Accessible name of the region.
+          * @default 'Notifications'
+         */
+        "label": string;
+        /**
+          * @default 'bottom-right'
+         */
+        "position": ToasterPosition;
+        /**
+          * Coloured backgrounds per variant.
+          * @default false
+         */
+        "richColors": boolean;
+        /**
+          * Newest toasts show; older ones beyond this count are hidden until there is room.
+          * @default 3
+         */
+        "visibleToasts": number;
+    }
+    /**
      * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
      * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the
      * platform top layer (Popover API) and positioned with the floating primitive; the trigger is
@@ -303,9 +866,29 @@ export interface ArtAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtAccordionItemElement;
 }
+export interface ArtCalendarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCalendarElement;
+}
+export interface ArtCarouselCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCarouselElement;
+}
 export interface ArtCollapsibleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtCollapsibleElement;
+}
+export interface ArtComboboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtComboboxElement;
+}
+export interface ArtCommandCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtCommandElement;
+}
+export interface ArtDatePickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtDatePickerElement;
 }
 export interface ArtHoverCardCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -319,9 +902,17 @@ export interface ArtResizableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtResizableElement;
 }
+export interface ArtSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtSelectElement;
+}
 export interface ArtTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtTabsElement;
+}
+export interface ArtToastCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtToastElement;
 }
 export interface ArtTooltipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -392,6 +983,63 @@ declare global {
         prototype: HTMLArtAvatarElement;
         new (): HTMLArtAvatarElement;
     };
+    interface HTMLArtCalendarElementEventMap {
+        "change": CalendarChangeDetail;
+        "month-change": { month: string };
+    }
+    /**
+     * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
+     * navigation or month + year dropdowns, single, multiple or range selection, min / max and
+     * custom disabled days, several months side by side, locale-aware weekday names and first
+     * day of the week. Dates cross the API as ISO strings; `change` also carries `Date` objects.
+     * Form-associated so it can sit inline in a form.
+     */
+    interface HTMLArtCalendarElement extends Components.ArtCalendar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCalendarElementEventMap>(type: K, listener: (this: HTMLArtCalendarElement, ev: ArtCalendarCustomEvent<HTMLArtCalendarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCalendarElementEventMap>(type: K, listener: (this: HTMLArtCalendarElement, ev: ArtCalendarCustomEvent<HTMLArtCalendarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCalendarElement: {
+        prototype: HTMLArtCalendarElement;
+        new (): HTMLArtCalendarElement;
+    };
+    interface HTMLArtCarouselElementEventMap {
+        "slide-change": { index: number };
+    }
+    /**
+     * Carousel — shadcn/ui parity on Embla (ADR-0005). Slides are `<art-carousel-item>`s in the
+     * light DOM; the viewport, track and the previous / next buttons live here. Drag / swipe,
+     * arrow keys, `loop`, `align`, horizontal or vertical.
+     */
+    interface HTMLArtCarouselElement extends Components.ArtCarousel, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCarouselElementEventMap>(type: K, listener: (this: HTMLArtCarouselElement, ev: ArtCarouselCustomEvent<HTMLArtCarouselElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCarouselElementEventMap>(type: K, listener: (this: HTMLArtCarouselElement, ev: ArtCarouselCustomEvent<HTMLArtCarouselElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCarouselElement: {
+        prototype: HTMLArtCarouselElement;
+        new (): HTMLArtCarouselElement;
+    };
+    /**
+     * Carousel Item — one slide of an `<art-carousel>`. Its width is `--art-carousel-basis`
+     * (100 % by default; set `33.333%` for three slides per view).
+     */
+    interface HTMLArtCarouselItemElement extends Components.ArtCarouselItem, HTMLStencilElement {
+    }
+    var HTMLArtCarouselItemElement: {
+        prototype: HTMLArtCarouselItemElement;
+        new (): HTMLArtCarouselItemElement;
+    };
     interface HTMLArtCollapsibleElementEventMap {
         "open-change": { open: boolean };
     }
@@ -413,6 +1061,118 @@ declare global {
     var HTMLArtCollapsibleElement: {
         prototype: HTMLArtCollapsibleElement;
         new (): HTMLArtCollapsibleElement;
+    };
+    interface HTMLArtComboboxElementEventMap {
+        "change": { value: string | string[]; item?: unknown; items?: unknown[]; element?: HTMLElement };
+        "query-change": { query: string };
+        "open-change": { open: boolean };
+    }
+    /**
+     * Combobox — shadcn/ui parity. A text field that filters a list of `<art-combobox-item>`s as
+     * the user types; single choice (the field shows the chosen label) or `multiple` (chips in
+     * the field). Items live in the light DOM so they can be any template and carry a data object
+     * in `item`. Rendered on the platform top layer. Form-associated.
+     */
+    interface HTMLArtComboboxElement extends Components.ArtCombobox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtComboboxElementEventMap>(type: K, listener: (this: HTMLArtComboboxElement, ev: ArtComboboxCustomEvent<HTMLArtComboboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtComboboxElementEventMap>(type: K, listener: (this: HTMLArtComboboxElement, ev: ArtComboboxCustomEvent<HTMLArtComboboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtComboboxElement: {
+        prototype: HTMLArtComboboxElement;
+        new (): HTMLArtComboboxElement;
+    };
+    /**
+     * Combobox Group — a labelled group of `<art-combobox-item>`s; hides itself when none of its
+     * items match the query.
+     */
+    interface HTMLArtComboboxGroupElement extends Components.ArtComboboxGroup, HTMLStencilElement {
+    }
+    var HTMLArtComboboxGroupElement: {
+        prototype: HTMLArtComboboxGroupElement;
+        new (): HTMLArtComboboxGroupElement;
+    };
+    /**
+     * Combobox Item — one option of an `<art-combobox>`. Any content; `item` carries the data
+     * object handed back in the combobox's `change` event.
+     */
+    interface HTMLArtComboboxItemElement extends Components.ArtComboboxItem, HTMLStencilElement {
+    }
+    var HTMLArtComboboxItemElement: {
+        prototype: HTMLArtComboboxItemElement;
+        new (): HTMLArtComboboxItemElement;
+    };
+    interface HTMLArtCommandElementEventMap {
+        "select": { value: string; item?: unknown; element: HTMLElement };
+        "query-change": { query: string };
+    }
+    /**
+     * Command — shadcn/ui parity. A command palette body: a search field over a filtered list of
+     * `<art-command-item>`s (optionally in `<art-command-group>`s) with an empty state. Typing
+     * filters, the arrows move the highlight, Enter runs the highlighted item. No dialog of its
+     * own (ADR-0019): compose it with Dialog for a ⌘K palette.
+     */
+    interface HTMLArtCommandElement extends Components.ArtCommand, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtCommandElementEventMap>(type: K, listener: (this: HTMLArtCommandElement, ev: ArtCommandCustomEvent<HTMLArtCommandElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtCommandElementEventMap>(type: K, listener: (this: HTMLArtCommandElement, ev: ArtCommandCustomEvent<HTMLArtCommandElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtCommandElement: {
+        prototype: HTMLArtCommandElement;
+        new (): HTMLArtCommandElement;
+    };
+    /**
+     * Command Group — a headed group of `<art-command-item>`s; hides itself when none of its
+     * items match the search.
+     */
+    interface HTMLArtCommandGroupElement extends Components.ArtCommandGroup, HTMLStencilElement {
+    }
+    var HTMLArtCommandGroupElement: {
+        prototype: HTMLArtCommandGroupElement;
+        new (): HTMLArtCommandGroupElement;
+    };
+    /**
+     * Command Item — one entry of an `<art-command>`: an optional leading icon, the label and an
+     * optional shortcut. `item` carries the data object handed back in the command's `select` event.
+     */
+    interface HTMLArtCommandItemElement extends Components.ArtCommandItem, HTMLStencilElement {
+    }
+    var HTMLArtCommandItemElement: {
+        prototype: HTMLArtCommandItemElement;
+        new (): HTMLArtCommandItemElement;
+    };
+    interface HTMLArtDatePickerElementEventMap {
+        "change": CalendarChangeDetail1;
+        "open-change": { open: boolean };
+    }
+    /**
+     * Date Picker — shadcn/ui parity: a field-height trigger showing the chosen date (or range)
+     * that opens a Calendar in a popover on the platform top layer. Single day or range;
+     * form-associated with an ISO `value`.
+     */
+    interface HTMLArtDatePickerElement extends Components.ArtDatePicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtDatePickerElementEventMap>(type: K, listener: (this: HTMLArtDatePickerElement, ev: ArtDatePickerCustomEvent<HTMLArtDatePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtDatePickerElementEventMap>(type: K, listener: (this: HTMLArtDatePickerElement, ev: ArtDatePickerCustomEvent<HTMLArtDatePickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtDatePickerElement: {
+        prototype: HTMLArtDatePickerElement;
+        new (): HTMLArtDatePickerElement;
     };
     interface HTMLArtHoverCardElementEventMap {
         "open-change": { open: boolean };
@@ -512,6 +1272,49 @@ declare global {
         prototype: HTMLArtScrollAreaElement;
         new (): HTMLArtScrollAreaElement;
     };
+    interface HTMLArtSelectElementEventMap {
+        "change": { value: string; item?: unknown; element: HTMLElement };
+        "open-change": { open: boolean };
+    }
+    /**
+     * Select — shadcn/ui parity. A trigger styled like Native Select and a listbox on the platform
+     * top layer, filled with `<art-select-item>`s from the light DOM — so an item can be any
+     * template (an avatar with a name and email) and carry a data object in `item`. The trigger
+     * shows a copy of the chosen item's content (or its `label`). Form-associated.
+     */
+    interface HTMLArtSelectElement extends Components.ArtSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtSelectElementEventMap>(type: K, listener: (this: HTMLArtSelectElement, ev: ArtSelectCustomEvent<HTMLArtSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtSelectElementEventMap>(type: K, listener: (this: HTMLArtSelectElement, ev: ArtSelectCustomEvent<HTMLArtSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtSelectElement: {
+        prototype: HTMLArtSelectElement;
+        new (): HTMLArtSelectElement;
+    };
+    /**
+     * Select Group — a labelled group of `<art-select-item>`s inside an `<art-select>`.
+     */
+    interface HTMLArtSelectGroupElement extends Components.ArtSelectGroup, HTMLStencilElement {
+    }
+    var HTMLArtSelectGroupElement: {
+        prototype: HTMLArtSelectGroupElement;
+        new (): HTMLArtSelectGroupElement;
+    };
+    /**
+     * Select Item — one option of an `<art-select>`. Any content (text, an avatar with name and
+     * email); `item` carries the data object handed back in the select's `change` event.
+     */
+    interface HTMLArtSelectItemElement extends Components.ArtSelectItem, HTMLStencilElement {
+    }
+    var HTMLArtSelectItemElement: {
+        prototype: HTMLArtSelectItemElement;
+        new (): HTMLArtSelectItemElement;
+    };
     /**
      * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
      * panel can reference it by id), styled per the parent's variant and orientation.
@@ -554,6 +1357,43 @@ declare global {
         prototype: HTMLArtTabsElement;
         new (): HTMLArtTabsElement;
     };
+    interface HTMLArtToastElementEventMap {
+        "dismiss": { reason: ToastDismissReason };
+        "action": void;
+        "cancel": void;
+    }
+    /**
+     * Toast — one notification, shadcn/ui (Sonner) parity: an icon per variant, a title, a
+     * description, optional action / cancel buttons and a close button. Auto-dismisses after
+     * `duration` (paused while hovered or focused), then plays the exit motion and emits `dismiss`.
+     * Usually created by `<art-toaster>` from `toast()`; can also be written declaratively.
+     */
+    interface HTMLArtToastElement extends Components.ArtToast, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtToastElementEventMap>(type: K, listener: (this: HTMLArtToastElement, ev: ArtToastCustomEvent<HTMLArtToastElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtToastElementEventMap>(type: K, listener: (this: HTMLArtToastElement, ev: ArtToastCustomEvent<HTMLArtToastElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtToastElement: {
+        prototype: HTMLArtToastElement;
+        new (): HTMLArtToastElement;
+    };
+    /**
+     * Toaster — shadcn/ui (Sonner) parity: the region that shows toasts. Put one on the page and
+     * call `toast('Saved')` / `toast.success(…)` / `toast.promise(…)` (exported from
+     * `@aranghat/components`) anywhere; `<art-toast>` children work declaratively too.
+     * Fixed in a corner on the platform top layer (above later overlays) unless `inline`.
+     */
+    interface HTMLArtToasterElement extends Components.ArtToaster, HTMLStencilElement {
+    }
+    var HTMLArtToasterElement: {
+        prototype: HTMLArtToasterElement;
+        new (): HTMLArtToasterElement;
+    };
     interface HTMLArtTooltipElementEventMap {
         "open-change": { open: boolean };
     }
@@ -582,16 +1422,31 @@ declare global {
         "art-accordion-item": HTMLArtAccordionItemElement;
         "art-alert": HTMLArtAlertElement;
         "art-avatar": HTMLArtAvatarElement;
+        "art-calendar": HTMLArtCalendarElement;
+        "art-carousel": HTMLArtCarouselElement;
+        "art-carousel-item": HTMLArtCarouselItemElement;
         "art-collapsible": HTMLArtCollapsibleElement;
+        "art-combobox": HTMLArtComboboxElement;
+        "art-combobox-group": HTMLArtComboboxGroupElement;
+        "art-combobox-item": HTMLArtComboboxItemElement;
+        "art-command": HTMLArtCommandElement;
+        "art-command-group": HTMLArtCommandGroupElement;
+        "art-command-item": HTMLArtCommandItemElement;
+        "art-date-picker": HTMLArtDatePickerElement;
         "art-hover-card": HTMLArtHoverCardElement;
         "art-popover": HTMLArtPopoverElement;
         "art-resizable": HTMLArtResizableElement;
         "art-resizable-handle": HTMLArtResizableHandleElement;
         "art-resizable-panel": HTMLArtResizablePanelElement;
         "art-scroll-area": HTMLArtScrollAreaElement;
+        "art-select": HTMLArtSelectElement;
+        "art-select-group": HTMLArtSelectGroupElement;
+        "art-select-item": HTMLArtSelectItemElement;
         "art-tab": HTMLArtTabElement;
         "art-tab-panel": HTMLArtTabPanelElement;
         "art-tabs": HTMLArtTabsElement;
+        "art-toast": HTMLArtToastElement;
+        "art-toaster": HTMLArtToasterElement;
         "art-tooltip": HTMLArtTooltipElement;
     }
 }
@@ -672,6 +1527,133 @@ declare namespace LocalJSX {
         "src"?: string;
     }
     /**
+     * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
+     * navigation or month + year dropdowns, single, multiple or range selection, min / max and
+     * custom disabled days, several months side by side, locale-aware weekday names and first
+     * day of the week. Dates cross the API as ISO strings; `change` also carries `Date` objects.
+     * Form-associated so it can sit inline in a form.
+     */
+    interface ArtCalendar {
+        /**
+          * `label` shows "September 2026" with arrows; `dropdown` adds month and year selects (date of birth).
+          * @default 'label'
+         */
+        "captionLayout"?: 'label' | 'dropdown';
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Return true for a day that cannot be selected (weekends, booked dates…).
+         */
+        "disabledDates"?: (date: Date) => boolean;
+        /**
+          * Always render six weeks so the height never changes.
+          * @default false
+         */
+        "fixedWeeks"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * BCP 47 tag for names and the first day of the week; defaults to the document language.
+         */
+        "locale"?: string;
+        "max"?: string;
+        /**
+          * Earliest / latest selectable day (`YYYY-MM-DD`).
+         */
+        "min"?: string;
+        /**
+          * Selection mode.
+          * @default 'single'
+         */
+        "mode"?: CalendarMode;
+        /**
+          * Displayed month (`YYYY-MM`); follows the selection, then today.
+         */
+        "month"?: string;
+        "name"?: string;
+        /**
+          * Months shown side by side (ranges usually show two).
+          * @default 1
+         */
+        "numberOfMonths"?: number;
+        /**
+          * Emitted when the selection changes.
+         */
+        "onChange"?: (event: ArtCalendarCustomEvent<CalendarChangeDetail>) => void;
+        /**
+          * Emitted when the displayed month changes; `detail.month` is `YYYY-MM`.
+         */
+        "onMonth-change"?: (event: ArtCalendarCustomEvent<{ month: string }>) => void;
+        /**
+          * Clicking the selected day keeps it selected instead of clearing (single mode).
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Fill the first and last rows with the neighbouring months' days.
+          * @default true
+         */
+        "showOutsideDays"?: boolean;
+        /**
+          * Selected day(s): `YYYY-MM-DD`; comma-separated for `multiple`; `start/end` for `range`.
+          * @default ''
+         */
+        "value"?: string;
+        /**
+          * 0 = Sunday … 6 = Saturday; overrides the locale's first day.
+         */
+        "weekStartsOn"?: number;
+    }
+    /**
+     * Carousel — shadcn/ui parity on Embla (ADR-0005). Slides are `<art-carousel-item>`s in the
+     * light DOM; the viewport, track and the previous / next buttons live here. Drag / swipe,
+     * arrow keys, `loop`, `align`, horizontal or vertical.
+     */
+    interface ArtCarousel {
+        /**
+          * Where a slide settles in the viewport.
+          * @default 'start'
+         */
+        "align"?: 'start' | 'center' | 'end';
+        /**
+          * Show the previous / next buttons.
+          * @default true
+         */
+        "controls"?: boolean;
+        /**
+          * Free-scrolling momentum instead of snapping.
+          * @default false
+         */
+        "dragFree"?: boolean;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * Wrap around at the ends.
+          * @default false
+         */
+        "loop"?: boolean;
+        /**
+          * Emitted when the selected slide changes; `detail.index` is zero-based.
+         */
+        "onSlide-change"?: (event: ArtCarouselCustomEvent<{ index: number }>) => void;
+        /**
+          * @default 'horizontal'
+         */
+        "orientation"?: 'horizontal' | 'vertical';
+    }
+    /**
+     * Carousel Item — one slide of an `<art-carousel>`. Its width is `--art-carousel-basis`
+     * (100 % by default; set `33.333%` for three slides per view).
+     */
+    interface ArtCarouselItem {
+    }
+    /**
      * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
      * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
      * platform behaviour. Height animates where the browser can interpolate `::details-content`.
@@ -689,6 +1671,276 @@ declare namespace LocalJSX {
           * @default false
          */
         "open"?: boolean;
+    }
+    /**
+     * Combobox — shadcn/ui parity. A text field that filters a list of `<art-combobox-item>`s as
+     * the user types; single choice (the field shows the chosen label) or `multiple` (chips in
+     * the field). Items live in the light DOM so they can be any template and carry a data object
+     * in `item`. Rendered on the platform top layer. Form-associated.
+     */
+    interface ArtCombobox {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Custom match: return true to keep an item for the query. Defaults to a case-insensitive substring match on the item's text, `label` and `keywords`.
+         */
+        "filter"?: (text: string, query: string, item: HTMLElement) => boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        /**
+          * Select several items; they show as chips in the field.
+          * @default false
+         */
+        "multiple"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted when the selection changes; `detail.value` (array when `multiple`), `detail.item` (the picked item's data; `detail.items` when `multiple`) and `detail.element`.
+         */
+        "onChange"?: (event: ArtComboboxCustomEvent<{ value: string | string[]; item?: unknown; items?: unknown[]; element?: HTMLElement }>) => void;
+        "onOpen-change"?: (event: ArtComboboxCustomEvent<{ open: boolean }>) => void;
+        /**
+          * Emitted as the user types; `detail.query`. Use it for async search with `should-filter="false"`.
+         */
+        "onQuery-change"?: (event: ArtComboboxCustomEvent<{ query: string }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        "placeholder"?: string;
+        /**
+          * Preferred side of the list.
+          * @default 'bottom-start'
+         */
+        "placement"?: Placement;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * Turn off the built-in filter when the consumer filters the items itself (async search).
+          * @default true
+         */
+        "shouldFilter"?: boolean;
+        /**
+          * Show a clear button while something is selected.
+          * @default false
+         */
+        "showClear"?: boolean;
+        /**
+          * Show the chevron button.
+          * @default true
+         */
+        "showTrigger"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * The chosen item's value; an array of values when `multiple`.
+          * @default ''
+         */
+        "value"?: string | string[];
+    }
+    /**
+     * Combobox Group — a labelled group of `<art-combobox-item>`s; hides itself when none of its
+     * items match the query.
+     */
+    interface ArtComboboxGroup {
+        "label"?: string;
+    }
+    /**
+     * Combobox Item — one option of an `<art-combobox>`. Any content; `item` carries the data
+     * object handed back in the combobox's `change` event.
+     */
+    interface ArtComboboxItem {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Data object for this option; reported as `detail.item`.
+         */
+        "item"?: unknown;
+        /**
+          * Extra words the filter should match.
+         */
+        "keywords"?: string;
+        /**
+          * Plain-text label shown in the field when chosen (defaults to the content's text); also matched by the filter.
+         */
+        "label"?: string;
+        /**
+          * Set by the combobox.
+          * @default false
+         */
+        "selected"?: boolean;
+        /**
+          * The option's value.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Command — shadcn/ui parity. A command palette body: a search field over a filtered list of
+     * `<art-command-item>`s (optionally in `<art-command-group>`s) with an empty state. Typing
+     * filters, the arrows move the highlight, Enter runs the highlighted item. No dialog of its
+     * own (ADR-0019): compose it with Dialog for a ⌘K palette.
+     */
+    interface ArtCommand {
+        /**
+          * Custom match: return true to keep an item for the query. Defaults to a case-insensitive substring match on the item's text and `keywords`.
+         */
+        "filter"?: (text: string, query: string, item: HTMLElement) => boolean;
+        /**
+          * Accessible name of the list.
+          * @default 'Suggestions'
+         */
+        "label"?: string;
+        /**
+          * Emitted as the search text changes; `detail.query`.
+         */
+        "onQuery-change"?: (event: ArtCommandCustomEvent<{ query: string }>) => void;
+        /**
+          * Emitted when an item is run (Enter or click); `detail.value`, `detail.item`, `detail.element`.
+         */
+        "onSelect"?: (event: ArtCommandCustomEvent<{ value: string; item?: unknown; element: HTMLElement }>) => void;
+        /**
+          * @default 'Type a command or search…'
+         */
+        "placeholder"?: string;
+        /**
+          * Current search text.
+          * @default ''
+         */
+        "query"?: string;
+        /**
+          * Turn off the built-in filter when the consumer filters the items itself.
+          * @default true
+         */
+        "shouldFilter"?: boolean;
+    }
+    /**
+     * Command Group — a headed group of `<art-command-item>`s; hides itself when none of its
+     * items match the search.
+     */
+    interface ArtCommandGroup {
+        "label"?: string;
+    }
+    /**
+     * Command Item — one entry of an `<art-command>`: an optional leading icon, the label and an
+     * optional shortcut. `item` carries the data object handed back in the command's `select` event.
+     */
+    interface ArtCommandItem {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Data object for this entry; reported as `detail.item`.
+         */
+        "item"?: unknown;
+        /**
+          * Extra words the filter should match besides the visible text.
+         */
+        "keywords"?: string;
+        /**
+          * Reported as `detail.value` when run.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Date Picker — shadcn/ui parity: a field-height trigger showing the chosen date (or range)
+     * that opens a Calendar in a popover on the platform top layer. Single day or range;
+     * form-associated with an ISO `value`.
+     */
+    interface ArtDatePicker {
+        /**
+          * Month and year dropdowns in the calendar caption (date of birth).
+          * @default 'label'
+         */
+        "captionLayout"?: 'label' | 'dropdown';
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Passed to the calendar: return true for a day that cannot be selected.
+         */
+        "disabledDates"?: (date: Date) => boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * How the chosen date reads in the trigger (`Intl.DateTimeFormat` `dateStyle`).
+          * @default 'long'
+         */
+        "format"?: 'full' | 'long' | 'medium' | 'short';
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "locale"?: string;
+        "max"?: string;
+        /**
+          * Earliest / latest selectable day.
+         */
+        "min"?: string;
+        /**
+          * `single` (a day) or `range` (`start/end`).
+          * @default 'single'
+         */
+        "mode"?: 'single' | 'range';
+        "name"?: string;
+        /**
+          * Months shown side by side; ranges default to two.
+         */
+        "numberOfMonths"?: number;
+        /**
+          * Emitted when the date (or range) changes; same detail as the calendar's `change`.
+         */
+        "onChange"?: (event: ArtDatePickerCustomEvent<CalendarChangeDetail1>) => void;
+        "onOpen-change"?: (event: ArtDatePickerCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * @default 'Pick a date'
+         */
+        "placeholder"?: string;
+        /**
+          * @default 'bottom-start'
+         */
+        "placement"?: Placement;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * `YYYY-MM-DD`, or `start/end` for a range.
+          * @default ''
+         */
+        "value"?: string;
     }
     /**
      * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
@@ -815,6 +2067,91 @@ declare namespace LocalJSX {
         "orientation"?: 'vertical' | 'horizontal' | 'both';
     }
     /**
+     * Select — shadcn/ui parity. A trigger styled like Native Select and a listbox on the platform
+     * top layer, filled with `<art-select-item>`s from the light DOM — so an item can be any
+     * template (an avatar with a name and email) and carry a data object in `item`. The trigger
+     * shows a copy of the chosen item's content (or its `label`). Form-associated.
+     */
+    interface ArtSelect {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hostAriaDescribedby"?: string | null;
+        "hostAriaLabel"?: string | null;
+        "hostAriaLabelledby"?: string | null;
+        /**
+          * @default false
+         */
+        "invalid"?: boolean;
+        "name"?: string;
+        /**
+          * Emitted when the user picks an item; `detail.value`, `detail.item` (the item's data object) and `detail.element`.
+         */
+        "onChange"?: (event: ArtSelectCustomEvent<{ value: string; item?: unknown; element: HTMLElement }>) => void;
+        "onOpen-change"?: (event: ArtSelectCustomEvent<{ open: boolean }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        "placeholder"?: string;
+        /**
+          * Preferred side of the listbox.
+          * @default 'bottom-start'
+         */
+        "placement"?: Placement;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * Select Group — a labelled group of `<art-select-item>`s inside an `<art-select>`.
+     */
+    interface ArtSelectGroup {
+        "label"?: string;
+    }
+    /**
+     * Select Item — one option of an `<art-select>`. Any content (text, an avatar with name and
+     * email); `item` carries the data object handed back in the select's `change` event.
+     */
+    interface ArtSelectItem {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Data object for this option; reported as `detail.item` on selection.
+         */
+        "item"?: unknown;
+        /**
+          * Plain-text label: shown in the trigger instead of a copy of the content, and used for type-ahead.
+         */
+        "label"?: string;
+        /**
+          * Set by the select.
+          * @default false
+         */
+        "selected"?: boolean;
+        /**
+          * The option's value (what the select's `value` becomes).
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
      * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
      * panel can reference it by id), styled per the parent's variant and orientation.
      */
@@ -881,6 +2218,100 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'line';
     }
     /**
+     * Toast — one notification, shadcn/ui (Sonner) parity: an icon per variant, a title, a
+     * description, optional action / cancel buttons and a close button. Auto-dismisses after
+     * `duration` (paused while hovered or focused), then plays the exit motion and emits `dismiss`.
+     * Usually created by `<art-toaster>` from `toast()`; can also be written declaratively.
+     */
+    interface ArtToast {
+        /**
+          * Action / cancel button labels (imperative use); the `action` slot is the declarative form.
+         */
+        "actionLabel"?: string;
+        "cancelLabel"?: string;
+        /**
+          * Show the close button.
+          * @default false
+         */
+        "closeButton"?: boolean;
+        /**
+          * Description text (alternative to the `description` slot).
+         */
+        "description"?: string;
+        /**
+          * ms before auto-dismiss; `0` or `Infinity` keeps the toast (loading toasts always stay).
+          * @default 4000
+         */
+        "duration"?: number;
+        /**
+          * Title text (alternative to the default slot).
+         */
+        "label"?: string;
+        /**
+          * The action button was pressed (the toast then dismisses).
+         */
+        "onAction"?: (event: ArtToastCustomEvent<void>) => void;
+        /**
+          * The cancel button was pressed (the toast then dismisses).
+         */
+        "onCancel"?: (event: ArtToastCustomEvent<void>) => void;
+        /**
+          * Emitted after the exit motion; `detail.reason`.
+         */
+        "onDismiss"?: (event: ArtToastCustomEvent<{ reason: ToastDismissReason }>) => void;
+        /**
+          * Coloured backgrounds per variant (Sonner `richColors`).
+          * @default false
+         */
+        "richColors"?: boolean;
+        /**
+          * @default 'default'
+         */
+        "variant"?: ToastVariant;
+    }
+    /**
+     * Toaster — shadcn/ui (Sonner) parity: the region that shows toasts. Put one on the page and
+     * call `toast('Saved')` / `toast.success(…)` / `toast.promise(…)` (exported from
+     * `@aranghat/components`) anywhere; `<art-toast>` children work declaratively too.
+     * Fixed in a corner on the platform top layer (above later overlays) unless `inline`.
+     */
+    interface ArtToaster {
+        /**
+          * Close button on every toast.
+          * @default false
+         */
+        "closeButton"?: boolean;
+        /**
+          * Default auto-dismiss (ms) for toasts that do not set their own.
+          * @default 4000
+         */
+        "duration"?: number;
+        /**
+          * Render in the page flow instead of a fixed corner (docs, previews).
+          * @default false
+         */
+        "inline"?: boolean;
+        /**
+          * Accessible name of the region.
+          * @default 'Notifications'
+         */
+        "label"?: string;
+        /**
+          * @default 'bottom-right'
+         */
+        "position"?: ToasterPosition;
+        /**
+          * Coloured backgrounds per variant.
+          * @default false
+         */
+        "richColors"?: boolean;
+        /**
+          * Newest toasts show; older ones beyond this count are hidden until there is room.
+          * @default 3
+         */
+        "visibleToasts"?: number;
+    }
+    /**
      * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
      * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the
      * platform top layer (Popover API) and positioned with the floating primitive; the trigger is
@@ -933,9 +2364,99 @@ declare namespace LocalJSX {
         "alt": string;
         "size": 'sm' | 'md' | 'lg';
     }
+    interface ArtCalendarAttributes {
+        "mode": CalendarMode;
+        "value": string;
+        "month": string;
+        "min": string;
+        "max": string;
+        "locale": string;
+        "weekStartsOn": number;
+        "showOutsideDays": boolean;
+        "fixedWeeks": boolean;
+        "captionLayout": 'label' | 'dropdown';
+        "numberOfMonths": number;
+        "required": boolean;
+        "disabled": boolean;
+        "name": string;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+    }
+    interface ArtCarouselAttributes {
+        "orientation": 'horizontal' | 'vertical';
+        "loop": boolean;
+        "align": 'start' | 'center' | 'end';
+        "controls": boolean;
+        "dragFree": boolean;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+    }
     interface ArtCollapsibleAttributes {
         "open": boolean;
         "disabled": boolean;
+    }
+    interface ArtComboboxAttributes {
+        "value": string | string[];
+        "multiple": boolean;
+        "placeholder": string;
+        "name": string;
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "open": boolean;
+        "showTrigger": boolean;
+        "showClear": boolean;
+        "shouldFilter": boolean;
+        "placement": Placement;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtComboboxGroupAttributes {
+        "label": string;
+    }
+    interface ArtComboboxItemAttributes {
+        "value": string;
+        "label": string;
+        "keywords": string;
+        "disabled": boolean;
+        "selected": boolean;
+    }
+    interface ArtCommandAttributes {
+        "query": string;
+        "placeholder": string;
+        "label": string;
+        "shouldFilter": boolean;
+    }
+    interface ArtCommandGroupAttributes {
+        "label": string;
+    }
+    interface ArtCommandItemAttributes {
+        "value": string;
+        "keywords": string;
+        "disabled": boolean;
+    }
+    interface ArtDatePickerAttributes {
+        "mode": 'single' | 'range';
+        "value": string;
+        "placeholder": string;
+        "name": string;
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "open": boolean;
+        "placement": Placement;
+        "min": string;
+        "max": string;
+        "locale": string;
+        "captionLayout": 'label' | 'dropdown';
+        "numberOfMonths": number;
+        "format": 'full' | 'long' | 'medium' | 'short';
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
     }
     interface ArtHoverCardAttributes {
         "placement": Placement;
@@ -965,6 +2486,29 @@ declare namespace LocalJSX {
     interface ArtScrollAreaAttributes {
         "orientation": 'vertical' | 'horizontal' | 'both';
     }
+    interface ArtSelectAttributes {
+        "value": string;
+        "placeholder": string;
+        "name": string;
+        "size": 'sm' | 'md' | 'lg';
+        "disabled": boolean;
+        "required": boolean;
+        "invalid": boolean;
+        "open": boolean;
+        "placement": Placement;
+        "hostAriaLabel": string | null;
+        "hostAriaLabelledby": string | null;
+        "hostAriaDescribedby": string | null;
+    }
+    interface ArtSelectGroupAttributes {
+        "label": string;
+    }
+    interface ArtSelectItemAttributes {
+        "value": string;
+        "label": string;
+        "disabled": boolean;
+        "selected": boolean;
+    }
     interface ArtTabAttributes {
         "value": string;
         "disabled": boolean;
@@ -980,6 +2524,25 @@ declare namespace LocalJSX {
         "variant": 'default' | 'line';
         "activation": 'automatic' | 'manual';
     }
+    interface ArtToastAttributes {
+        "variant": ToastVariant;
+        "label": string;
+        "description": string;
+        "duration": number;
+        "closeButton": boolean;
+        "richColors": boolean;
+        "actionLabel": string;
+        "cancelLabel": string;
+    }
+    interface ArtToasterAttributes {
+        "position": ToasterPosition;
+        "inline": boolean;
+        "visibleToasts": number;
+        "duration": number;
+        "closeButton": boolean;
+        "richColors": boolean;
+        "label": string;
+    }
     interface ArtTooltipAttributes {
         "placement": Placement;
         "offset": number;
@@ -993,16 +2556,31 @@ declare namespace LocalJSX {
         "art-accordion-item": Omit<ArtAccordionItem, keyof ArtAccordionItemAttributes> & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes]?: ArtAccordionItem[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `attr:${K}`]?: ArtAccordionItemAttributes[K] } & { [K in keyof ArtAccordionItem & keyof ArtAccordionItemAttributes as `prop:${K}`]?: ArtAccordionItem[K] };
         "art-alert": Omit<ArtAlert, keyof ArtAlertAttributes> & { [K in keyof ArtAlert & keyof ArtAlertAttributes]?: ArtAlert[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `attr:${K}`]?: ArtAlertAttributes[K] } & { [K in keyof ArtAlert & keyof ArtAlertAttributes as `prop:${K}`]?: ArtAlert[K] };
         "art-avatar": Omit<ArtAvatar, keyof ArtAvatarAttributes> & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes]?: ArtAvatar[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `attr:${K}`]?: ArtAvatarAttributes[K] } & { [K in keyof ArtAvatar & keyof ArtAvatarAttributes as `prop:${K}`]?: ArtAvatar[K] };
+        "art-calendar": Omit<ArtCalendar, keyof ArtCalendarAttributes> & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes]?: ArtCalendar[K] } & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes as `attr:${K}`]?: ArtCalendarAttributes[K] } & { [K in keyof ArtCalendar & keyof ArtCalendarAttributes as `prop:${K}`]?: ArtCalendar[K] };
+        "art-carousel": Omit<ArtCarousel, keyof ArtCarouselAttributes> & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes]?: ArtCarousel[K] } & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes as `attr:${K}`]?: ArtCarouselAttributes[K] } & { [K in keyof ArtCarousel & keyof ArtCarouselAttributes as `prop:${K}`]?: ArtCarousel[K] };
+        "art-carousel-item": ArtCarouselItem;
         "art-collapsible": Omit<ArtCollapsible, keyof ArtCollapsibleAttributes> & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes]?: ArtCollapsible[K] } & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes as `attr:${K}`]?: ArtCollapsibleAttributes[K] } & { [K in keyof ArtCollapsible & keyof ArtCollapsibleAttributes as `prop:${K}`]?: ArtCollapsible[K] };
+        "art-combobox": Omit<ArtCombobox, keyof ArtComboboxAttributes> & { [K in keyof ArtCombobox & keyof ArtComboboxAttributes]?: ArtCombobox[K] } & { [K in keyof ArtCombobox & keyof ArtComboboxAttributes as `attr:${K}`]?: ArtComboboxAttributes[K] } & { [K in keyof ArtCombobox & keyof ArtComboboxAttributes as `prop:${K}`]?: ArtCombobox[K] };
+        "art-combobox-group": Omit<ArtComboboxGroup, keyof ArtComboboxGroupAttributes> & { [K in keyof ArtComboboxGroup & keyof ArtComboboxGroupAttributes]?: ArtComboboxGroup[K] } & { [K in keyof ArtComboboxGroup & keyof ArtComboboxGroupAttributes as `attr:${K}`]?: ArtComboboxGroupAttributes[K] } & { [K in keyof ArtComboboxGroup & keyof ArtComboboxGroupAttributes as `prop:${K}`]?: ArtComboboxGroup[K] };
+        "art-combobox-item": Omit<ArtComboboxItem, keyof ArtComboboxItemAttributes> & { [K in keyof ArtComboboxItem & keyof ArtComboboxItemAttributes]?: ArtComboboxItem[K] } & { [K in keyof ArtComboboxItem & keyof ArtComboboxItemAttributes as `attr:${K}`]?: ArtComboboxItemAttributes[K] } & { [K in keyof ArtComboboxItem & keyof ArtComboboxItemAttributes as `prop:${K}`]?: ArtComboboxItem[K] };
+        "art-command": Omit<ArtCommand, keyof ArtCommandAttributes> & { [K in keyof ArtCommand & keyof ArtCommandAttributes]?: ArtCommand[K] } & { [K in keyof ArtCommand & keyof ArtCommandAttributes as `attr:${K}`]?: ArtCommandAttributes[K] } & { [K in keyof ArtCommand & keyof ArtCommandAttributes as `prop:${K}`]?: ArtCommand[K] };
+        "art-command-group": Omit<ArtCommandGroup, keyof ArtCommandGroupAttributes> & { [K in keyof ArtCommandGroup & keyof ArtCommandGroupAttributes]?: ArtCommandGroup[K] } & { [K in keyof ArtCommandGroup & keyof ArtCommandGroupAttributes as `attr:${K}`]?: ArtCommandGroupAttributes[K] } & { [K in keyof ArtCommandGroup & keyof ArtCommandGroupAttributes as `prop:${K}`]?: ArtCommandGroup[K] };
+        "art-command-item": Omit<ArtCommandItem, keyof ArtCommandItemAttributes> & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes]?: ArtCommandItem[K] } & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes as `attr:${K}`]?: ArtCommandItemAttributes[K] } & { [K in keyof ArtCommandItem & keyof ArtCommandItemAttributes as `prop:${K}`]?: ArtCommandItem[K] };
+        "art-date-picker": Omit<ArtDatePicker, keyof ArtDatePickerAttributes> & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes]?: ArtDatePicker[K] } & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes as `attr:${K}`]?: ArtDatePickerAttributes[K] } & { [K in keyof ArtDatePicker & keyof ArtDatePickerAttributes as `prop:${K}`]?: ArtDatePicker[K] };
         "art-hover-card": Omit<ArtHoverCard, keyof ArtHoverCardAttributes> & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes]?: ArtHoverCard[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `attr:${K}`]?: ArtHoverCardAttributes[K] } & { [K in keyof ArtHoverCard & keyof ArtHoverCardAttributes as `prop:${K}`]?: ArtHoverCard[K] };
         "art-popover": Omit<ArtPopover, keyof ArtPopoverAttributes> & { [K in keyof ArtPopover & keyof ArtPopoverAttributes]?: ArtPopover[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `attr:${K}`]?: ArtPopoverAttributes[K] } & { [K in keyof ArtPopover & keyof ArtPopoverAttributes as `prop:${K}`]?: ArtPopover[K] };
         "art-resizable": Omit<ArtResizable, keyof ArtResizableAttributes> & { [K in keyof ArtResizable & keyof ArtResizableAttributes]?: ArtResizable[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `attr:${K}`]?: ArtResizableAttributes[K] } & { [K in keyof ArtResizable & keyof ArtResizableAttributes as `prop:${K}`]?: ArtResizable[K] };
         "art-resizable-handle": Omit<ArtResizableHandle, keyof ArtResizableHandleAttributes> & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes]?: ArtResizableHandle[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `attr:${K}`]?: ArtResizableHandleAttributes[K] } & { [K in keyof ArtResizableHandle & keyof ArtResizableHandleAttributes as `prop:${K}`]?: ArtResizableHandle[K] };
         "art-resizable-panel": Omit<ArtResizablePanel, keyof ArtResizablePanelAttributes> & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes]?: ArtResizablePanel[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `attr:${K}`]?: ArtResizablePanelAttributes[K] } & { [K in keyof ArtResizablePanel & keyof ArtResizablePanelAttributes as `prop:${K}`]?: ArtResizablePanel[K] };
         "art-scroll-area": Omit<ArtScrollArea, keyof ArtScrollAreaAttributes> & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes]?: ArtScrollArea[K] } & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes as `attr:${K}`]?: ArtScrollAreaAttributes[K] } & { [K in keyof ArtScrollArea & keyof ArtScrollAreaAttributes as `prop:${K}`]?: ArtScrollArea[K] };
+        "art-select": Omit<ArtSelect, keyof ArtSelectAttributes> & { [K in keyof ArtSelect & keyof ArtSelectAttributes]?: ArtSelect[K] } & { [K in keyof ArtSelect & keyof ArtSelectAttributes as `attr:${K}`]?: ArtSelectAttributes[K] } & { [K in keyof ArtSelect & keyof ArtSelectAttributes as `prop:${K}`]?: ArtSelect[K] };
+        "art-select-group": Omit<ArtSelectGroup, keyof ArtSelectGroupAttributes> & { [K in keyof ArtSelectGroup & keyof ArtSelectGroupAttributes]?: ArtSelectGroup[K] } & { [K in keyof ArtSelectGroup & keyof ArtSelectGroupAttributes as `attr:${K}`]?: ArtSelectGroupAttributes[K] } & { [K in keyof ArtSelectGroup & keyof ArtSelectGroupAttributes as `prop:${K}`]?: ArtSelectGroup[K] };
+        "art-select-item": Omit<ArtSelectItem, keyof ArtSelectItemAttributes> & { [K in keyof ArtSelectItem & keyof ArtSelectItemAttributes]?: ArtSelectItem[K] } & { [K in keyof ArtSelectItem & keyof ArtSelectItemAttributes as `attr:${K}`]?: ArtSelectItemAttributes[K] } & { [K in keyof ArtSelectItem & keyof ArtSelectItemAttributes as `prop:${K}`]?: ArtSelectItem[K] };
         "art-tab": Omit<ArtTab, keyof ArtTabAttributes> & { [K in keyof ArtTab & keyof ArtTabAttributes]?: ArtTab[K] } & { [K in keyof ArtTab & keyof ArtTabAttributes as `attr:${K}`]?: ArtTabAttributes[K] } & { [K in keyof ArtTab & keyof ArtTabAttributes as `prop:${K}`]?: ArtTab[K] };
         "art-tab-panel": Omit<ArtTabPanel, keyof ArtTabPanelAttributes> & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes]?: ArtTabPanel[K] } & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes as `attr:${K}`]?: ArtTabPanelAttributes[K] } & { [K in keyof ArtTabPanel & keyof ArtTabPanelAttributes as `prop:${K}`]?: ArtTabPanel[K] };
         "art-tabs": Omit<ArtTabs, keyof ArtTabsAttributes> & { [K in keyof ArtTabs & keyof ArtTabsAttributes]?: ArtTabs[K] } & { [K in keyof ArtTabs & keyof ArtTabsAttributes as `attr:${K}`]?: ArtTabsAttributes[K] } & { [K in keyof ArtTabs & keyof ArtTabsAttributes as `prop:${K}`]?: ArtTabs[K] };
+        "art-toast": Omit<ArtToast, keyof ArtToastAttributes> & { [K in keyof ArtToast & keyof ArtToastAttributes]?: ArtToast[K] } & { [K in keyof ArtToast & keyof ArtToastAttributes as `attr:${K}`]?: ArtToastAttributes[K] } & { [K in keyof ArtToast & keyof ArtToastAttributes as `prop:${K}`]?: ArtToast[K] };
+        "art-toaster": Omit<ArtToaster, keyof ArtToasterAttributes> & { [K in keyof ArtToaster & keyof ArtToasterAttributes]?: ArtToaster[K] } & { [K in keyof ArtToaster & keyof ArtToasterAttributes as `attr:${K}`]?: ArtToasterAttributes[K] } & { [K in keyof ArtToaster & keyof ArtToasterAttributes as `prop:${K}`]?: ArtToaster[K] };
         "art-tooltip": Omit<ArtTooltip, keyof ArtTooltipAttributes> & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes]?: ArtTooltip[K] } & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes as `attr:${K}`]?: ArtTooltipAttributes[K] } & { [K in keyof ArtTooltip & keyof ArtTooltipAttributes as `prop:${K}`]?: ArtTooltip[K] };
     }
 }
@@ -1033,11 +2611,70 @@ declare module "@stencil/core" {
              */
             "art-avatar": LocalJSX.IntrinsicElements["art-avatar"] & JSXBase.HTMLAttributes<HTMLArtAvatarElement>;
             /**
+             * Calendar — shadcn/ui parity (react-day-picker look): a month grid with previous / next
+             * navigation or month + year dropdowns, single, multiple or range selection, min / max and
+             * custom disabled days, several months side by side, locale-aware weekday names and first
+             * day of the week. Dates cross the API as ISO strings; `change` also carries `Date` objects.
+             * Form-associated so it can sit inline in a form.
+             */
+            "art-calendar": LocalJSX.IntrinsicElements["art-calendar"] & JSXBase.HTMLAttributes<HTMLArtCalendarElement>;
+            /**
+             * Carousel — shadcn/ui parity on Embla (ADR-0005). Slides are `<art-carousel-item>`s in the
+             * light DOM; the viewport, track and the previous / next buttons live here. Drag / swipe,
+             * arrow keys, `loop`, `align`, horizontal or vertical.
+             */
+            "art-carousel": LocalJSX.IntrinsicElements["art-carousel"] & JSXBase.HTMLAttributes<HTMLArtCarouselElement>;
+            /**
+             * Carousel Item — one slide of an `<art-carousel>`. Its width is `--art-carousel-basis`
+             * (100 % by default; set `33.333%` for three slides per view).
+             */
+            "art-carousel-item": LocalJSX.IntrinsicElements["art-carousel-item"] & JSXBase.HTMLAttributes<HTMLArtCarouselItemElement>;
+            /**
              * Collapsible — shadcn/ui parity on the native `<details>` element: the trigger is its
              * `<summary>`, so toggling, keyboard activation (Enter / Space) and the expanded state are
              * platform behaviour. Height animates where the browser can interpolate `::details-content`.
              */
             "art-collapsible": LocalJSX.IntrinsicElements["art-collapsible"] & JSXBase.HTMLAttributes<HTMLArtCollapsibleElement>;
+            /**
+             * Combobox — shadcn/ui parity. A text field that filters a list of `<art-combobox-item>`s as
+             * the user types; single choice (the field shows the chosen label) or `multiple` (chips in
+             * the field). Items live in the light DOM so they can be any template and carry a data object
+             * in `item`. Rendered on the platform top layer. Form-associated.
+             */
+            "art-combobox": LocalJSX.IntrinsicElements["art-combobox"] & JSXBase.HTMLAttributes<HTMLArtComboboxElement>;
+            /**
+             * Combobox Group — a labelled group of `<art-combobox-item>`s; hides itself when none of its
+             * items match the query.
+             */
+            "art-combobox-group": LocalJSX.IntrinsicElements["art-combobox-group"] & JSXBase.HTMLAttributes<HTMLArtComboboxGroupElement>;
+            /**
+             * Combobox Item — one option of an `<art-combobox>`. Any content; `item` carries the data
+             * object handed back in the combobox's `change` event.
+             */
+            "art-combobox-item": LocalJSX.IntrinsicElements["art-combobox-item"] & JSXBase.HTMLAttributes<HTMLArtComboboxItemElement>;
+            /**
+             * Command — shadcn/ui parity. A command palette body: a search field over a filtered list of
+             * `<art-command-item>`s (optionally in `<art-command-group>`s) with an empty state. Typing
+             * filters, the arrows move the highlight, Enter runs the highlighted item. No dialog of its
+             * own (ADR-0019): compose it with Dialog for a ⌘K palette.
+             */
+            "art-command": LocalJSX.IntrinsicElements["art-command"] & JSXBase.HTMLAttributes<HTMLArtCommandElement>;
+            /**
+             * Command Group — a headed group of `<art-command-item>`s; hides itself when none of its
+             * items match the search.
+             */
+            "art-command-group": LocalJSX.IntrinsicElements["art-command-group"] & JSXBase.HTMLAttributes<HTMLArtCommandGroupElement>;
+            /**
+             * Command Item — one entry of an `<art-command>`: an optional leading icon, the label and an
+             * optional shortcut. `item` carries the data object handed back in the command's `select` event.
+             */
+            "art-command-item": LocalJSX.IntrinsicElements["art-command-item"] & JSXBase.HTMLAttributes<HTMLArtCommandItemElement>;
+            /**
+             * Date Picker — shadcn/ui parity: a field-height trigger showing the chosen date (or range)
+             * that opens a Calendar in a popover on the platform top layer. Single day or range;
+             * form-associated with an ISO `value`.
+             */
+            "art-date-picker": LocalJSX.IntrinsicElements["art-date-picker"] & JSXBase.HTMLAttributes<HTMLArtDatePickerElement>;
             /**
              * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
              * a link: opens after a longer hover intent than a tooltip (it is content, not a label), stays
@@ -1074,6 +2711,22 @@ declare module "@stencil/core" {
              */
             "art-scroll-area": LocalJSX.IntrinsicElements["art-scroll-area"] & JSXBase.HTMLAttributes<HTMLArtScrollAreaElement>;
             /**
+             * Select — shadcn/ui parity. A trigger styled like Native Select and a listbox on the platform
+             * top layer, filled with `<art-select-item>`s from the light DOM — so an item can be any
+             * template (an avatar with a name and email) and carry a data object in `item`. The trigger
+             * shows a copy of the chosen item's content (or its `label`). Form-associated.
+             */
+            "art-select": LocalJSX.IntrinsicElements["art-select"] & JSXBase.HTMLAttributes<HTMLArtSelectElement>;
+            /**
+             * Select Group — a labelled group of `<art-select-item>`s inside an `<art-select>`.
+             */
+            "art-select-group": LocalJSX.IntrinsicElements["art-select-group"] & JSXBase.HTMLAttributes<HTMLArtSelectGroupElement>;
+            /**
+             * Select Item — one option of an `<art-select>`. Any content (text, an avatar with name and
+             * email); `item` carries the data object handed back in the select's `change` event.
+             */
+            "art-select-item": LocalJSX.IntrinsicElements["art-select-item"] & JSXBase.HTMLAttributes<HTMLArtSelectItemElement>;
+            /**
              * Tab — one trigger of an `<art-tabs>`. The host itself is the `role="tab"` element (so the
              * panel can reference it by id), styled per the parent's variant and orientation.
              */
@@ -1089,6 +2742,20 @@ declare module "@stencil/core" {
              * Tabs and panels are light-DOM siblings, so `aria-controls` / `aria-labelledby` can link them.
              */
             "art-tabs": LocalJSX.IntrinsicElements["art-tabs"] & JSXBase.HTMLAttributes<HTMLArtTabsElement>;
+            /**
+             * Toast — one notification, shadcn/ui (Sonner) parity: an icon per variant, a title, a
+             * description, optional action / cancel buttons and a close button. Auto-dismisses after
+             * `duration` (paused while hovered or focused), then plays the exit motion and emits `dismiss`.
+             * Usually created by `<art-toaster>` from `toast()`; can also be written declaratively.
+             */
+            "art-toast": LocalJSX.IntrinsicElements["art-toast"] & JSXBase.HTMLAttributes<HTMLArtToastElement>;
+            /**
+             * Toaster — shadcn/ui (Sonner) parity: the region that shows toasts. Put one on the page and
+             * call `toast('Saved')` / `toast.success(…)` / `toast.promise(…)` (exported from
+             * `@aranghat/components`) anywhere; `<art-toast>` children work declaratively too.
+             * Fixed in a corner on the platform top layer (above later overlays) unless `inline`.
+             */
+            "art-toaster": LocalJSX.IntrinsicElements["art-toaster"] & JSXBase.HTMLAttributes<HTMLArtToasterElement>;
             /**
              * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
              * trigger (hover intent), on keyboard focus, or on press-and-hold with touch. Rendered on the

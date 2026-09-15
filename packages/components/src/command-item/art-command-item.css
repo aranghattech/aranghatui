@@ -1,0 +1,31 @@
+:host {
+  @apply relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm select-none;
+  box-sizing: border-box;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([data-highlighted]) {
+  background: var(--art-color-bg-accent);
+}
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 50%;
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+  color: var(--art-color-fg-muted);
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+::slotted([slot='shortcut']) {
+  margin-inline-start: auto;
+  font-size: var(--art-font-size-xs);
+  letter-spacing: var(--art-font-tracking-wide);
+  color: var(--art-color-fg-muted);
+}

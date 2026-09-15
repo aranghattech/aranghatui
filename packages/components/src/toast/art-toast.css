@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  width: 100%;
+}
+:host([hidden]) {
+  display: none;
+}
+.toast {
+  box-sizing: border-box;
+}
+/* Empty description / actions collapse so a one-line toast stays one line. */
+.description:not(:has(*)):empty,
+.actions:not(:has(*)) {
+  display: none;
+}
+.close {
+  inset-inline-end: calc(-1 * var(--art-space-2));
+  top: calc(-1 * var(--art-space-2));
+  width: var(--art-space-5);
+  height: var(--art-space-5);
+}
+/* Variant icons carry the status colour. */
+:host([variant='success']) .variant-icon { color: var(--art-color-success-solid); }
+:host([variant='error']) .variant-icon { color: var(--art-color-destructive-solid); }
+:host([variant='warning']) .variant-icon { color: var(--art-color-warning-solid); }
+:host([variant='info']) .variant-icon { color: var(--art-color-info-solid); }
+:host([variant='loading']) .variant-icon { color: var(--art-color-fg-muted); }
+/* Rich colours: the whole card takes the status tint (Sonner `richColors`). */
+:host([rich-colors][variant='success']) .toast { background: var(--art-color-success-muted); border-color: var(--art-color-success-solid); color: var(--art-color-success-fg); }
+:host([rich-colors][variant='error']) .toast { background: var(--art-color-destructive-muted); border-color: var(--art-color-destructive-solid); color: var(--art-color-destructive-fg); }
+:host([rich-colors][variant='warning']) .toast { background: var(--art-color-warning-muted); border-color: var(--art-color-warning-solid); color: var(--art-color-warning-fg); }
+:host([rich-colors][variant='info']) .toast { background: var(--art-color-info-muted); border-color: var(--art-color-info-solid); color: var(--art-color-info-fg); }
+:host([rich-colors]) .toast .description,
+:host([rich-colors]) .toast .variant-icon {
+  color: inherit;
+}
+/* Enter / exit motion shared with the overlays; the toaster sets the slide direction. */
+.toast[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.toast[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+::slotted([slot='description']) {
+  margin: 0;
+}
+::slotted(svg[slot='icon']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+  flex-shrink: 0;
+}

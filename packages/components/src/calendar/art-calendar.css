@@ -1,0 +1,67 @@
+:host {
+  display: inline-block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+[part='calendar'] {
+  border-radius: var(--art-radius-md);
+}
+/* Rows breathe like shadcn's `mt-2` between weeks. */
+tbody tr + tr td {
+  padding-top: var(--art-space-2);
+}
+/* Days of the neighbouring months are muted. */
+.day[data-outside] {
+  color: var(--art-color-fg-muted);
+}
+/* Today: accent fill unless selected. */
+.day[data-today]:not([data-selected]):not([data-range-middle]) {
+  background: var(--art-color-bg-accent);
+}
+/* Selected day / range ends: primary fill (shadcn `bg-primary text-primary-foreground`). */
+.day[data-selected]:not([data-range-middle]),
+.day[data-range-start],
+.day[data-range-end] {
+  background: var(--art-color-primary-solid);
+  color: var(--art-color-fg-on-primary);
+}
+.day[data-selected]:not([data-range-middle]):hover,
+.day[data-range-start]:hover,
+.day[data-range-end]:hover {
+  background: var(--art-color-primary-hover);
+}
+/* Days inside a range: a continuous accent band across the cells (the cell carries the band, the
+   button stays square so the ends keep their radius). */
+td[data-range-middle] {
+  background: var(--art-color-bg-accent);
+}
+td[data-range-start] {
+  background: linear-gradient(to right, transparent 50%, var(--art-color-bg-accent) 50%);
+}
+td[data-range-end] {
+  background: linear-gradient(to left, transparent 50%, var(--art-color-bg-accent) 50%);
+}
+td[data-range-start][data-range-end] {
+  background: transparent;
+}
+:host(:dir(rtl)) td[data-range-start] {
+  background: linear-gradient(to left, transparent 50%, var(--art-color-bg-accent) 50%);
+}
+:host(:dir(rtl)) td[data-range-end] {
+  background: linear-gradient(to right, transparent 50%, var(--art-color-bg-accent) 50%);
+}
+.day[data-range-middle] {
+  border-radius: 0;
+  color: var(--art-color-fg-default);
+}
+/* The nav arrows flip with the writing direction. */
+:host(:dir(rtl)) .nav svg {
+  transform: scaleX(-1);
+}
+.caption-select {
+  appearance: auto;
+}

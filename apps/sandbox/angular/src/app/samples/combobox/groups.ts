@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+import { ArtCombobox, ArtComboboxGroup, ArtComboboxItem } from '@aranghat/components-angular';
+
+@Component({
+  selector: 'sample-combobox-groups',
+  imports: [ArtCombobox, ArtComboboxGroup, ArtComboboxItem],
+  template: `
+    <art-combobox placeholder="Pick a fruit or a vegetable" aria-label="Produce">
+      <art-combobox-group label="Fruits">
+        <art-combobox-item value="apple">Apple</art-combobox-item>
+        <art-combobox-item value="banana">Banana</art-combobox-item>
+      </art-combobox-group>
+      <art-combobox-group label="Vegetables">
+        <art-combobox-item value="carrot">Carrot</art-combobox-item>
+        <art-combobox-item value="pea">Pea</art-combobox-item>
+      </art-combobox-group>
+    </art-combobox>
+  `,
+})
+export class ComboboxGroups {}

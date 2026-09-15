@@ -1,0 +1,32 @@
+:host {
+  @apply relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pe-8 ps-2 text-sm select-none;
+  box-sizing: border-box;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([data-highlighted]) {
+  background: var(--art-color-bg-accent);
+}
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 50%;
+}
+.check {
+  position: absolute;
+  inset-inline-end: var(--art-space-2);
+}
+::slotted(svg),
+::slotted(art-icon) {
+  pointer-events: none;
+  flex-shrink: 0;
+  color: var(--art-color-fg-muted);
+}
+::slotted(svg) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+::slotted(.muted) {
+  color: var(--art-color-fg-muted);
+}

@@ -1,0 +1,13 @@
+<art-toaster></art-toaster>
+<art-button variant="outline" id="save">Save</art-button>
+<script type="module">
+  import { toast } from '@aranghat/components';
+  const save = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Report' }), 2000));
+  document.getElementById('save').addEventListener('click', () => {
+    toast.promise(save(), {
+      loading: 'Saving…',
+      success: (data) => `${data.name} has been saved`,
+      error: 'Something went wrong',
+    });
+  });
+</script>

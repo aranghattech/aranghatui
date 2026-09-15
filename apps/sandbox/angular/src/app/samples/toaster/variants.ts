@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { ArtToast, ArtToaster } from '@aranghat/components-angular';
+
+@Component({
+  selector: 'sample-toaster-variants',
+  imports: [ArtToast, ArtToaster],
+  template: `
+    <art-toaster inline>
+      <art-toast duration="0">Default</art-toast>
+      <art-toast variant="success" duration="0">Success</art-toast>
+      <art-toast variant="error" duration="0">Error</art-toast>
+      <art-toast variant="warning" duration="0">Warning</art-toast>
+      <art-toast variant="info" duration="0">Info</art-toast>
+      <art-toast variant="loading" duration="0">Loading…</art-toast>
+    </art-toaster>
+  `,
+})
+export class ToasterVariants {}

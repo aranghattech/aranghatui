@@ -219,104 +219,152 @@
         {
           "tag": "art-collapsible",
           "name": "Collapsible",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-accordion",
           "name": "Accordion",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-accordion-item",
           "name": "Accordion Item",
-          "status": "in-progress",
+          "status": "done",
           "internal": true
         },
         {
           "tag": "art-tabs",
           "name": "Tabs",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-tab",
           "name": "Tab",
-          "status": "in-progress",
+          "status": "done",
           "internal": true
         },
         {
           "tag": "art-tab-panel",
           "name": "Tab Panel",
-          "status": "in-progress",
+          "status": "done",
           "internal": true
         },
         {
           "tag": "art-alert",
           "name": "Alert",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-avatar",
           "name": "Avatar",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-scroll-area",
           "name": "Scroll Area",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-toast",
           "name": "Toast",
-          "status": "planned"
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-toaster",
+          "name": "Toast",
+          "status": "in-progress"
         },
         {
           "tag": "art-select",
           "name": "Select",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-select-item",
+          "name": "Select Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-select-group",
+          "name": "Select Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-command",
           "name": "Command",
-          "status": "planned",
+          "status": "in-progress",
           "budgetKb": 15
+        },
+        {
+          "tag": "art-command-item",
+          "name": "Command Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-command-group",
+          "name": "Command Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-combobox",
           "name": "Combobox",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-combobox-item",
+          "name": "Combobox Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-combobox-group",
+          "name": "Combobox Group",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "art-calendar",
           "name": "Calendar",
-          "status": "planned",
+          "status": "in-progress",
           "budgetKb": 15
         },
         {
           "tag": "art-date-picker",
           "name": "Date Picker",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-resizable",
           "name": "Resizable",
-          "status": "in-progress"
+          "status": "done"
         },
         {
           "tag": "art-resizable-panel",
           "name": "Resizable Panel",
-          "status": "in-progress",
+          "status": "done",
           "internal": true
         },
         {
           "tag": "art-resizable-handle",
           "name": "Resizable Handle",
-          "status": "in-progress",
+          "status": "done",
           "internal": true
         },
         {
           "tag": "art-carousel",
           "name": "Carousel",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-carousel-item",
+          "name": "Carousel Item",
+          "status": "in-progress",
+          "internal": true
         },
         {
           "tag": "data-table",
