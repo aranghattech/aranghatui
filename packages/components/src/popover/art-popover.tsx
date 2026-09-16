@@ -2,6 +2,7 @@ import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@
 import { createDismissable, type DismissReason, type Dismissable } from '@aranghat/primitives/dismissable';
 import type { Placement } from '@aranghat/primitives/floating';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Popover — shadcn/ui parity. Rich content anchored to a trigger, opened by click, closed by
@@ -50,7 +51,7 @@ export class ArtPopover {
   }
 
   private trigger(): HTMLElement | null {
-    return this.host.querySelector(':scope > [slot="trigger"]');
+    return child(this.host, '[slot="trigger"]');
   }
   private wire = () => {
     const t = this.trigger();

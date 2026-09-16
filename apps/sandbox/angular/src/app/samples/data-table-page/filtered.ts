@@ -6,7 +6,7 @@ import { ArtBadge, ArtButton, ArtCheckbox, ArtTable } from '@aranghat/base-angul
   selector: 'sample-data-table-page-filtered',
   imports: [ArtBadge, ArtButton, ArtCheckbox, ArtDataTablePage, ArtTable],
   template: `
-    <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="20" page-size="5" filter="pixel" selected="2" page="3">
+    <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="10" page-size="10" filter="pixel" selected="2" page="3">
       <art-button slot="actions" variant="outline" size="sm">Export</art-button>
       <art-button slot="filters" variant="outline" size="sm">Status</art-button>
       <art-button slot="filters" variant="outline" size="sm">Priority</art-button>

@@ -3,16 +3,32 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Visual regression, accessibility and cross-framework smoke suites (CLAUDE.md §9). Run through scripts/pw-docker.sh for identical rendering (ADR-0018).",
+  "description": "Visual regression, accessibility and cross-framework smoke suites (CLAUDE.md \u00a79). Run through scripts/pw-docker.sh for identical rendering (ADR-0018).",
   "scripts": {
     "test:visual": "playwright test --project=visual",
     "test:a11y": "playwright test --project=a11y",
-    "test:smoke": "playwright test --project=smoke"
+    "test:smoke": "playwright test --project=smoke",
+    "build": "node ssr/build-client.mjs",
+    "test:ssr": "playwright test --project=ssr"
   },
   "devDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/base-react": "workspace:*",
+    "@aranghat/base-vue": "workspace:*",
+    "@aranghat/components": "workspace:*",
+    "@aranghat/hydrate": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*",
     "@artui/stories": "workspace:*",
     "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
-    "typescript": "6.0.3"
+    "@types/react": "19.2.18",
+    "esbuild": "0.28.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "6.0.3",
+    "vue": "3.5.42"
   }
 }

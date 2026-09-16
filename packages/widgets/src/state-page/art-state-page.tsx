@@ -1,6 +1,8 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { defineCustomElement as defineButton } from '@aranghat/base/button';
 import { defineCustomElement as defineEmpty } from '@aranghat/base/empty';
+import { child } from '@aranghat/primitives/dom';
+import { defineOnClient } from '../define';
 
 const COPY = {
   empty: { heading: 'Nothing here yet', description: 'When there is something to show, it will appear here.' },
@@ -34,8 +36,7 @@ export class ArtStatePage {
   @State() hasBody = false;
 
   connectedCallback() {
-    defineEmpty();
-    defineButton();
+    defineOnClient(defineEmpty, defineButton);
   }
   componentWillLoad() {
     this.wire();
@@ -44,9 +45,9 @@ export class ArtStatePage {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
   }
   private wire = () => {
-    this.hasMedia = !!this.host.querySelector(':scope > [slot="media"]');
-    this.hasActions = !!this.host.querySelector(':scope > [slot="actions"]');
-    this.hasBody = !!this.host.querySelector(':scope > :not([slot])');
+    this.hasMedia = !!child(this.host, '[slot="media"]');
+    this.hasActions = !!child(this.host, '[slot="actions"]');
+    this.hasBody = !!child(this.host, ':not([slot])');
   };
 
   render() {

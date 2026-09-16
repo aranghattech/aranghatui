@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 export type AttachmentState = 'idle' | 'uploading' | 'processing' | 'error' | 'done';
 
@@ -52,10 +53,10 @@ export class ArtAttachment {
   }
   /** Slotted state, read from the light DOM into state (a shadow stylesheet's `:has()` cannot see it) so the render follows. */
   private sync = () => {
-    this.host.toggleAttribute('data-image', !!this.host.querySelector(':scope > img[slot="media"], :scope > picture[slot="media"]'));
-    this.hasActions = !!this.host.querySelector(':scope > [slot="actions"]');
+    this.host.toggleAttribute('data-image', !!child(this.host, 'img[slot="media"], picture[slot="media"]'));
+    this.hasActions = !!child(this.host, '[slot="actions"]');
     this.host.toggleAttribute('data-has-actions', this.hasActions);
-    this.hasDescription = !!this.host.querySelector(':scope > [slot="description"]');
+    this.hasDescription = !!child(this.host, '[slot="description"]');
     // whitespace between child tags is assigned to the default slot and would hide the `name` fallback
     this.hasTitle = Array.from(this.host.childNodes).some((n) => (n.nodeType === Node.TEXT_NODE && !!n.textContent?.trim()) || (n.nodeType === Node.ELEMENT_NODE && !(n as Element).hasAttribute('slot')));
   };

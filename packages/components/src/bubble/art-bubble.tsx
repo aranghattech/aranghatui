@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Bubble — shadcn/ui parity. The visible surface of a conversational message: seven variants,
@@ -32,7 +33,7 @@ export class ArtBubble {
     this.sync();
   }
   /** `:has()` in a shadow stylesheet cannot see slotted nodes, so the filled slot is mirrored on the host. */
-  private sync = () => { this.host.toggleAttribute('data-has-reactions', !!this.host.querySelector(':scope > [slot="reactions"]')); };
+  private sync = () => { this.host.toggleAttribute('data-has-reactions', !!child(this.host, '[slot="reactions"]')); };
 
   render() {
     const content = 'content w-fit max-w-full min-w-0 overflow-hidden rounded-xl px-3 py-2 text-sm leading-relaxed';

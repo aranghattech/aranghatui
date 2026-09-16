@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { children } from '@aranghat/primitives/dom';
 
 /**
  * Menubar — shadcn/ui parity. A row of `<art-menubar-menu>`s (File, Edit, View…): one trigger is
@@ -27,7 +28,7 @@ export class ArtMenubar {
     this.host.removeEventListener('focusin', this.onFocusin);
     this.host.removeEventListener('menubar-open', this.onMenuOpen);
   }
-  private menus(): Array<HTMLElement & { open: boolean; setOpen(open: boolean, byKeyboard?: boolean): Promise<void> }> { return Array.from(this.host.querySelectorAll(':scope > art-menubar-menu')); }
+  private menus(): Array<HTMLElement & { open: boolean; setOpen(open: boolean, byKeyboard?: boolean): Promise<void> }> { return children(this.host, 'art-menubar-menu'); }
   private triggers(): HTMLButtonElement[] { return this.menus().map((m) => m.shadowRoot?.querySelector<HTMLButtonElement>('[part="trigger"]')).filter(Boolean) as HTMLButtonElement[]; }
   /** Roving tabindex: the last focused (else first enabled) trigger is the one in the tab order. */
   private setTabbable(active?: HTMLElement) {

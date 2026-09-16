@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { defineCustomElement as defineButton } from '@aranghat/base/button';
+import { children } from '@aranghat/primitives/dom';
+import { defineOnClient } from '../define';
 
 interface StepInfo { label: string; description?: string; optional: boolean }
 type StepEl = HTMLElement & { label?: string; description?: string; optional?: boolean };
@@ -43,7 +45,7 @@ export class ArtOnboardingWizard {
   @Event({ eventName: 'finish', bubbles: true, composed: true }) finishEvent!: EventEmitter<void>;
 
   connectedCallback() {
-    defineButton();
+    defineOnClient(defineButton);
   }
   componentWillLoad() {
     this.read();
@@ -52,7 +54,7 @@ export class ArtOnboardingWizard {
     this.host.shadowRoot?.addEventListener('slotchange', this.read);
   }
 
-  private items(): StepEl[] { return Array.from(this.host.querySelectorAll(':scope > art-wizard-step')) as StepEl[]; }
+  private items(): StepEl[] { return children(this.host, 'art-wizard-step') as StepEl[]; }
   /** Properties first: a framework sets them before the step reflects them as attributes. */
   private info(el: StepEl): StepInfo { return { label: el.label ?? el.getAttribute('label') ?? '', description: el.description ?? el.getAttribute('description') ?? undefined, optional: el.optional === true || el.hasAttribute('optional') }; }
   private read = () => {

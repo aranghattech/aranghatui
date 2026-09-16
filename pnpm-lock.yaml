@@ -568,6 +568,48 @@ importers:
         specifier: 4.1.11
         version: 4.1.11(jsdom@28.1.0)(vite@8.3.0(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1)(sass@1.104.1)(yaml@2.9.1))
 
+  packages/hydrate:
+    devDependencies:
+      '@aranghat/base':
+        specifier: workspace:*
+        version: link:../base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../components
+      '@aranghat/icons':
+        specifier: workspace:*
+        version: link:../icons
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../modals
+      '@aranghat/navigation':
+        specifier: workspace:*
+        version: link:../navigation
+      '@aranghat/primitives':
+        specifier: workspace:*
+        version: link:../primitives
+      '@aranghat/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      '@aranghat/widgets':
+        specifier: workspace:*
+        version: link:../widgets
+      '@artui/stencil-config':
+        specifier: workspace:*
+        version: link:../../tooling/stencil-config
+      '@floating-ui/dom':
+        specifier: 1.8.0
+        version: 1.8.0
+      '@stencil/core':
+        specifier: 4.45.0
+        version: 4.45.0
+      embla-carousel:
+        specifier: 8.6.0
+        version: 8.6.0
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+
   packages/icons:
     devDependencies:
       lucide:
@@ -689,6 +731,9 @@ importers:
       '@aranghat/base':
         specifier: workspace:*
         version: link:../../base
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@artui/wrapper-entries':
         specifier: workspace:*
         version: link:../../../tooling/wrapper-entries
@@ -717,6 +762,9 @@ importers:
       '@aranghat/components':
         specifier: workspace:*
         version: link:../../components
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@artui/wrapper-entries':
         specifier: workspace:*
         version: link:../../../tooling/wrapper-entries
@@ -742,6 +790,9 @@ importers:
         specifier: 1.6.2
         version: 1.6.2(@stencil/core@4.45.0)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/modals':
         specifier: workspace:*
         version: link:../../modals
@@ -770,6 +821,9 @@ importers:
         specifier: 1.6.2
         version: 1.6.2(@stencil/core@4.45.0)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/navigation':
         specifier: workspace:*
         version: link:../../navigation
@@ -798,6 +852,9 @@ importers:
         specifier: 1.6.2
         version: 1.6.2(@stencil/core@4.45.0)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/widgets':
         specifier: workspace:*
         version: link:../../widgets
@@ -835,6 +892,9 @@ importers:
       '@aranghat/base':
         specifier: workspace:*
         version: link:../../base
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@artui/wrapper-entries':
         specifier: workspace:*
         version: link:../../../tooling/wrapper-entries
@@ -854,6 +914,9 @@ importers:
       '@aranghat/components':
         specifier: workspace:*
         version: link:../../components
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@artui/wrapper-entries':
         specifier: workspace:*
         version: link:../../../tooling/wrapper-entries
@@ -870,6 +933,9 @@ importers:
         specifier: 0.14.3
         version: 0.14.3(@stencil/core@4.45.0)(vue@3.5.42(typescript@6.0.3))
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/modals':
         specifier: workspace:*
         version: link:../../modals
@@ -889,6 +955,9 @@ importers:
         specifier: 0.14.3
         version: 0.14.3(@stencil/core@4.45.0)(vue@3.5.42(typescript@6.0.3))
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/navigation':
         specifier: workspace:*
         version: link:../../navigation
@@ -908,6 +977,9 @@ importers:
         specifier: 0.14.3
         version: 0.14.3(@stencil/core@4.45.0)(vue@3.5.42(typescript@6.0.3))
     devDependencies:
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../../hydrate
       '@aranghat/widgets':
         specifier: workspace:*
         version: link:../../widgets
@@ -974,6 +1046,33 @@ importers:
 
   tests:
     devDependencies:
+      '@aranghat/base':
+        specifier: workspace:*
+        version: link:../packages/base
+      '@aranghat/base-react':
+        specifier: workspace:*
+        version: link:../packages/react/base
+      '@aranghat/base-vue':
+        specifier: workspace:*
+        version: link:../packages/vue/base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../packages/components
+      '@aranghat/hydrate':
+        specifier: workspace:*
+        version: link:../packages/hydrate
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../packages/modals
+      '@aranghat/navigation':
+        specifier: workspace:*
+        version: link:../packages/navigation
+      '@aranghat/tokens':
+        specifier: workspace:*
+        version: link:../packages/tokens
+      '@aranghat/widgets':
+        specifier: workspace:*
+        version: link:../packages/widgets
       '@artui/stories':
         specifier: workspace:*
         version: link:../tooling/stories
@@ -983,9 +1082,24 @@ importers:
       '@playwright/test':
         specifier: 1.63.0
         version: 1.63.0
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      esbuild:
+        specifier: 0.28.2
+        version: 0.28.2
+      react:
+        specifier: 19.3.0
+        version: 19.3.0
+      react-dom:
+        specifier: 19.3.0
+        version: 19.3.0(react@19.3.0)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
+      vue:
+        specifier: 3.5.42
+        version: 3.5.42(typescript@6.0.3)
 
   tooling/e2e:
     dependencies:

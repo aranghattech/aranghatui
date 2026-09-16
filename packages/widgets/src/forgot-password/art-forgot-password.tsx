@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, h } from '@stencil/core';
 import { defineAuthElements, submitOnEnter } from '../auth/define';
+import { child } from '@aranghat/primitives/dom';
 
 type InputEl = HTMLElement & { value: string };
 
@@ -50,8 +51,8 @@ export class ArtForgotPassword {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
   }
   private wire = () => {
-    this.hasLogo = !!this.host.querySelector(':scope > [slot="logo"]');
-    this.hasFooter = !!this.host.querySelector(':scope > [slot="footer"]');
+    this.hasLogo = !!child(this.host, '[slot="logo"]');
+    this.hasFooter = !!child(this.host, '[slot="footer"]');
   };
   private onSubmit = (e: Event) => {
     e.preventDefault();

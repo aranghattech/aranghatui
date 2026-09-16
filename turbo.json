@@ -19,7 +19,8 @@
         "www/**",
         "src/components/**",
         "src/directives/**",
-        ".vitepress/dist/**"
+        ".vitepress/dist/**",
+        "ssr/.pages/**"
       ]
     },
     "dev": {

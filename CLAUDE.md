@@ -37,6 +37,7 @@ artui/
 │   ├── navigation/        # @aranghat/navigation — Tier 4
 │   ├── modals/            # @aranghat/modals     — Tier 5
 │   ├── widgets/           # @aranghat/widgets    — Tier 6
+│   ├── hydrate/           # @aranghat/hydrate    — SSR: one Node hydrate app for every tier (ADR-0023)
 │   ├── react/             # @aranghat/base-react, -components-react, … (one build, one pkg per tier)
 │   ├── vue/               # @aranghat/base-vue, …
 │   └── angular/           # @aranghat/base-angular, …
@@ -220,6 +221,7 @@ Two levers: **tier packages** (don't install what you don't need) and **tree-sha
 - `size-limit` runs in CI and fails the build on regression. Budgets live in `.size-limit.json`.
 - Approved runtime deps: `@floating-ui/dom` (primitives) and `embla-carousel` (Carousel only, ADR-0005). Anything else requires an ADR.
 - Icons are not bundled into components — passed via slot, or imported individually from `@aranghat/icons`.
+- Server-side rendering never taxes the default client: the hydratable runtime (+~3 kB gzip per tier) is built separately and published under the `artui-ssr` export condition; `@aranghat/hydrate` renders every tier on the server (ADR-0023).
 
 ---
 
@@ -356,6 +358,7 @@ Each `SKILL.md` gets a tight `description` so it triggers on the right task, and
 - Never change an existing visual baseline without explicit human approval. The first baselines of a brand-new component may be committed after every image has been reviewed and the review is noted in the PR (ADR-0015).
 - Never rename or remove a public prop/event/slot without a deprecation cycle and a migration note.
 - Never add a variant that doesn't exist in shadcn unless explicitly requested — API surface is a cost.
+- Never use `:scope` or `:dir()` in a selector passed to `querySelector` / `matches` (Stencil's server document cannot parse them): `child` / `children` / `isRtl` from `@aranghat/primitives/dom`. Guard observers and browser-only globals; components must render in Node (ADR-0023).
 - If a shadcn behaviour conflicts with a token rule, raise it rather than silently diverging.
 
 ---
@@ -404,5 +407,6 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Native controls first | Wrap and style the native element wherever HTML has one (`input` types, `select`, `textarea`, `button`, `progress`, `dialog`, `details`); custom logic only where no native exists or to orchestrate natives across shadow roots | 0020 |
 | Overlays on the top layer | Tooltip, Popover, Hover Card (and later menus, selects, dialogs) show their panel with the Popover API (`popover="manual"`) and position it with floating-ui's fixed strategy — no portal, no DOM moves, styles stay in the shadow root | 0022 |
 | Light-DOM prose and tables | `art-table` and `art-typography` render in the light DOM (`shadow: false`) with tag-scoped stylesheets, because `::slotted()` cannot reach nested rows, cells or list items; the Tailwind plugin skips the shadow reset for them (`/* light-dom */` marker) | 0021 |
+| Server-side rendering | One Node hydrate app compiled from every tier's sources (`@aranghat/hydrate`) — a per-tier app cannot reach elements inside another tier's shadow root; the client that adopts server-rendered shadow roots is a second build published under the `artui-ssr` export condition, so the default client stays lean | 0023 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

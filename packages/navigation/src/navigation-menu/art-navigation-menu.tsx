@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { children, isRtl } from '@aranghat/primitives/dom';
 
 /**
  * Navigation Menu — shadcn/ui parity. A site navigation bar: a list of links and triggers that
@@ -22,12 +23,12 @@ export class ArtNavigationMenu {
     this.host.removeEventListener('navigation-menu-open', this.onItemOpen);
     this.host.removeEventListener('keydown', this.onKeydown);
   }
-  private items(): Array<HTMLElement & { open: boolean; setOpen(open: boolean, byKeyboard?: boolean): Promise<void> }> { return Array.from(this.host.querySelectorAll(':scope > art-navigation-menu-item')); }
+  private items(): Array<HTMLElement & { open: boolean; setOpen(open: boolean, byKeyboard?: boolean): Promise<void> }> { return children(this.host, 'art-navigation-menu-item'); }
   /** One panel at a time. */
   private onItemOpen = (e: Event) => { for (const i of this.items()) if (i !== e.target && i.open) void i.setOpen(false); };
   /** ← / → move between the bar's triggers and links. */
   private onKeydown = (e: KeyboardEvent) => {
-    const rtl = this.host.matches(':dir(rtl)');
+    const rtl = isRtl(this.host);
     const prev = rtl ? 'ArrowRight' : 'ArrowLeft', next = rtl ? 'ArrowLeft' : 'ArrowRight';
     if (e.key !== prev && e.key !== next) return;
     const target = e.target as HTMLElement;

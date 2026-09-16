@@ -4,6 +4,7 @@ import type { Placement } from '@aranghat/primitives/floating';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
+import { child, isRtl } from '@aranghat/primitives/dom';
 
 const MENU_ITEM_SELECTOR = 'art-menu-item';
 const MENU_LEVEL_SELECTOR = 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub';
@@ -36,7 +37,7 @@ export class ArtDropdownMenu {
 
   @Event({ eventName: 'open-change', bubbles: true, composed: true }) openChange!: EventEmitter<{ open: boolean }>;
 
-  private trigger(): HTMLElement | null { return this.host.querySelector(':scope > [slot="trigger"]'); }
+  private trigger(): HTMLElement | null { return child(this.host, '[slot="trigger"]'); }
   private items(): HTMLElement[] { return levelItems(this.host, MENU_ITEM_SELECTOR, MENU_LEVEL_SELECTOR); }
 
   connectedCallback() {
@@ -52,7 +53,7 @@ export class ArtDropdownMenu {
       getItems: () => this.items(),
       onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub.parentElement?.closest(MENU_LEVEL_SELECTOR) === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => { this.set(false); if (reason !== 'tab') this.trigger()?.focus({ preventScroll: true }); },
-      isRtl: () => this.host.matches(':dir(rtl)'),
+      isRtl: () => isRtl(this.host),
     });
     if (this.open) this.onOpen(true);
   }

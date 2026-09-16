@@ -5,7 +5,7 @@ The chrome around a data table: heading, toolbar (filter, faceted filters, reset
 ## Preview
 
 <Preview frame="block">
-  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="20" page-size="5">
+  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="10" page-size="10">
     <art-button slot="actions" variant="outline" size="sm">Export</art-button>
     <art-button slot="filters" variant="outline" size="sm">Status</art-button>
     <art-button slot="filters" variant="outline" size="sm">Priority</art-button>
@@ -70,7 +70,7 @@ Slot your `art-table` (rendered from `createTableState`) as the content, faceted
 Heading and `actions`, a toolbar with the filter field, `filters` and `view` slots, the `art-table` in the default slot, and the footer driven by `selected` / `total` / `page` / `page-count` / `page-size`. Wire the events to `createTableState` (Data Table recipe) — the page owns no data.
 
 <Preview frame="block">
-  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="20" page-size="5">
+  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="10" page-size="10">
     <art-button slot="actions" variant="outline" size="sm">Export</art-button>
     <art-button slot="filters" variant="outline" size="sm">Status</art-button>
     <art-button slot="filters" variant="outline" size="sm">Priority</art-button>
@@ -110,7 +110,7 @@ Heading and `actions`, a toolbar with the filter field, `filters` and `view` slo
 With `filter` text the Reset button appears; `selected` and `page` come from your state.
 
 <Preview frame="block">
-  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="20" page-size="5" filter="pixel" selected="2" page="3">
+  <art-data-table-page filter-placeholder="Filter tasks…" total="100" page-count="10" page-size="10" filter="pixel" selected="2" page="3">
     <art-button slot="actions" variant="outline" size="sm">Export</art-button>
     <art-button slot="filters" variant="outline" size="sm">Status</art-button>
     <art-button slot="filters" variant="outline" size="sm">Priority</art-button>
@@ -148,7 +148,7 @@ With `filter` text the Reset button appears; `selected` and `page` come from you
 Your table decides how to show an empty result; the footer reads 0 rows and one page.
 
 <Preview frame="block">
-  <art-data-table-page filter-placeholder="Filter tasks…" total="0" page-count="1" page-size="5" filter="zzz">
+  <art-data-table-page filter-placeholder="Filter tasks…" total="0" page-count="1" page-size="10" filter="zzz">
     <art-button slot="actions" variant="outline" size="sm">Export</art-button>
     <art-button slot="filters" variant="outline" size="sm">Status</art-button>
     <art-button slot="filters" variant="outline" size="sm">Priority</art-button>

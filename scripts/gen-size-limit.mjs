@@ -33,6 +33,11 @@ for (const [tier, def] of Object.entries(catalog.tiers)) {
     entries.push({ name: `${tier}/${c.tag}${runtimeInlined ? ' (+ inlined runtime: single-component tier)' : ''}`, path: file, import: '{ defineCustomElement }', ignore: externals, limit: `${budget} kB`, gzip: true });
   }
   entries.push({ name: `${tier}: whole tier`, path: `packages/${tier}/dist/components/index.js`, import: '*', ignore: ['@aranghat/*', '@floating-ui/dom', 'embla-carousel'], limit: `${TIER_BUDGET_KB[tier]} kB`, gzip: true });
+  // The opt-in `artui-ssr` client (ADR-0023) carries Stencil's client-side hydration on top of the runtime.
+  const ssrDir = join(repo, 'packages', tier, 'dist', 'components-ssr');
+  if (existsSync(ssrDir)) for (const chunk of readdirSync(ssrDir).filter((f) => /^index\d+\.js$/.test(f))) {
+    entries.push({ name: `${tier}: hydratable runtime chunk, artui-ssr (${chunk})`, path: `packages/${tier}/dist/components-ssr/${chunk}`, limit: `${RUNTIME_BUDGET_KB} kB`, gzip: true });
+  }
 }
 // Primitives (all modules, including @floating-ui/dom): runtime + primitives ≤ 20 kB → primitives ≤ 13 kB.
 if (existsSync(join(repo, 'packages/primitives/dist/index.js'))) {

@@ -4,15 +4,14 @@ import { defineCustomElement as defineField } from '@aranghat/base/field';
 import { defineCustomElement as defineInput } from '@aranghat/base/input';
 import { defineCustomElement as defineLabel } from '@aranghat/base/label';
 import { defineCustomElement as defineSeparator } from '@aranghat/base/separator';
+import { defineOnClient } from '../define';
 
-/** The base elements an auth screen renders in its shadow root (lower tiers register lazily; peers, never bundled). */
+/**
+ * The base elements an auth screen renders in its shadow root (lower tiers register lazily; peers,
+ * never bundled). A no-op on the server: the hydrate app of each tier renders its own elements.
+ */
 export function defineAuthElements(): void {
-  defineButton();
-  defineCard();
-  defineField();
-  defineInput();
-  defineLabel();
-  defineSeparator();
+  defineOnClient(defineButton, defineCard, defineField, defineInput, defineLabel, defineSeparator);
 }
 
 /**

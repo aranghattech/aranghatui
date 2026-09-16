@@ -32,6 +32,7 @@ export default defineConfig({
           { text: 'Dark Mode', link: '/guide/dark-mode' },
           { text: 'RTL', link: '/guide/rtl' },
           { text: 'Bundle Size', link: '/guide/bundle-size' },
+          { text: 'Server-Side Rendering', link: '/guide/ssr' },
           { text: 'Primitives', link: '/guide/primitives' },
           { text: 'Migration', link: '/guide/migration' },
           { text: 'Contributing', link: '/guide/contributing' },

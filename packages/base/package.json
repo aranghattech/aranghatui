@@ -16,158 +16,199 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
     "./dist/components": {
       "types": "./dist/components/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
-    "./dist/components/*": "./dist/components/*",
+    "./dist/components/*": {
+      "types": "./dist/components/*",
+      "artui-ssr": "./dist/components-ssr/*",
+      "default": "./dist/components/*"
+    },
     "./aspect-ratio": {
       "types": "./dist/components/art-aspect-ratio.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-aspect-ratio.js",
       "import": "./dist/components/art-aspect-ratio.js"
     },
     "./badge": {
       "types": "./dist/components/art-badge.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-badge.js",
       "import": "./dist/components/art-badge.js"
     },
     "./button": {
       "types": "./dist/components/art-button.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-button.js",
       "import": "./dist/components/art-button.js"
     },
     "./button-group": {
       "types": "./dist/components/art-button-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-button-group.js",
       "import": "./dist/components/art-button-group.js"
     },
     "./button-group-text": {
       "types": "./dist/components/art-button-group-text.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-button-group-text.js",
       "import": "./dist/components/art-button-group-text.js"
     },
     "./card": {
       "types": "./dist/components/art-card.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-card.js",
       "import": "./dist/components/art-card.js"
     },
     "./checkbox": {
       "types": "./dist/components/art-checkbox.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-checkbox.js",
       "import": "./dist/components/art-checkbox.js"
     },
     "./empty": {
       "types": "./dist/components/art-empty.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-empty.js",
       "import": "./dist/components/art-empty.js"
     },
     "./field": {
       "types": "./dist/components/art-field.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-field.js",
       "import": "./dist/components/art-field.js"
     },
     "./field-group": {
       "types": "./dist/components/art-field-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-field-group.js",
       "import": "./dist/components/art-field-group.js"
     },
     "./field-set": {
       "types": "./dist/components/art-field-set.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-field-set.js",
       "import": "./dist/components/art-field-set.js"
     },
     "./icon": {
       "types": "./dist/components/art-icon.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-icon.js",
       "import": "./dist/components/art-icon.js"
     },
     "./input": {
       "types": "./dist/components/art-input.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-input.js",
       "import": "./dist/components/art-input.js"
     },
     "./input-group": {
       "types": "./dist/components/art-input-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-input-group.js",
       "import": "./dist/components/art-input-group.js"
     },
     "./input-otp": {
       "types": "./dist/components/art-input-otp.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-input-otp.js",
       "import": "./dist/components/art-input-otp.js"
     },
     "./item": {
       "types": "./dist/components/art-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-item.js",
       "import": "./dist/components/art-item.js"
     },
     "./item-group": {
       "types": "./dist/components/art-item-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-item-group.js",
       "import": "./dist/components/art-item-group.js"
     },
     "./kbd": {
       "types": "./dist/components/art-kbd.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-kbd.js",
       "import": "./dist/components/art-kbd.js"
     },
     "./kbd-group": {
       "types": "./dist/components/art-kbd-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-kbd-group.js",
       "import": "./dist/components/art-kbd-group.js"
     },
     "./label": {
       "types": "./dist/components/art-label.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-label.js",
       "import": "./dist/components/art-label.js"
     },
     "./marker": {
       "types": "./dist/components/art-marker.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-marker.js",
       "import": "./dist/components/art-marker.js"
     },
     "./native-select": {
       "types": "./dist/components/art-native-select.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-native-select.js",
       "import": "./dist/components/art-native-select.js"
     },
     "./progress": {
       "types": "./dist/components/art-progress.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-progress.js",
       "import": "./dist/components/art-progress.js"
     },
     "./radio": {
       "types": "./dist/components/art-radio.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-radio.js",
       "import": "./dist/components/art-radio.js"
     },
     "./radio-group": {
       "types": "./dist/components/art-radio-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-radio-group.js",
       "import": "./dist/components/art-radio-group.js"
     },
     "./separator": {
       "types": "./dist/components/art-separator.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-separator.js",
       "import": "./dist/components/art-separator.js"
     },
     "./skeleton": {
       "types": "./dist/components/art-skeleton.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-skeleton.js",
       "import": "./dist/components/art-skeleton.js"
     },
     "./slider": {
       "types": "./dist/components/art-slider.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-slider.js",
       "import": "./dist/components/art-slider.js"
     },
     "./spinner": {
       "types": "./dist/components/art-spinner.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-spinner.js",
       "import": "./dist/components/art-spinner.js"
     },
     "./switch": {
       "types": "./dist/components/art-switch.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-switch.js",
       "import": "./dist/components/art-switch.js"
     },
     "./table": {
       "types": "./dist/components/art-table.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-table.js",
       "import": "./dist/components/art-table.js"
     },
     "./textarea": {
       "types": "./dist/components/art-textarea.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-textarea.js",
       "import": "./dist/components/art-textarea.js"
     },
     "./toggle": {
       "types": "./dist/components/art-toggle.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-toggle.js",
       "import": "./dist/components/art-toggle.js"
     },
     "./toggle-group": {
       "types": "./dist/components/art-toggle-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-toggle-group.js",
       "import": "./dist/components/art-toggle-group.js"
     },
     "./typography": {
       "types": "./dist/components/art-typography.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-typography.js",
       "import": "./dist/components/art-typography.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core base",
+    "build": "rm -rf dist www && stencil build --docs && ARTUI_SSR=1 stencil build && rm -rf dist/hydrate && artui-wrapper-entries core base",
     "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
     "test:unit": "vitest run",
     "test:e2e": "playwright test"

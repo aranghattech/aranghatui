@@ -2,6 +2,8 @@ import { Component, Element, Event, EventEmitter, Host, Prop, State, h } from '@
 import { defineCustomElement as defineButton } from '@aranghat/base/button';
 import { defineCustomElement as defineInput } from '@aranghat/base/input';
 import { defineCustomElement as defineNativeSelect } from '@aranghat/base/native-select';
+import { child } from '@aranghat/primitives/dom';
+import { defineOnClient } from '../define';
 
 /**
  * Data Table Page — the chrome around a data table (shadcn "tasks" example): page heading and
@@ -54,9 +56,7 @@ export class ArtDataTablePage {
   @Event({ eventName: 'page-size-change', bubbles: true, composed: true }) pageSizeChange!: EventEmitter<{ pageSize: number }>;
 
   connectedCallback() {
-    defineButton();
-    defineInput();
-    defineNativeSelect();
+    defineOnClient(defineButton, defineInput, defineNativeSelect);
   }
   componentWillLoad() {
     this.wire();
@@ -65,9 +65,9 @@ export class ArtDataTablePage {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
   }
   private wire = () => {
-    this.hasActions = !!this.host.querySelector(':scope > [slot="actions"]');
-    this.hasFilters = !!this.host.querySelector(':scope > [slot="filters"]');
-    this.hasView = !!this.host.querySelector(':scope > [slot="view"]');
+    this.hasActions = !!child(this.host, '[slot="actions"]');
+    this.hasFilters = !!child(this.host, '[slot="filters"]');
+    this.hasView = !!child(this.host, '[slot="view"]');
   };
   /** The field's native `input` bubbles out of its shadow root retargeted to the `art-input`, whose `value` is already in sync. */
   private setFilter(value: string) {

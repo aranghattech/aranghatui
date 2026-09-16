@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { bindSidebar, isIconMode } from '../sidebar/context';
+import { child } from '@aranghat/primitives/dom';
 
 type MenuButton = HTMLElement & { expanded?: boolean };
 
@@ -51,10 +52,10 @@ export class ArtSidebarMenuItem {
   }
 
   private wire = () => {
-    this.sub = this.host.querySelector(':scope > art-sidebar-menu-sub');
-    this.button = this.host.querySelector(':scope > art-sidebar-menu-button');
-    this.hasAction = !!this.host.querySelector(':scope > [slot="action"]');
-    this.hasBadge = !!this.host.querySelector(':scope > [slot="badge"]');
+    this.sub = child(this.host, 'art-sidebar-menu-sub');
+    this.button = child(this.host, 'art-sidebar-menu-button');
+    this.hasAction = !!child(this.host, '[slot="action"]');
+    this.hasBadge = !!child(this.host, '[slot="badge"]');
     this.applyOpen();
   };
   @Watch('open')

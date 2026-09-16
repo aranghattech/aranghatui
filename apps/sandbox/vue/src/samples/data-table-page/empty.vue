@@ -4,7 +4,7 @@ import { Button, Checkbox, Table } from '@aranghat/base-vue';
 </script>
 
 <template>
-  <DataTablePage filter-placeholder="Filter tasks…" total="0" page-count="1" page-size="5" filter="zzz">
+  <DataTablePage filter-placeholder="Filter tasks…" total="0" page-count="1" page-size="10" filter="zzz">
     <Button slot="actions" variant="outline" size="sm">Export</Button>
     <Button slot="filters" variant="outline" size="sm">Status</Button>
     <Button slot="filters" variant="outline" size="sm">Priority</Button>

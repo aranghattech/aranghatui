@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { bindSidebar, isIconMode } from '../sidebar/context';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Sidebar Group — a titled section of the sidebar with an optional action button.
@@ -38,8 +39,8 @@ export class ArtSidebarGroup {
   }
   /* Slotted state is mirrored as state: `:has()` in a shadow stylesheet never sees slotted nodes. */
   private wire = () => {
-    this.hasLabel = !!this.label || !!this.host.querySelector(':scope > [slot="label"]');
-    this.hasAction = !!this.host.querySelector(':scope > [slot="action"]');
+    this.hasLabel = !!this.label || !!child(this.host, '[slot="label"]');
+    this.hasAction = !!child(this.host, '[slot="action"]');
   };
 
   render() {

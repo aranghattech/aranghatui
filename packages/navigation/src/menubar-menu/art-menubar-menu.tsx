@@ -3,6 +3,7 @@ import { createDismissable, type Dismissable } from '@aranghat/primitives/dismis
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
+import { children, isRtl } from '@aranghat/primitives/dom';
 
 const LEVEL = 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub';
 type Menu = HTMLElement & { open: boolean; disabled: boolean; setOpen(open: boolean, byKeyboard?: boolean): Promise<void> };
@@ -34,7 +35,7 @@ export class ArtMenubarMenu {
   /** Internal: tells the bar to close its other menus. */
   @Event({ eventName: 'menubar-open', bubbles: true, composed: false }) barOpen!: EventEmitter<void>;
 
-  private siblings(): Menu[] { return Array.from(this.host.closest('art-menubar')?.querySelectorAll(':scope > art-menubar-menu') ?? []) as Menu[]; }
+  private siblings(): Menu[] { return children(this.host.closest('art-menubar'), 'art-menubar-menu') as Menu[]; }
   private anyOpen(): boolean { return this.siblings().some((m) => m.open); }
   /** Move to the previous / next enabled menu; an open menu stays open on the new one. */
   private step(delta: number) {
@@ -60,7 +61,7 @@ export class ArtMenubarMenu {
       getItems: () => this.items(),
       onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub.parentElement?.closest(LEVEL) === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => { this.setOpen(false); if (reason !== 'tab') this.button?.focus({ preventScroll: true }); },
-      isRtl: () => this.host.matches(':dir(rtl)'),
+      isRtl: () => isRtl(this.host),
     });
     if (this.open) this.onOpen(true);
   }
@@ -103,7 +104,7 @@ export class ArtMenubarMenu {
   /** While a sibling menu is open, pointing at this trigger switches to it (Windows / macOS menubar behaviour). */
   private onTriggerEnter = () => { if (!this.open && this.anyOpen()) void this.setOpen(true, false); };
   private onKeydown = (e: KeyboardEvent) => {
-    const rtl = this.host.matches(':dir(rtl)');
+    const rtl = isRtl(this.host);
     const prev = rtl ? 'ArrowRight' : 'ArrowLeft', next = rtl ? 'ArrowLeft' : 'ArrowRight';
     const onTrigger = e.composedPath().includes(this.button as EventTarget);
     if (onTrigger) {

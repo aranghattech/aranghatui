@@ -1,5 +1,7 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { defineCustomElement as defineSeparator } from '@aranghat/base/separator';
+import { child } from '@aranghat/primitives/dom';
+import { defineOnClient } from '../define';
 
 /**
  * Settings Page — the shadcn settings layout: a page heading, a section nav (vertical beside the
@@ -31,7 +33,7 @@ export class ArtSettingsPage {
   @State() hasActions = false;
 
   connectedCallback() {
-    defineSeparator();
+    defineOnClient(defineSeparator);
   }
   componentWillLoad() {
     this.wire();
@@ -40,8 +42,8 @@ export class ArtSettingsPage {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
   }
   private wire = () => {
-    this.hasNav = !!this.host.querySelector(':scope > [slot="nav"]');
-    this.hasActions = !!this.host.querySelector(':scope > [slot="actions"]');
+    this.hasNav = !!child(this.host, '[slot="nav"]');
+    this.hasActions = !!child(this.host, '[slot="actions"]');
   };
 
   render() {

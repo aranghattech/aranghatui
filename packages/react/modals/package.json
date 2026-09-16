@@ -29,6 +29,10 @@
       "types": "./dist/sheet.d.ts",
       "import": "./dist/sheet.js"
     },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -38,11 +42,13 @@
     "@stencil/react-output-target": "1.6.2"
   },
   "peerDependencies": {
+    "@aranghat/hydrate": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
   "devDependencies": {
+    "@aranghat/hydrate": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@artui/wrapper-entries": "workspace:*",
     "@types/react": "19.2.18",
@@ -50,5 +56,10 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "typescript": "6.0.3"
+  },
+  "peerDependenciesMeta": {
+    "@aranghat/hydrate": {
+      "optional": true
+    }
   }
 }

@@ -8,6 +8,8 @@ import { defineCustomElement as defineSidebarMenuItem } from '@aranghat/navigati
 import { defineCustomElement as defineSidebarMenuSub } from '@aranghat/navigation/sidebar-menu-sub';
 import { defineCustomElement as defineSidebarProvider } from '@aranghat/navigation/sidebar-provider';
 import { defineCustomElement as defineSidebarTrigger } from '@aranghat/navigation/sidebar-trigger';
+import { child } from '@aranghat/primitives/dom';
+import { defineOnClient } from '../define';
 
 /**
  * App Shell — the dashboard frame in one element: a Sidebar (header / groups / footer slots), a
@@ -41,15 +43,7 @@ export class ArtAppShell {
 
   connectedCallback() {
     // the frame's own parts plus the family its slots expect (idempotent; peers, never bundled)
-    defineSidebarProvider();
-    defineSidebar();
-    defineSidebarInset();
-    defineSidebarTrigger();
-    defineSidebarGroup();
-    defineSidebarMenu();
-    defineSidebarMenuItem();
-    defineSidebarMenuButton();
-    defineSidebarMenuSub();
+    defineOnClient(defineSidebarProvider, defineSidebar, defineSidebarInset, defineSidebarTrigger, defineSidebarGroup, defineSidebarMenu, defineSidebarMenuItem, defineSidebarMenuButton, defineSidebarMenuSub);
     this.host.addEventListener('open-change', this.onOpenChange);
   }
   componentWillLoad() {
@@ -61,7 +55,7 @@ export class ArtAppShell {
   disconnectedCallback() {
     this.host.removeEventListener('open-change', this.onOpenChange);
   }
-  private wire = () => { this.hasActions = !!this.host.querySelector(':scope > [slot="actions"]'); };
+  private wire = () => { this.hasActions = !!child(this.host, '[slot="actions"]'); };
   /** The provider's `open-change` (composed) bubbles out of the shell as its own; keep `open` in step. */
   private onOpenChange = (e: Event) => { const open = (e as CustomEvent<{ open: boolean }>).detail?.open; if (typeof open === 'boolean') this.open = open; };
 

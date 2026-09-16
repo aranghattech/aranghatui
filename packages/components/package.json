@@ -16,174 +16,219 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
     "./dist/components": {
       "types": "./dist/components/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
-    "./dist/components/*": "./dist/components/*",
+    "./dist/components/*": {
+      "types": "./dist/components/*",
+      "artui-ssr": "./dist/components-ssr/*",
+      "default": "./dist/components/*"
+    },
     "./accordion": {
       "types": "./dist/components/art-accordion.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-accordion.js",
       "import": "./dist/components/art-accordion.js"
     },
     "./accordion-item": {
       "types": "./dist/components/art-accordion-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-accordion-item.js",
       "import": "./dist/components/art-accordion-item.js"
     },
     "./alert": {
       "types": "./dist/components/art-alert.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-alert.js",
       "import": "./dist/components/art-alert.js"
     },
     "./attachment": {
       "types": "./dist/components/art-attachment.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-attachment.js",
       "import": "./dist/components/art-attachment.js"
     },
     "./attachment-group": {
       "types": "./dist/components/art-attachment-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-attachment-group.js",
       "import": "./dist/components/art-attachment-group.js"
     },
     "./avatar": {
       "types": "./dist/components/art-avatar.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-avatar.js",
       "import": "./dist/components/art-avatar.js"
     },
     "./bubble": {
       "types": "./dist/components/art-bubble.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-bubble.js",
       "import": "./dist/components/art-bubble.js"
     },
     "./bubble-group": {
       "types": "./dist/components/art-bubble-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-bubble-group.js",
       "import": "./dist/components/art-bubble-group.js"
     },
     "./calendar": {
       "types": "./dist/components/art-calendar.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-calendar.js",
       "import": "./dist/components/art-calendar.js"
     },
     "./carousel": {
       "types": "./dist/components/art-carousel.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-carousel.js",
       "import": "./dist/components/art-carousel.js"
     },
     "./carousel-item": {
       "types": "./dist/components/art-carousel-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-carousel-item.js",
       "import": "./dist/components/art-carousel-item.js"
     },
     "./collapsible": {
       "types": "./dist/components/art-collapsible.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-collapsible.js",
       "import": "./dist/components/art-collapsible.js"
     },
     "./combobox": {
       "types": "./dist/components/art-combobox.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-combobox.js",
       "import": "./dist/components/art-combobox.js"
     },
     "./combobox-group": {
       "types": "./dist/components/art-combobox-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-combobox-group.js",
       "import": "./dist/components/art-combobox-group.js"
     },
     "./combobox-item": {
       "types": "./dist/components/art-combobox-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-combobox-item.js",
       "import": "./dist/components/art-combobox-item.js"
     },
     "./command": {
       "types": "./dist/components/art-command.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-command.js",
       "import": "./dist/components/art-command.js"
     },
     "./command-group": {
       "types": "./dist/components/art-command-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-command-group.js",
       "import": "./dist/components/art-command-group.js"
     },
     "./command-item": {
       "types": "./dist/components/art-command-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-command-item.js",
       "import": "./dist/components/art-command-item.js"
     },
     "./date-picker": {
       "types": "./dist/components/art-date-picker.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-date-picker.js",
       "import": "./dist/components/art-date-picker.js"
     },
     "./hover-card": {
       "types": "./dist/components/art-hover-card.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-hover-card.js",
       "import": "./dist/components/art-hover-card.js"
     },
     "./message": {
       "types": "./dist/components/art-message.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-message.js",
       "import": "./dist/components/art-message.js"
     },
     "./message-group": {
       "types": "./dist/components/art-message-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-message-group.js",
       "import": "./dist/components/art-message-group.js"
     },
     "./message-scroller": {
       "types": "./dist/components/art-message-scroller.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-message-scroller.js",
       "import": "./dist/components/art-message-scroller.js"
     },
     "./message-scroller-item": {
       "types": "./dist/components/art-message-scroller-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-message-scroller-item.js",
       "import": "./dist/components/art-message-scroller-item.js"
     },
     "./popover": {
       "types": "./dist/components/art-popover.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-popover.js",
       "import": "./dist/components/art-popover.js"
     },
     "./questionnaire": {
       "types": "./dist/components/art-questionnaire.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-questionnaire.js",
       "import": "./dist/components/art-questionnaire.js"
     },
     "./resizable": {
       "types": "./dist/components/art-resizable.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-resizable.js",
       "import": "./dist/components/art-resizable.js"
     },
     "./resizable-handle": {
       "types": "./dist/components/art-resizable-handle.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-resizable-handle.js",
       "import": "./dist/components/art-resizable-handle.js"
     },
     "./resizable-panel": {
       "types": "./dist/components/art-resizable-panel.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-resizable-panel.js",
       "import": "./dist/components/art-resizable-panel.js"
     },
     "./scroll-area": {
       "types": "./dist/components/art-scroll-area.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-scroll-area.js",
       "import": "./dist/components/art-scroll-area.js"
     },
     "./select": {
       "types": "./dist/components/art-select.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-select.js",
       "import": "./dist/components/art-select.js"
     },
     "./select-group": {
       "types": "./dist/components/art-select-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-select-group.js",
       "import": "./dist/components/art-select-group.js"
     },
     "./select-item": {
       "types": "./dist/components/art-select-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-select-item.js",
       "import": "./dist/components/art-select-item.js"
     },
     "./tab": {
       "types": "./dist/components/art-tab.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tab.js",
       "import": "./dist/components/art-tab.js"
     },
     "./tab-panel": {
       "types": "./dist/components/art-tab-panel.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tab-panel.js",
       "import": "./dist/components/art-tab-panel.js"
     },
     "./tabs": {
       "types": "./dist/components/art-tabs.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tabs.js",
       "import": "./dist/components/art-tabs.js"
     },
     "./toast": {
       "types": "./dist/components/art-toast.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-toast.js",
       "import": "./dist/components/art-toast.js"
     },
     "./toaster": {
       "types": "./dist/components/art-toaster.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-toaster.js",
       "import": "./dist/components/art-toaster.js"
     },
     "./tooltip": {
       "types": "./dist/components/art-tooltip.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tooltip.js",
       "import": "./dist/components/art-tooltip.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core components",
+    "build": "rm -rf dist www && stencil build --docs && ARTUI_SSR=1 stencil build && rm -rf dist/hydrate && artui-wrapper-entries core components",
     "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
     "test:unit": "vitest run",
     "test:e2e": "playwright test"

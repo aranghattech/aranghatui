@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
 import { resolveAria } from '@aranghat/primitives/aria';
+import { isRtl } from '@aranghat/primitives/dom';
 
 /**
  * Carousel — shadcn/ui parity on Embla (ADR-0005). Slides are `<art-carousel-item>`s in the
@@ -77,9 +78,11 @@ export class ArtCarousel {
     this.sync();
   };
   private options() {
-    return { axis: this.orientation === 'vertical' ? 'y' as const : 'x' as const, loop: this.loop, align: this.align, dragFree: this.dragFree, container: this.container ?? null, slides: this.slides(), direction: this.host.matches(':dir(rtl)') ? 'rtl' as const : 'ltr' as const };
+    return { axis: this.orientation === 'vertical' ? 'y' as const : 'x' as const, loop: this.loop, align: this.align, dragFree: this.dragFree, container: this.container ?? null, slides: this.slides(), direction: isRtl(this.host) ? 'rtl' as const : 'ltr' as const };
   }
   private init() {
+    // Embla observes the DOM as it starts; a server document has no observers (ADR-0023) — the client initialises on hydration.
+    if (typeof MutationObserver === 'undefined') return;
     if (!this.viewport || !this.container) return;
     this.labelSlides();
     this.embla = EmblaCarousel(this.viewport, this.options());
@@ -108,7 +111,7 @@ export class ArtCarousel {
 
   private onKeydown = (e: KeyboardEvent) => {
     const h = this.orientation === 'horizontal';
-    const rtl = this.host.matches(':dir(rtl)');
+    const rtl = isRtl(this.host);
     const prev = h ? (rtl ? 'ArrowRight' : 'ArrowLeft') : 'ArrowUp';
     const next = h ? (rtl ? 'ArrowLeft' : 'ArrowRight') : 'ArrowDown';
     if (e.key === prev) { e.preventDefault(); this.embla?.scrollPrev(); }

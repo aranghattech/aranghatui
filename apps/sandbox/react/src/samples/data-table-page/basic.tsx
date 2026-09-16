@@ -4,7 +4,7 @@ import { Badge, Button, Checkbox, Table } from '@aranghat/base-react';
 export default function Basic() {
   return (
     <>
-      <DataTablePage filterPlaceholder="Filter tasks…" total="100" pageCount="20" pageSize="5">
+      <DataTablePage filterPlaceholder="Filter tasks…" total="100" pageCount="10" pageSize="10">
         <Button slot="actions" variant="outline" size="sm">Export</Button>
         <Button slot="filters" variant="outline" size="sm">Status</Button>
         <Button slot="filters" variant="outline" size="sm">Priority</Button>

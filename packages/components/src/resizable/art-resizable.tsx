@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { children } from '@aranghat/primitives/dom';
 
 type PanelEl = HTMLElement & { defaultSize?: number; minSize: number; maxSize: number; size: number };
 
@@ -19,8 +20,8 @@ export class ArtResizable {
   /** Emitted after a resize; `detail.sizes` are the panel percentages in order. */
   @Event({ eventName: 'layout-change', bubbles: true, composed: true }) layoutChange!: EventEmitter<{ sizes: number[] }>;
 
-  private panels(): PanelEl[] { return Array.from(this.host.querySelectorAll(':scope > art-resizable-panel')); }
-  private handles(): HTMLElement[] { return Array.from(this.host.querySelectorAll(':scope > art-resizable-handle')); }
+  private panels(): PanelEl[] { return children(this.host, 'art-resizable-panel'); }
+  private handles(): HTMLElement[] { return children(this.host, 'art-resizable-handle'); }
 
   connectedCallback() {
     this.host.setAttribute('role', 'group');

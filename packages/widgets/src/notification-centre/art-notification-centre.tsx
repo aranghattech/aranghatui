@@ -3,6 +3,7 @@ import { defineCustomElement as defineButton } from '@aranghat/base/button';
 import { defineCustomElement as defineEmpty } from '@aranghat/base/empty';
 import { createDismissable, type Dismissable } from '@aranghat/primitives/dismissable';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { defineOnClient } from '../define';
 
 type Item = HTMLElement & { unread: boolean };
 
@@ -52,8 +53,7 @@ export class ArtNotificationCentre {
   @Event({ eventName: 'read-all', bubbles: true, composed: true }) readAll!: EventEmitter<void>;
 
   connectedCallback() {
-    defineButton();
-    defineEmpty();
+    defineOnClient(defineButton, defineEmpty);
     this.host.addEventListener('select', this.onSelect);
   }
   componentWillLoad() {

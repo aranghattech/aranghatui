@@ -16,34 +16,44 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
     "./dist/components": {
       "types": "./dist/components/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
-    "./dist/components/*": "./dist/components/*",
+    "./dist/components/*": {
+      "types": "./dist/components/*",
+      "artui-ssr": "./dist/components-ssr/*",
+      "default": "./dist/components/*"
+    },
     "./alert-dialog": {
       "types": "./dist/components/art-alert-dialog.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-alert-dialog.js",
       "import": "./dist/components/art-alert-dialog.js"
     },
     "./dialog": {
       "types": "./dist/components/art-dialog.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-dialog.js",
       "import": "./dist/components/art-dialog.js"
     },
     "./drawer": {
       "types": "./dist/components/art-drawer.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-drawer.js",
       "import": "./dist/components/art-drawer.js"
     },
     "./sheet": {
       "types": "./dist/components/art-sheet.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sheet.js",
       "import": "./dist/components/art-sheet.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core modals",
+    "build": "rm -rf dist www && stencil build --docs && ARTUI_SSR=1 stencil build && rm -rf dist/hydrate && artui-wrapper-entries core modals",
     "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
     "test:unit": "vitest run",
     "test:e2e": "playwright test"

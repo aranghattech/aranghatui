@@ -4,7 +4,7 @@ import { Button, Checkbox, Table } from '@aranghat/base-react';
 export default function Empty() {
   return (
     <>
-      <DataTablePage filterPlaceholder="Filter tasks…" total="0" pageCount="1" pageSize="5" filter="zzz">
+      <DataTablePage filterPlaceholder="Filter tasks…" total="0" pageCount="1" pageSize="10" filter="zzz">
         <Button slot="actions" variant="outline" size="sm">Export</Button>
         <Button slot="filters" variant="outline" size="sm">Status</Button>
         <Button slot="filters" variant="outline" size="sm">Priority</Button>

@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Notification Item — one row of an `art-notification-centre`: media, heading, description,
@@ -40,8 +41,8 @@ export class ArtNotificationItem {
     this.host.shadowRoot?.addEventListener('slotchange', this.wire);
   }
   private wire = () => {
-    this.hasMedia = !!this.host.querySelector(':scope > [slot="media"]');
-    this.hasBody = !!this.host.querySelector(':scope > :not([slot])');
+    this.hasMedia = !!child(this.host, '[slot="media"]');
+    this.hasBody = !!child(this.host, ':not([slot])');
   };
   private onActivate = () => {
     if (!this.selectEvent.emit({ value: this.value }).defaultPrevented) this.unread = false;
