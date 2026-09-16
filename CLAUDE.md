@@ -38,6 +38,7 @@ artui/
 │   ├── modals/            # @aranghat/modals     — Tier 5
 │   ├── widgets/           # @aranghat/widgets    — Tier 6
 │   ├── hydrate/           # @aranghat/hydrate    — SSR: one Node hydrate app for every tier (ADR-0023)
+│   ├── ui/                # @aranghat/ui         — meta-package: every tier in one import (costs bundle size)
 │   ├── react/             # @aranghat/base-react, -components-react, … (one build, one pkg per tier)
 │   ├── vue/               # @aranghat/base-vue, …
 │   └── angular/           # @aranghat/base-angular, …
@@ -392,7 +393,7 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Carousel | `embla-carousel` (second approved runtime dep) | 0005 |
 | Data Table | Headless only: `table-state` primitive + styled Table + documented composition recipe | 0006 |
 | Icon strategy | Per-icon ES modules + one generic `<art-icon>`; no sprite sheet | 0007 |
-| React 19 native custom elements | Keep generated wrappers; revisit at Phase 8 | 0008 |
+| React 19 native custom elements | Keep generated wrappers — revisited at Phase 8: they also carry the server-component entry and typed events | 0008 |
 | Stencil project layout | Five independent Stencil projects, one per tier | 0009 |
 | Widgets distribution | Compiled components | 0010 |
 | Widgets entry points | Subpaths (`@aranghat/widgets/login`) | 0011 |

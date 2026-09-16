@@ -1640,5 +1640,17 @@
     "path": "tooling/size/landing.mjs",
     "limit": "15 kB",
     "gzip": true
+  },
+  {
+    "name": "reference: auth screen (base + widgets/login)",
+    "path": "tooling/size/auth.mjs",
+    "limit": "30 kB",
+    "gzip": true
+  },
+  {
+    "name": "reference: full admin shell (all tiers via @aranghat/ui)",
+    "path": "tooling/size/admin.mjs",
+    "limit": "180 kB",
+    "gzip": true
   }
 ]

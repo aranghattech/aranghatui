@@ -49,9 +49,3 @@ jobs:
             packages/*/test-results
           retention-days: 7
 
-  release:
-    name: release (disabled until 1.0)
-    if: false
-    runs-on: ubuntu-24.04
-    steps:
-      - run: echo "ADR-0016 — enable after Phase 8"

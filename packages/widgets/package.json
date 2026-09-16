@@ -118,5 +118,9 @@
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

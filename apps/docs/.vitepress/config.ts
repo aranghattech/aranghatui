@@ -34,6 +34,7 @@ export default defineConfig({
           { text: 'Bundle Size', link: '/guide/bundle-size' },
           { text: 'Server-Side Rendering', link: '/guide/ssr' },
           { text: 'Primitives', link: '/guide/primitives' },
+          { text: 'Versioning', link: '/guide/versioning' },
           { text: 'Migration', link: '/guide/migration' },
           { text: 'Contributing', link: '/guide/contributing' },
         ] },

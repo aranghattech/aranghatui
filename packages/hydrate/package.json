@@ -41,5 +41,9 @@
     "@stencil/core": "4.45.0",
     "embla-carousel": "8.6.0",
     "typescript": "6.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

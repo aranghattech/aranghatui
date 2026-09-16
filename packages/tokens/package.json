@@ -1,7 +1,7 @@
 {
   "name": "@aranghat/tokens",
   "version": "0.0.0",
-  "description": "artui design tokens — the only place a design value is born. Style Dictionary → css/scss/js/ts/json/compose/swift.",
+  "description": "artui design tokens \u2014 the only place a design value is born. Style Dictionary \u2192 css/scss/js/ts/json/compose/swift.",
   "license": "UNLICENSED",
   "type": "module",
   "sideEffects": [
@@ -21,7 +21,8 @@
     "./tailwind.css": "./dist/css/tailwind.css",
     "./scss": "./dist/scss/_tokens.scss",
     "./json": "./dist/json/tokens.json",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./figma/*": "./dist/figma/*"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -30,5 +31,9 @@
   },
   "devDependencies": {
     "style-dictionary": "5.5.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

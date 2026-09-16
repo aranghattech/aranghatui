@@ -883,6 +883,30 @@ importers:
         specifier: 5.5.3
         version: 5.5.3
 
+  packages/ui:
+    devDependencies:
+      '@aranghat/base':
+        specifier: workspace:*
+        version: link:../base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../components
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../modals
+      '@aranghat/navigation':
+        specifier: workspace:*
+        version: link:../navigation
+      '@aranghat/primitives':
+        specifier: workspace:*
+        version: link:../primitives
+      '@aranghat/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      '@aranghat/widgets':
+        specifier: workspace:*
+        version: link:../widgets
+
   packages/vue/base:
     dependencies:
       '@stencil/vue-output-target':
@@ -1115,9 +1139,27 @@ importers:
       '@aranghat/base':
         specifier: workspace:*
         version: link:../../packages/base
+      '@aranghat/components':
+        specifier: workspace:*
+        version: link:../../packages/components
+      '@aranghat/modals':
+        specifier: workspace:*
+        version: link:../../packages/modals
+      '@aranghat/navigation':
+        specifier: workspace:*
+        version: link:../../packages/navigation
+      '@aranghat/primitives':
+        specifier: workspace:*
+        version: link:../../packages/primitives
       '@aranghat/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
+      '@aranghat/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@aranghat/widgets':
+        specifier: workspace:*
+        version: link:../../packages/widgets
 
   tooling/stencil-config:
     dependencies:

@@ -197,5 +197,9 @@
     "@stencil/vitest": "1.15.1",
     "jsdom": "28.1.0",
     "vitest": "4.1.11"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

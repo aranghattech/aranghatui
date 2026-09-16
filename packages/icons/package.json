@@ -1,14 +1,22 @@
 {
   "name": "@aranghat/icons",
   "version": "0.0.0",
-  "description": "artui icon set — a lucide subset, one ES module per icon so apps pay only for what they import.",
+  "description": "artui icon set \u2014 a lucide subset, one ES module per icon so apps pay only for what they import.",
   "license": "UNLICENSED",
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./*": { "types": "./dist/icons/*.d.ts", "import": "./dist/icons/*.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -18,5 +26,9 @@
   "devDependencies": {
     "lucide": "0.577.0",
     "typescript": "6.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

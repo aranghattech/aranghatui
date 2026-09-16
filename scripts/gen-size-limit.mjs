@@ -44,7 +44,7 @@ if (existsSync(join(repo, 'packages/primitives/dist/index.js'))) {
   entries.push({ name: 'primitives: all modules (incl. @floating-ui/dom)', path: 'packages/primitives/dist/index.js', import: '*', limit: '13 kB', gzip: true });
 }
 // Reference apps (CLAUDE.md §7): real entry modules under tooling/size import what each page needs.
-for (const [name, file, limit] of [['landing page (tokens + runtime + button + icon)', 'landing.mjs', '15 kB']]) {
+for (const [name, file, limit] of [['landing page (tokens + runtime + button + icon)', 'landing.mjs', '15 kB'], ['auth screen (base + widgets/login)', 'auth.mjs', '30 kB'], ['full admin shell (all tiers via @aranghat/ui)', 'admin.mjs', '180 kB']]) {
   if (existsSync(join(repo, 'tooling/size', file))) entries.push({ name: `reference: ${name}`, path: `tooling/size/${file}`, limit, gzip: true });
 }
 writeFileSync(join(repo, '.size-limit.json'), JSON.stringify(entries, null, 2) + '\n');

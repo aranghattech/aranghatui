@@ -255,5 +255,9 @@
   },
   "dependencies": {
     "embla-carousel": "^8.6.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }
