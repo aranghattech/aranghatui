@@ -11,6 +11,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "docs:image": "docker build -f apps/docs/Dockerfile -t aranghat/ui-docs .",
+    "docs:serve": "docker run --rm -p 8080:8080 --name artui-docs aranghat/ui-docs",
     "test:unit": "turbo run test:unit",
     "test:e2e": "turbo run test:e2e --concurrency=${ARTUI_E2E_CONCURRENCY:-5}",
     "test:visual": "scripts/pw-docker.sh npx playwright test --project=visual",
