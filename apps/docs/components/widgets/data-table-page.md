@@ -14,7 +14,7 @@ The chrome around a data table: heading, toolbar (filter, faceted filters, reset
       <table>
         <thead>
           <tr>
-            <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+            <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>
             <th>Task</th>
             <th>Title</th>
             <th>Status</th>
@@ -79,7 +79,7 @@ Heading and `actions`, a toolbar with the filter field, `filters` and `view` slo
       <table>
         <thead>
           <tr>
-            <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+            <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>
             <th>Task</th>
             <th>Title</th>
             <th>Status</th>
@@ -119,7 +119,7 @@ With `filter` text the Reset button appears; `selected` and `page` come from you
       <table>
         <thead>
           <tr>
-            <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+            <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>
             <th>Task</th>
             <th>Title</th>
             <th>Status</th>
@@ -157,7 +157,7 @@ Your table decides how to show an empty result; the footer reads 0 rows and one 
       <table>
         <thead>
           <tr>
-            <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+            <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>
             <th>Task</th>
             <th>Title</th>
             <th>Status</th>

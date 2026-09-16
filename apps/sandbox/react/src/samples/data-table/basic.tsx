@@ -30,7 +30,7 @@ export default function Basic() {
         <table>
           <thead>
             <tr>
-              <th><Checkbox aria-label="Select all" checked={s.pageSelection === 'all'} indeterminate={s.pageSelection === 'some'} onChange={(e) => table.setPageSelected(e.detail.checked)} /></th>
+              <th><Checkbox aria-label="Select all" checked={s.pageSelection === 'all'} indeterminate={s.pageSelection === 'some'} onChange={(e) => table.setPageSelected(e.detail.checked)} /><span className="sr-only">Select</span></th>
               {s.visibleColumns.map((c) => (
                 <th key={c.id} aria-sort={s.sort?.id === c.id ? (s.sort.desc ? 'descending' : 'ascending') : undefined} data-align={c.id === 'amount' ? 'end' : undefined}>
                   {c.header} <Button variant="ghost" size="sm" icon aria-label={`Sort by ${c.header!.toLowerCase()}`} onClick={() => table.sortBy(c.id)}>{sortMark(c.id)}</Button>

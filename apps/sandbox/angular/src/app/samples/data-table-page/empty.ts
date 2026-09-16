@@ -15,7 +15,7 @@ import { ArtButton, ArtCheckbox, ArtTable } from '@aranghat/base-angular';
         <table>
           <thead>
             <tr>
-              <th><art-checkbox aria-label="Select all"></art-checkbox></th>
+              <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>
               <th>Task</th>
               <th>Title</th>
               <th>Status</th>

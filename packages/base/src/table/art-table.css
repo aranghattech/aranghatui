@@ -62,3 +62,17 @@ art-table .numeric,
 art-table [data-align='end'] {
   text-align: end;
 }
+
+/* Visually hidden, still announced: a header cell whose only content is a control (a select-all
+   checkbox) needs discernible text for assistive tech and for `axe`'s empty-table-header rule. */
+art-table .sr-only {
+  position: absolute;
+  width: var(--art-space-px);
+  height: var(--art-space-px);
+  margin: calc(-1 * var(--art-space-px));
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
