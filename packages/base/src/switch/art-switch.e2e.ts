@@ -4,6 +4,7 @@ test.describe('art-switch', () => {
   test('keyboard toggles; label click toggles; form value', async ({ page }) => {
     await page.setContent(`<form id="f"><art-switch id="s" name="wifi"></art-switch><art-label for="s">Wi-Fi</art-label></form>`);
     await page.keyboard.press('Tab');
+    await expect(page.locator('art-switch')).toBeFocused(); // a slow runner pressed Space before focus had landed
     await page.keyboard.press('Space');
     expect(await page.locator('art-switch').evaluate((el: any) => el.checked)).toBe(true);
     expect(await page.evaluate(() => Object.fromEntries(new FormData(document.getElementById('f') as HTMLFormElement)))).toEqual({ wifi: 'on' });
