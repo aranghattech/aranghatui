@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/components",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "artui Tier 3 — composite components (overlays, disclosure, selection, dates, feedback).",
   "license": "UNLICENSED",
   "type": "module",

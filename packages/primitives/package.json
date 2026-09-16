@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/primitives",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "artui headless primitives \u2014 shared behaviour for every tier (positioning, dismissal, focus, roving tabindex, portal, typeahead, ids, events).",
   "license": "UNLICENSED",
   "type": "module",

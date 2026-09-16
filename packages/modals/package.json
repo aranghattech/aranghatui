@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/modals",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "artui Tier 5 — modals and overlays.",
   "license": "UNLICENSED",
   "type": "module",

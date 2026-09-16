@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/icons",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "artui icon set \u2014 a lucide subset, one ES module per icon so apps pay only for what they import.",
   "license": "UNLICENSED",
   "type": "module",
