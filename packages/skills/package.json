@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/skills",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Agent skills for artui — teaches an AI assistant how to build with @aranghat/* (tiers, slots, tokens, framework idioms).",
   "license": "UNLICENSED",
   "type": "module",

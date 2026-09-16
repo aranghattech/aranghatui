@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/tokens",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "artui design tokens \u2014 the only place a design value is born. Style Dictionary \u2192 css/scss/js/ts/json/compose/swift.",
   "license": "UNLICENSED",
   "type": "module",
