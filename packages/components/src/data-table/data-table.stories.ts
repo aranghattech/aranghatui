@@ -12,7 +12,7 @@ const rows = [
   ['success', 'silas22@example.com', '$874.00'],
   ['failed', 'carmella@example.com', '$721.00'],
 ];
-const table = `<art-table>\n  <table>\n    <thead>\n      <tr>\n        <th><art-checkbox aria-label="Select all"></art-checkbox></th>\n        <th>Status</th>\n        <th>Email <art-button variant="ghost" size="sm" icon aria-label="Sort by email">↕</art-button></th>\n        <th data-align="end">Amount <art-button variant="ghost" size="sm" icon aria-label="Sort by amount">↕</art-button></th>\n      </tr>\n    </thead>\n    <tbody>\n${rows.map(([s, e, a]) => `      <tr>\n        <td><art-checkbox aria-label="Select row"></art-checkbox></td>\n        <td>${s}</td>\n        <td>${e}</td>\n        <td data-align="end">${a}</td>\n      </tr>`).join('\n')}\n    </tbody>\n  </table>\n</art-table>`;
+const table = `<art-table>\n  <table>\n    <thead>\n      <tr>\n        <th><art-checkbox aria-label="Select all"></art-checkbox><span class="sr-only">Select</span></th>\n        <th>Status</th>\n        <th>Email <art-button variant="ghost" size="sm" icon aria-label="Sort by email">↕</art-button></th>\n        <th data-align="end">Amount <art-button variant="ghost" size="sm" icon aria-label="Sort by amount">↕</art-button></th>\n      </tr>\n    </thead>\n    <tbody>\n${rows.map(([s, e, a]) => `      <tr>\n        <td><art-checkbox aria-label="Select row"></art-checkbox></td>\n        <td>${s}</td>\n        <td>${e}</td>\n        <td data-align="end">${a}</td>\n      </tr>`).join('\n')}\n    </tbody>\n  </table>\n</art-table>`;
 
 export const stories: ComponentStories = {
   tag: 'data-table',
