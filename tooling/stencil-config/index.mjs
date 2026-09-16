@@ -34,7 +34,7 @@ const common = (namespace, srcDir) => ({
 
 /**
  * @param {object} o
- * @param {'base'|'components'|'navigation'|'modals'|'widgets'} o.tier
+ * @param {'base'|'components'|'navigation'|'modals'|'widgets'|'extended'} o.tier
  * @param {string[]} [o.external] extra Rollup externals
  */
 export function createTierConfig({ tier, external = [] }) {
@@ -64,7 +64,7 @@ export function createTierConfig({ tier, external = [] }) {
     ...common(`artui-${tier}`, 'src'),
     sourceMap: true,
     // address must be localhost: Chrome blocks sub-resource requests to 0.0.0.0 (Stencil's default), which silently breaks @stencil/playwright's setContent.
-    devServer: { address: 'localhost', openBrowser: false, port: { base: 3333, components: 3334, navigation: 3335, modals: 3336, widgets: 3337 }[tier] },
+    devServer: { address: 'localhost', openBrowser: false, port: { base: 3333, components: 3334, navigation: 3335, modals: 3336, widgets: 3337, extended: 3338 }[tier] },
     rollupConfig: { inputOptions: { external: externalRuntime ? [/^@stencil\//] : [] } },
     rollupPlugins: { before: [peersPlugin(external, bundlePeers)] },
     outputTargets: ssr

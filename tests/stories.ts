@@ -15,7 +15,7 @@ function* walk(dir: string): Generator<string> {
 
 export async function loadStories(): Promise<ComponentStories[]> {
   const out: ComponentStories[] = [];
-  for (const tier of ['base', 'components', 'navigation', 'modals', 'widgets']) {
+  for (const tier of ['base', 'components', 'navigation', 'modals', 'widgets', 'extended']) {
     const src = join(packages, tier, 'src');
     try { statSync(src); } catch { continue; }
     for (const file of walk(src)) out.push((await import(file)).stories as ComponentStories);

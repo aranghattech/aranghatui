@@ -37,6 +37,7 @@ artui/
 │   ├── navigation/        # @aranghat/navigation — Tier 4
 │   ├── modals/            # @aranghat/modals     — Tier 5
 │   ├── widgets/           # @aranghat/widgets    — Tier 6
+│   ├── extended/          # @aranghat/extended   — Tier 7: patterns with no shadcn counterpart (ADR-0024)
 │   ├── hydrate/           # @aranghat/hydrate    — SSR: one Node hydrate app for every tier (ADR-0023)
 │   ├── skills/            # @aranghat/skills     — the agent skill published for consumers (§11)
 │   ├── ui/                # @aranghat/ui         — meta-package: every tier in one import (costs bundle size)
@@ -71,6 +72,7 @@ Apps install only the tiers they need. A marketing site takes `base` and nothing
 | `@aranghat/navigation` | tokens, primitives, base |
 | `@aranghat/modals` | tokens, primitives, base |
 | `@aranghat/widgets` | all of the above |
+| `@aranghat/extended` | tokens, primitives, base |
 
 - Framework packages mirror this exactly: `@aranghat/base-react`, `@aranghat/components-react`, `@aranghat/navigation-vue`, `@aranghat/modals-angular`, etc.
 - Cross-tier deps are **peerDependencies + devDependencies**, never `dependencies`. A tier must never bundle a lower tier — that would duplicate components in the consumer's graph.
@@ -181,6 +183,11 @@ Dialog · Alert Dialog · Sheet · Drawer (Side Drawer) · Common Dialogs (`conf
 ### Tier 6 — Widgets (ready-to-use compositions)
 App Shell · Login · Signup · Forgot Password · Settings Page · Data Table Page · Empty/404/500 States · Onboarding Wizard · Notification Centre
 
+### Tier 7 — Extended (`@aranghat/extended`, ADR-0024)
+Patterns with no shadcn counterpart that are not assemblies of one. Tiers 2–5 stay a literal mirror of shadcn so N2 remains checkable; this is where the house's own patterns live.
+
+Nav Rail (a permanent icon rail beside a collapsible secondary panel)
+
 ### Excluded
 Chart (N2). `Direction` (RTL) is implemented as a **util/context**, not a component.
 
@@ -215,11 +222,11 @@ Two levers: **tier packages** (don't install what you don't need) and **tree-sha
     - Tier 3 composite: ≤ 8 kB
     - Data Table / Calendar / Command: ≤ 15 kB
     - Stencil runtime + primitives total: ≤ 20 kB
-- **Package budgets (gzip, full tier imported):** base ≤ 45 kB · components ≤ 90 kB · navigation ≤ 45 kB · modals ≤ 30 kB · widgets ≤ 60 kB.
+- **Package budgets (gzip, full tier imported):** base ≤ 45 kB · components ≤ 90 kB · navigation ≤ 45 kB · modals ≤ 30 kB · widgets ≤ 60 kB · extended ≤ 30 kB.
 - **Reference app budgets**, tracked in CI as the real-world proof:
     - Landing page (`base` only, ~6 components): ≤ 15 kB
     - Auth screen (`base` + `widgets/login`): ≤ 30 kB
-    - Full admin shell (all tiers): ≤ 180 kB
+    - Full admin shell (all tiers): ≤ 195 kB — raised from 180 kB when Tier 7 landed (ADR-0024); the figure tracks the number of tiers, not a fixed ceiling
 - `size-limit` runs in CI and fails the build on regression. Budgets live in `.size-limit.json`.
 - Approved runtime deps: `@floating-ui/dom` (primitives) and `embla-carousel` (Carousel only, ADR-0005). Anything else requires an ADR.
 - Icons are not bundled into components — passed via slot, or imported individually from `@aranghat/icons`.
@@ -414,6 +421,7 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Native controls first | Wrap and style the native element wherever HTML has one (`input` types, `select`, `textarea`, `button`, `progress`, `dialog`, `details`); custom logic only where no native exists or to orchestrate natives across shadow roots | 0020 |
 | Overlays on the top layer | Tooltip, Popover, Hover Card (and later menus, selects, dialogs) show their panel with the Popover API (`popover="manual"`) and position it with floating-ui's fixed strategy — no portal, no DOM moves, styles stay in the shadow root | 0022 |
 | Light-DOM prose and tables | `art-table` and `art-typography` render in the light DOM (`shadow: false`) with tag-scoped stylesheets, because `::slotted()` cannot reach nested rows, cells or list items; the Tailwind plugin skips the shadow reset for them (`/* light-dom */` marker) | 0021 |
+| Extended tier | `@aranghat/extended` (Tier 7) holds patterns with no shadcn counterpart, peering only on tokens / primitives / base, so tiers 2–5 stay a literal mirror of shadcn and N2 stays checkable | 0024 |
 | Server-side rendering | One Node hydrate app compiled from every tier's sources (`@aranghat/hydrate`) — a per-tier app cannot reach elements inside another tier's shadow root; the client that adopts server-rendered shadow roots is a second build published under the `artui-ssr` export condition, so the default client stays lean | 0023 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

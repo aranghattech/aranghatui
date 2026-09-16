@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+/* Collapsed: the words go, a rule keeps the grouping. The first section needs no rule — it already
+   sits under the header's border. */
+:host([collapsed]) .label {
+  display: none;
+}
+:host([collapsed]:not(:first-of-type)) {
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+  padding-block-start: var(--art-space-2);
+}

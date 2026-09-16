@@ -4,7 +4,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-const tiers = ['base', 'components', 'navigation', 'modals', 'widgets', 'hydrate']; // hydrate: the SSR app (ADR-0023)
+const tiers = ['base', 'components', 'navigation', 'modals', 'widgets', 'extended', 'hydrate']; // hydrate: the SSR app (ADR-0023)
 const versions = new Map();
 for (const tier of tiers) {
   const p = join('packages', tier, 'package.json');

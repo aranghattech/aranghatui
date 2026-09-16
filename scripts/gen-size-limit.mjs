@@ -10,7 +10,7 @@ import { join, resolve } from 'node:path';
 
 const repo = resolve(import.meta.dirname, '..');
 const catalog = JSON.parse(readFileSync(join(repo, 'tooling/catalog.json'), 'utf8'));
-const TIER_BUDGET_KB = { base: 45, components: 90, navigation: 45, modals: 30, widgets: 60 };
+const TIER_BUDGET_KB = { base: 45, components: 90, navigation: 45, modals: 30, widgets: 60, extended: 30 };
 const RUNTIME_BUDGET_KB = 20;
 const entries = [];
 const externals = ['@aranghat/*', '@floating-ui/dom', 'embla-carousel', './index*.js'];
@@ -44,7 +44,7 @@ if (existsSync(join(repo, 'packages/primitives/dist/index.js'))) {
   entries.push({ name: 'primitives: all modules (incl. @floating-ui/dom)', path: 'packages/primitives/dist/index.js', import: '*', limit: '13 kB', gzip: true });
 }
 // Reference apps (CLAUDE.md §7): real entry modules under tooling/size import what each page needs.
-for (const [name, file, limit] of [['landing page (tokens + runtime + button + icon)', 'landing.mjs', '15 kB'], ['auth screen (base + widgets/login)', 'auth.mjs', '30 kB'], ['full admin shell (all tiers via @aranghat/ui)', 'admin.mjs', '180 kB']]) {
+for (const [name, file, limit] of [['landing page (tokens + runtime + button + icon)', 'landing.mjs', '15 kB'], ['auth screen (base + widgets/login)', 'auth.mjs', '30 kB'], ['full admin shell (all tiers via @aranghat/ui)', 'admin.mjs', '195 kB']]) {
   if (existsSync(join(repo, 'tooling/size', file))) entries.push({ name: `reference: ${name}`, path: `tooling/size/${file}`, limit, gzip: true });
 }
 writeFileSync(join(repo, '.size-limit.json'), JSON.stringify(entries, null, 2) + '\n');

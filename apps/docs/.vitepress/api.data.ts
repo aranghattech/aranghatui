@@ -6,7 +6,7 @@ export default {
   watch: ['../../../packages/*/dist/docs.json'],
   load() {
     const out: Record<string, any> = {};
-    for (const tier of ['base', 'components', 'navigation', 'modals', 'widgets']) {
+    for (const tier of ['base', 'components', 'navigation', 'modals', 'widgets', 'extended']) {
       const p = resolve(__dirname, `../../../packages/${tier}/dist/docs.json`);
       if (!existsSync(p)) continue;
       for (const c of JSON.parse(readFileSync(p, 'utf8')).components) out[c.tag] = { tier, ...c };

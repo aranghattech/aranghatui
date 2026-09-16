@@ -1629,6 +1629,82 @@
     "gzip": true
   },
   {
+    "name": "extended: runtime chunk (index2.js)",
+    "path": "packages/extended/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-nav-rail",
+    "path": "packages/extended/dist/components/art-nav-rail.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-nav-rail-item",
+    "path": "packages/extended/dist/components/art-nav-rail-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-nav-section",
+    "path": "packages/extended/dist/components/art-nav-section.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-nav-link",
+    "path": "packages/extended/dist/components/art-nav-link.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended: whole tier",
+    "path": "packages/extended/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "30 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended: hydratable runtime chunk, artui-ssr (index2.js)",
+    "path": "packages/extended/dist/components-ssr/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
     "name": "primitives: all modules (incl. @floating-ui/dom)",
     "path": "packages/primitives/dist/index.js",
     "import": "*",
@@ -1650,7 +1726,7 @@
   {
     "name": "reference: full admin shell (all tiers via @aranghat/ui)",
     "path": "tooling/size/admin.mjs",
-    "limit": "180 kB",
+    "limit": "195 kB",
     "gzip": true
   }
 ]
