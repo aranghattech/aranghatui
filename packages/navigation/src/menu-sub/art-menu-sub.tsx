@@ -4,6 +4,7 @@ import { createHoverIntent, type HoverIntent } from '@aranghat/primitives/hover-
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
+import { child, isRtl } from '@aranghat/primitives/dom';
 
 /**
  * Dropdown Menu Sub — a submenu: an item in the `trigger` slot opens a nested `role="menu"`
@@ -30,7 +31,7 @@ export class ArtMenuSub {
 
   /** Whether the submenu is open (read by the parent menu's key handling). */
   get isOpen() { return this.open; }
-  private trigger(): HTMLElement | null { return this.host.querySelector(':scope > [slot="trigger"]'); }
+  private trigger(): HTMLElement | null { return child(this.host, '[slot="trigger"]'); }
   private items(): HTMLElement[] { return levelItems(this.host, 'art-menu-item', 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub'); }
 
   connectedCallback() {
@@ -49,7 +50,7 @@ export class ArtMenuSub {
       getItems: () => this.items(),
       onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub !== this.host && sub.parentElement?.closest('art-menu-sub') === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => { this.set(false); if (reason !== 'tab') this.trigger()?.focus({ preventScroll: true }); },
-      isRtl: () => this.host.matches(':dir(rtl)'),
+      isRtl: () => isRtl(this.host),
     });
     if (this.open) this.onOpen(true);
   }
@@ -77,7 +78,7 @@ export class ArtMenuSub {
     t?.setAttribute('aria-expanded', String(open));
     if (!this.panel || !t) return;
     if (open) {
-      this.overlay ??= createOverlay(t, this.panel, { placement: this.host.matches(':dir(rtl)') ? 'left-start' : 'right-start', offset: 0 });
+      this.overlay ??= createOverlay(t, this.panel, { placement: isRtl(this.host) ? 'left-start' : 'right-start', offset: 0 });
       this.opening = this.overlay.open(); // resolves once the panel is placed and visible (focus only then)
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: false, focusOutside: false, onDismiss: () => { this.set(false); t.focus({ preventScroll: true }); } });
     } else {

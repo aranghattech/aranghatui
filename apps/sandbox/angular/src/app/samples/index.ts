@@ -311,9 +311,42 @@ import { DrawerBasic } from './drawer/basic';
 import { DrawerSides } from './drawer/sides';
 import { DrawerScrollable } from './drawer/scrollable';
 import { DrawerPersistent } from './drawer/persistent';
+import { AppShellBasic } from './app-shell/basic';
+import { AppShellIcon } from './app-shell/icon';
+import { AppShellInset } from './app-shell/inset';
+import { LoginBasic } from './login/basic';
+import { LoginLogo } from './login/logo';
+import { LoginSocial } from './login/social';
+import { LoginEmailOnly } from './login/email-only';
+import { LoginError } from './login/error';
+import { LoginLoading } from './login/loading';
+import { SignupBasic } from './signup/basic';
+import { SignupSocial } from './signup/social';
+import { SignupNoConfirm } from './signup/no-confirm';
+import { SignupError } from './signup/error';
+import { ForgotPasswordBasic } from './forgot-password/basic';
+import { ForgotPasswordSent } from './forgot-password/sent';
+import { ForgotPasswordError } from './forgot-password/error';
+import { StatePageBasic } from './state-page/basic';
+import { StatePageNotFound } from './state-page/not-found';
+import { StatePageError } from './state-page/error';
+import { SettingsPageBasic } from './settings-page/basic';
+import { SettingsPageAppearance } from './settings-page/appearance';
+import { SettingsPageNoNav } from './settings-page/no-nav';
+import { DataTablePageBasic } from './data-table-page/basic';
+import { DataTablePageFiltered } from './data-table-page/filtered';
+import { DataTablePageEmpty } from './data-table-page/empty';
+import { OnboardingWizardBasic } from './onboarding-wizard/basic';
+import { OnboardingWizardOptional } from './onboarding-wizard/optional';
+import { OnboardingWizardVertical } from './onboarding-wizard/vertical';
+import { OnboardingWizardLoading } from './onboarding-wizard/loading';
+import { NotificationCentreBasic } from './notification-centre/basic';
+import { NotificationCentreUnread } from './notification-centre/unread';
+import { NotificationCentreEmpty } from './notification-centre/empty';
+import { NotificationCentreBell } from './notification-centre/bell';
 
 /** Static array so `imports: [...SAMPLE_COMPONENTS]` stays analysable (NG1010). */
-export const SAMPLE_COMPONENTS = [ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm, CalendarBasic, CalendarRange, CalendarMultiple, CalendarDropdown, CalendarMinMax, CalendarDisabledDays, CalendarWeekStartsMonday, CalendarDisabled, DatePickerBasic, DatePickerOpen, DatePickerRange, DatePickerDateOfBirth, DatePickerSizes, DatePickerDisabled, DatePickerForm, ToasterBasic, ToasterVariants, ToasterRichColors, ToasterWithAction, ToasterCloseButton, ToasterPromise, CarouselBasic, CarouselMultiplePerView, CarouselLoop, CarouselVertical, CarouselNoControls, BubbleBasic, BubbleVariants, BubbleAlignment, BubbleGroup, BubbleLinks, BubbleReactions, MessageBasic, MessageGroup, MessageHeaderFooter, MessageActions, MessageAttachments, AttachmentBasic, AttachmentImages, AttachmentStates, AttachmentSizes, AttachmentGroup, AttachmentTrigger, MessageScrollerBasic, MessageScrollerOpenAtStart, MessageScrollerStreaming, MessageScrollerLoadEarlier, QuestionnaireBasic, QuestionnaireMultiple, QuestionnaireFreeText, QuestionnaireOptional, QuestionnaireShortcuts, QuestionnaireInvalid, QuestionnaireDisabled, DataTableBasic, BreadcrumbBasic, BreadcrumbSlash, BreadcrumbEllipsis, PaginationBasic, PaginationManyPages, PaginationLinks, PaginationDisabled, DropdownMenuBasic, DropdownMenuOpen, DropdownMenuCheckboxes, DropdownMenuRadios, DropdownMenuSubmenu, DropdownMenuLinks, ContextMenuBasic, ContextMenuOpen, MenubarBasic, MenubarOpen, NavigationMenuBasic, NavigationMenuOpen, NavigationMenuActive, SidebarBasic, SidebarIcon, SidebarFloating, SidebarInset, SidebarRight, SidebarSubmenu, SidebarRail, SidebarApp, SidebarLoading, TopNavBasic, TopNavCollapsed, TopNavSticky, TreeViewBasic, TreeViewIcons, DialogBasic, DialogShare, DialogHideClose, DialogScrollable, AlertDialogBasic, AlertDialogSmall, AlertDialogMedia, AlertDialogDestructive, SheetBasic, SheetSides, SheetHideClose, CommonDialogsConfirm, CommonDialogsAlert, CommonDialogsPrompt, DrawerBasic, DrawerSides, DrawerScrollable, DrawerPersistent];
+export const SAMPLE_COMPONENTS = [ButtonBasic, ButtonVariants, ButtonSizes, ButtonWithIcon, ButtonIconOnly, ButtonLoading, ButtonDisabled, ButtonLink, ButtonForm, LabelBasic, LabelDisabled, InputBasic, InputSizes, InputWithLabel, InputWithButton, InputDisabled, InputInvalid, InputFile, InputForm, TextareaBasic, TextareaWithLabel, TextareaWithText, TextareaDisabled, TextareaInvalid, TextareaWithButton, CheckboxBasic, CheckboxChecked, CheckboxIndeterminate, CheckboxSizes, CheckboxWithText, CheckboxDisabled, CheckboxInvalid, SwitchBasic, SwitchChecked, SwitchSizes, SwitchDisabled, RadioGroupBasic, RadioGroupHorizontal, RadioGroupDisabledItem, RadioGroupSizes, RadioGroupForm, NativeSelectBasic, NativeSelectWithLabel, NativeSelectGroups, NativeSelectSizes, NativeSelectDisabled, NativeSelectInvalid, ToggleBasic, ToggleOutline, ToggleWithText, ToggleSizes, TogglePressed, ToggleDisabled, ToggleGroupBasic, ToggleGroupSingle, ToggleGroupOutline, ToggleGroupSizes, ToggleGroupDisabled, SliderBasic, SliderStep, SliderSizes, SliderVertical, SliderDisabled, InputWithIcon, InputWithEndIcon, InputWithText, InputAddonSizes, SeparatorBasic, SeparatorVertical, SeparatorSemantic, BadgeBasic, BadgeVariants, BadgeWithIcon, BadgeLink, KbdBasic, KbdGroup, KbdInText, KbdInButton, SkeletonBasic, SkeletonCard, SkeletonCircle, SpinnerBasic, SpinnerSizes, SpinnerInButton, SpinnerColour, ProgressBasic, ProgressValues, ProgressCustomMax, ProgressWithLabel, ButtonGroupBasic, ButtonGroupVertical, ButtonGroupSizes, ButtonGroupNested, ButtonGroupWithSeparator, ButtonGroupSplit, ButtonGroupWithInput, ButtonGroupWithText, InputGroupBasic, InputGroupWithButton, InputGroupWithKbd, InputGroupWithSpinner, InputGroupWithTextarea, InputGroupPrefixSuffix, InputGroupDisabled, InputGroupInvalid, FieldBasic, FieldError, FieldHorizontal, FieldSelectAndTextarea, FieldFieldSet, FieldFieldGroup, FieldDisabled, InputOtpBasic, InputOtpGroups, InputOtpLength, InputOtpAlphanumeric, InputOtpWithValue, InputOtpDisabled, InputOtpInvalid, InputOtpWithLabel, AspectRatioBasic, AspectRatioSquare, AspectRatioPortrait, CardBasic, CardWithAction, CardLogin, CardContentOnly, ItemBasic, ItemVariants, ItemSizes, ItemWithImage, ItemGroup, ItemLink, ItemHeaderAndFooter, EmptyBasic, EmptyWithActions, EmptyWithoutMedia, EmptyInCard, MarkerBasic, MarkerStatus, MarkerSeparator, MarkerBorder, MarkerLink, TableBasic, TableWithFooter, TableSelectedRow, TableWithCheckboxes, TypographyArticle, TypographyHeadings, TypographyTextStyles, TypographyList, TooltipBasic, TooltipPlacements, TooltipIconButton, TooltipDelays, PopoverBasic, PopoverOpen, HoverCardBasic, HoverCardOpen, HoverCardWithLink, PopoverPlacements, HoverCardPlacements, CollapsibleBasic, CollapsibleOpen, CollapsibleDisabled, AccordionBasic, AccordionMultiple, AccordionDisabled, TabsBasic, TabsLine, TabsVertical, TabsDisabled, TabsManual, AlertBasic, AlertDestructive, AlertTitleOnly, AlertNoIcon, AvatarBasic, AvatarFallback, AvatarSizes, AvatarWithItem, ScrollAreaBasic, ScrollAreaHorizontal, ResizableBasic, ResizableVertical, ResizableWithHandle, SelectBasic, SelectOpen, SelectGroups, SelectRichItems, SelectSizes, SelectDisabled, SelectForm, CommandBasic, CommandFiltered, CommandEmpty, ComboboxBasic, ComboboxOpen, ComboboxGroups, ComboboxRichItems, ComboboxMultiple, ComboboxNoTrigger, ComboboxSizes, ComboboxDisabled, ComboboxForm, CalendarBasic, CalendarRange, CalendarMultiple, CalendarDropdown, CalendarMinMax, CalendarDisabledDays, CalendarWeekStartsMonday, CalendarDisabled, DatePickerBasic, DatePickerOpen, DatePickerRange, DatePickerDateOfBirth, DatePickerSizes, DatePickerDisabled, DatePickerForm, ToasterBasic, ToasterVariants, ToasterRichColors, ToasterWithAction, ToasterCloseButton, ToasterPromise, CarouselBasic, CarouselMultiplePerView, CarouselLoop, CarouselVertical, CarouselNoControls, BubbleBasic, BubbleVariants, BubbleAlignment, BubbleGroup, BubbleLinks, BubbleReactions, MessageBasic, MessageGroup, MessageHeaderFooter, MessageActions, MessageAttachments, AttachmentBasic, AttachmentImages, AttachmentStates, AttachmentSizes, AttachmentGroup, AttachmentTrigger, MessageScrollerBasic, MessageScrollerOpenAtStart, MessageScrollerStreaming, MessageScrollerLoadEarlier, QuestionnaireBasic, QuestionnaireMultiple, QuestionnaireFreeText, QuestionnaireOptional, QuestionnaireShortcuts, QuestionnaireInvalid, QuestionnaireDisabled, DataTableBasic, BreadcrumbBasic, BreadcrumbSlash, BreadcrumbEllipsis, PaginationBasic, PaginationManyPages, PaginationLinks, PaginationDisabled, DropdownMenuBasic, DropdownMenuOpen, DropdownMenuCheckboxes, DropdownMenuRadios, DropdownMenuSubmenu, DropdownMenuLinks, ContextMenuBasic, ContextMenuOpen, MenubarBasic, MenubarOpen, NavigationMenuBasic, NavigationMenuOpen, NavigationMenuActive, SidebarBasic, SidebarIcon, SidebarFloating, SidebarInset, SidebarRight, SidebarSubmenu, SidebarRail, SidebarApp, SidebarLoading, TopNavBasic, TopNavCollapsed, TopNavSticky, TreeViewBasic, TreeViewIcons, DialogBasic, DialogShare, DialogHideClose, DialogScrollable, AlertDialogBasic, AlertDialogSmall, AlertDialogMedia, AlertDialogDestructive, SheetBasic, SheetSides, SheetHideClose, CommonDialogsConfirm, CommonDialogsAlert, CommonDialogsPrompt, DrawerBasic, DrawerSides, DrawerScrollable, DrawerPersistent, AppShellBasic, AppShellIcon, AppShellInset, LoginBasic, LoginLogo, LoginSocial, LoginEmailOnly, LoginError, LoginLoading, SignupBasic, SignupSocial, SignupNoConfirm, SignupError, ForgotPasswordBasic, ForgotPasswordSent, ForgotPasswordError, StatePageBasic, StatePageNotFound, StatePageError, SettingsPageBasic, SettingsPageAppearance, SettingsPageNoNav, DataTablePageBasic, DataTablePageFiltered, DataTablePageEmpty, OnboardingWizardBasic, OnboardingWizardOptional, OnboardingWizardVertical, OnboardingWizardLoading, NotificationCentreBasic, NotificationCentreUnread, NotificationCentreEmpty, NotificationCentreBell];
 
 export const SAMPLES = [
   { id: 'button/basic', component: ButtonBasic },
@@ -628,4 +661,37 @@ export const SAMPLES = [
   { id: 'drawer/sides', component: DrawerSides },
   { id: 'drawer/scrollable', component: DrawerScrollable },
   { id: 'drawer/persistent', component: DrawerPersistent },
+  { id: 'app-shell/basic', component: AppShellBasic },
+  { id: 'app-shell/icon', component: AppShellIcon },
+  { id: 'app-shell/inset', component: AppShellInset },
+  { id: 'login/basic', component: LoginBasic },
+  { id: 'login/logo', component: LoginLogo },
+  { id: 'login/social', component: LoginSocial },
+  { id: 'login/email-only', component: LoginEmailOnly },
+  { id: 'login/error', component: LoginError },
+  { id: 'login/loading', component: LoginLoading },
+  { id: 'signup/basic', component: SignupBasic },
+  { id: 'signup/social', component: SignupSocial },
+  { id: 'signup/no-confirm', component: SignupNoConfirm },
+  { id: 'signup/error', component: SignupError },
+  { id: 'forgot-password/basic', component: ForgotPasswordBasic },
+  { id: 'forgot-password/sent', component: ForgotPasswordSent },
+  { id: 'forgot-password/error', component: ForgotPasswordError },
+  { id: 'state-page/basic', component: StatePageBasic },
+  { id: 'state-page/not-found', component: StatePageNotFound },
+  { id: 'state-page/error', component: StatePageError },
+  { id: 'settings-page/basic', component: SettingsPageBasic },
+  { id: 'settings-page/appearance', component: SettingsPageAppearance },
+  { id: 'settings-page/no-nav', component: SettingsPageNoNav },
+  { id: 'data-table-page/basic', component: DataTablePageBasic },
+  { id: 'data-table-page/filtered', component: DataTablePageFiltered },
+  { id: 'data-table-page/empty', component: DataTablePageEmpty },
+  { id: 'onboarding-wizard/basic', component: OnboardingWizardBasic },
+  { id: 'onboarding-wizard/optional', component: OnboardingWizardOptional },
+  { id: 'onboarding-wizard/vertical', component: OnboardingWizardVertical },
+  { id: 'onboarding-wizard/loading', component: OnboardingWizardLoading },
+  { id: 'notification-centre/basic', component: NotificationCentreBasic },
+  { id: 'notification-centre/unread', component: NotificationCentreUnread },
+  { id: 'notification-centre/empty', component: NotificationCentreEmpty },
+  { id: 'notification-centre/bell', component: NotificationCentreBell },
 ];

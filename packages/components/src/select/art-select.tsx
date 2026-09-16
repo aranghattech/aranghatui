@@ -113,7 +113,7 @@ export class ArtSelect {
     for (const item of this.items()) item.selected = item === selected;
     const target = this.host.shadowRoot?.querySelector<HTMLElement>('[part="value"]');
     if (!target) return;
-    target.replaceChildren();
+    target.textContent = ''; // not replaceChildren(): Stencil's mock document (SSR) lacks it
     if (!selected) {
       target.textContent = this.placeholder ?? '';
       target.toggleAttribute('data-placeholder', true);

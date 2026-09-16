@@ -45,3 +45,10 @@ Outputs: `aranghat.css` (light + dark), `themes/*.css` (brands), `tailwind.css` 
 
 - `pnpm --filter @aranghat/tokens test:unit` runs an AA contrast sweep over every text pair (4.5:1), UI fill (3:1) and the focus halo as rendered (3:1) in light, dark and every brand theme.
 - Brand sheets may only override semantic tokens that exist in the default theme (checked by the same sweep).
+
+## Figma
+
+The build also emits the tokens for [Tokens Studio](https://tokens.studio) in its multi-file, DTCG-style layout at `@aranghat/tokens/figma/`: `core.json` (primitives and shared semantics), `light.json`, `dark.json`, plus `$metadata.json` (set order) and `$themes.json` (a *Light* and a *Dark* theme, both sourcing `core`). References stay references (`{color.white}`), so a Figma variable follows its primitive exactly as the CSS does.
+
+Point the Tokens Studio plugin at the `figma` folder of the published package (or at `packages/tokens/dist/figma` in this repository) with the *Multi-file* sync option; the sync is one-way — Style Dictionary sources in `packages/tokens/src` stay the only place a value is born (§4 of `CLAUDE.md`). Regenerate with `pnpm -F @aranghat/tokens build`.
+

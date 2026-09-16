@@ -19,7 +19,7 @@ export class ArtTab {
   @Prop() tabbable = false;
 
   connectedCallback() {
-    this.host.slot = 'tab';
+    this.host.setAttribute('slot', 'tab'); // the attribute, not the property: the server document serializes attributes only (ADR-0023)
     this.host.setAttribute('role', 'tab');
   }
 

@@ -35,6 +35,6 @@ const brand = ref<string>('');
 .artui-preview__stage[data-frame='control-text'] p { width: auto; }
 .artui-preview__stage[data-frame='block'] { display: block; padding: 0; }
 .artui-preview__stage[data-frame='shell'] { display: block; padding: 0; height: 32rem; overflow: hidden; border-radius: 0 0 var(--art-radius-lg) var(--art-radius-lg); }
-.artui-preview__stage[data-frame='shell'] > art-sidebar-provider { height: 100%; min-height: 0; }
+.artui-preview__stage[data-frame='shell'] > * { height: 100%; min-height: 0; }
 .artui-preview__stage > p { margin: 0; font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted); width: 20rem; max-width: 100%; }
 </style>

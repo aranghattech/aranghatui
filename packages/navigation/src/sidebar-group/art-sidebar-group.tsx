@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
-import { isIconMode, watchState } from '../sidebar/context';
+import { bindSidebar, isIconMode } from '../sidebar/context';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Sidebar Group — a titled section of the sidebar with an optional action button.
@@ -15,7 +16,6 @@ import { isIconMode, watchState } from '../sidebar/context';
 @Component({ tag: 'art-sidebar-group', styleUrl: 'art-sidebar-group.css', shadow: true })
 export class ArtSidebarGroup {
   @Element() host!: HTMLElement;
-  private sidebar: HTMLElement | null = null;
   private unwatch?: () => void;
 
   /** Heading text. */
@@ -25,8 +25,7 @@ export class ArtSidebarGroup {
   @State() hasAction = false;
 
   connectedCallback() {
-    this.sidebar = this.host.closest('art-sidebar');
-    this.unwatch = watchState(this.sidebar, () => { this.icon = isIconMode(this.sidebar); });
+    this.unwatch = bindSidebar(this.host, (s) => { this.icon = isIconMode(s); });
   }
   componentWillLoad() {
     this.wire();
@@ -40,8 +39,8 @@ export class ArtSidebarGroup {
   }
   /* Slotted state is mirrored as state: `:has()` in a shadow stylesheet never sees slotted nodes. */
   private wire = () => {
-    this.hasLabel = !!this.label || !!this.host.querySelector(':scope > [slot="label"]');
-    this.hasAction = !!this.host.querySelector(':scope > [slot="action"]');
+    this.hasLabel = !!this.label || !!child(this.host, '[slot="label"]');
+    this.hasAction = !!child(this.host, '[slot="action"]');
   };
 
   render() {

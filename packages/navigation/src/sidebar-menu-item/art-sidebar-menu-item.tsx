@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
-import { isIconMode, watchState } from '../sidebar/context';
+import { bindSidebar, isIconMode } from '../sidebar/context';
+import { child } from '@aranghat/primitives/dom';
 
 type MenuButton = HTMLElement & { expanded?: boolean };
 
@@ -18,7 +19,6 @@ type MenuButton = HTMLElement & { expanded?: boolean };
 @Component({ tag: 'art-sidebar-menu-item', styleUrl: 'art-sidebar-menu-item.css', shadow: true })
 export class ArtSidebarMenuItem {
   @Element() host!: HTMLElement;
-  private sidebar: HTMLElement | null = null;
   private unwatch?: () => void;
   private sub: HTMLElement | null = null;
   private button: MenuButton | null = null;
@@ -36,8 +36,7 @@ export class ArtSidebarMenuItem {
 
   connectedCallback() {
     this.host.setAttribute('role', 'listitem');
-    this.sidebar = this.host.closest('art-sidebar');
-    this.unwatch = watchState(this.sidebar, () => { this.icon = isIconMode(this.sidebar); });
+    this.unwatch = bindSidebar(this.host, (s) => { this.icon = isIconMode(s); });
     this.host.addEventListener('click', this.onClick);
   }
   componentWillLoad() {
@@ -53,10 +52,10 @@ export class ArtSidebarMenuItem {
   }
 
   private wire = () => {
-    this.sub = this.host.querySelector(':scope > art-sidebar-menu-sub');
-    this.button = this.host.querySelector(':scope > art-sidebar-menu-button');
-    this.hasAction = !!this.host.querySelector(':scope > [slot="action"]');
-    this.hasBadge = !!this.host.querySelector(':scope > [slot="badge"]');
+    this.sub = child(this.host, 'art-sidebar-menu-sub');
+    this.button = child(this.host, 'art-sidebar-menu-button');
+    this.hasAction = !!child(this.host, '[slot="action"]');
+    this.hasBadge = !!child(this.host, '[slot="badge"]');
     this.applyOpen();
   };
   @Watch('open')

@@ -3,6 +3,7 @@ import { createDismissable, type Dismissable } from '@aranghat/primitives/dismis
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
+import { isRtl } from '@aranghat/primitives/dom';
 
 const LEVEL = 'art-dropdown-menu, art-context-menu, art-menubar-menu, art-menu-sub';
 
@@ -47,7 +48,7 @@ export class ArtContextMenu {
       getItems: () => this.items(),
       onOpenSub: (item) => { const sub = item.closest('art-menu-sub') as (HTMLElement & { openSub?: () => Promise<void> }) | null; if (item.getAttribute('slot') === 'trigger' && sub && sub.parentElement?.closest(LEVEL) === this.host) { void sub.openSub?.(); return true; } return false; },
       onClose: (reason) => this.close(reason !== 'tab'),
-      isRtl: () => this.host.matches(':dir(rtl)'),
+      isRtl: () => isRtl(this.host),
     });
   }
   disconnectedCallback() {

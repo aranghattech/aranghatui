@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Navigation Menu Link — a link inside a panel (or in the bar): a title line and an optional
@@ -20,7 +21,7 @@ export class ArtNavigationMenuLink {
     this.host.shadowRoot?.addEventListener('slotchange', this.sync);
     this.sync();
   }
-  private sync = () => { this.host.toggleAttribute('data-has-description', !!this.host.querySelector(':scope > [slot="description"]')); };
+  private sync = () => { this.host.toggleAttribute('data-has-description', !!child(this.host, '[slot="description"]')); };
 
   render() {
     return (

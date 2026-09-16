@@ -1,0 +1,114 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--art-space-6);
+  width: 100%;
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+/* Stepper: a row of steps joined by connectors; a column when vertical. */
+.steps {
+  display: flex;
+  gap: var(--art-space-2);
+}
+.step {
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  gap: var(--art-space-2);
+  min-width: 0;
+}
+.step:last-child {
+  flex: none;
+}
+.connector {
+  flex: 1 1 0%;
+  height: var(--art-border-width);
+  min-width: var(--art-space-4);
+  background: var(--art-color-border-default);
+}
+.step[data-state='complete'] .connector {
+  background: var(--art-color-primary-solid);
+}
+.indicator {
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  color: var(--art-color-fg-muted);
+  transition:
+    background-color var(--art-duration-base) var(--art-ease-out),
+    border-color var(--art-duration-base) var(--art-ease-out),
+    color var(--art-duration-base) var(--art-ease-out);
+}
+.step[data-state='current'] .indicator {
+  border-color: var(--art-color-primary-solid);
+  color: var(--art-color-fg-default);
+  box-shadow: 0 0 0 var(--art-ring-width) color-mix(in oklab, var(--art-color-primary-solid) 20%, transparent);
+}
+.step[data-state='complete'] .indicator {
+  background: var(--art-color-primary-solid);
+  border-color: var(--art-color-primary-solid);
+  color: var(--art-color-fg-on-primary);
+}
+.label {
+  color: var(--art-color-fg-muted);
+}
+.step[data-state='current'] .label,
+.step[data-state='complete'] .label {
+  color: var(--art-color-fg-default);
+}
+/* Below sm only the current step keeps its text (Tailwind `hidden sm:flex` on the others). */
+.text {
+  overflow: hidden;
+}
+/* Vertical: stepper beside the content, connectors run down from each indicator. */
+:host([orientation='vertical']) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--art-space-8);
+}
+:host([orientation='vertical']) .stepper {
+  grid-row: span 2;
+}
+:host([orientation='vertical']) .steps {
+  flex-direction: column;
+  gap: 0;
+}
+:host([orientation='vertical']) .step {
+  flex: none;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-block-end: var(--art-space-6);
+}
+:host([orientation='vertical']) .text {
+  display: flex;
+}
+:host([orientation='vertical']) .step:last-child {
+  padding-block-end: 0;
+}
+:host([orientation='vertical']) .connector {
+  position: absolute;
+}
+:host([orientation='vertical']) .step {
+  position: relative;
+}
+:host([orientation='vertical']) .connector {
+  inset-inline-start: calc(var(--art-space-4) - var(--art-border-width) / 2);
+  top: var(--art-space-8);
+  bottom: 0;
+  width: var(--art-border-width);
+  height: auto;
+  min-width: 0;
+}
+.panel {
+  outline: none;
+  min-width: 0;
+}
+.footer {
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+  padding-block-start: var(--art-space-4);
+}

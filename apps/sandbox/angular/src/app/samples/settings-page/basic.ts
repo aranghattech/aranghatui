@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { ArtSettingsPage } from '@aranghat/widgets-angular';
+import { ArtButton, ArtField, ArtInput, ArtLabel, ArtNativeSelect, ArtTextarea } from '@aranghat/base-angular';
+
+@Component({
+  selector: 'sample-settings-page-basic',
+  imports: [ArtButton, ArtField, ArtInput, ArtLabel, ArtNativeSelect, ArtSettingsPage, ArtTextarea],
+  template: `
+    <art-settings-page section-heading="Profile" section-description="This is how others will see you on the site.">
+      <a slot="nav" href="#profile" aria-current="page">Profile</a>
+      <a slot="nav" href="#account">Account</a>
+      <a slot="nav" href="#appearance">Appearance</a>
+      <a slot="nav" href="#notifications">Notifications</a>
+      <a slot="nav" href="#display">Display</a>
+      <art-field>
+        <art-label slot="label">Username</art-label>
+        <art-input value="shadcn"></art-input>
+        <p slot="description">This is your public display name. It can be your real name or a pseudonym.</p>
+      </art-field>
+      <art-field>
+        <art-label slot="label">Email</art-label>
+        <art-native-select>
+          <option value="">Select a verified email to display</option>
+          <option value="m@example.com">m@example.com</option>
+          <option value="m@google.com">m@google.com</option>
+        </art-native-select>
+        <p slot="description">You can manage verified email addresses in your email settings.</p>
+      </art-field>
+      <art-field>
+        <art-label slot="label">Bio</art-label>
+        <art-textarea value="I own a computer."></art-textarea>
+        <p slot="description">You can @mention other users and organizations to link to them.</p>
+      </art-field>
+      <div>
+        <art-button>Update profile</art-button>
+      </div>
+    </art-settings-page>
+  `,
+})
+export class SettingsPageBasic {}

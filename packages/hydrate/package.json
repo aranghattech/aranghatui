@@ -1,0 +1,49 @@
+{
+  "name": "@aranghat/hydrate",
+  "version": "0.0.0",
+  "description": "Server-side rendering for artui \u2014 one Node hydrate app spanning every tier: renderToString() emits declarative shadow DOM (ADR-0023).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./index.mjs",
+  "types": "./index.d.ts",
+  "files": [
+    "dist",
+    "index.mjs",
+    "index.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs"
+    },
+    "./stencil": {
+      "types": "./dist/hydrate/index.d.ts",
+      "import": "./dist/hydrate/index.mjs",
+      "require": "./dist/hydrate/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "rm -rf dist src-all && node scripts/collect.mjs && stencil build"
+  },
+  "devDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/components": "workspace:*",
+    "@aranghat/icons": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*",
+    "@artui/stencil-config": "workspace:*",
+    "@floating-ui/dom": "1.8.0",
+    "@stencil/core": "4.45.0",
+    "embla-carousel": "8.6.0",
+    "typescript": "6.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  }
+}

@@ -3,9 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Reference-app entry modules measured by size-limit (CLAUDE.md §7). Each file imports exactly what that page would.",
+  "description": "Reference-app entry modules measured by size-limit (CLAUDE.md \u00a77). Each file imports exactly what that page would.",
   "devDependencies": {
     "@aranghat/base": "workspace:*",
-    "@aranghat/tokens": "workspace:*"
+    "@aranghat/components": "workspace:*",
+    "@aranghat/modals": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@aranghat/ui": "workspace:*",
+    "@aranghat/widgets": "workspace:*"
   }
 }

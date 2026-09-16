@@ -1,6 +1,6 @@
 # ADR-0008: React packages use generated wrappers, not React 19 native support
 
-**Status:** Accepted (2026-09-14). Revisit at Phase 8.
+**Status:** Accepted (2026-09-14). Revisited 2026-09-16 (Phase 8): kept.
 
 ## Context
 React 19 sets properties on custom elements natively, but does not map custom events to `onFoo` props and provides no TypeScript types for our elements.
@@ -11,3 +11,8 @@ React 19 sets properties on custom elements natively, but does not map custom ev
 ## Consequences
 - Wrapper cost is measured in size-limit and reported per package.
 - If React drops the need for wrappers, the packages can become thin re-exports without a breaking change to consumers.
+
+## Revisit (Phase 8, 2026-09-16)
+
+Kept. React 19 still maps no custom event to an `onFoo` prop and ships no types for our elements, and the wrappers now carry two things native support cannot: the server-component entry (`@aranghat/<tier>-react/next`, ADR-0023) and typed `detail`s for every event. Their cost is measured per package by size-limit and is small next to the tier runtime. Revisit again when React types custom elements' events natively.
+

@@ -179,12 +179,23 @@
   },
   "peerDependencies": {
     "@aranghat/components": "workspace:*",
+    "@aranghat/hydrate": "workspace:*",
     "vue": "^3.4.38"
   },
   "devDependencies": {
     "@aranghat/components": "workspace:*",
+    "@aranghat/hydrate": "workspace:*",
     "@artui/wrapper-entries": "workspace:*",
     "typescript": "6.0.3",
     "vue": "3.5.42"
+  },
+  "peerDependenciesMeta": {
+    "@aranghat/hydrate": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, Watch, h } from '@stencil/core';
 import { uniqueId } from '@aranghat/primitives/id';
+import { child } from '@aranghat/primitives/dom';
 
 type ControlEl = HTMLElement & { invalid?: boolean; disabled?: boolean };
 const CONTROLS = 'art-input, art-textarea, art-native-select, art-checkbox, art-switch, art-radio-group, art-slider, art-toggle-group, art-input-otp';
@@ -44,7 +45,7 @@ export class ArtField {
     return c.tagName === 'ART-INPUT-GROUP' ? (c.querySelector('art-input, art-textarea') as ControlEl | null) : c;
   }
   private slotted(name: string): HTMLElement | null {
-    return this.host.querySelector(`:scope > [slot="${name}"]`);
+    return child(this.host, `[slot="${name}"]`);
   }
 
   @Watch('invalid')

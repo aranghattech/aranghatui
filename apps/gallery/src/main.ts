@@ -5,9 +5,10 @@ import * as base from '@aranghat/base';
 import * as components from '@aranghat/components';
 import * as navigation from '@aranghat/navigation';
 import * as modals from '@aranghat/modals';
+import * as widgets from '@aranghat/widgets';
 
 // Register every element of every tier (the gallery is allowed to pay for everything).
-for (const tier of [base, components, navigation, modals]) {
+for (const tier of [base, components, navigation, modals, widgets]) {
   for (const [name, fn] of Object.entries(tier)) {
     if (name.startsWith('defineCustomElement') && typeof fn === 'function') (fn as () => void)();
   }

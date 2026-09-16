@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Tree Item — a node of an `art-tree-view`: `label`, optional `icon`, and nested
@@ -61,7 +62,7 @@ export class ArtTreeItem {
   onExpanded(expanded: boolean) {
     (expanded ? this.expandEvent : this.collapseEvent).emit({ value: this.value });
   }
-  private wire = () => { this.hasChildren = !!this.host.querySelector(':scope > art-tree-item'); };
+  private wire = () => { this.hasChildren = !!child(this.host, 'art-tree-item'); };
   private onClick = (e: MouseEvent) => {
     const path = e.composedPath();
     // a click on a nested item bubbles through this host: it belongs to the child

@@ -17,10 +17,13 @@ test.describe('art-drawer', () => {
     expect(await content.evaluate((el) => el.matches(':modal'))).toBe(true);
     const handle = (await content.locator('[part="handle"]').boundingBox())!;
     const hx = handle.x + handle.width / 2, hy = handle.y + handle.height / 2;
-    // short drag: springs back
-    await page.mouse.move(hx, hy); await page.mouse.down(); await page.mouse.move(hx, hy + 20, { steps: 4 }); await page.mouse.up();
+    // short drag: springs back — under the 16 px flick floor and slow, so no runner speed turns it into a flick (> 0.4 px/ms)
+    await page.mouse.move(hx, hy); await page.mouse.down();
+    for (let i = 1; i <= 3; i++) { await page.mouse.move(hx, hy + i * 4); await page.waitForTimeout(40); }
+    await page.mouse.up();
     await expect(content).toBeVisible();
-    await expect.poll(async () => Math.round((await content.boundingBox())!.y + (await content.boundingBox())!.height)).toBe(600);
+    // one read, null-safe: the box is briefly unavailable while the panel springs back (a throw would end the poll)
+    await expect.poll(async () => { const b = await content.boundingBox(); return b ? Math.round(b.y + b.height) : -1; }).toBe(600);
     // long drag: dismisses
     await page.mouse.move(hx, hy); await page.mouse.down(); await page.mouse.move(hx, hy + 200, { steps: 8 }); await page.mouse.up();
     await expect(content).toBeHidden();

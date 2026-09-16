@@ -29,6 +29,8 @@ export default defineConfig({
     { name: 'visual', testDir: './visual', use: { colorScheme: 'light' } },
     { name: 'a11y', testDir: './a11y' },
     { name: 'smoke', testDir: './smoke' },
+    // the server-rendered screenshot is written as the snapshot the hydrated page must match
+    { name: 'ssr', testDir: './ssr', snapshotPathTemplate: '{testDir}/.snapshots/{arg}{ext}', use: { colorScheme: 'light' } },
   ],
   webServer: [
     server('apps/gallery/dist', 4100),
@@ -36,5 +38,6 @@ export default defineConfig({
     server('apps/sandbox/react/dist', 4002),
     server('apps/sandbox/vue/dist', 4003),
     server('apps/sandbox/angular/dist/browser', 4004),
+    server('tests/ssr/.pages', 4105),
   ],
 });

@@ -21,3 +21,16 @@ test('tailwind mapping contains no literal colours', () => {
   assert.doesNotMatch(tw, /#[0-9a-f]{3,8}\b/i);
   assert.match(tw, /--color-primary: var\(--art-color-primary-solid\)/);
 });
+
+test('figma: Tokens Studio sets keep references and DTCG types', () => {
+  const read = (f) => JSON.parse(readFileSync(join(root, 'dist/figma', f), 'utf8'));
+  const core = read('core.json'), light = read('light.json'), dark = read('dark.json');
+  assert.equal(core.color.white.$type, 'color');
+  assert.match(String(core.color.white.$value), /^#[0-9a-f]{6}$/i);
+  assert.equal(light.color.bg.canvas.$value, '{color.white}');
+  assert.equal(light.color.bg.canvas.$type, 'color');
+  assert.ok(String(dark.color.bg.canvas.$value).startsWith('{color.'));
+  assert.equal(core.space['4'].$value, '1rem');
+  assert.deepEqual(read('$metadata.json').tokenSetOrder, ['core', 'light', 'dark']);
+  assert.deepEqual(read('$themes.json').map((t) => t.name), ['Light', 'Dark']);
+});

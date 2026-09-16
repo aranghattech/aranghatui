@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
 import { createTypeahead, type Typeahead } from '@aranghat/primitives/typeahead';
+import { children, isRtl } from '@aranghat/primitives/dom';
 
 type Item = HTMLElement & { value: string; label: string; expanded: boolean; disabled: boolean };
 
@@ -94,7 +95,7 @@ export class ArtTreeView {
     if (!it || !this.items().includes(it) || e.altKey || e.ctrlKey || e.metaKey) return;
     const vis = this.visible();
     const i = vis.indexOf(it);
-    const rtl = this.host.matches(':dir(rtl)');
+    const rtl = isRtl(this.host);
     const forward = rtl ? 'ArrowLeft' : 'ArrowRight';
     const back = rtl ? 'ArrowRight' : 'ArrowLeft';
     const parent = it.hasAttribute('aria-expanded');
@@ -114,7 +115,7 @@ export class ArtTreeView {
       case 'Enter': case ' ': it.click(); break;
       case '*': {
         const scope = this.parentOf(it) ?? this.host;
-        for (const s of Array.from(scope.querySelectorAll(':scope > art-tree-item')) as Item[]) if (s.hasAttribute('aria-expanded') && !s.disabled) s.expanded = true;
+        for (const s of children(scope, 'art-tree-item') as Item[]) if (s.hasAttribute('aria-expanded') && !s.disabled) s.expanded = true;
         break;
       }
       default:

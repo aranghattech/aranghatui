@@ -61,7 +61,12 @@ export class ArtNativeSelect {
     while (this.select.firstChild) this.select.removeChild(this.select.firstChild);
     for (const c of Array.from(this.host.children)) if (/^(OPTION|OPTGROUP)$/.test(c.tagName)) this.select.appendChild(c.cloneNode(true));
     if (!this.value) this.value = this.select.value; // adopt the browser's default selection
-    else this.select.value = this.value;
+    else {
+      this.select.value = this.value;
+      // the attribute as well: a server document serializes attributes only, and the browser picks the
+      // `selected` option when it parses the declarative shadow root (ADR-0023)
+      for (const o of Array.from(this.select.querySelectorAll('option'))) o.toggleAttribute('selected', (o.getAttribute('value') ?? o.textContent ?? '') === this.value);
+    }
     this.syncForm();
   }
   @Watch('value')

@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: var(--art-container-sm);
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+.logo {
+  margin-block-end: var(--art-space-6);
+}
+.link {
+  text-decoration: none;
+  text-underline-offset: var(--art-space-1);
+}
+.link:hover {
+  text-decoration: underline;
+}
+/* "Or continue with" between the primary action and the social buttons */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--art-space-2);
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-fg-muted);
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1 1 0%;
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+}
+/* Full-width buttons (shadcn `w-full`): a Button host stretches with the grid but its control sizes to content. */
+art-button::part(button) {
+  width: 100%;
+}
+::slotted(art-button)::part(button) {
+  width: 100%;
+}
+.error {
+  color: var(--art-color-destructive-fg);
+}

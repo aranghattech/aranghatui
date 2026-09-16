@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createModal, type Modal, type ModalReason } from '../dialog/modal';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Alert Dialog — shadcn/ui parity on the native `<dialog>`: a `role="alertdialog"` that
@@ -62,12 +63,12 @@ export class ArtAlertDialog {
     this.modal = undefined;
   }
 
-  private slotted(name: string): HTMLElement | null { return this.host.querySelector(`:scope > [slot="${name}"]`); }
+  private slotted(name: string): HTMLElement | null { return child(this.host, `[slot="${name}"]`); }
   private wire = () => {
     this.hasMedia = !!this.slotted('media');
     this.hasTitle = !!this.slotted('title');
     this.hasDescription = !!this.slotted('description');
-    this.hasBody = !!this.host.querySelector(':scope > :not([slot])');
+    this.hasBody = !!child(this.host, ':not([slot])');
     const t = this.slotted('trigger');
     t?.setAttribute('aria-haspopup', 'dialog');
     t?.setAttribute('aria-expanded', String(this.open));

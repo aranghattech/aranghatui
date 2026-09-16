@@ -58,8 +58,10 @@ export class ArtMessageScroller {
     if (!this.viewport || !this.content) return;
     this.firstChild = this.host.firstElementChild;
     this.trackFirst();
-    this.mo = new MutationObserver(this.onMutate);
-    this.mo.observe(this.host, { childList: true });
+    if (typeof MutationObserver !== 'undefined') {
+      this.mo = new MutationObserver(this.onMutate);
+      this.mo.observe(this.host, { childList: true });
+    }
     if (typeof ResizeObserver !== 'undefined') {
       this.ro = new ResizeObserver(this.onResize);
       this.ro.observe(this.content);

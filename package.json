@@ -12,7 +12,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "test:unit": "turbo run test:unit",
-    "test:e2e": "turbo run test:e2e",
+    "test:e2e": "turbo run test:e2e --concurrency=${ARTUI_E2E_CONCURRENCY:-5}",
     "test:visual": "scripts/pw-docker.sh npx playwright test --project=visual",
     "test:a11y": "scripts/pw-docker.sh npx playwright test --project=a11y",
     "smoke:frameworks": "scripts/pw-docker.sh npx playwright test --project=smoke",
@@ -21,8 +21,11 @@
     "size": "node scripts/gen-size-limit.mjs && size-limit",
     "verify:docs-parity": "node apps/docs/scripts/verify-parity.mjs",
     "verify:isolation": "node scripts/check-install-isolation.mjs",
-    "verify": "pnpm lint:pins && pnpm build && pnpm lint:tokens && pnpm test:unit && pnpm test:e2e && pnpm size && pnpm verify:docs-parity && pnpm verify:isolation && pnpm test:visual && pnpm test:a11y && pnpm smoke:frameworks",
-    "changeset": "changeset"
+    "verify": "pnpm lint:pins && pnpm build && pnpm lint:tokens && pnpm test:unit && pnpm test:e2e && pnpm size && pnpm verify:docs-parity && pnpm verify:isolation && pnpm test:visual && pnpm test:a11y && pnpm smoke:frameworks && pnpm test:ssr",
+    "changeset": "changeset",
+    "test:ssr": "scripts/pw-docker.sh npx playwright test --project=ssr",
+    "version-packages": "changeset version && pnpm install --lockfile-only --offline",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "3.0.2",

@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createModal, type Modal, type ModalReason } from './modal';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Dialog — shadcn/ui parity on the native `<dialog>` (ADR-0020): a modal window over the page
@@ -59,11 +60,11 @@ export class ArtDialog {
     this.modal = undefined;
   }
 
-  private trigger(): HTMLElement | null { return this.host.querySelector(':scope > [slot="trigger"]'); }
+  private trigger(): HTMLElement | null { return child(this.host, '[slot="trigger"]'); }
   private wire = () => {
-    this.hasTitle = !!this.host.querySelector(':scope > [slot="title"]');
-    this.hasDescription = !!this.host.querySelector(':scope > [slot="description"]');
-    this.hasFooter = !!this.host.querySelector(':scope > [slot="footer"]');
+    this.hasTitle = !!child(this.host, '[slot="title"]');
+    this.hasDescription = !!child(this.host, '[slot="description"]');
+    this.hasFooter = !!child(this.host, '[slot="footer"]');
     const t = this.trigger();
     t?.setAttribute('aria-haspopup', 'dialog');
     t?.setAttribute('aria-expanded', String(this.open));

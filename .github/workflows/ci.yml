@@ -22,6 +22,8 @@ jobs:
       # The image's ENV is not inherited by container jobs; browsers live here in the image.
       PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
       CI: 'true'
+      # one tier's dev server + browser at a time: five in parallel starve each other on the runner (timeouts, dropped keys)
+      ARTUI_E2E_CONCURRENCY: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -49,9 +51,3 @@ jobs:
             packages/*/test-results
           retention-days: 7
 
-  release:
-    name: release (disabled until 1.0)
-    if: false
-    runs-on: ubuntu-24.04
-    steps:
-      - run: echo "ADR-0016 — enable after Phase 8"

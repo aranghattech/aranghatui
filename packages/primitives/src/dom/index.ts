@@ -35,6 +35,21 @@ export function containsAcrossShadow(container: Node, target: Node | null, path?
   return false;
 }
 
+/**
+ * First direct child of `host` matching `selector` — what `:scope > selector` means in a browser.
+ * Stencil's mock document (SSR) cannot parse `:scope`; components use these two instead.
+ */
+export function child<T extends Element = HTMLElement>(host: ParentNode | null | undefined, selector: string): T | null {
+  if (!host) return null;
+  for (const c of Array.from(host.children)) if (c.matches(selector)) return c as T;
+  return null;
+}
+
+/** Every direct child of `host` matching `selector`, in DOM order (`[]` for a missing host). */
+export function children<T extends Element = HTMLElement>(host: ParentNode | null | undefined, selector: string): T[] {
+  return host ? (Array.from(host.children).filter((c) => c.matches(selector)) as T[]) : [];
+}
+
 export function isRtl(el: Element): boolean {
   const dir = closestAcrossShadow(el, '[dir]')?.getAttribute('dir');
   if (dir) return dir === 'rtl';

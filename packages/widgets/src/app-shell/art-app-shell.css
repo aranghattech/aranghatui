@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  min-height: 100svh;
+}
+:host([hidden]) {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
+/* the provider fills the shell, not the viewport: a docs frame or a nested layout sizes the host */
+.provider {
+  min-height: 100%;
+  height: 100%;
+}
+.header {
+  height: var(--art-space-14);
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+}

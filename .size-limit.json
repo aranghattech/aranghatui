@@ -473,6 +473,12 @@
     "gzip": true
   },
   {
+    "name": "base: hydratable runtime chunk, artui-ssr (index2.js)",
+    "path": "packages/base/dist/components-ssr/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
     "name": "components: runtime chunk (index2.js)",
     "path": "packages/components/dist/components/index2.js",
     "limit": "20 kB",
@@ -998,6 +1004,12 @@
     "gzip": true
   },
   {
+    "name": "components: hydratable runtime chunk, artui-ssr (index2.js)",
+    "path": "packages/components/dist/components-ssr/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
     "name": "navigation: runtime chunk (index2.js)",
     "path": "packages/navigation/dist/components/index2.js",
     "limit": "20 kB",
@@ -1380,6 +1392,12 @@
     "gzip": true
   },
   {
+    "name": "navigation: hydratable runtime chunk, artui-ssr (index2.js)",
+    "path": "packages/navigation/dist/components-ssr/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
     "name": "modals/art-dialog (+ inlined runtime: single-component tier)",
     "path": "packages/modals/dist/components/art-dialog.js",
     "import": "{ defineCustomElement }",
@@ -1444,6 +1462,173 @@
     "gzip": true
   },
   {
+    "name": "widgets: runtime chunk (index2.js)",
+    "path": "packages/widgets/dist/components/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-app-shell",
+    "path": "packages/widgets/dist/components/art-app-shell.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-login",
+    "path": "packages/widgets/dist/components/art-login.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-signup",
+    "path": "packages/widgets/dist/components/art-signup.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-forgot-password",
+    "path": "packages/widgets/dist/components/art-forgot-password.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-settings-page",
+    "path": "packages/widgets/dist/components/art-settings-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-data-table-page",
+    "path": "packages/widgets/dist/components/art-data-table-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-state-page",
+    "path": "packages/widgets/dist/components/art-state-page.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-onboarding-wizard",
+    "path": "packages/widgets/dist/components/art-onboarding-wizard.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-notification-centre",
+    "path": "packages/widgets/dist/components/art-notification-centre.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-wizard-step",
+    "path": "packages/widgets/dist/components/art-wizard-step.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets/art-notification-item",
+    "path": "packages/widgets/dist/components/art-notification-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets: whole tier",
+    "path": "packages/widgets/dist/components/index.js",
+    "import": "*",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel"
+    ],
+    "limit": "60 kB",
+    "gzip": true
+  },
+  {
+    "name": "widgets: hydratable runtime chunk, artui-ssr (index2.js)",
+    "path": "packages/widgets/dist/components-ssr/index2.js",
+    "limit": "20 kB",
+    "gzip": true
+  },
+  {
     "name": "primitives: all modules (incl. @floating-ui/dom)",
     "path": "packages/primitives/dist/index.js",
     "import": "*",
@@ -1454,6 +1639,18 @@
     "name": "reference: landing page (tokens + runtime + button + icon)",
     "path": "tooling/size/landing.mjs",
     "limit": "15 kB",
+    "gzip": true
+  },
+  {
+    "name": "reference: auth screen (base + widgets/login)",
+    "path": "tooling/size/auth.mjs",
+    "limit": "30 kB",
+    "gzip": true
+  },
+  {
+    "name": "reference: full admin shell (all tiers via @aranghat/ui)",
+    "path": "tooling/size/admin.mjs",
+    "limit": "180 kB",
     "gzip": true
   }
 ]

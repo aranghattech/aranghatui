@@ -211,6 +211,24 @@ StyleDictionary.registerFormat({
   })), null, 2),
 });
 
+// Figma — Tokens Studio "multi-file" format, DTCG style: one JSON per set (core / light / dark),
+// references kept as `{path.to.token}`, plus $metadata and $themes (CLAUDE.md §13, Phase 8).
+StyleDictionary.registerFormat({
+  name: 'json/tokens-studio',
+  format: ({ dictionary }) => {
+    const out = {};
+    for (const t of dictionary.allTokens) {
+      let node = out;
+      for (const key of t.path.slice(0, -1)) node = node[key] ??= {};
+      const leaf = { $value: t.original.$value, $type: t.$type };
+      if (t.$description) leaf.$description = t.$description;
+      node[t.path[t.path.length - 1]] = leaf;
+    }
+    return JSON.stringify(out, null, 2);
+  },
+});
+const isCore = (t) => t.filePath.includes('/primitive/') || t.filePath.includes('/semantic/shared/');
+
 // --- builds ------------------------------------------------------------------
 const primitive = ['src/primitive/**/*.json', 'src/semantic/shared/**/*.json'];
 const light = new StyleDictionary({
@@ -248,6 +266,14 @@ const light = new StyleDictionary({
       buildPath: 'dist/json/',
       files: [{ destination: 'tokens.json', format: 'json/nested' }, { destination: 'tokens.flat.json', format: 'json/artui-flat' }],
     },
+    figma: {
+      transforms: [],
+      buildPath: 'dist/figma/',
+      files: [
+        { destination: 'core.json', format: 'json/tokens-studio', filter: isCore },
+        { destination: 'light.json', format: 'json/tokens-studio', filter: (t) => t.filePath.includes('/semantic/light/') },
+      ],
+    },
     compose: {
       transformGroup: 'compose',
       buildPath: 'dist/compose/',
@@ -280,10 +306,23 @@ const dark = new StyleDictionary({
       buildPath: 'dist/swift/',
       files: [{ destination: 'TokensDark.swift', format: 'ios-swift/class.swift', options: { className: 'ArtTokensDark' }, filter: (t) => t.$type === 'color' && t.filePath.includes('/semantic/dark/') }],
     },
+    figma: {
+      transforms: [],
+      buildPath: 'dist/figma/',
+      files: [{ destination: 'dark.json', format: 'json/tokens-studio', filter: (t) => t.filePath.includes('/semantic/dark/') }],
+    },
   },
 });
 
 await Promise.all([light.buildAllPlatforms(), dark.buildAllPlatforms()]);
+
+// Tokens Studio set order and the two themes it switches between (core is the source set of both).
+const figmaDir = join(dist, 'figma');
+writeFileSync(join(figmaDir, '$metadata.json'), JSON.stringify({ tokenSetOrder: ['core', 'light', 'dark'] }, null, 2) + '\n');
+writeFileSync(join(figmaDir, '$themes.json'), JSON.stringify([
+  { id: 'artui-light', name: 'Light', group: 'Mode', selectedTokenSets: { core: 'source', light: 'enabled' } },
+  { id: 'artui-dark', name: 'Dark', group: 'Mode', selectedTokenSets: { core: 'source', dark: 'enabled' } },
+], null, 2) + '\n');
 
 // Stitch aranghat.css
 const cssDir = join(dist, 'css');
@@ -322,4 +361,4 @@ for (const name of themeNames) {
   writeFileSync(join(cssDir, 'themes', `${name}.css`), out);
   rmSync(join(cssDir, 'themes', `_${name}`), { recursive: true, force: true });
 }
-console.log('✔ tokens built → dist/{css,scss,js,ts,json,compose,swift}');
+console.log('✔ tokens built → dist/{css,scss,js,ts,json,figma,compose,swift}');

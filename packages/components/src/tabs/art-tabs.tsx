@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createRovingTabindex, type RovingTabindex } from '@aranghat/primitives/roving-tabindex';
+import { children } from '@aranghat/primitives/dom';
 
 type TabEl = HTMLElement & { value: string; disabled: boolean; selected: boolean; tabbable: boolean };
 type PanelEl = HTMLElement & { value: string };
@@ -31,8 +32,8 @@ export class ArtTabs {
   /** Emitted when the user selects a tab; `detail.value`. */
   @Event({ eventName: 'value-change', bubbles: true, composed: true }) valueChange!: EventEmitter<{ value: string }>;
 
-  private tabs(): TabEl[] { return Array.from(this.host.querySelectorAll(':scope > art-tab')); }
-  private panels(): PanelEl[] { return Array.from(this.host.querySelectorAll(':scope > art-tab-panel')); }
+  private tabs(): TabEl[] { return children(this.host, 'art-tab'); }
+  private panels(): PanelEl[] { return children(this.host, 'art-tab-panel'); }
 
   connectedCallback() {
     this.host.addEventListener('click', this.onClick);

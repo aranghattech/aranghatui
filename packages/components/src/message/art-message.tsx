@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Message — shadcn/ui parity. A row in a conversation: an avatar anchored to the bottom, then
@@ -27,11 +28,11 @@ export class ArtMessage {
   }
   /** `:host(:has(…))` cannot see slotted state, so the parts that change layout are mirrored as data attributes. */
   private sync = () => {
-    const has = (s: string) => !!this.host.querySelector(`:scope > [slot="${s}"]`);
+    const has = (s: string) => !!child(this.host, `[slot="${s}"]`);
     this.host.toggleAttribute('data-has-footer', has('footer'));
     this.host.toggleAttribute('data-has-header', has('header'));
     this.host.toggleAttribute('data-has-avatar', has('avatar'));
-    this.host.toggleAttribute('data-ghost', !!this.host.querySelector(':scope > art-bubble[variant="ghost"]'));
+    this.host.toggleAttribute('data-ghost', !!child(this.host, 'art-bubble[variant="ghost"]'));
   };
 
   render() {

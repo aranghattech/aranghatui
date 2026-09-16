@@ -3,6 +3,7 @@ import { createDismissable, type Dismissable } from '@aranghat/primitives/dismis
 import type { Placement } from '@aranghat/primitives/floating';
 import { createHoverIntent, durationToken, type HoverIntent } from '@aranghat/primitives/hover-intent';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Hover Card — shadcn/ui parity. A preview card for sighted users to peek at what sits behind
@@ -48,7 +49,7 @@ export class ArtHoverCard {
   }
 
   private trigger(): HTMLElement | null {
-    return this.host.querySelector(':scope > [slot="trigger"]');
+    return child(this.host, '[slot="trigger"]');
   }
   private wire = () => {
     const t = this.trigger();

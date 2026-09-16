@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, Watch, h } from '@stencil/core';
+import { children } from '@aranghat/primitives/dom';
 
 /**
  * Breadcrumb — shadcn/ui parity. A `<nav aria-label="breadcrumb">` with an ordered list of
@@ -24,7 +25,7 @@ export class ArtBreadcrumb {
   @Watch('separator')
   onSeparator() { this.sync(); }
   private sync = () => {
-    const items = Array.from(this.host.querySelectorAll(':scope > art-breadcrumb-item'));
+    const items = children(this.host, 'art-breadcrumb-item');
     items.forEach((item, i) => {
       item.setAttribute('data-separator', this.separator);
       item.toggleAttribute('data-last', i === items.length - 1);

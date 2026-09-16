@@ -77,7 +77,9 @@ export function createFloating(reference: Element | VirtualElement, floating: HT
     }
     if (arrow) middleware.push(arrowMiddleware({ element: arrow }));
 
-    const result = await computePosition(reference, floating, { placement, strategy, middleware });
+    let result;
+    // A server document (ADR-0023) has no layout to measure; the client positions on hydration.
+    try { result = await computePosition(reference, floating, { placement, strategy, middleware }); } catch { return; }
     if (destroyed) return;
     // left/top, not a transform: individual `scale` / `translate` animations on the panel compose
     // before the transform property and would scale the positioning translation too, making the

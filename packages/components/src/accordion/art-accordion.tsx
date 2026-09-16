@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { children } from '@aranghat/primitives/dom';
 
 type ItemEl = HTMLElement & { value: string; open: boolean; disabled: boolean };
 
@@ -24,7 +25,7 @@ export class ArtAccordion {
   /** Emitted after a user toggle; `detail.value` is a string (`single`) or string[] (`multiple`). */
   @Event({ eventName: 'value-change', bubbles: true, composed: true }) valueChange!: EventEmitter<{ value: string | string[] }>;
 
-  private items(): ItemEl[] { return Array.from(this.host.querySelectorAll(':scope > art-accordion-item')); }
+  private items(): ItemEl[] { return children(this.host, 'art-accordion-item'); }
   private selected(): string[] {
     const v = this.value;
     return Array.isArray(v) ? v : typeof v === 'string' && v ? (this.type === 'multiple' ? v.split(',').map((s) => s.trim()) : [v]) : [];

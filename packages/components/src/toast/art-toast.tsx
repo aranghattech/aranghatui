@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Method, Prop, State, h } from '@stencil/core';
 import type { ToastVariant } from './toast-api';
+import { child } from '@aranghat/primitives/dom';
 
 export type ToastDismissReason = 'timeout' | 'close' | 'action' | 'cancel' | 'programmatic';
 
@@ -66,8 +67,8 @@ export class ArtToast {
   }
   /** Slotted state drives the layout; it is read from the light DOM (a shadow stylesheet's `:has()` cannot see it) into state so the render follows. */
   private sync = () => {
-    this.hasDescription = !!this.host.querySelector(':scope > [slot="description"]');
-    this.hasActions = !!this.host.querySelector(':scope > [slot="action"]');
+    this.hasDescription = !!child(this.host, '[slot="description"]');
+    this.hasActions = !!child(this.host, '[slot="action"]');
     // whitespace between child tags is assigned to the default slot and would hide the `label` fallback
     this.hasTitle = Array.from(this.host.childNodes).some((n) => (n.nodeType === Node.TEXT_NODE && !!n.textContent?.trim()) || (n.nodeType === Node.ELEMENT_NODE && !(n as Element).hasAttribute('slot')));
   };

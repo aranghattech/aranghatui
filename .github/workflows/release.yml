@@ -1,0 +1,41 @@
+name: Release
+
+# Manual, and inert until the repository variable RELEASE_ENABLED is "true" (ADR-0016: nothing is
+# published before 1.0). Publishes every @aranghat/* package in lockstep to GitHub Packages with
+# Changesets: `changeset version` opens (or updates) the release PR; merging it publishes.
+on:
+  workflow_dispatch:
+
+concurrency: release
+
+jobs:
+  release:
+    name: version & publish (Changesets → GitHub Packages)
+    if: vars.RELEASE_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: '@aranghat'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          publish: pnpm release
+          title: 'chore(release): version packages'
+          commit: 'chore(release): version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

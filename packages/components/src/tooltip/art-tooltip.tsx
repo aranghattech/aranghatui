@@ -3,6 +3,7 @@ import { createDismissable, type Dismissable } from '@aranghat/primitives/dismis
 import type { Placement } from '@aranghat/primitives/floating';
 import { createHoverIntent, type HoverIntent } from '@aranghat/primitives/hover-intent';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { child } from '@aranghat/primitives/dom';
 
 /**
  * Tooltip — shadcn/ui parity. A short label that appears when the pointer rests on the
@@ -50,7 +51,7 @@ export class ArtTooltip {
   }
 
   private trigger(): HTMLElement | null {
-    return this.host.querySelector(':scope > [slot="trigger"]');
+    return child(this.host, '[slot="trigger"]');
   }
   private text(): string {
     return Array.from(this.host.childNodes).filter((n) => !(n.nodeType === 1 && (n as Element).hasAttribute('slot'))).map((n) => n.textContent).join('').trim();

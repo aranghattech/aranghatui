@@ -36,5 +36,9 @@
       "default": "./dist/fesm2022/aranghat-navigation-angular.mjs"
     },
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

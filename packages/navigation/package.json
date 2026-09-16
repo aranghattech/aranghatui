@@ -16,130 +16,164 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
     "./dist/components": {
       "types": "./dist/components/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
       "import": "./dist/components/index.js"
     },
-    "./dist/components/*": "./dist/components/*",
+    "./dist/components/*": {
+      "types": "./dist/components/*",
+      "artui-ssr": "./dist/components-ssr/*",
+      "default": "./dist/components/*"
+    },
     "./breadcrumb": {
       "types": "./dist/components/art-breadcrumb.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-breadcrumb.js",
       "import": "./dist/components/art-breadcrumb.js"
     },
     "./breadcrumb-item": {
       "types": "./dist/components/art-breadcrumb-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-breadcrumb-item.js",
       "import": "./dist/components/art-breadcrumb-item.js"
     },
     "./context-menu": {
       "types": "./dist/components/art-context-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-context-menu.js",
       "import": "./dist/components/art-context-menu.js"
     },
     "./dropdown-menu": {
       "types": "./dist/components/art-dropdown-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-dropdown-menu.js",
       "import": "./dist/components/art-dropdown-menu.js"
     },
     "./menu-group": {
       "types": "./dist/components/art-menu-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-group.js",
       "import": "./dist/components/art-menu-group.js"
     },
     "./menu-item": {
       "types": "./dist/components/art-menu-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-item.js",
       "import": "./dist/components/art-menu-item.js"
     },
     "./menu-label": {
       "types": "./dist/components/art-menu-label.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-label.js",
       "import": "./dist/components/art-menu-label.js"
     },
     "./menu-radio-group": {
       "types": "./dist/components/art-menu-radio-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-radio-group.js",
       "import": "./dist/components/art-menu-radio-group.js"
     },
     "./menu-separator": {
       "types": "./dist/components/art-menu-separator.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-separator.js",
       "import": "./dist/components/art-menu-separator.js"
     },
     "./menu-sub": {
       "types": "./dist/components/art-menu-sub.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menu-sub.js",
       "import": "./dist/components/art-menu-sub.js"
     },
     "./menubar": {
       "types": "./dist/components/art-menubar.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menubar.js",
       "import": "./dist/components/art-menubar.js"
     },
     "./menubar-menu": {
       "types": "./dist/components/art-menubar-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-menubar-menu.js",
       "import": "./dist/components/art-menubar-menu.js"
     },
     "./navigation-menu": {
       "types": "./dist/components/art-navigation-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-navigation-menu.js",
       "import": "./dist/components/art-navigation-menu.js"
     },
     "./navigation-menu-item": {
       "types": "./dist/components/art-navigation-menu-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-navigation-menu-item.js",
       "import": "./dist/components/art-navigation-menu-item.js"
     },
     "./navigation-menu-link": {
       "types": "./dist/components/art-navigation-menu-link.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-navigation-menu-link.js",
       "import": "./dist/components/art-navigation-menu-link.js"
     },
     "./pagination": {
       "types": "./dist/components/art-pagination.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-pagination.js",
       "import": "./dist/components/art-pagination.js"
     },
     "./sidebar": {
       "types": "./dist/components/art-sidebar.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar.js",
       "import": "./dist/components/art-sidebar.js"
     },
     "./sidebar-group": {
       "types": "./dist/components/art-sidebar-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-group.js",
       "import": "./dist/components/art-sidebar-group.js"
     },
     "./sidebar-inset": {
       "types": "./dist/components/art-sidebar-inset.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-inset.js",
       "import": "./dist/components/art-sidebar-inset.js"
     },
     "./sidebar-menu": {
       "types": "./dist/components/art-sidebar-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-menu.js",
       "import": "./dist/components/art-sidebar-menu.js"
     },
     "./sidebar-menu-button": {
       "types": "./dist/components/art-sidebar-menu-button.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-menu-button.js",
       "import": "./dist/components/art-sidebar-menu-button.js"
     },
     "./sidebar-menu-item": {
       "types": "./dist/components/art-sidebar-menu-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-menu-item.js",
       "import": "./dist/components/art-sidebar-menu-item.js"
     },
     "./sidebar-menu-sub": {
       "types": "./dist/components/art-sidebar-menu-sub.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-menu-sub.js",
       "import": "./dist/components/art-sidebar-menu-sub.js"
     },
     "./sidebar-provider": {
       "types": "./dist/components/art-sidebar-provider.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-provider.js",
       "import": "./dist/components/art-sidebar-provider.js"
     },
     "./sidebar-trigger": {
       "types": "./dist/components/art-sidebar-trigger.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-sidebar-trigger.js",
       "import": "./dist/components/art-sidebar-trigger.js"
     },
     "./top-nav": {
       "types": "./dist/components/art-top-nav.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-top-nav.js",
       "import": "./dist/components/art-top-nav.js"
     },
     "./tree-item": {
       "types": "./dist/components/art-tree-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tree-item.js",
       "import": "./dist/components/art-tree-item.js"
     },
     "./tree-view": {
       "types": "./dist/components/art-tree-view.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-tree-view.js",
       "import": "./dist/components/art-tree-view.js"
     },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "rm -rf dist www && stencil build --docs && artui-wrapper-entries core navigation",
+    "build": "rm -rf dist www && stencil build --docs && ARTUI_SSR=1 stencil build && rm -rf dist/hydrate && artui-wrapper-entries core navigation",
     "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
     "test:unit": "vitest run",
     "test:e2e": "playwright test"
@@ -163,5 +197,9 @@
     "@stencil/vitest": "1.15.1",
     "jsdom": "28.1.0",
     "vitest": "4.1.11"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

@@ -625,47 +625,59 @@
         {
           "tag": "art-app-shell",
           "name": "App Shell",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-login",
           "name": "Login",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-signup",
           "name": "Signup",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-forgot-password",
           "name": "Forgot Password",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-settings-page",
           "name": "Settings Page",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-data-table-page",
           "name": "Data Table Page",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-state-page",
           "name": "Empty / 404 / 500 States",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-onboarding-wizard",
           "name": "Onboarding Wizard",
-          "status": "planned"
+          "status": "in-progress"
         },
         {
           "tag": "art-notification-centre",
           "name": "Notification Centre",
-          "status": "planned"
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-wizard-step",
+          "name": "Wizard Step",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-notification-item",
+          "name": "Notification Item",
+          "status": "in-progress",
+          "internal": true
         }
       ]
     }

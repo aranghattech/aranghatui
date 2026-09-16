@@ -18,6 +18,8 @@
     "@aranghat/navigation": "workspace:*",
     "@aranghat/navigation-vue": "workspace:*",
     "@aranghat/tokens": "workspace:*",
+    "@aranghat/widgets": "workspace:*",
+    "@aranghat/widgets-vue": "workspace:*",
     "vue": "3.5.42"
   },
   "devDependencies": {

@@ -1,8 +1,5 @@
 import type { Config } from '@stencil/core';
 import { createTierConfig } from '@artui/stencil-config';
 
-export const config: Config = createTierConfig({
-  tier: 'modals',
-  // Vue v-model:open (CLAUDE.md §3a); React gets `onOpenChange` from the kebab-case event name
-  componentModels: [{ elements: ['art-dialog', 'art-alert-dialog', 'art-sheet', 'art-drawer'], targetAttr: 'open', event: 'open-change' }],
-});
+// Framework binding metadata (v-model, ngModel) lives in @artui/stencil-config/models.
+export const config: Config = createTierConfig({ tier: 'modals' });

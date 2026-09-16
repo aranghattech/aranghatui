@@ -36,5 +36,9 @@
       "types": "./dist/types/aranghat-components-angular.d.ts",
       "default": "./dist/fesm2022/aranghat-components-angular.mjs"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

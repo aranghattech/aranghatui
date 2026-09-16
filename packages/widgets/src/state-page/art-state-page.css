@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100svh;
+}
+:host([hidden]) {
+  display: none;
+}
+:host [hidden] {
+  display: none;
+}
+.empty {
+  width: 100%;
+  max-width: var(--art-container-md);
+}
+.code {
+  font-size: var(--art-font-size-4xl);
+  line-height: var(--art-font-line-height-4xl);
+  letter-spacing: var(--art-font-tracking-tight);
+  font-variant-numeric: tabular-nums;
+}

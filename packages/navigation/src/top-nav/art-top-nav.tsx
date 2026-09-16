@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { createDismissable, type Dismissable } from '@aranghat/primitives/dismissable';
-import { cssLength, getTabbables } from '@aranghat/primitives/dom';
+import { cssLength, getTabbables, child } from '@aranghat/primitives/dom';
 
 /**
  * TopNav — an app header bar: a brand at the start, a row of links, actions at the end. Below
@@ -64,8 +64,8 @@ export class ArtTopNav {
 
   private get collapsed() { return this.collapse === 'always' || (this.collapse === 'auto' && this.narrow); }
   private wire = () => {
-    this.hasBrand = !!this.host.querySelector(':scope > [slot="brand"]');
-    this.hasEnd = !!this.host.querySelector(':scope > [slot="end"]');
+    this.hasBrand = !!child(this.host, '[slot="brand"]');
+    this.hasEnd = !!child(this.host, '[slot="end"]');
   };
   private onMedia = (e: MediaQueryListEvent) => { this.narrow = e.matches; };
   @Watch('narrow') @Watch('collapse')

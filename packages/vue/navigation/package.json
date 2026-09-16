@@ -134,13 +134,24 @@
     "@stencil/vue-output-target": "0.14.3"
   },
   "peerDependencies": {
-    "vue": "^3.4.38",
-    "@aranghat/navigation": "workspace:*"
+    "@aranghat/hydrate": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
+    "vue": "^3.4.38"
   },
   "devDependencies": {
+    "@aranghat/hydrate": "workspace:*",
+    "@aranghat/navigation": "workspace:*",
     "@artui/wrapper-entries": "workspace:*",
     "typescript": "6.0.3",
-    "vue": "3.5.42",
-    "@aranghat/navigation": "workspace:*"
+    "vue": "3.5.42"
+  },
+  "peerDependenciesMeta": {
+    "@aranghat/hydrate": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

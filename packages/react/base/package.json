@@ -153,6 +153,10 @@
       "types": "./dist/typography.d.ts",
       "import": "./dist/typography.js"
     },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -163,16 +167,27 @@
   },
   "peerDependencies": {
     "@aranghat/base": "workspace:*",
+    "@aranghat/hydrate": "workspace:*",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
   "devDependencies": {
     "@aranghat/base": "workspace:*",
+    "@aranghat/hydrate": "workspace:*",
     "@artui/wrapper-entries": "workspace:*",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "typescript": "6.0.3"
+  },
+  "peerDependenciesMeta": {
+    "@aranghat/hydrate": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   }
 }

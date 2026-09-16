@@ -2,7 +2,7 @@ import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { isRtl } from '@aranghat/primitives/dom';
 import { createHoverIntent, type HoverIntent } from '@aranghat/primitives/hover-intent';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
-import { isIconMode, watchState } from '../sidebar/context';
+import { bindSidebar, flatClosest, isIconMode } from '../sidebar/context';
 
 /**
  * Sidebar Menu Button — the control of an `art-sidebar-menu-item`: a button, or a link with
@@ -42,11 +42,11 @@ export class ArtSidebarMenuButton {
   @State() sub = false;
 
   connectedCallback() {
-    this.sidebar = this.host.closest('art-sidebar');
-    this.sub = !!this.host.closest('art-sidebar-menu-sub');
-    this.unwatch = watchState(this.sidebar, () => {
-      this.icon = isIconMode(this.sidebar);
-      this.mobile = !!this.sidebar?.hasAttribute('data-mobile');
+    this.sub = !!flatClosest(this.host, 'art-sidebar-menu-sub');
+    this.unwatch = bindSidebar(this.host, (s) => {
+      this.sidebar = s;
+      this.icon = isIconMode(s);
+      this.mobile = !!s?.hasAttribute('data-mobile');
       if (!this.icon) this.showTip(false);
     });
   }
