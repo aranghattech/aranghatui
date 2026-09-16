@@ -7,7 +7,7 @@ import { Checkbox, Table } from '@aranghat/base-vue';
   <table>
     <thead>
       <tr>
-        <th><Checkbox aria-label="Select all" /></th>
+        <th><Checkbox aria-label="Select all" /><span class="sr-only">Select</span></th>
         <th>Invoice</th>
         <th data-align="end">Amount</th>
       </tr>

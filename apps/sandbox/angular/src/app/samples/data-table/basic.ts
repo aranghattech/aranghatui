@@ -26,7 +26,7 @@ const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD
       <table>
         <thead>
           <tr>
-            <th><art-checkbox aria-label="Select all" [checked]="s.pageSelection === 'all'" [indeterminate]="s.pageSelection === 'some'" (change)="table.setPageSelected($any($event).detail.checked)"></art-checkbox></th>
+            <th><art-checkbox aria-label="Select all" [checked]="s.pageSelection === 'all'" [indeterminate]="s.pageSelection === 'some'" (change)="table.setPageSelected($any($event).detail.checked)"></art-checkbox><span class="sr-only">Select</span></th>
             @for (c of s.visibleColumns; track c.id) {
               <th [attr.aria-sort]="s.sort?.id === c.id ? (s.sort?.desc ? 'descending' : 'ascending') : null" [attr.data-align]="c.id === 'amount' ? 'end' : null">
                 {{ c.header }} <art-button variant="ghost" size="sm" icon [attr.aria-label]="'Sort by ' + c.header!.toLowerCase()" (click)="table.sortBy(c.id)">{{ sortMark(c.id) }}</art-button>

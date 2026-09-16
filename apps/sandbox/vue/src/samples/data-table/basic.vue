@@ -32,7 +32,7 @@ const toggleColumn = (e: CustomEvent<{ value: string }>) => { if (e.detail.value
     <table>
       <thead>
         <tr>
-          <th><Checkbox aria-label="Select all" :checked="s.pageSelection === 'all'" :indeterminate="s.pageSelection === 'some'" @change="table.setPageSelected($event.detail.checked)" /></th>
+          <th><Checkbox aria-label="Select all" :checked="s.pageSelection === 'all'" :indeterminate="s.pageSelection === 'some'" @change="table.setPageSelected($event.detail.checked)" /><span class="sr-only">Select</span></th>
           <th v-for="c in s.visibleColumns" :key="c.id" :aria-sort="s.sort?.id === c.id ? (s.sort.desc ? 'descending' : 'ascending') : undefined" :data-align="c.id === 'amount' ? 'end' : undefined">
             {{ c.header }} <Button variant="ghost" size="sm" icon :aria-label="`Sort by ${c.header!.toLowerCase()}`" @click="table.sortBy(c.id)">{{ sortMark(c.id) }}</Button>
           </th>

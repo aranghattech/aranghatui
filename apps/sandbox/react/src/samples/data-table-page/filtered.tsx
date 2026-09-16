@@ -13,7 +13,7 @@ export default function Filtered() {
           <table>
             <thead>
               <tr>
-                <th><Checkbox aria-label="Select all" /></th>
+                <th><Checkbox aria-label="Select all" /><span className="sr-only">Select</span></th>
                 <th>Task</th>
                 <th>Title</th>
                 <th>Status</th>
