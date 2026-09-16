@@ -3,6 +3,7 @@ name: Release
 # Manual, and inert until the repository variable RELEASE_ENABLED is "true" (ADR-0016: nothing is
 # published before 1.0). Publishes every @aranghat/* package in lockstep to GitHub Packages with
 # Changesets: `changeset version` opens (or updates) the release PR; merging it publishes.
+# Auth comes from the ART_PKG_TOKEN repo secret for both steps — see .changeset/README.md.
 on:
   workflow_dispatch:
 
@@ -21,6 +22,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # the release PR is pushed with this token; a PAT (unlike GITHUB_TOKEN) also lets CI run on it
+          token: ${{ secrets.ART_PKG_TOKEN }}
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -37,5 +40,6 @@ jobs:
           title: 'chore(release): version packages'
           commit: 'chore(release): version packages'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # ART_PKG_TOKEN (repo secret) needs `write:packages` to publish and `repo` to open the release PR
+          GITHUB_TOKEN: ${{ secrets.ART_PKG_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.ART_PKG_TOKEN }}
