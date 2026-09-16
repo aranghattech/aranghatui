@@ -121,7 +121,7 @@ export class ArtNotificationCentre {
           <h2 class="m-0 text-sm font-semibold">{this.heading}</h2>
           <art-button variant="ghost" size="sm" disabled={this.unread === 0} onClick={this.markAll}>{this.markAllLabel}</art-button>
         </div>
-        <div part="filters" class="filters flex items-center gap-1 px-3 pb-2">
+        <div part="filters" class="filters flex items-center gap-1 px-3 py-2">
           <art-button variant={this.filter === 'all' ? 'secondary' : 'ghost'} size="sm" aria-pressed={this.filter === 'all' ? 'true' : 'false'} onClick={() => (this.filter = 'all')}>{this.allLabel}</art-button>
           <art-button variant={this.filter === 'unread' ? 'secondary' : 'ghost'} size="sm" aria-pressed={this.filter === 'unread' ? 'true' : 'false'} onClick={() => (this.filter = 'unread')}>{this.unreadLabel}{this.unread > 0 && <span class="ms-1">({this.unread})</span>}</art-button>
         </div>

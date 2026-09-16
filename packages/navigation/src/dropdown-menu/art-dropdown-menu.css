@@ -15,8 +15,12 @@
     height: auto;
   }
 }
+/**
+ * @prop --art-menu-max-height: Height at which the menu starts to scroll. Defaults to the `space.72` token (18rem); set it on the element to show more (or fewer) items before the scrollbar appears.
+ */
 [part='content'] {
   position: fixed;
+  max-height: var(--art-menu-max-height, var(--art-space-72));
 }
 [part='content']:not([data-state]),
 [part='content'][popover]:not(:popover-open) {
