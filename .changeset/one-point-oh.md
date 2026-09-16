@@ -17,6 +17,7 @@
 '@aranghat/navigation-react': major
 '@aranghat/widgets-react': major
 '@aranghat/tokens': major
+'@aranghat/skills': major
 '@aranghat/ui': major
 '@aranghat/base-vue': major
 '@aranghat/components-vue': major

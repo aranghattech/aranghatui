@@ -36,6 +36,7 @@ export default defineConfig({
           { text: 'Primitives', link: '/guide/primitives' },
           { text: 'Versioning', link: '/guide/versioning' },
           { text: 'Migration', link: '/guide/migration' },
+          { text: 'Agent Skills', link: '/guide/skills' },
           { text: 'Contributing', link: '/guide/contributing' },
         ] },
       ],
