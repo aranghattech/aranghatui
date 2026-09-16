@@ -73,14 +73,14 @@ export class ArtCombobox {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   private items(): ItemEl[] { return Array.from(this.host.querySelectorAll('art-combobox-item')); }
@@ -199,7 +199,7 @@ export class ArtCombobox {
     this.set(false);
     this.input?.focus({ preventScroll: true });
   }
-  private remove(value: string) {
+  private removeValue(value: string) {
     const next = this.values().filter((v) => v !== value);
     this.value = next;
     this.changeEvent.emit({ value: next, items: next.map((v) => this.items().find((i) => i.value === v)?.item) });
@@ -252,7 +252,7 @@ export class ArtCombobox {
     }
     if (e.key === 'Enter' && !this.open) return; // submit the surrounding form
     if (e.key === 'Tab') { this.set(false); return; }
-    if (e.key === 'Backspace' && this.multiple && !this.input?.value && this.chips.length) { this.remove(this.chips[this.chips.length - 1]!.value); return; }
+    if (e.key === 'Backspace' && this.multiple && !this.input?.value && this.chips.length) { this.removeValue(this.chips[this.chips.length - 1]!.value); return; }
     if (this.open && this.list?.handleKey(e)) e.preventDefault();
   };
   private onFieldPointerDown = (e: PointerEvent) => {
@@ -282,7 +282,7 @@ export class ArtCombobox {
           {this.chips.map((c) => (
             <span part="chip" class="inline-flex h-6 shrink-0 items-center gap-1 rounded-md bg-secondary ps-2 pe-1 text-xs font-medium text-secondary-fg" key={c.value}>
               {c.text}
-              <button type="button" class="chip-remove inline-flex items-center justify-center rounded-sm text-fg-muted transition-interactive motion-fast hover:text-fg focus-ring" aria-label={`Remove ${c.text}`} tabindex="-1" disabled={this.disabled} onClick={() => this.remove(c.value)}>
+              <button type="button" class="chip-remove inline-flex items-center justify-center rounded-sm text-fg-muted transition-interactive motion-fast hover:text-fg focus-ring" aria-label={`Remove ${c.text}`} tabindex="-1" disabled={this.disabled} onClick={() => this.removeValue(c.value)}>
                 <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
               </button>
             </span>
@@ -296,8 +296,8 @@ export class ArtCombobox {
             aria-controls={this.listboxId}
             aria-autocomplete="list"
             aria-haspopup="listbox"
-            aria-label={this.ariaLabel}
-            aria-description={this.ariaDescription}
+            aria-label={this.hostLabel}
+            aria-description={this.hostDescription}
             aria-invalid={this.invalid ? 'true' : undefined}
             aria-required={this.required ? 'true' : undefined}
             autocomplete="off"
@@ -321,7 +321,7 @@ export class ArtCombobox {
           )}
         </div>
         <div part="content" popover="manual" ref={(el) => (this.panel = el)} class="rounded-md border-default bg-popover text-fg shadow-popover">
-          <div part="listbox" id={this.listboxId} role="listbox" aria-label={this.ariaLabel} aria-multiselectable={this.multiple ? 'true' : undefined} class="max-h-72 overflow-x-hidden overflow-y-auto p-1">
+          <div part="listbox" id={this.listboxId} role="listbox" aria-label={this.hostLabel} aria-multiselectable={this.multiple ? 'true' : undefined} class="max-h-72 overflow-x-hidden overflow-y-auto p-1">
             <slot />
           </div>
           <div part="empty" class="py-6 text-center text-sm text-fg-muted" hidden={!this.empty}>

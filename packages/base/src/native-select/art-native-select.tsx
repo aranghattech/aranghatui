@@ -32,14 +32,14 @@ export class ArtNativeSelect {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   connectedCallback() {
@@ -109,8 +109,8 @@ export class ArtNativeSelect {
             disabled={this.disabled}
             required={this.required}
             aria-invalid={this.invalid ? 'true' : undefined}
-            aria-label={this.ariaLabel}
-            aria-description={this.ariaDescription}
+            aria-label={this.hostLabel}
+            aria-description={this.hostDescription}
             onChange={this.onChange}
           />
           <svg class="pointer-events-none absolute end-3 top-1/2 icon-md -translate-y-1/2 text-fg-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">

@@ -60,14 +60,14 @@ export class ArtDatePicker {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   connectedCallback() { this.defaultValue = this.value; }
@@ -145,8 +145,8 @@ export class ArtDatePicker {
           aria-haspopup="dialog"
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls={this.dialogId}
-          aria-label={this.ariaLabel}
-          aria-description={this.ariaDescription}
+          aria-label={this.hostLabel}
+          aria-description={this.hostDescription}
           aria-invalid={this.invalid ? 'true' : undefined}
           disabled={this.disabled}
           class={{ 'flex w-full min-w-0 items-center justify-start gap-2 whitespace-nowrap border-default bg-transparent text-md md:text-sm font-normal text-fg shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 aria-invalid:invalid-ring': true, [`field-${this.size}`]: true }}
@@ -157,7 +157,7 @@ export class ArtDatePicker {
           <svg class="icon-md shrink-0 text-fg-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
           <span part="value" class={{ 'min-w-0 flex-1 truncate text-start': true, 'text-fg-muted': !label }}>{label ?? this.placeholder}</span>
         </button>
-        <div part="content" id={this.dialogId} role="dialog" aria-label={this.ariaLabel ?? 'Calendar'} popover="manual" ref={(el) => (this.panel = el)} class="rounded-md border-default bg-popover text-fg shadow-popover">
+        <div part="content" id={this.dialogId} role="dialog" aria-label={this.hostLabel ?? 'Calendar'} popover="manual" ref={(el) => (this.panel = el)} class="rounded-md border-default bg-popover text-fg shadow-popover">
           <art-calendar
             ref={(el) => (this.calendar = el as HTMLElement & { setFocus(): Promise<void> })}
             mode={this.mode}

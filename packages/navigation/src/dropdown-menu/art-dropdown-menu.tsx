@@ -135,7 +135,7 @@ export class ArtDropdownMenu {
     return (
       <Host>
         <slot name="trigger" />
-        <div part="content" id={this.menuId} role="menu" tabindex="-1" popover="manual" aria-label={this.label ?? this.trigger()?.textContent?.trim() ?? undefined} ref={(el) => (this.panel = el)} class="content max-h-72 min-w-32 overflow-x-hidden overflow-y-auto rounded-md border-default bg-popover p-1 text-fg shadow-popover outline-none">
+        <div part="content" id={this.menuId} role="menu" tabindex="-1" popover="manual" aria-label={this.label ?? this.trigger()?.textContent?.trim() ?? undefined} ref={(el) => (this.panel = el)} class="content min-w-32 overflow-x-hidden overflow-y-auto rounded-md border-default bg-popover p-1 text-fg shadow-popover outline-none">
           <slot />
         </div>
       </Host>

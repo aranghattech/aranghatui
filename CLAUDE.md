@@ -359,6 +359,7 @@ Each `SKILL.md` gets a tight `description` so it triggers on the right task, and
 - Never change an existing visual baseline without explicit human approval. The first baselines of a brand-new component may be committed after every image has been reviewed and the review is noted in the PR (ADR-0015).
 - Never rename or remove a public prop/event/slot without a deprecation cycle and a migration note.
 - Never add a variant that doesn't exist in shadcn unless explicitly requested — API surface is a cost.
+- Never name a class field or method after a host DOM member (`id`, `firstChild`, `remove`, `focus`, `scrollTo`, `ariaLabel`, …): in the custom-elements build the component class *is* the element, so the member shadows the real one for every consumer and framework. `pnpm lint:dom` enforces it (Chromium's own member list); a prop that must reflect a DOM name is allow-listed there with a reason.
 - Never use `:scope` or `:dir()` in a selector passed to `querySelector` / `matches` (Stencil's server document cannot parse them): `child` / `children` / `isRtl` from `@aranghat/primitives/dom`. Guard observers and browser-only globals; components must render in Node (ADR-0023).
 - If a shadcn behaviour conflicts with a token rule, raise it rather than silently diverging.
 

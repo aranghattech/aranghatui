@@ -35,14 +35,14 @@ export class ArtSlider {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   private num(): number { const n = Number(this.value); return Math.min(this.max, Math.max(this.min, Number.isFinite(n) ? n : this.min)); }
@@ -73,8 +73,8 @@ export class ArtSlider {
           step={this.step}
           value={this.num()}
           disabled={this.disabled}
-          aria-label={this.ariaLabel}
-          aria-description={this.ariaDescription}
+          aria-label={this.hostLabel}
+          aria-description={this.hostDescription}
           aria-orientation={this.orientation === 'vertical' ? 'vertical' : undefined}
           class="appearance-none bg-transparent transition-interactive motion-fast disabled:opacity-50"
           style={{ '--fill': `${this.pct()}%` }}

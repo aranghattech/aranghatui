@@ -32,11 +32,11 @@ export class ArtRadio {
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
+  private hostLabel?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
-    this.ariaLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
+    this.hostLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
   }
   @Watch('checked')
   syncChecked() { if (this.input) this.input.checked = this.checked; }
@@ -57,7 +57,7 @@ export class ArtRadio {
             checked={this.checked}
             disabled={disabled}
             tabindex={this.tabbable ? 0 : -1}
-            aria-label={this.ariaLabel}
+            aria-label={this.hostLabel}
             class={{
               'appearance-none shrink-0 rounded-full border-default bg-transparent text-transparent shadow-raised transition-interactive motion-fast focus-ring disabled:opacity-50 checked:border-primary checked:text-primary': true,
               // safelist: icon-sm icon-md icon-lg

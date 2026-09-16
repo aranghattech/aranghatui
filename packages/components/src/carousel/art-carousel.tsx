@@ -41,11 +41,11 @@ export class ArtCarousel {
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
+  private hostLabel?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
-    this.ariaLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
+    this.hostLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
   }
 
   private slides(): HTMLElement[] { return Array.from(this.host.children).filter((c) => c.tagName === 'ART-CAROUSEL-ITEM') as HTMLElement[]; }
@@ -121,7 +121,7 @@ export class ArtCarousel {
   render() {
     const btn = 'inline-flex items-center justify-center rounded-full border-default bg-canvas text-fg shadow-raised transition-interactive motion-fast hover:bg-accent focus-ring control-icon-sm disabled:pointer-events-none disabled:opacity-50';
     return (
-      <Host role="region" aria-roledescription="carousel" aria-label={this.ariaLabel} onKeyDown={this.onKeydown}>
+      <Host role="region" aria-roledescription="carousel" aria-label={this.hostLabel} onKeyDown={this.onKeydown}>
         <div part="viewport" ref={(el) => (this.viewport = el)} class="viewport overflow-hidden">
           <div part="container" ref={(el) => (this.container = el)} class={{ 'track flex': true, 'flex-col': this.orientation === 'vertical' }}>
             <slot />

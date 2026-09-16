@@ -35,11 +35,11 @@ export class ArtToggle {
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
+  private hostLabel?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
-    this.ariaLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
+    this.hostLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
   }
   @Watch('pressed') @Watch('value')
   syncForm() { this.internals?.setFormValue?.(this.pressed ? this.value : null); }
@@ -66,7 +66,7 @@ export class ArtToggle {
           part="button"
           type="button"
           aria-pressed={this.pressed ? 'true' : 'false'}
-          aria-label={this.ariaLabel}
+          aria-label={this.hostLabel}
           disabled={disabled}
           tabindex={this.tabbable === undefined ? undefined : this.tabbable ? 0 : -1}
           class={{

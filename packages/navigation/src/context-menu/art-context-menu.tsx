@@ -131,7 +131,7 @@ export class ArtContextMenu {
     return (
       <Host>
         <slot />
-        <div part="content" id={this.menuId} role="menu" tabindex="-1" popover="manual" aria-label={this.label} ref={(el) => (this.panel = el)} class="content max-h-72 min-w-32 overflow-x-hidden overflow-y-auto rounded-md border-default bg-popover p-1 text-fg shadow-popover outline-none">
+        <div part="content" id={this.menuId} role="menu" tabindex="-1" popover="manual" aria-label={this.label} ref={(el) => (this.panel = el)} class="content min-w-32 overflow-x-hidden overflow-y-auto rounded-md border-default bg-popover p-1 text-fg shadow-popover outline-none">
           <slot name="menu" />
         </div>
       </Host>

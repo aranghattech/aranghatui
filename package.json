@@ -21,11 +21,12 @@
     "size": "node scripts/gen-size-limit.mjs && size-limit",
     "verify:docs-parity": "node apps/docs/scripts/verify-parity.mjs",
     "verify:isolation": "node scripts/check-install-isolation.mjs",
-    "verify": "pnpm lint:pins && pnpm build && pnpm lint:tokens && pnpm test:unit && pnpm test:e2e && pnpm size && pnpm verify:docs-parity && pnpm verify:isolation && pnpm test:visual && pnpm test:a11y && pnpm smoke:frameworks && pnpm test:ssr",
+    "verify": "pnpm lint:pins && pnpm build && pnpm lint:tokens && pnpm lint:dom && pnpm test:unit && pnpm test:e2e && pnpm size && pnpm verify:docs-parity && pnpm verify:isolation && pnpm test:visual && pnpm test:a11y && pnpm smoke:frameworks && pnpm test:ssr",
     "changeset": "changeset",
     "test:ssr": "scripts/pw-docker.sh npx playwright test --project=ssr",
     "version-packages": "changeset version && pnpm install --lockfile-only --offline",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "lint:dom": "node scripts/check-dom-shadowing.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "3.0.2",

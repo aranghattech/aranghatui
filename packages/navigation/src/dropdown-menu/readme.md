@@ -43,6 +43,13 @@ focus to the trigger.
 | `"content"` | The `role="menu"` panel. |
 
 
+## CSS Custom Properties
+
+| Name                    | Description                                                                                                                                                            |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--art-menu-max-height` | Height at which the menu starts to scroll. Defaults to the `space.72` token (18rem); set it on the element to show more (or fewer) items before the scrollbar appears. |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

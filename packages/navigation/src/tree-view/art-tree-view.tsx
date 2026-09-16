@@ -36,7 +36,7 @@ export class ArtTreeView {
     this.ta = createTypeahead({
       getItems: () => this.visible().map((i) => ({ text: i.label, disabled: i.disabled })),
       getActiveIndex: () => this.visible().indexOf(this.current() as Item),
-      onMatch: (i) => this.focus(this.visible()[i]),
+      onMatch: (i) => this.focusItem(this.visible()[i]),
     });
     if (typeof MutationObserver === 'function') {
       this.observer = new MutationObserver(() => this.sync());
@@ -75,7 +75,7 @@ export class ArtTreeView {
     if (!focusable || !visible.includes(focusable)) focusable = (this.value && visible.find((i) => i.value === this.value)) || visible.find((i) => !i.disabled) || visible[0] || null;
     this.setTabStop(focusable);
   }
-  private focus(item?: Item | null) {
+  private focusItem(item?: Item | null) {
     if (!item) return;
     this.setTabStop(item);
     item.focus();
@@ -100,18 +100,18 @@ export class ArtTreeView {
     const back = rtl ? 'ArrowRight' : 'ArrowLeft';
     const parent = it.hasAttribute('aria-expanded');
     switch (e.key) {
-      case 'ArrowDown': this.focus(vis[i + 1]); break;
-      case 'ArrowUp': this.focus(vis[i - 1]); break;
+      case 'ArrowDown': this.focusItem(vis[i + 1]); break;
+      case 'ArrowUp': this.focusItem(vis[i - 1]); break;
       case forward:
         if (parent && !it.expanded) it.expanded = true;
-        else if (parent) this.focus(this.visible()[i + 1]);
+        else if (parent) this.focusItem(this.visible()[i + 1]);
         break;
       case back:
         if (parent && it.expanded) it.expanded = false;
-        else this.focus(this.parentOf(it));
+        else this.focusItem(this.parentOf(it));
         break;
-      case 'Home': this.focus(vis[0]); break;
-      case 'End': this.focus(vis[vis.length - 1]); break;
+      case 'Home': this.focusItem(vis[0]); break;
+      case 'End': this.focusItem(vis[vis.length - 1]); break;
       case 'Enter': case ' ': it.click(); break;
       case '*': {
         const scope = this.parentOf(it) ?? this.host;

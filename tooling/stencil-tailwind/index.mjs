@@ -40,12 +40,16 @@ export function artuiTailwind(options = {}) {
     pluginType: 'css',
     async transform(sourceText, fileName, context) {
       if (!fileName || !fileName.endsWith('.css')) return null;
+      // Stencil reads a component's CSS custom-property docs (`/** @prop --x: … */`) from the CSS it is
+      // handed — after this plugin, which minifies comments away — so the doc blocks are kept in front.
+      const docs = (sourceText.match(/\/\*\*[\s\S]*?\*\//g) ?? []).filter((block) => /@prop\s/.test(block)).join('\n');
+      const withDocs = (code) => (docs ? `${docs}\n${code}` : code);
       // Light-DOM components (Table, Typography; ADR-0021) style native descendants with
       // tag-scoped rules and ship as global CSS: no @theme, no recipes and — above all — no
       // shadow-root base reset may leak into the document. Marked by a leading comment.
       if (/^\s*\/\*\s*light-dom/.test(sourceText)) {
         const dev = Boolean(context?.config?.devMode);
-        return { code: dev ? sourceText : optimize(sourceText, { minify: true }).code, id: fileName, dependencies: [], diagnostics: [] };
+        return { code: dev ? sourceText : withDocs(optimize(sourceText, { minify: true }).code), id: fileName, dependencies: [], diagnostics: [] };
       }
       const dir = dirname(fileName);
       const files = (await readdir(dir)).filter((f) => /\.(tsx|ts)$/.test(f) && !/\.(spec|e2e|stories|test)\./.test(f));
@@ -65,7 +69,7 @@ export function artuiTailwind(options = {}) {
       });
       const built = shadowPropertyDefaults(compiler.build([...candidates]));
       const dev = Boolean(context?.config?.devMode);
-      const code = dev ? built : optimize(built, { minify: true }).code;
+      const code = dev ? built : withDocs(optimize(built, { minify: true }).code);
       return { code, id: fileName, dependencies, diagnostics: [] };
     },
   };
