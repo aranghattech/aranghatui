@@ -8,7 +8,7 @@ Every `@aranghat/*` package — tokens, primitives, icons, the five tiers, `hydr
 pnpm up "@aranghat/*"
 ```
 
-Releases are cut with [Changesets](https://github.com/changesets/changesets) from `main`; the changelog of each package lists what changed for it, and the release notes list everything.
+Releases are cut with [Changesets](https://github.com/changesets/changesets) from `main` and published to GitHub Packages by the *Release* workflow; the changelog of each package lists what changed for it, and the release notes list everything.
 
 ## Semantic versioning, from 1.0
 
