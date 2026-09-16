@@ -20,7 +20,8 @@ test.describe('art-drawer', () => {
     // short drag: springs back
     await page.mouse.move(hx, hy); await page.mouse.down(); await page.mouse.move(hx, hy + 20, { steps: 4 }); await page.mouse.up();
     await expect(content).toBeVisible();
-    await expect.poll(async () => Math.round((await content.boundingBox())!.y + (await content.boundingBox())!.height)).toBe(600);
+    // one read, null-safe: the box is briefly unavailable while the panel springs back (a throw would end the poll)
+    await expect.poll(async () => { const b = await content.boundingBox(); return b ? Math.round(b.y + b.height) : -1; }).toBe(600);
     // long drag: dismisses
     await page.mouse.move(hx, hy); await page.mouse.down(); await page.mouse.move(hx, hy + 200, { steps: 8 }); await page.mouse.up();
     await expect(content).toBeHidden();
