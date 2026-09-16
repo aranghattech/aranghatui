@@ -37,8 +37,8 @@ export namespace Components {
     }
     /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
-     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
-     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `full` width, a `rounded`
+     * pill, `loading`, and `href` rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
      * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
      */
     interface ArtButton {
@@ -47,6 +47,11 @@ export namespace Components {
           * @default false
          */
         "disabled": boolean;
+        /**
+          * Full width: the button fills its container, for stacked forms and dialog footers.
+          * @default false
+         */
+        "full": boolean;
         "hostAriaDescription"?: string | null;
         /**
           * Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them).
@@ -75,6 +80,11 @@ export namespace Components {
           * Link rel (only with `href`).
          */
         "rel"?: string;
+        /**
+          * Pill shape: the `full` step of the one radius scale (N4), never a default.
+          * @default false
+         */
+        "rounded": boolean;
         /**
           * Control size; aligns with Input, Select and Combobox.
           * @default 'md'
@@ -837,8 +847,8 @@ declare global {
     };
     /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
-     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
-     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `full` width, a `rounded`
+     * pill, `loading`, and `href` rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
      * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
      */
     interface HTMLArtButtonElement extends Components.ArtButton, HTMLStencilElement {
@@ -1380,8 +1390,8 @@ declare namespace LocalJSX {
     }
     /**
      * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
-     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
-     * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+     * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `full` width, a `rounded`
+     * pill, `loading`, and `href` rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
      * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
      */
     interface ArtButton {
@@ -1394,6 +1404,11 @@ declare namespace LocalJSX {
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        /**
+          * Full width: the button fills its container, for stacked forms and dialog footers.
+          * @default false
+         */
+        "full"?: boolean;
         "hostAriaDescription"?: string | null;
         /**
           * Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them).
@@ -1426,6 +1441,11 @@ declare namespace LocalJSX {
           * Link rel (only with `href`).
          */
         "rel"?: string;
+        /**
+          * Pill shape: the `full` step of the one radius scale (N4), never a default.
+          * @default false
+         */
+        "rounded"?: boolean;
         /**
           * Control size; aligns with Input, Select and Combobox.
           * @default 'md'
@@ -2212,6 +2232,8 @@ declare namespace LocalJSX {
         "variant": 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
         "size": 'sm' | 'md' | 'lg';
         "icon": boolean;
+        "full": boolean;
+        "rounded": boolean;
         "disabled": boolean;
         "loading": boolean;
         "type": 'button' | 'submit' | 'reset';
@@ -2464,8 +2486,8 @@ declare module "@stencil/core" {
             "art-badge": LocalJSX.IntrinsicElements["art-badge"] & JSXBase.HTMLAttributes<HTMLArtBadgeElement>;
             /**
              * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
-             * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
-             * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+             * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `full` width, a `rounded`
+             * pill, `loading`, and `href` rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
              * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
              */
             "art-button": LocalJSX.IntrinsicElements["art-button"] & JSXBase.HTMLAttributes<HTMLArtButtonElement>;

@@ -92,7 +92,7 @@ export class ArtLogin {
             )}
             {this.error && <p part="error" role="alert" class="error m-0 text-sm">{this.error}</p>}
             <div class="grid gap-3">
-              <art-button type="submit" loading={this.loading}>{this.submitLabel}</art-button>
+              <art-button full type="submit" loading={this.loading}>{this.submitLabel}</art-button>
               <div class="divider" hidden={!this.hasSocial}><span>Or continue with</span></div>
               <slot name="social" />
             </div>

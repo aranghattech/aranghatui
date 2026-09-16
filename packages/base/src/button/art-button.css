@@ -11,6 +11,20 @@
 :host([hidden]) {
   display: none;
 }
+/* Full width: the host stretches and the control fills it, so a button in a stacked form, a
+   dialog footer or a grid cell spans its container instead of staying content-sized. */
+:host([full]) {
+  display: flex;
+  width: 100%;
+}
+:host([full]) [part='button'] {
+  width: 100%;
+}
+/* Pill. Uses the radius scale's `full` step, so N4 holds: one scale, opt-in per button.
+   Inside a Button Group the group's ::slotted() corner rules still win (outer tree). */
+:host([rounded]) {
+  border-radius: var(--art-radius-full);
+}
 /* Nothing on the host reacts while disabled or loading (a click must never reach consumers). */
 :host([disabled]),
 :host([loading]) {

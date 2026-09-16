@@ -69,7 +69,7 @@ export class ArtForgotPassword {
           <span slot="description">{this.sent ? this.sentDescription : this.description}</span>
           {this.sent ? (
             <div part="sent" class="sent grid gap-3">
-              {this.loginHref && <art-button variant="outline" href={this.loginHref}>{this.loginLabel}</art-button>}
+              {this.loginHref && <art-button full variant="outline" href={this.loginHref}>{this.loginLabel}</art-button>}
             </div>
           ) : (
             <form part="form" class="form grid gap-6" onSubmit={this.onSubmit} onKeyDown={submitOnEnter}>
@@ -79,7 +79,7 @@ export class ArtForgotPassword {
               </art-field>
               {this.error && <p part="error" role="alert" class="error m-0 text-sm">{this.error}</p>}
               <div class="grid gap-3">
-                <art-button type="submit" loading={this.loading}>{this.submitLabel}</art-button>
+                <art-button full type="submit" loading={this.loading}>{this.submitLabel}</art-button>
               </div>
               {this.loginHref && (
                 <p class="m-0 text-center text-sm"><a class="link underline" href={this.loginHref}>{this.loginLabel}</a></p>
