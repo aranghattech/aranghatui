@@ -55,8 +55,8 @@ export class ArtInput {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   /**
    * Runs before every render (not in a watcher: an attribute set by `art-label` between
@@ -68,8 +68,8 @@ export class ArtInput {
       this.host.removeAttribute('aria-label');
     }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   @Watch('value')
@@ -149,8 +149,8 @@ export class ArtInput {
             minlength={this.minlength}
             maxlength={this.maxlength}
             aria-invalid={this.invalid ? 'true' : undefined}
-            aria-label={this.ariaLabel}
-            aria-description={this.ariaDescription}
+            aria-label={this.hostLabel}
+            aria-description={this.hostDescription}
             onInput={this.onInput}
             onChange={this.onChange}
           />

@@ -74,11 +74,11 @@ export class ArtCalendar {
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
+  private hostLabel?: string;
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
-    this.ariaLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
+    this.hostLabel = resolveAria(this.host, { labelledby: this.hostAriaLabelledby }, this.directLabel).label;
   }
 
   // ---- selection model
@@ -334,7 +334,7 @@ export class ArtCalendar {
     const count = Math.max(1, this.numberOfMonths);
     return (
       <Host>
-        <div part="calendar" role="group" aria-label={this.ariaLabel} class="inline-flex flex-col gap-4 bg-canvas p-3 text-fg md:flex-row" data-mode={this.mode}>
+        <div part="calendar" role="group" aria-label={this.hostLabel} class="inline-flex flex-col gap-4 bg-canvas p-3 text-fg md:flex-row" data-mode={this.mode}>
           {Array.from({ length: count }, (_, i) => this.renderMonth(addMonths(first, i), i, count))}
         </div>
       </Host>

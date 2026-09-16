@@ -42,14 +42,14 @@ export class ArtButton {
    * that re-apply the attribute are picked up.
    */
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
-  @State() private ariaLabel?: string;
+  @State() private hostLabel?: string;
   /** Popover-style triggers set these on the host; they belong on the native button (a generic host may not carry them). */
   @Prop({ attribute: 'aria-expanded' }) hostAriaExpanded?: string | null;
   @Prop({ attribute: 'aria-haspopup' }) hostAriaHaspopup?: string | null;
   @Prop({ attribute: 'aria-description' }) hostAriaDescription?: string | null;
-  @State() private ariaExpanded?: string;
-  @State() private ariaHaspopup?: string;
-  @State() private ariaDescription?: string;
+  @State() private hostExpanded?: string;
+  @State() private hostHaspopup?: string;
+  @State() private hostDescription?: string;
   /** Which icon slots are filled — the padding on that side tightens (optical alignment, shadcn `has-[>svg]:px-3`). */
   @State() private hasStart = false;
   @State() private hasEnd = false;
@@ -57,7 +57,7 @@ export class ArtButton {
   @Watch('hostAriaLabel')
   adoptAriaLabel(value?: string | null) {
     if (value == null) return;
-    this.ariaLabel = value;
+    this.hostLabel = value;
     this.host.removeAttribute('aria-label');
   }
   @Watch('hostAriaExpanded') @Watch('hostAriaHaspopup') @Watch('hostAriaDescription')
@@ -133,11 +133,11 @@ export class ArtButton {
     return (
       <Host aria-busy={this.loading ? 'true' : undefined} onSlotchange={this.syncSlots}>
         {this.href ? (
-          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.ariaLabel} aria-expanded={this.ariaExpanded} aria-haspopup={this.ariaHaspopup} aria-description={this.ariaDescription} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
+          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
             {content}
           </a>
         ) : (
-          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.ariaLabel} aria-expanded={this.ariaExpanded} aria-haspopup={this.ariaHaspopup} aria-description={this.ariaDescription} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
+          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
             {content}
           </button>
         )}

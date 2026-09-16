@@ -51,7 +51,7 @@ export type QuestionnaireAnswers = Record<string, string | string[]>;
 export class ArtQuestionnaire {
   @Element() host!: HTMLElement;
   @AttachInternals() internals?: ElementInternals;
-  private id = uniqueId('art-questionnaire');
+  private uid = uniqueId('art-questionnaire');
   private fieldset?: HTMLFieldSetElement;
 
   /** The questions (array, or a JSON string attribute). */
@@ -198,7 +198,7 @@ export class ArtQuestionnaire {
             <span class="track block h-1 w-full overflow-hidden rounded-full bg-muted"><span class="fill block h-full rounded-full bg-primary transition-interactive motion-base" style={{ width: `${total ? ((this.step + 1) / total) * 100 : 0}%` }} /></span>
           </div>
           {item && (
-            <fieldset part="item" ref={(el) => (this.fieldset = el)} class="m-0 flex min-w-0 flex-col gap-4 border-0 p-0" aria-invalid={this.error ? 'true' : undefined} aria-describedby={this.error ? `${this.id}-error` : undefined} disabled={this.disabled}>
+            <fieldset part="item" ref={(el) => (this.fieldset = el)} class="m-0 flex min-w-0 flex-col gap-4 border-0 p-0" aria-invalid={this.error ? 'true' : undefined} aria-describedby={this.error ? `${this.uid}-error` : undefined} disabled={this.disabled}>
               <legend part="title" class="text-lg font-semibold text-fg">{item.prompt}</legend>
               {item.description && <p part="description" class="m-0 text-sm text-fg-muted">{item.description}</p>}
               {(item.choices?.length || item.input) && (
@@ -220,7 +220,7 @@ export class ArtQuestionnaire {
                   ))}
                 </div>
               )}
-              {this.error && <p part="error" id={`${this.id}-error`} role="alert" class="m-0 text-sm text-destructive-fg">{this.error}</p>}
+              {this.error && <p part="error" id={`${this.uid}-error`} role="alert" class="m-0 text-sm text-destructive-fg">{this.error}</p>}
             </fieldset>
           )}
           <div part="actions" class="flex flex-wrap items-center gap-2">

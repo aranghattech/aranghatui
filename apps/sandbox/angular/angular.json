@@ -16,15 +16,25 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "styles": ["node_modules/@aranghat/tokens/dist/css/aranghat.css", "src/sandbox.css"],
+            "styles": [
+              "node_modules/@aranghat/tokens/dist/css/aranghat.css",
+              "src/sandbox.css"
+            ],
             "sourceMap": true,
             "optimization": true,
-            "outputHashing": "none"
+            "outputHashing": "none",
+            "server": "src/main.server.ts",
+            "outputMode": "static",
+            "conditions": [
+              "artui-ssr"
+            ]
           }
         },
         "serve": {
           "builder": "@angular/build:dev-server",
-          "options": { "buildTarget": "sandbox:build" }
+          "options": {
+            "buildTarget": "sandbox:build"
+          }
         }
       }
     }

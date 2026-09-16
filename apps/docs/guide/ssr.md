@@ -68,17 +68,31 @@ import { Button } from '@aranghat/base-vue';
 
 ### Angular — `@angular/ssr`
 
-Angular's server renders the tags with their attributes but has no hook for custom-element internals; post-process its HTML with `hydrateDocument` (or `renderToString`) in the server entry:
+Angular's server renderer leaves custom elements as tags with their attributes; post-process its HTML with `renderToString` and let Angular's client hydration and the `artui-ssr` client take it from there. The Angular sandbox in this repository is prerendered exactly this way and hydrated in the SSR suite:
 
-```ts
-// server.ts
-import { renderToString } from '@aranghat/hydrate';
-
-const angularHtml = await renderApplication(bootstrap, { document, url });
-const { html } = await renderToString(angularHtml); // adds the declarative shadow roots
+```json
+// angular.json → projects.<app>.architect.build.options
+{ "server": "src/main.server.ts", "outputMode": "static", "conditions": ["artui-ssr"] }
 ```
 
-Only **attribute** bindings reach the server markup (`variant="outline"`, `[attr.size]="size"`); a property binding (`[variant]="v"`) is set on the element object and is applied when the client hydrates.
+```ts
+// app.config.ts — client hydration
+export const appConfig: ApplicationConfig = { providers: [provideClientHydration()] };
+```
+
+```js
+// after `ng build`: apps/sandbox/angular/scripts/ssr-postprocess.mjs
+import { renderToString } from '@aranghat/hydrate';
+const { html } = await renderToString(readFileSync('dist/browser/index.html', 'utf8'), { fullDocument: true, removeHtmlComments: false });
+writeFileSync('dist/browser/index.html', html); // Angular's `ngh` markers and anchor comments are kept
+```
+
+For a request-time server (`outputMode: "server"`), call `renderToString` on the string your request handler gets back from `renderApplication()` / `AngularAppEngine`.
+
+Two things to know:
+
+- Only **attribute** bindings reach the server markup (`variant="outline"`, `[attr.size]="size"`). A property binding (`[icon]="mail"`, `[page]="3"`, an items array) is set on the element object, which the server never sees: the element renders its defaults on the server and the real thing once the client hydrates. Bind attributes for what must be in the first paint.
+- Elements inside Angular templates hydrate without a `NG05xx` error — artui's server output carries none of Stencil's reference comments where Angular expects the app's own nodes (they are dropped for shadow hosts and moved last for the light-DOM ones), and no component member shadows a host DOM property (`pnpm lint:dom`).
 
 ## What to expect
 

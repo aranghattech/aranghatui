@@ -30,7 +30,7 @@ export class ArtMessageScroller {
   private userInputUntil = 0;
   private draggingScrollbar = false;
   private following = true;
-  private firstChild: Element | null = null;
+  private firstRow: Element | null = null;
   /** Offset of the first row, tracked continuously so a prepend can be measured against the layout before it. */
   private firstTop = 0;
   /** The row kept in place while rows are added above it (native scroll anchoring does nothing at scrollTop 0). */
@@ -56,7 +56,7 @@ export class ArtMessageScroller {
 
   componentDidLoad() {
     if (!this.viewport || !this.content) return;
-    this.firstChild = this.host.firstElementChild;
+    this.firstRow = this.host.firstElementChild;
     this.trackFirst();
     if (typeof MutationObserver !== 'undefined') {
       this.mo = new MutationObserver(this.onMutate);
@@ -127,7 +127,7 @@ export class ArtMessageScroller {
     this.measure();
   };
   private onMutate = (records: MutationRecord[]) => {
-    const oldFirst = this.firstChild as HTMLElement | null;
+    const oldFirst = this.firstRow as HTMLElement | null;
     const oldFirstTop = this.keep?.el === oldFirst ? this.keep.top : this.firstTop;
     let prepended = false;
     let anchored: HTMLElement | undefined;
@@ -138,7 +138,7 @@ export class ArtMessageScroller {
         else if (n.hasAttribute('scroll-anchor')) anchored = n;
       }
     }
-    this.firstChild = this.host.firstElementChild;
+    this.firstRow = this.host.firstElementChild;
     if (prepended && oldFirst) {
       // Older messages loaded above: keep the row the reader was looking at where it is. Layout settles over
       // a few frames (the new rows upgrade), so the shift is re-applied from the resize observer until stable.
@@ -184,9 +184,9 @@ export class ArtMessageScroller {
     const v = this.viewport!, c = this.content!;
     const top = Math.max(0, item.offsetTop - this.scrollPreviousItemPeek);
     c.style.minHeight = `${top + v.clientHeight}px`;
-    this.scrollTo(top, behavior);
+    this.scrollToOffset(top, behavior);
   }
-  private scrollTo(top: number, behavior: ScrollBehavior) {
+  private scrollToOffset(top: number, behavior: ScrollBehavior) {
     const v = this.viewport!;
     const target = Math.max(0, Math.min(top, v.scrollHeight - v.clientHeight));
     if (Math.abs(target - v.scrollTop) < 1) return; // nothing to move: no scroll events would follow
@@ -195,18 +195,18 @@ export class ArtMessageScroller {
     v.scrollTo({ top: target, behavior: smooth ? 'smooth' : 'instant' });
     if (smooth) setTimeout(this.onScrollEnd, 1000); else requestAnimationFrame(() => requestAnimationFrame(this.onScrollEnd)); // where `scrollend` never fires
   }
-  private toEnd(behavior: ScrollBehavior) { this.scrollTo(this.viewport!.scrollHeight, behavior); }
+  private toEnd(behavior: ScrollBehavior) { this.scrollToOffset(this.viewport!.scrollHeight, behavior); }
 
   /** Jump to the latest message and follow new ones. */
   @Method() async scrollToEnd(behavior: ScrollBehavior = 'smooth') { this.setFollowing(this.autoScroll); this.toEnd(behavior); }
   /** Jump to the first message (following stops). */
-  @Method() async scrollToStart(behavior: ScrollBehavior = 'smooth') { this.setFollowing(false); this.scrollTo(0, behavior); }
+  @Method() async scrollToStart(behavior: ScrollBehavior = 'smooth') { this.setFollowing(false); this.scrollToOffset(0, behavior); }
   /** Bring a row (`message-id`) into view near the top (following stops). */
   @Method() async scrollToMessage(id: string, behavior: ScrollBehavior = 'smooth') {
     const item = this.items().find((i) => i.getAttribute('message-id') === id);
     if (!item) return;
     this.setFollowing(false);
-    this.scrollTo(Math.max(0, item.offsetTop - this.scrollPreviousItemPeek), behavior);
+    this.scrollToOffset(Math.max(0, item.offsetTop - this.scrollPreviousItemPeek), behavior);
   }
   /** Whether the reader is at the end. */
   @Method() async isAtEnd() { return this.atEnd; }

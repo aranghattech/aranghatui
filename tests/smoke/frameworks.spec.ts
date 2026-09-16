@@ -31,7 +31,8 @@ for (const [framework, port] of Object.entries(apps)) {
         await expect(el).toBeAttached();
         // upgraded and rendered: a shadow root for shadow components, light-DOM children for the
         // light-DOM ones (art-table, art-typography; ADR-0021)
-        await expect.poll(() => el.evaluate((n) => n.matches(':defined') && (!!n.shadowRoot || n.childElementCount > 0))).toBe(true);
+        // the Angular page is prerendered with every element's shadow root inline (ADR-0023): 8 MB to parse and hydrate before the last samples upgrade
+        await expect.poll(() => el.evaluate((n) => n.matches(':defined') && (!!n.shadowRoot || n.childElementCount > 0)), { timeout: 15_000 }).toBe(true);
         expect(errors).toEqual([]);
       });
     }

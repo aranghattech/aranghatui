@@ -40,8 +40,8 @@ export class ArtInputOtp {
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
   @Prop({ attribute: 'aria-describedby' }) hostAriaDescribedby?: string | null;
   private directLabel?: string;
-  private ariaLabel?: string;
-  private ariaDescription?: string;
+  private hostLabel?: string;
+  private hostDescription?: string;
 
   /** Index of the slot holding the caret; -1 when unfocused. */
   @State() active = -1;
@@ -52,8 +52,8 @@ export class ArtInputOtp {
       this.host.removeAttribute('aria-label');
     }
     const r = resolveAria(this.host, { labelledby: this.hostAriaLabelledby, describedby: this.hostAriaDescribedby }, this.directLabel);
-    this.ariaLabel = r.label;
-    this.ariaDescription = r.description;
+    this.hostLabel = r.label;
+    this.hostDescription = r.description;
   }
 
   connectedCallback() {
@@ -145,8 +145,8 @@ export class ArtInputOtp {
             disabled={this.disabled}
             required={this.required}
             aria-invalid={this.invalid ? 'true' : undefined}
-            aria-label={this.ariaLabel}
-            aria-description={this.ariaDescription}
+            aria-label={this.hostLabel}
+            aria-description={this.hostDescription}
             onInput={this.onInput}
             onChange={this.onChange}
             onFocus={this.toEnd}
