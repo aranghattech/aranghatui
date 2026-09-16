@@ -18,6 +18,7 @@ import { applyCollapsed } from '../nav/context';
  * @slot footer - A card above the user row (an assistant prompt, an upgrade nudge).
  * @slot user - The account row at the very bottom of the panel.
  * @part rail - The icon column.
+ * @part brand - The band at the top of the rail, the height of the panel's header.
  * @part panel - The secondary column.
  * @part header - The panel header.
  * @part toggle - The button that collapses the panel.
@@ -63,8 +64,8 @@ export class ArtNavRail {
   render() {
     return (
       <Host>
-        <div part="rail" class="rail flex shrink-0 flex-col items-center gap-1 border-default bg-sidebar py-3">
-          <div class="brand flex h-8 w-8 items-center justify-center"><slot name="brand" /></div>
+        <div part="rail" class="rail flex shrink-0 flex-col items-center gap-1 border-default bg-sidebar pb-3">
+          <div part="brand" class="brand flex w-full shrink-0 items-center justify-center"><slot name="brand" /></div>
           <nav class="flex min-h-0 flex-1 flex-col items-center gap-1 overflow-y-auto" aria-label={this.railLabel}>
             <slot name="rail" />
           </nav>

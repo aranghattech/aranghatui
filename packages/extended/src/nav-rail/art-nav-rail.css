@@ -1,6 +1,7 @@
 /**
  * @prop --art-nav-rail-width: Width of the icon rail. Defaults to the `space.14` token (3.5rem).
  * @prop --art-nav-panel-width: Width of the expanded panel. Defaults to the sidebar width token (16rem).
+ * @prop --art-nav-header-height: Height of the top band — the rail's brand and the panel's header share it, so the mark lines up with the workspace switcher beside it. Defaults to the `space.12` token (3rem).
  */
 :host {
   display: flex;
@@ -38,6 +39,12 @@
 }
 :host([collapsed]) .toggle {
   margin-inline: auto;
+}
+/* The rail's mark and the panel's header are one row across two columns: give them the same height
+   and the mark sits level with the workspace switcher instead of riding the top edge. */
+.brand,
+.header {
+  min-height: var(--art-nav-header-height, var(--art-space-12));
 }
 .header {
   border-block-end: var(--art-border-width) solid var(--art-color-border-default);

@@ -48,23 +48,25 @@ slot, because those belong to the product, not to the design system.
 
 ## Shadow Parts
 
-| Part       | Description                          |
-| ---------- | ------------------------------------ |
-| `"footer"` | The footer region.                   |
-| `"header"` | The panel header.                    |
-| `"nav"`    | The `<nav>` wrapping the sections.   |
-| `"panel"`  | The secondary column.                |
-| `"rail"`   | The icon column.                     |
-| `"toggle"` | The button that collapses the panel. |
-| `"user"`   | The user region.                     |
+| Part       | Description                                                        |
+| ---------- | ------------------------------------------------------------------ |
+| `"brand"`  | The band at the top of the rail, the height of the panel's header. |
+| `"footer"` | The footer region.                                                 |
+| `"header"` | The panel header.                                                  |
+| `"nav"`    | The `<nav>` wrapping the sections.                                 |
+| `"panel"`  | The secondary column.                                              |
+| `"rail"`   | The icon column.                                                   |
+| `"toggle"` | The button that collapses the panel.                               |
+| `"user"`   | The user region.                                                   |
 
 
 ## CSS Custom Properties
 
-| Name                    | Description                                                               |
-| ----------------------- | ------------------------------------------------------------------------- |
-| `--art-nav-panel-width` | Width of the expanded panel. Defaults to the sidebar width token (16rem). |
-| `--art-nav-rail-width`  | Width of the icon rail. Defaults to the `space.14` token (3.5rem).        |
+| Name                      | Description                                                                                                                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--art-nav-header-height` | Height of the top band — the rail's brand and the panel's header share it, so the mark lines up with the workspace switcher beside it. Defaults to the `space.12` token (3rem). |
+| `--art-nav-panel-width`   | Width of the expanded panel. Defaults to the sidebar width token (16rem).                                                                                                       |
+| `--art-nav-rail-width`    | Width of the icon rail. Defaults to the `space.14` token (3.5rem).                                                                                                              |
 
 
 ----------------------------------------------

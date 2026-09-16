@@ -26,7 +26,7 @@ const rail = `  <span slot="brand" style="display:block;width:var(--art-space-6)
   <art-nav-rail-item slot="rail-end" label="Appearance">${moon}</art-nav-rail-item>
   <art-nav-rail-item slot="rail-end" label="Account">${person}</art-nav-rail-item>`;
 
-const header = `  <button slot="header" type="button" style="display:flex;width:100%;align-items:center;gap:var(--art-space-2);border-radius:var(--art-radius-md);padding:var(--art-space-1);font:inherit;color:inherit;text-align:start">
+const header = `  <button slot="header" type="button" style="display:flex;width:100%;align-items:center;gap:var(--art-space-2);border-radius:var(--art-radius-md);padding:var(--art-space-1);font:inherit;color:inherit;background:none;border:0;text-align:start;cursor:pointer">
     <span style="display:block;width:var(--art-space-5);height:var(--art-space-5);border-radius:var(--art-radius-sm);background:var(--art-color-primary-solid)"></span>
     <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--art-font-size-sm);font-weight:var(--art-font-weight-medium)">Locally inc.</span>
   </button>`;
