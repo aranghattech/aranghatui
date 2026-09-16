@@ -38,6 +38,7 @@ artui/
 │   ├── modals/            # @aranghat/modals     — Tier 5
 │   ├── widgets/           # @aranghat/widgets    — Tier 6
 │   ├── hydrate/           # @aranghat/hydrate    — SSR: one Node hydrate app for every tier (ADR-0023)
+│   ├── skills/            # @aranghat/skills     — the agent skill published for consumers (§11)
 │   ├── ui/                # @aranghat/ui         — meta-package: every tier in one import (costs bundle size)
 │   ├── react/             # @aranghat/base-react, -components-react, … (one build, one pkg per tier)
 │   ├── vue/               # @aranghat/base-vue, …
@@ -326,6 +327,10 @@ Recommended companions (install the ones available in this environment; record w
 | `component-review` | Pre-merge critique: consistency against siblings, token compliance, bundle delta, motion restraint. |
 
 Each `SKILL.md` gets a tight `description` so it triggers on the right task, and a checklist body that maps 1:1 to §9.
+
+### The published skill (`@aranghat/skills`)
+
+The skills in `skills/` are for people working **on** artui. `packages/skills/skills/artui/SKILL.md` is the one we publish for people building **with** it: tiers, slot composition, framework idioms, tokens, SSR. It is released in lockstep with the component packages, so it must be updated in the same PR as any change to the public surface it describes — a renamed slot or a new tier is a change to that file too.
 
 ---
 

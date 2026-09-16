@@ -886,6 +886,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
 
+  packages/skills: {}
+
   packages/tokens:
     devDependencies:
       style-dictionary:

@@ -1,0 +1,19 @@
+{
+  "name": "@aranghat/skills",
+  "version": "0.0.0",
+  "description": "Agent skills for artui — teaches an AI assistant how to build with @aranghat/* (tiers, slots, tokens, framework idioms).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "skills"
+  ],
+  "exports": {
+    "./artui": "./skills/artui/SKILL.md",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  }
+}
