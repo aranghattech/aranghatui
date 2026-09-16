@@ -43,6 +43,17 @@ test.describe('art-button', () => {
     expect(await page.inputValue('input[name=q]')).toBe('x');
   });
 
+  test('full fills its container and takes a click at the far edge; rounded is a pill', async ({ page }) => {
+    await page.setContent(`<div id="box" style="width:320px"><art-button full>Continue</art-button></div><art-button rounded>Pill</art-button>`);
+    const control = page.locator('art-button').first().locator('button');
+    expect(Math.round((await control.boundingBox())!.width)).toBe(320);
+    // the whole width is the control, not just its content box
+    await control.click({ position: { x: 310, y: 10 } });
+    await expect(page.locator('art-button').first()).toBeVisible();
+    const radius = await page.locator('art-button').nth(1).locator('button').evaluate((el) => getComputedStyle(el).borderTopLeftRadius);
+    expect(parseFloat(radius)).toBeGreaterThan(100);
+  });
+
   test('href renders a focusable anchor that Enter follows', async ({ page }) => {
     await page.setContent(`<art-button href="#target">Jump</art-button>`);
     await page.keyboard.press('Tab');

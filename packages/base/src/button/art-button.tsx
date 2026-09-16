@@ -2,8 +2,8 @@ import { AttachInternals, Component, Element, Host, Prop, State, Watch, h } from
 
 /**
  * Button — shadcn/ui parity (ADR-0012): variants `default | secondary | outline | ghost |
- * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `loading`, and `href`
- * rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
+ * destructive | link`, sizes `sm | md | lg`, square `icon` buttons, `full` width, a `rounded`
+ * pill, `loading`, and `href` rendering an anchor. Wraps a native `<button>` so `click` stays native (CLAUDE.md §3a);
  * form-associated so `type="submit"` / `type="reset"` work inside a plain `<form>`.
  *
  * @slot - Label.
@@ -22,6 +22,10 @@ export class ArtButton {
   @Prop({ reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
   /** Square icon-only button. Provide an accessible name via `aria-label` on the host. */
   @Prop({ reflect: true }) icon = false;
+  /** Full width: the button fills its container, for stacked forms and dialog footers. */
+  @Prop({ reflect: true }) full = false;
+  /** Pill shape: the `full` step of the one radius scale (N4), never a default. */
+  @Prop({ reflect: true }) rounded = false;
   /** Disabled: no interaction, no events. */
   @Prop({ reflect: true }) disabled = false;
   /** Loading: shows a spinner in place of `start`, sets `aria-busy`, blocks activation. */

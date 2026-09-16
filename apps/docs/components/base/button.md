@@ -124,6 +124,41 @@ Icons go in the `start` or `end` slot. Import the icon you need from `@aranghat/
 <<< ../../../sandbox/angular/src/app/samples/button/icon-only.ts [Angular]
 :::
 
+### Full width
+
+`full` stretches the button to its container: the host fills the width and the control fills the host. Use it for stacked forms, dialog footers and grid cells. Without it a button in a stretched host still looks right but only takes clicks on its own box.
+
+<Preview>
+  <div style="display: grid; gap: var(--art-space-2); max-width: var(--art-container-xs); width: 100%">
+    <art-button full>Continue</art-button>
+    <art-button full variant="outline">Back</art-button>
+  </div>
+</Preview>
+
+::: code-group
+<<< ../../../sandbox/html/src/samples/button/full.html [HTML]
+<<< ../../../sandbox/react/src/samples/button/full.tsx [React]
+<<< ../../../sandbox/vue/src/samples/button/full.vue [Vue]
+<<< ../../../sandbox/angular/src/app/samples/button/full.ts [Angular]
+:::
+
+### Rounded
+
+`rounded` gives the button a pill shape, and a circle when combined with `icon`. It uses the `full` step of the one radius scale, so it stays in step with every other surface (N4); the default corners are unchanged. Inside a Button Group the group still squares the joined corners.
+
+<Preview>
+  <art-button rounded>Button</art-button>
+  <art-button rounded variant="outline">Outline</art-button>
+  <art-button rounded icon aria-label="Add"><art-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></art-icon></art-button>
+</Preview>
+
+::: code-group
+<<< ../../../sandbox/html/src/samples/button/rounded.html [HTML]
+<<< ../../../sandbox/react/src/samples/button/rounded.tsx [React]
+<<< ../../../sandbox/vue/src/samples/button/rounded.vue [Vue]
+<<< ../../../sandbox/angular/src/app/samples/button/rounded.ts [Angular]
+:::
+
 ### Loading
 
 `loading` swaps the `start` slot for a spinner, sets `aria-busy="true"` and blocks activation while keeping the label readable.

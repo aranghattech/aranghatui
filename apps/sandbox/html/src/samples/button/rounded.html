@@ -1,0 +1,9 @@
+<art-button rounded>Button</art-button>
+<art-button rounded variant="outline">Outline</art-button>
+<art-button rounded icon aria-label="Add">
+  <art-icon id="rounded-plus"></art-icon>
+</art-button>
+<script type="module">
+  import { plus } from '@aranghat/icons/plus';
+  document.getElementById('rounded-plus').icon = plus;
+</script>

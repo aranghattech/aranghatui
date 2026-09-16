@@ -60,6 +60,15 @@ describe('art-button', () => {
     expect(btn.className).not.toContain('control-icon-end-md');
   });
 
+  it('reflects full and rounded so the host can be styled from outside', async () => {
+    const { root } = await render(<art-button full rounded>Continue</art-button>);
+    expect(root.hasAttribute('full')).toBe(true);
+    expect(root.hasAttribute('rounded')).toBe(true);
+    const { root: plain } = await render(<art-button>Continue</art-button>);
+    expect(plain.hasAttribute('full')).toBe(false);
+    expect(plain.hasAttribute('rounded')).toBe(false);
+  });
+
   it('href renders an anchor with target/rel and part="button"', async () => {
     const { root } = await render(<art-button href="/docs" target="_blank" rel="noreferrer">Docs</art-button>);
     const a = root.shadowRoot!.querySelector('a')!;
