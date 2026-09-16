@@ -7,7 +7,7 @@ export default function WithCheckboxes() {
       <table>
         <thead>
           <tr>
-            <th><Checkbox aria-label="Select all" /></th>
+            <th><Checkbox aria-label="Select all" /><span className="sr-only">Select</span></th>
             <th>Invoice</th>
             <th data-align="end">Amount</th>
           </tr>
