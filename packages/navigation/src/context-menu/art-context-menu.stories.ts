@@ -15,6 +15,7 @@ export const stories: ComponentStories = {
   examples: {
     basic: { title: 'Basic', render: () => `<art-context-menu>\n  ${area}\n${items}\n</art-context-menu>`, note: 'Right-click (or Shift+F10 / the Menu key with focus inside) the area to open the menu at the pointer. Items go in the `menu` slot and behave as in Dropdown Menu: `select`, checkbox `change`, radio `value-change`, submenus.' },
     open: { title: 'Open', render: () => `<art-context-menu open>\n  ${area}\n${items}\n</art-context-menu>`, note: 'Controlled with `open` (the menu then anchors to the area\'s corner until the next right-click).' },
+    'visible-items': { title: 'Limited height', render: () => `<art-context-menu open visible-items="5">\n  ${area}\n${items}\n</art-context-menu>`, note: '`visible-items` caps the menu at a number of rows rather than a pixel height: the row height is measured from a real item, so it follows the control size. Leave it unset and the menu is as tall as its items, scrolling only when the viewport has no room — set `--art-menu-max-height` instead if you would rather give a length.' },
   },
   render: () => `<art-context-menu>\n  ${area}\n${items}\n</art-context-menu>`,
   docs: {

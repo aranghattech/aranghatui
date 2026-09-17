@@ -14,11 +14,12 @@ focus to the trigger.
 
 ## Properties
 
-| Property    | Attribute   | Description                                                  | Type                                                                                                                                                                 | Default          |
-| ----------- | ----------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| `label`     | `label`     | Accessible name of the menu; defaults to the trigger's text. | `string \| undefined`                                                                                                                                                | `undefined`      |
-| `open`      | `open`      |                                                              | `boolean`                                                                                                                                                            | `false`          |
-| `placement` | `placement` | Preferred side / alignment of the panel.                     | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `'bottom-start'` |
+| Property       | Attribute       | Description                                                                                                                                                                           | Type                                                                                                                                                                 | Default          |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `label`        | `label`         | Accessible name of the menu; defaults to the trigger's text.                                                                                                                          | `string \| undefined`                                                                                                                                                | `undefined`      |
+| `open`         | `open`          |                                                                                                                                                                                       | `boolean`                                                                                                                                                            | `false`          |
+| `placement`    | `placement`     | Preferred side / alignment of the panel.                                                                                                                                              | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `'bottom-start'` |
+| `visibleItems` | `visible-items` | Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport. | `number \| undefined`                                                                                                                                                | `undefined`      |
 
 
 ## Events
@@ -45,9 +46,9 @@ focus to the trigger.
 
 ## CSS Custom Properties
 
-| Name                    | Description                                                                                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--art-menu-max-height` | Height at which the menu starts to scroll. Defaults to the `space.72` token (18rem); set it on the element to show more (or fewer) items before the scrollbar appears. |
+| Name                    | Description                                                                                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--art-menu-max-height` | Height at which the menu starts to scroll. Unset, the menu is as tall as its items and only scrolls when the viewport has no room for them; set it (or `visible-items`) to cap it sooner. |
 
 
 ----------------------------------------------

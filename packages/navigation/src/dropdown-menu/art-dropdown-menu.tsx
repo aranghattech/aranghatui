@@ -3,6 +3,7 @@ import { createDismissable, type Dismissable } from '@aranghat/primitives/dismis
 import type { Placement } from '@aranghat/primitives/floating';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { applyVisibleItems, setRestingTabStop } from '../menu/visible-items';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
 import { child, isRtl } from '@aranghat/primitives/dom';
 
@@ -26,6 +27,7 @@ export class ArtDropdownMenu {
   private overlay?: Overlay;
   private dismiss?: Dismissable;
   private list?: MenuList;
+  private stopCap?: () => void;
   private menuId = uniqueId('art-dropdown-menu');
   private openedByKeyboard = false;
 
@@ -34,6 +36,11 @@ export class ArtDropdownMenu {
   @Prop() placement: Placement = 'bottom-start';
   /** Accessible name of the menu; defaults to the trigger's text. */
   @Prop() label?: string;
+  /**
+   * Show this many rows before the menu scrolls. Measured from a real row, so it follows the
+   * control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+   */
+  @Prop({ attribute: 'visible-items' }) visibleItems?: number;
 
   @Event({ eventName: 'open-change', bubbles: true, composed: true }) openChange!: EventEmitter<{ open: boolean }>;
 
@@ -63,6 +70,7 @@ export class ArtDropdownMenu {
     this.host.removeEventListener('select', this.onSelect);
     this.host.removeEventListener('pointermove', this.onPointerOver);
     this.list?.destroy();
+    this.stopCap?.();
     this.dismiss?.destroy();
     this.overlay?.destroy();
     this.overlay = undefined;
@@ -85,14 +93,20 @@ export class ArtDropdownMenu {
     t?.setAttribute('aria-expanded', String(open));
     if (!this.panel || !t) return;
     if (open) {
-      this.overlay ??= createOverlay(t, this.panel, { placement: this.placement, offset: 4 });
+      this.overlay ??= createOverlay(t, this.panel, { placement: this.placement, offset: 4, availableHeight: true });
       const byKeyboard = this.openedByKeyboard;
       void this.overlay.open().then(() => {
         if (!this.open) return;
+        this.stopCap?.();
+        this.stopCap = applyVisibleItems(this.panel, this.host, this.visibleItems);
+        setRestingTabStop(this.host, true);
         if (byKeyboard) this.list?.first(); else this.panel?.focus({ preventScroll: true });
       });
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: true, focusOutside: true, ignore: () => [t], onDismiss: (r) => { this.set(false); if (r === 'escape') t.focus({ preventScroll: true }); } });
     } else {
+      setRestingTabStop(this.host, false);
+      this.stopCap?.();
+      this.stopCap = undefined;
       this.dismiss?.destroy();
       this.dismiss = undefined;
       void this.overlay?.close();

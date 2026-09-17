@@ -16,11 +16,15 @@
   }
 }
 /**
- * @prop --art-menu-max-height: Height at which the menu starts to scroll. Defaults to the `space.72` token (18rem); set it on the element to show more (or fewer) items before the scrollbar appears.
+ * @prop --art-menu-max-height: Height at which the menu starts to scroll. Unset, the menu is as tall as its items and only scrolls when the viewport has no room for them; set it (or `visible-items`) to cap it sooner.
  */
+/* Precedence: an explicit cap, else the room the viewport actually has (published by the
+   positioning primitive), else the token — which only applies before the first measurement,
+   and on a server-rendered page (ADR-0023). A menu of eleven items no longer scrolls to hide
+   the last two on a screen that had space for them. */
 [part='content'] {
   position: fixed;
-  max-height: var(--art-menu-max-height, var(--art-space-72));
+  max-height: var(--art-menu-max-height, var(--art-available-height, var(--art-space-72)));
 }
 [part='content']:not([data-state]),
 [part='content'][popover]:not(:popover-open) {

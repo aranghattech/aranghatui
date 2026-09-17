@@ -196,6 +196,33 @@ An item with `href` is a real link (middle-click and new tabs work).
 <<< ../../../sandbox/angular/src/app/samples/dropdown-menu/links.ts [Angular]
 :::
 
+### Limited height
+
+`visible-items` caps the menu at a number of rows rather than a pixel height: the row height is measured from a real item, so it follows the control size. Leave it unset and the menu is as tall as its items, scrolling only when the viewport has no room — set `--art-menu-max-height` instead if you would rather give a length.
+
+<Preview frame="inline">
+  <art-dropdown-menu open visible-items="5">
+    <art-button slot="trigger" variant="outline">Open</art-button>
+    <art-menu-item value="profile">Profile</art-menu-item>
+    <art-menu-item value="billing">Billing</art-menu-item>
+    <art-menu-item value="settings">Settings</art-menu-item>
+    <art-menu-item value="shortcuts">Keyboard shortcuts</art-menu-item>
+    <art-menu-item value="team">Team</art-menu-item>
+    <art-menu-item value="invite">Invite users</art-menu-item>
+    <art-menu-item value="new-team">New team</art-menu-item>
+    <art-menu-item value="github">GitHub</art-menu-item>
+    <art-menu-item value="support">Support</art-menu-item>
+    <art-menu-item value="logout">Log out</art-menu-item>
+  </art-dropdown-menu>
+</Preview>
+
+::: code-group
+<<< ../../../sandbox/html/src/samples/dropdown-menu/visible-items.html [HTML]
+<<< ../../../sandbox/react/src/samples/dropdown-menu/visible-items.tsx [React]
+<<< ../../../sandbox/vue/src/samples/dropdown-menu/visible-items.vue [Vue]
+<<< ../../../sandbox/angular/src/app/samples/dropdown-menu/visible-items.ts [Angular]
+:::
+
 ## API Reference
 
 <ApiReference tag="art-dropdown-menu" />

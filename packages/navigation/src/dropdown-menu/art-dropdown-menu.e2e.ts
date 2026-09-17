@@ -65,4 +65,30 @@ test.describe('art-dropdown-menu', () => {
     await expect.poll(focused2).toBe('Share');
     await expect(host).toHaveAttribute('open');
   });
+
+  test('the panel is as tall as its items, and falls back to the room the viewport has', async ({ page }) => {
+    const rows = Array.from({ length: 10 }, (_, i) => `<art-menu-item value="i${i}">Item ${i + 1}</art-menu-item>`).join('');
+    const read = () =>
+      page.locator('art-dropdown-menu').evaluate((el: HTMLElement) => {
+        const p = el.shadowRoot!.querySelector('[part="content"]') as HTMLElement;
+        return { client: p.clientHeight, scroll: p.scrollHeight, bottom: Math.round(p.getBoundingClientRect().bottom) };
+      });
+
+    await page.setViewportSize({ width: 800, height: 900 });
+    await page.setContent(`<div style="padding:24px"><art-dropdown-menu><button slot="trigger">Open</button>${rows}</art-dropdown-menu></div>`);
+    await page.locator('button[slot="trigger"]').click();
+    await expect.poll(async () => (await read()).client > 0).toBe(true);
+    const roomy = await read();
+    expect(roomy.scroll).toBe(roomy.client); // ten items, no scrollbar
+
+    // the same menu on a short viewport caps at what is left below the trigger instead of overflowing
+    await page.setViewportSize({ width: 800, height: 320 });
+    await page.setContent(`<div style="padding:24px"><art-dropdown-menu><button slot="trigger">Open</button>${rows}</art-dropdown-menu></div>`);
+    await page.locator('button[slot="trigger"]').click();
+    await expect.poll(async () => { const r = await read(); return r.client > 0 && r.scroll > r.client; }).toBe(true);
+    const tight = await read();
+    expect(tight.client).toBeLessThan(roomy.client);
+    expect(tight.scroll).toBeGreaterThan(tight.client);
+    expect(tight.bottom).toBeLessThanOrEqual(320);
+  });
 });
