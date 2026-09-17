@@ -133,6 +133,42 @@ Controlled with `open` (the menu then anchors to the area's corner until the nex
 <<< ../../../sandbox/angular/src/app/samples/context-menu/open.ts [Angular]
 :::
 
+### Limited height
+
+`visible-items` caps the menu at a number of rows rather than a pixel height: the row height is measured from a real item, so it follows the control size. Leave it unset and the menu is as tall as its items, scrolling only when the viewport has no room — set `--art-menu-max-height` instead if you would rather give a length.
+
+<Preview frame="inline">
+  <art-context-menu open visible-items="5">
+    <div style="display: flex; align-items: center; justify-content: center; height: calc(var(--art-space-20) * 2); width: var(--art-container-xs); border: var(--art-border-width) dashed var(--art-color-border-default); border-radius: var(--art-radius-md); font-size: var(--art-font-size-sm); color: var(--art-color-fg-muted)">Right click here</div>
+    <art-menu-item slot="menu" value="back">Back<span slot="shortcut">⌘[</span></art-menu-item>
+    <art-menu-item slot="menu" value="forward" disabled>Forward<span slot="shortcut">⌘]</span></art-menu-item>
+    <art-menu-item slot="menu" value="reload">Reload<span slot="shortcut">⌘R</span></art-menu-item>
+    <art-menu-sub slot="menu">
+      <art-menu-item slot="trigger">More tools</art-menu-item>
+      <art-menu-item value="save">Save page…<span slot="shortcut">⇧⌘S</span></art-menu-item>
+      <art-menu-item value="shortcut">Create shortcut…</art-menu-item>
+      <art-menu-separator></art-menu-separator>
+      <art-menu-item value="devtools">Developer tools</art-menu-item>
+    </art-menu-sub>
+    <art-menu-separator slot="menu"></art-menu-separator>
+    <art-menu-item slot="menu" type="checkbox" value="bookmarks" checked>Show bookmarks</art-menu-item>
+    <art-menu-item slot="menu" type="checkbox" value="urls">Show full URLs</art-menu-item>
+    <art-menu-separator slot="menu"></art-menu-separator>
+    <art-menu-radio-group slot="menu" value="pedro">
+      <art-menu-label inset>People</art-menu-label>
+      <art-menu-item type="radio" value="pedro">Pedro Duarte</art-menu-item>
+      <art-menu-item type="radio" value="colm">Colm Tuite</art-menu-item>
+    </art-menu-radio-group>
+  </art-context-menu>
+</Preview>
+
+::: code-group
+<<< ../../../sandbox/html/src/samples/context-menu/visible-items.html [HTML]
+<<< ../../../sandbox/react/src/samples/context-menu/visible-items.tsx [React]
+<<< ../../../sandbox/vue/src/samples/context-menu/visible-items.vue [Vue]
+<<< ../../../sandbox/angular/src/app/samples/context-menu/visible-items.ts [Angular]
+:::
+
 ## API Reference
 
 <ApiReference tag="art-context-menu" />

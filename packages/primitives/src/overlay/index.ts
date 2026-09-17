@@ -9,6 +9,8 @@ export interface OverlayOptions {
   arrow?: HTMLElement | null;
   /** Make the panel as wide as the anchor (Select, Combobox). */
   matchReferenceWidth?: boolean;
+  /** Publish the room that is left as `--art-available-height` on the panel (menus cap themselves with it). */
+  availableHeight?: boolean;
 }
 
 export interface Overlay {
@@ -40,7 +42,7 @@ const ORIGIN: Record<string, string> = { top: 'bottom center', bottom: 'top cent
  * outside pointer) is the component's decision via `createDismissable`.
  */
 export function createOverlay(anchor: Element, panel: HTMLElement, options: OverlayOptions = {}): Overlay {
-  const { placement = 'bottom', offset = 4, arrow = null, matchReferenceWidth = false } = options;
+  const { placement = 'bottom', offset = 4, arrow = null, matchReferenceWidth = false, availableHeight = false } = options;
   const native = typeof (panel as HTMLElement & { showPopover?: () => void }).showPopover === 'function';
   if (native) panel.setAttribute('popover', 'manual');
   let floating: FloatingController | undefined;
@@ -65,7 +67,7 @@ export function createOverlay(anchor: Element, panel: HTMLElement, options: Over
       stopFloating();
       return new Promise<void>((resolve) => {
         floating = createFloating(anchor, panel, {
-          placement, offset, arrow, matchReferenceWidth, strategy: 'fixed',
+          placement, offset, arrow, matchReferenceWidth, availableHeight, strategy: 'fixed',
           onPositioned: ({ placement: p }) => {
             const side = p.split('-')[0] ?? '';
             panel.style.setProperty('--art-overlay-slide', SLIDE[side] ?? '0 0');

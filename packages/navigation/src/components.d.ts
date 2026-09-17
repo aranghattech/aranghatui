@@ -61,6 +61,10 @@ export namespace Components {
           * @default false
          */
         "open": boolean;
+        /**
+          * Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+         */
+        "visibleItems"?: number;
     }
     /**
      * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
@@ -82,6 +86,10 @@ export namespace Components {
           * @default 'bottom-start'
          */
         "placement": Placement;
+        /**
+          * Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+         */
+        "visibleItems"?: number;
     }
     /**
      * Dropdown Menu Group — groups items under an accessible name.
@@ -1137,6 +1145,10 @@ declare namespace LocalJSX {
           * @default false
          */
         "open"?: boolean;
+        /**
+          * Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+         */
+        "visibleItems"?: number;
     }
     /**
      * Dropdown Menu — shadcn/ui parity. A menu of actions opened from a trigger, on the platform
@@ -1159,6 +1171,10 @@ declare namespace LocalJSX {
           * @default 'bottom-start'
          */
         "placement"?: Placement;
+        /**
+          * Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+         */
+        "visibleItems"?: number;
     }
     /**
      * Dropdown Menu Group — groups items under an accessible name.
@@ -1669,11 +1685,13 @@ declare namespace LocalJSX {
         "open": boolean;
         "label": string;
         "disabled": boolean;
+        "visibleItems": number;
     }
     interface ArtDropdownMenuAttributes {
         "open": boolean;
         "placement": Placement;
         "label": string;
+        "visibleItems": number;
     }
     interface ArtMenuGroupAttributes {
         "label": string;

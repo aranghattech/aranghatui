@@ -13,11 +13,12 @@ Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`
 
 ## Properties
 
-| Property   | Attribute  | Description                  | Type      | Default          |
-| ---------- | ---------- | ---------------------------- | --------- | ---------------- |
-| `disabled` | `disabled` |                              | `boolean` | `false`          |
-| `label`    | `label`    | Accessible name of the menu. | `string`  | `'Context menu'` |
-| `open`     | `open`     |                              | `boolean` | `false`          |
+| Property       | Attribute       | Description                                                                                                                                                                           | Type                  | Default          |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------- |
+| `disabled`     | `disabled`      |                                                                                                                                                                                       | `boolean`             | `false`          |
+| `label`        | `label`         | Accessible name of the menu.                                                                                                                                                          | `string`              | `'Context menu'` |
+| `open`         | `open`          |                                                                                                                                                                                       | `boolean`             | `false`          |
+| `visibleItems` | `visible-items` | Show this many rows before the menu scrolls. Measured from a real row, so it follows the control height; leave it unset and the menu is as tall as its items, capped by the viewport. | `number \| undefined` | `undefined`      |
 
 
 ## Events
@@ -44,9 +45,9 @@ Dropdown Menu: `art-menu-item`, `-label`, `-separator`, `-group`, `-radio-group`
 
 ## CSS Custom Properties
 
-| Name                    | Description                                                                                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--art-menu-max-height` | Height at which the menu starts to scroll. Defaults to the `space.72` token (18rem); set it on the element to show more (or fewer) items before the scrollbar appears. |
+| Name                    | Description                                                                                                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--art-menu-max-height` | Height at which the menu starts to scroll. Unset, the menu is as tall as its items and only scrolls when the viewport has no room for them; set it (or `visible-items`) to cap it sooner. |
 
 
 ----------------------------------------------

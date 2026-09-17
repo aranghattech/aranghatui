@@ -29,6 +29,12 @@ export interface FloatingOptions {
   arrow?: HTMLElement | null;
   /** Match the reference width (Select, Combobox). @default false */
   matchReferenceWidth?: boolean;
+  /**
+   * Publish the room left between the reference and the viewport edge as `--art-available-height`
+   * on the floating element, so a panel can cap itself at what actually fits instead of at a
+   * guessed pixel height. @default false
+   */
+  availableHeight?: boolean;
   /** `fixed` for portaled content. @default 'absolute' */
   strategy?: Strategy;
   /** Called after every position update. */
@@ -62,6 +68,7 @@ export function createFloating(reference: Element | VirtualElement, floating: HT
     padding = 0,
     arrow = null,
     matchReferenceWidth = false,
+    availableHeight = false,
     strategy = 'absolute',
     onPositioned,
   } = options;
@@ -72,8 +79,17 @@ export function createFloating(reference: Element | VirtualElement, floating: HT
     const middleware: Middleware[] = [offsetMiddleware(typeof offset === 'function' ? offset() : offset)];
     if (flip) middleware.push(flipMiddleware({ padding }));
     if (shift) middleware.push(shiftMiddleware({ padding }));
-    if (matchReferenceWidth) {
-      middleware.push(sizeMiddleware({ apply({ rects, elements }) { elements.floating.style.width = `${rects.reference.width}px`; } }));
+    // One size middleware for both: a second would overwrite the first's middlewareData.
+    if (matchReferenceWidth || availableHeight) {
+      middleware.push(
+        sizeMiddleware({
+          padding,
+          apply({ rects, elements, availableHeight: room }) {
+            if (matchReferenceWidth) elements.floating.style.width = `${rects.reference.width}px`;
+            if (availableHeight) elements.floating.style.setProperty('--art-available-height', `${Math.max(0, Math.floor(room))}px`);
+          },
+        }),
+      );
     }
     if (arrow) middleware.push(arrowMiddleware({ element: arrow }));
 

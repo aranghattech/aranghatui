@@ -2,6 +2,7 @@ import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@
 import { createDismissable, type Dismissable } from '@aranghat/primitives/dismissable';
 import { uniqueId } from '@aranghat/primitives/id';
 import { createOverlay, type Overlay } from '@aranghat/primitives/overlay';
+import { applyVisibleItems, setRestingTabStop } from '../menu/visible-items';
 import { createMenuList, levelItems, type MenuList } from '../menu/menu-list';
 import { isRtl } from '@aranghat/primitives/dom';
 
@@ -23,8 +24,10 @@ export class ArtContextMenu {
   private overlay?: Overlay;
   private dismiss?: Dismissable;
   private list?: MenuList;
+  private stopCap?: () => void;
   private menuId = uniqueId('art-context-menu');
-  private point = { x: 0, y: 0 };
+  /** Where the last right-click landed. `null` until one happens: see `anchor()`. */
+  private point: { x: number; y: number } | null = null;
   private byKeyboard = false;
   private lastFocus: HTMLElement | null = null;
 
@@ -32,6 +35,11 @@ export class ArtContextMenu {
   /** Accessible name of the menu. */
   @Prop() label = 'Context menu';
   @Prop({ reflect: true }) disabled = false;
+  /**
+   * Show this many rows before the menu scrolls. Measured from a real row, so it follows the
+   * control height; leave it unset and the menu is as tall as its items, capped by the viewport.
+   */
+  @Prop({ attribute: 'visible-items' }) visibleItems?: number;
 
   @Event({ eventName: 'open-change', bubbles: true, composed: true }) openChange!: EventEmitter<{ open: boolean }>;
 
@@ -50,6 +58,9 @@ export class ArtContextMenu {
       onClose: (reason) => this.close(reason !== 'tab'),
       isRtl: () => isRtl(this.host),
     });
+    // `@Watch` fires on a change, never on the value an element is born with, so a menu written
+    // as `<art-context-menu open>` stayed shut — the way the Dropdown Menu already handles it.
+    if (this.open) this.onOpen(true);
   }
   disconnectedCallback() {
     this.host.removeEventListener('contextmenu', this.onContextMenu);
@@ -57,14 +68,23 @@ export class ArtContextMenu {
     this.host.removeEventListener('select', this.onSelect);
     this.host.removeEventListener('pointermove', this.onPointerMove);
     this.list?.destroy();
+    this.stopCap?.();
     this.dismiss?.destroy();
     this.overlay?.destroy();
     this.overlay = undefined;
   }
 
-  /** The menu anchors to a point: a virtual element for floating-ui. */
+  /**
+   * The menu anchors to a point: a virtual element for floating-ui. A menu opened by its `open`
+   * prop has no pointer to anchor to, so it falls back to the corner of the area it belongs to —
+   * read on every update, so the panel tracks the area while the page scrolls.
+   */
   private anchor(): Element {
-    const rect = () => new DOMRect(this.point.x, this.point.y, 0, 0);
+    const rect = () => {
+      if (this.point) return new DOMRect(this.point.x, this.point.y, 0, 0);
+      const r = this.host.getBoundingClientRect();
+      return new DOMRect(r.left, r.top, 0, 0);
+    };
     return { getBoundingClientRect: rect, contextElement: this.host } as unknown as Element;
   }
   private openAt(x: number, y: number, byKeyboard: boolean) {
@@ -89,14 +109,20 @@ export class ArtContextMenu {
   onOpen(open: boolean) {
     if (!this.panel) return;
     if (open) {
-      this.overlay ??= createOverlay(this.anchor(), this.panel, { placement: 'bottom-start', offset: 2 });
+      this.overlay ??= createOverlay(this.anchor(), this.panel, { placement: 'bottom-start', offset: 2, availableHeight: true });
       const byKeyboard = this.byKeyboard;
       void this.overlay.open().then(() => {
         if (!this.open) return;
+        this.stopCap?.();
+        this.stopCap = applyVisibleItems(this.panel, this.host, this.visibleItems);
+        setRestingTabStop(this.host, true);
         if (byKeyboard) this.list?.first(); else this.panel?.focus({ preventScroll: true });
       });
       this.dismiss ??= createDismissable(this.panel, { escape: true, pointerOutside: true, focusOutside: true, onDismiss: (r) => this.close(r === 'escape') });
     } else {
+      setRestingTabStop(this.host, false);
+      this.stopCap?.();
+      this.stopCap = undefined;
       this.dismiss?.destroy();
       this.dismiss = undefined;
       void this.overlay?.close();
