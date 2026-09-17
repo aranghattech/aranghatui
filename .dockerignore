@@ -1,0 +1,19 @@
+# Build context: the whole monorepo is needed to build the docs, but none of its output is.
+**/node_modules
+**/dist
+**/www
+**/.turbo
+**/.stencil
+**/.angular
+**/test-results
+**/playwright-report
+**/__diff_output__
+apps/docs/.vitepress/dist
+apps/docs/.vitepress/cache
+tests/ssr/.pages
+tests/ssr/.snapshots
+packages/hydrate/src-all
+.git
+.github
+*.log
+.DS_Store
