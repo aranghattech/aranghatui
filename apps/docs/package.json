@@ -13,6 +13,7 @@
   "dependencies": {
     "@aranghat/base": "workspace:*",
     "@aranghat/components": "workspace:*",
+    "@aranghat/extended": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/navigation": "workspace:*",
     "@aranghat/tokens": "workspace:*",

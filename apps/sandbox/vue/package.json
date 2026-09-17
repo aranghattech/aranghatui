@@ -12,6 +12,8 @@
     "@aranghat/base-vue": "workspace:*",
     "@aranghat/components": "workspace:*",
     "@aranghat/components-vue": "workspace:*",
+    "@aranghat/extended": "workspace:*",
+    "@aranghat/extended-vue": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/modals-vue": "workspace:*",

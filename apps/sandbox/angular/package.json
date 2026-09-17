@@ -16,6 +16,8 @@
     "@aranghat/base-angular": "workspace:*",
     "@aranghat/components": "workspace:*",
     "@aranghat/components-angular": "workspace:*",
+    "@aranghat/extended": "workspace:*",
+    "@aranghat/extended-angular": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/modals-angular": "workspace:*",

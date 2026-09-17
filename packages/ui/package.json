@@ -21,6 +21,7 @@
   "peerDependencies": {
     "@aranghat/base": "workspace:*",
     "@aranghat/components": "workspace:*",
+    "@aranghat/extended": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/navigation": "workspace:*",
     "@aranghat/primitives": "workspace:*",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@aranghat/base": "workspace:*",
     "@aranghat/components": "workspace:*",
+    "@aranghat/extended": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/navigation": "workspace:*",
     "@aranghat/primitives": "workspace:*",

@@ -1,0 +1,79 @@
+{
+  "name": "@aranghat/extended",
+  "version": "1.0.0",
+  "description": "artui Tier 7 — extended compositions that go beyond the shadcn surface (two-level navigation rail).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components": {
+      "types": "./dist/components/index.d.ts",
+      "artui-ssr": "./dist/components-ssr/index.js",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/components/*": {
+      "types": "./dist/components/*",
+      "artui-ssr": "./dist/components-ssr/*",
+      "default": "./dist/components/*"
+    },
+    "./nav-link": {
+      "types": "./dist/components/art-nav-link.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-nav-link.js",
+      "import": "./dist/components/art-nav-link.js"
+    },
+    "./nav-rail": {
+      "types": "./dist/components/art-nav-rail.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-nav-rail.js",
+      "import": "./dist/components/art-nav-rail.js"
+    },
+    "./nav-rail-item": {
+      "types": "./dist/components/art-nav-rail-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-nav-rail-item.js",
+      "import": "./dist/components/art-nav-rail-item.js"
+    },
+    "./nav-section": {
+      "types": "./dist/components/art-nav-section.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-nav-section.js",
+      "import": "./dist/components/art-nav-section.js"
+    },
+    "./docs.json": "./dist/docs.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist www && stencil build --docs && ARTUI_SSR=1 stencil build && rm -rf dist/hydrate && artui-wrapper-entries core extended",
+    "dev": "ARTUI_BUNDLE_PEERS=1 stencil build --dev --watch --serve",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "peerDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@aranghat/base": "workspace:*",
+    "@aranghat/primitives": "workspace:*",
+    "@aranghat/tokens": "workspace:*",
+    "@artui/e2e": "workspace:*",
+    "@artui/stencil-config": "workspace:*",
+    "@artui/stories": "workspace:*",
+    "@artui/wrapper-entries": "workspace:*",
+    "@playwright/test": "1.63.0",
+    "@stencil/core": "4.45.0",
+    "@stencil/playwright": "0.5.1",
+    "@stencil/vitest": "1.15.1",
+    "jsdom": "28.1.0",
+    "vitest": "4.1.11"
+  }
+}

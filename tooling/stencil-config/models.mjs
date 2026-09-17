@@ -2,7 +2,7 @@
  * Framework binding metadata per tier (CLAUDE.md §3a), shared by the tier builds (Angular value
  * accessors) and the hydrate build that generates the React and Vue wrappers (ADR-0023).
  */
-export const TIERS = ['base', 'components', 'navigation', 'modals', 'widgets'];
+export const TIERS = ['base', 'components', 'navigation', 'modals', 'widgets', 'extended'];
 
 /** Vue `v-model` (`v-model:open`, …); React derives `onOpenChange` / `onValueChange` from the kebab-case event names. */
 export const componentModels = {
@@ -23,6 +23,7 @@ export const componentModels = {
     { elements: ['art-tree-view'], targetAttr: 'value', event: 'value-change' },
   ],
   modals: [{ elements: ['art-dialog', 'art-alert-dialog', 'art-sheet', 'art-drawer'], targetAttr: 'open', event: 'open-change' }],
+  extended: [{ elements: ['art-nav-rail'], targetAttr: 'collapsed', event: 'collapsed-change' }],
   widgets: [
     { elements: ['art-app-shell'], targetAttr: 'open', event: 'open-change' },
     { elements: ['art-data-table-page'], targetAttr: 'filter', event: 'filter-change' },
@@ -45,4 +46,5 @@ export const valueAccessorConfigs = {
   navigation: [],
   modals: [],
   widgets: [],
+  extended: [],
 };

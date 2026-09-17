@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve, relative } from 'node:path';
 
 const repo = resolve(import.meta.dirname, '../..');
-const tiers = ['base', 'components', 'navigation', 'modals', 'widgets'];
+const tiers = ['base', 'components', 'navigation', 'modals', 'widgets', 'extended'];
 const SKIP = /\.(spec|e2e|test|stories)\.(tsx?|mjs)$|readme\.md$|components\.d\.ts$/;
 
 const rules = [

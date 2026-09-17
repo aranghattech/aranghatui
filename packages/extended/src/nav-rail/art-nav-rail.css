@@ -1,0 +1,56 @@
+/**
+ * @prop --art-nav-rail-width: Width of the icon rail. Defaults to the `space.14` token (3.5rem).
+ * @prop --art-nav-panel-width: Width of the expanded panel. Defaults to the sidebar width token (16rem).
+ * @prop --art-nav-header-height: Height of the top band — the rail's brand and the panel's header share it, so the mark lines up with the workspace switcher beside it. Defaults to the `space.12` token (3rem).
+ */
+:host {
+  display: flex;
+  height: 100%;
+  color: var(--art-color-fg-default);
+}
+:host([hidden]) {
+  display: none;
+}
+.rail {
+  width: var(--art-nav-rail-width, var(--art-space-14));
+  border-inline-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+.panel {
+  width: var(--art-nav-panel-width, var(--art-sidebar-width));
+  border-inline-end: var(--art-border-width) solid var(--art-color-border-default);
+  transition: width var(--art-duration-base) var(--art-ease-out);
+}
+/* Collapsed: the panel keeps its chrome but narrows to the icon column, so the rows stay in place
+   instead of unmounting. Sections and links clip their own text (they are told via data-collapsed). */
+:host([collapsed]) .panel {
+  width: var(--art-sidebar-width-icon);
+}
+:host([collapsed]) .header,
+:host([collapsed]) .footer,
+:host([collapsed]) .user {
+  padding-inline: var(--art-space-1);
+}
+:host([collapsed]) .nav {
+  padding-inline: var(--art-space-1);
+}
+/* The header's own content (a workspace switcher) has no room when collapsed; the toggle stays. */
+:host([collapsed]) .header > :first-child {
+  display: none;
+}
+:host([collapsed]) .toggle {
+  margin-inline: auto;
+}
+/* The rail's mark and the panel's header are one row across two columns: give them the same height
+   and the mark sits level with the workspace switcher instead of riding the top edge. */
+.brand,
+.header {
+  min-height: var(--art-nav-header-height, var(--art-space-12));
+}
+.header {
+  border-block-end: var(--art-border-width) solid var(--art-color-border-default);
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+}

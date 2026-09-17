@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+/* Disabled keeps the muted foreground rather than dimming: axe measures dimmed text as a contrast
+   failure, and the `badge` carries the reason ("Soon") anyway. */
+:host([disabled]) .control {
+  color: var(--art-color-fg-muted);
+}
+/* The current page reads as a raised row, the way the rail's active icon does. */
+:host([active]) .control,
+:host([active]) .control:hover {
+  background-color: var(--art-color-bg-surface);
+  color: var(--art-color-fg-default);
+  box-shadow: inset 0 0 0 var(--art-border-width) var(--art-color-border-default), var(--art-shadow-raised);
+  font-weight: var(--art-font-weight-medium);
+}
+/* Collapsed: the row becomes the icon square. The label and the badge are hidden from the eye but
+   not from the accessibility tree — `display: none` would leave the control with no accessible
+   name at all, which is what the tooltip beside it is there to repeat, not to replace. */
+:host([collapsed]) .control {
+  justify-content: center;
+  padding-inline: 0;
+}
+:host([collapsed]) .label,
+:host([collapsed]) .badge {
+  position: absolute;
+  width: var(--art-space-px);
+  height: var(--art-space-px);
+  margin: calc(-1 * var(--art-space-px));
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+/* A consumer's icon has no intrinsic size: the component gives it one, the way the Sidebar's
+   menu button does. Works for an `<svg>` and for an `<art-icon>` alike. */
+::slotted([slot='icon']) {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+/* the top-layer tooltip (ADR-0022) */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+.tooltip {
+  position: fixed;
+}
+.tooltip:not([data-state]),
+.tooltip[popover]:not(:popover-open) {
+  display: none;
+}
+.tooltip[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.tooltip[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}

@@ -55,7 +55,7 @@ export interface StoryDocs {
 
 export interface ComponentStories {
   tag: string;
-  tier: 'base' | 'components' | 'navigation' | 'modals' | 'widgets';
+  tier: 'base' | 'components' | 'navigation' | 'modals' | 'widgets' | 'extended';
   /** Documented variants; each becomes a VRT axis. Use ['default'] when the component has none. */
   variants: string[];
   /** Documented sizes; [] when the component has no size prop. */

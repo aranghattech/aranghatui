@@ -117,6 +117,10 @@ import { defineCustomElement as defineOnboardingWizard } from '@aranghat/widgets
 import { defineCustomElement as defineWizardStep } from '@aranghat/widgets/wizard-step';
 import { defineCustomElement as defineNotificationCentre } from '@aranghat/widgets/notification-centre';
 import { defineCustomElement as defineNotificationItem } from '@aranghat/widgets/notification-item';
+import { defineCustomElement as defineNavRail } from '@aranghat/extended/nav-rail';
+import { defineCustomElement as defineNavRailItem } from '@aranghat/extended/nav-rail-item';
+import { defineCustomElement as defineNavSection } from '@aranghat/extended/nav-section';
+import { defineCustomElement as defineNavLink } from '@aranghat/extended/nav-link';
 import './sandbox.css';
 
 defineButton();
@@ -235,6 +239,10 @@ defineOnboardingWizard();
 defineWizardStep();
 defineNotificationCentre();
 defineNotificationItem();
+defineNavRail();
+defineNavRailItem();
+defineNavSection();
+defineNavLink();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

@@ -1,0 +1,53 @@
+:host {
+  display: contents;
+}
+:host([hidden]) {
+  display: none;
+}
+:host([disabled]) {
+  pointer-events: none;
+}
+:host([disabled]) .control {
+  opacity: 50%;
+}
+/* The current context reads as a pressed key: a filled square that survives hover. */
+:host([active]) .control,
+:host([active]) .control:hover {
+  background-color: var(--art-color-bg-sidebar-accent);
+  color: var(--art-color-fg-default);
+  box-shadow: inset 0 0 0 var(--art-border-width) var(--art-color-border-default);
+}
+::slotted(*) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+/* the top-layer tooltip (ADR-0022) */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+.tooltip {
+  position: fixed;
+}
+.tooltip:not([data-state]),
+.tooltip[popover]:not(:popover-open) {
+  display: none;
+}
+.tooltip[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.tooltip[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}

@@ -12,6 +12,8 @@
     "@aranghat/base-react": "workspace:*",
     "@aranghat/components": "workspace:*",
     "@aranghat/components-react": "workspace:*",
+    "@aranghat/extended": "workspace:*",
+    "@aranghat/extended-react": "workspace:*",
     "@aranghat/icons": "workspace:*",
     "@aranghat/modals": "workspace:*",
     "@aranghat/modals-react": "workspace:*",

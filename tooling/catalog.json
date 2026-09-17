@@ -680,6 +680,36 @@
           "internal": true
         }
       ]
+    },
+    "extended": {
+      "package": "@aranghat/extended",
+      "title": "Extended",
+      "budgetKb": 8,
+      "components": [
+        {
+          "tag": "art-nav-rail",
+          "name": "Nav Rail",
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-nav-rail-item",
+          "name": "Nav Rail Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-nav-section",
+          "name": "Nav Section",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-nav-link",
+          "name": "Nav Link",
+          "status": "in-progress",
+          "internal": true
+        }
+      ]
     }
   }
 }
