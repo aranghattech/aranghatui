@@ -690,6 +690,9 @@ importers:
       '@aranghat/components':
         specifier: workspace:*
         version: link:../components
+      '@aranghat/extended':
+        specifier: workspace:*
+        version: link:../extended
       '@aranghat/icons':
         specifier: workspace:*
         version: link:../icons
