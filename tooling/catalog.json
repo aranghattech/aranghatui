@@ -708,6 +708,29 @@
           "name": "Nav Link",
           "status": "in-progress",
           "internal": true
+        },
+        {
+          "tag": "art-mega-menu",
+          "name": "Mega Menu",
+          "status": "in-progress"
+        },
+        {
+          "tag": "art-mega-menu-item",
+          "name": "Mega Menu Item",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-mega-menu-group",
+          "name": "Mega Menu Group",
+          "status": "in-progress",
+          "internal": true
+        },
+        {
+          "tag": "art-mega-menu-link",
+          "name": "Mega Menu Link",
+          "status": "in-progress",
+          "internal": true
         }
       ]
     }

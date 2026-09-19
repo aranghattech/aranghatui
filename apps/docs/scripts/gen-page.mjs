@@ -161,7 +161,7 @@ ${cg(key)}
 ## API Reference
 
 <ApiReference tag="${tag}" />
-
+${(d.api ?? []).map((t) => `\n<ApiReference tag="${t}" nested />\n`).join('')}
 ## Accessibility
 
 ${table(d.keyboard.map(([k, a]) => [`\`${k}\``, a]), ['Key', 'Action'])}

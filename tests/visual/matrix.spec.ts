@@ -35,6 +35,7 @@ for (const s of stories) {
           await page.goto(storyUrl(s, { example: key, theme }));
           await page.locator('#stage[data-ready]').waitFor();
           await page.evaluate(() => document.fonts.ready);
+          if (example.click) await page.locator(example.click).first().click();
           const shot = [s.tag, `example-${key}-${theme}.png`];
           if (s.screenshot === 'viewport') await expect(page).toHaveScreenshot(shot);
           else await expect(page.locator('#stage')).toHaveScreenshot(shot);

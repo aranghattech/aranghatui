@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+.list {
+  grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+  column-gap: var(--art-space-2);
+}

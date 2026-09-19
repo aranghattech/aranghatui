@@ -26,7 +26,7 @@ import '@aranghat/tokens/aranghat.css';   // once, in the app entry. The only st
 | 4 | `@aranghat/navigation` | Breadcrumb, Pagination, Dropdown Menu, Context Menu, Menubar, Navigation Menu, Sidebar, TopNav, Tree View |
 | 5 | `@aranghat/modals` | Dialog, Alert Dialog, Sheet, Drawer, Common Dialogs (`confirm` / `alert` / `prompt`) |
 | 6 | `@aranghat/widgets` | App Shell, Login, Signup, Forgot Password, Settings Page, Data Table Page, Empty / 404 / 500 States, Onboarding Wizard, Notification Centre |
-| 7 | `@aranghat/extended` | Nav Rail (icon rail + collapsible secondary panel) |
+| 7 | `@aranghat/extended` | Nav Rail (icon rail + collapsible secondary panel), Mega Menu (bar of wide panels of named link groups) |
 
 `@aranghat/ui` re-exports every tier for a prototype. It costs the bundle of every tier you do not use — prefer the per-tier packages.
 
@@ -50,6 +50,8 @@ There is one element per component. Parts that a React library would expose as `
 ```
 
 The same shape everywhere: `<Alert>` takes `icon` / `title` / `description`; `<Dialog>` takes `trigger` / `title` / `description` / `footer`; `<Field>` takes `label` / `description` / `error` around its control; `<Item>` takes `media` / `title` / `description` / `actions`. Read the component's page for its slot list — it is in the API reference under *Slots*.
+
+A few families are several elements, because each level carries its own props: Navigation Menu, Sidebar, Nav Rail and Mega Menu. A Mega Menu is `<MegaMenu>` › `<MegaMenuItem label>` (a trigger; `href` makes it a plain link) › `<MegaMenuGroup label>` › `<MegaMenuLink href>` with `icon` / `description` slots; the item takes `trigger` (a burger icon or a logo in place of the label, which then names the button), `aside` and `footer` slots too, and `hideChevron` drops the chevron. The groups' flow is on the item — `layout="columns"` with `maxColumns`, or `layout="rows"` with `maxRows` — and the widths are `fullWidth` (the panel spans the viewport) and `fullWidthContent` (the content fills it instead of the `--art-mega-menu-content-width` container), on the bar for every panel or on one item.
 
 There is no `asChild`. A button that is a link takes `href` (with `target`, `rel`) and renders an anchor itself.
 

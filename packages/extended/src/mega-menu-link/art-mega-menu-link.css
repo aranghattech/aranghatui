@@ -1,0 +1,34 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+.link {
+  text-decoration: none;
+}
+.link[data-active] {
+  background: color-mix(in oklab, var(--art-color-bg-accent) 50%, transparent);
+}
+/* The icon sits on the title's line: a box as tall as the title's leading, the icon centred in it. */
+.icon {
+  height: var(--art-font-size-sm);
+}
+:host(:not([data-has-icon])) .icon,
+:host(:not([data-has-description])) .description {
+  display: none;
+}
+/* A consumer's icon has no intrinsic size: the link gives it one (the Sidebar's convention). */
+::slotted([slot='icon']) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+::slotted([slot='description']) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: var(--art-font-line-height-sm);
+}

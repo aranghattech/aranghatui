@@ -1687,6 +1687,58 @@
     "gzip": true
   },
   {
+    "name": "extended/art-mega-menu",
+    "path": "packages/extended/dist/components/art-mega-menu.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-mega-menu-item",
+    "path": "packages/extended/dist/components/art-mega-menu-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-mega-menu-group",
+    "path": "packages/extended/dist/components/art-mega-menu-group.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "extended/art-mega-menu-link",
+    "path": "packages/extended/dist/components/art-mega-menu-link.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
     "name": "extended: whole tier",
     "path": "packages/extended/dist/components/index.js",
     "import": "*",

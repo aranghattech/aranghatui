@@ -17,6 +17,9 @@
     "xl": { "$value": "36rem" },
     "2xl": { "$value": "42rem" },
     "3xl": { "$value": "48rem" },
-    "4xl": { "$value": "56rem" }
+    "4xl": { "$value": "56rem" },
+    "5xl": { "$value": "64rem" },
+    "6xl": { "$value": "72rem" },
+    "7xl": { "$value": "80rem" }
   }
 }

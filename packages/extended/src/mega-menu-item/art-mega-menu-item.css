@@ -1,0 +1,183 @@
+/**
+ * @prop --art-mega-menu-content-width: Width of the centred container a full-width panel's content sits in, unless `full-width-content` is set. Match it to your page container. Defaults to the `container.6xl` token (72rem).
+ * @prop --art-mega-menu-column-width: The widest a group column grows in a panel that hugs its content. Defaults to the `space.64` token (16rem).
+ * @prop --art-mega-menu-aside-width: Width of the `aside` column. Defaults to the `space.64` token (16rem).
+ */
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+.top {
+  text-decoration: none;
+}
+.top[data-state='open'],
+.top[data-active] {
+  background: color-mix(in oklab, var(--art-color-bg-accent) 50%, transparent);
+}
+.chevron {
+  transition-property: rotate;
+  transition-duration: var(--art-duration-base);
+  transition-timing-function: var(--art-ease-out);
+}
+.top[data-state='open'] .chevron {
+  rotate: 180deg;
+}
+/* Custom trigger content. An icon-only trigger (a burger, a logo mark) is a square control; an svg with
+   no size of its own takes the icon size, one that states a width keeps it. */
+.top[data-icon] {
+  min-width: var(--art-control-height-md);
+  padding-inline: var(--art-space-2);
+}
+::slotted(svg[slot='trigger']:not([width])) {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+::slotted([slot='trigger']) {
+  flex-shrink: 0;
+}
+
+/* the top-layer panel (ADR-0022) */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+[part='content'] {
+  position: fixed;
+  box-sizing: border-box;
+  /* Fixed on the top layer, so 100% is the viewport: a hugging panel keeps a gutter on both sides. */
+  max-width: calc(100% - 2 * var(--art-space-4));
+  /* A panel taller than the room below scrolls, stopping a gutter short of the viewport's edge. */
+  max-height: calc(var(--art-available-height) - var(--art-space-4));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--art-border-width) solid var(--art-color-border-default);
+  border-radius: var(--art-radius-md);
+}
+/* Full width: edge to edge, so only the top and bottom edges carry a rule and nothing is rounded. */
+[part='content'][data-full] {
+  max-width: none;
+  border-inline-width: 0;
+  border-radius: 0;
+}
+[part='content']:not([data-state]),
+[part='content'][popover]:not(:popover-open) {
+  display: none;
+}
+[part='content'][data-state='open'] {
+  @apply animate-overlay-in;
+}
+[part='content'][data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+/* A zoom reads as motion across a viewport-wide panel: fade and settle only. */
+[part='content'][data-full][data-state='open'] {
+  animation-name: mega-menu-in;
+}
+[part='content'][data-full][data-state='closed'] {
+  animation-name: mega-menu-out;
+}
+@keyframes mega-menu-in {
+  from {
+    opacity: 0;
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+@keyframes mega-menu-out {
+  to {
+    opacity: 0;
+    translate: var(--art-overlay-slide, 0 0);
+  }
+}
+
+/* The content container: padded; capped and centred inside a full-width panel unless `full-width-content`. */
+.inner,
+.footer-inner {
+  box-sizing: border-box;
+  padding-inline: var(--art-space-6);
+}
+.inner {
+  padding-block: var(--art-space-6);
+}
+.footer-inner {
+  padding-block: var(--art-space-3);
+}
+[data-contained] {
+  max-width: var(--art-mega-menu-content-width, var(--art-container-6xl));
+  margin-inline: auto;
+}
+.body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--art-space-6);
+}
+
+/*
+ * The groups grid. Its column and row counts come from the item (layout × max × group count);
+ * `data-flow="column"` fills it top to bottom (rows), otherwise left to right (columns). A panel
+ * that hugs its content sizes each column to its widest group, up to the column width; a
+ * full-width panel shares its width out evenly.
+ */
+.groups {
+  --_track: fit-content(var(--art-mega-menu-column-width, var(--art-space-64)));
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+  grid-template-columns: repeat(var(--_cols, 1), var(--_track));
+  align-items: start;
+  gap: var(--art-space-6);
+}
+.groups[data-flow='column'] {
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--_rows, 1), auto);
+}
+[data-full] .groups {
+  --_track: minmax(0, 1fr);
+}
+.aside {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: var(--art-space-3);
+  width: var(--art-mega-menu-aside-width, var(--art-space-64));
+}
+.footer {
+  border-block-start: var(--art-border-width) solid var(--art-color-border-default);
+  background: var(--art-color-bg-muted);
+}
+
+/* Below the md breakpoint: one column, the aside under the groups. */
+[data-narrow] .body {
+  flex-direction: column;
+  align-items: stretch;
+}
+[data-narrow] .groups {
+  --_track: minmax(0, 1fr);
+}
+[data-narrow] .aside {
+  width: auto;
+}
+[data-narrow] .inner,
+[data-narrow] .footer-inner {
+  padding-inline: var(--art-space-4);
+}
+[data-narrow] .inner {
+  padding-block: var(--art-space-4);
+}
+
+/* The UA's `[hidden]` loses to the display rules above: an empty aside or footer must not keep its box. */
+.aside[hidden],
+.footer[hidden] {
+  display: none;
+}

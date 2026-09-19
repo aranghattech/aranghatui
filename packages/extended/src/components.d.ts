@@ -7,6 +7,129 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     /**
+     * Mega Menu — a site navigation bar whose triggers open wide panels of named link groups. The
+     * groups flow in columns or rows with a cap on either; a panel can span the viewport, and its
+     * content can fill that width or sit in a centred container. An `aside` (a tutorial, a sales
+     * prompt) and a `footer` sit beside and below the groups. Panels live on the platform top layer
+     * and one is open at a time (the pattern of shadcn's full mega menu example).
+     * The width settings here apply to every panel; an `art-mega-menu-item` can opt in on its own.
+     */
+    interface ArtMegaMenu {
+        /**
+          * Every panel spans the full width of the viewport, hanging from the bottom edge of this element.
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * Every panel's content fills its panel instead of sitting in a centred container (`--art-mega-menu-content-width`).
+          * @default false
+         */
+        "fullWidthContent": boolean;
+        /**
+          * Accessible name of the `<nav>`.
+          * @default 'Main'
+         */
+        "label": string;
+    }
+    /**
+     * Mega Menu Group — a named set of `art-mega-menu-link`s in a panel. The name sits above the links
+     * and names their list for assistive technology. The links stack in one column unless `columns`
+     * spreads them out (a band of links across a wide panel).
+     */
+    interface ArtMegaMenuGroup {
+        /**
+          * Columns the group's own links flow in.
+          * @default 1
+         */
+        "columns": number;
+        /**
+          * The group's name ("Core features", "Resources").
+         */
+        "label"?: string;
+    }
+    /**
+     * Mega Menu Item — one entry in the bar: a plain link (`href`), or a trigger (`label`) whose panel
+     * holds `art-mega-menu-group`s. The groups flow in columns or rows, capped by `max-columns` /
+     * `max-rows`; `aside` content sits beside them and `footer` content below. Below the `md`
+     * breakpoint the groups stack in one column and the aside moves under them.
+     */
+    interface ArtMegaMenuItem {
+        /**
+          * Marks the link as the current page (`aria-current="page"`).
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * The panel spans the full width of the viewport, hanging from the bottom edge of the bar. Also settable on `art-mega-menu` for every panel.
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * The content fills the panel instead of sitting in a centred container (`--art-mega-menu-content-width`). Also settable on `art-mega-menu`.
+          * @default false
+         */
+        "fullWidthContent": boolean;
+        /**
+          * Leave the chevron off the trigger (a burger icon or a logo says "menu" on its own).
+          * @default false
+         */
+        "hideChevron": boolean;
+        /**
+          * Makes the entry a plain link instead of a trigger.
+         */
+        "href"?: string;
+        /**
+          * Trigger text. With a `trigger` slot it is the button's accessible name instead — required for an icon-only trigger.
+          * @default ''
+         */
+        "label": string;
+        /**
+          * How the groups flow. `columns`: side by side, starting a new line after `max-columns`. `rows`: stacked, starting a new column after `max-rows`.
+          * @default 'columns'
+         */
+        "layout": 'columns' | 'rows';
+        /**
+          * With `layout="columns"`, the most groups side by side. Unset: every group in one row.
+         */
+        "maxColumns"?: number;
+        /**
+          * With `layout="rows"`, the most groups stacked in a column. Unset: every group in one column.
+         */
+        "maxRows"?: number;
+        /**
+          * Whether the panel is open.
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Open or close the panel.
+         */
+        "setOpen": (open: boolean, byKeyboard?: boolean) => Promise<void>;
+    }
+    /**
+     * Mega Menu Link — one destination in a group: an optional leading icon, a title and an optional
+     * line of description, tinted when `active`.
+     */
+    interface ArtMegaMenuLink {
+        /**
+          * Marks the current page (`aria-current="page"`).
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * Destination.
+         */
+        "href"?: string;
+        /**
+          * Link rel.
+         */
+        "rel"?: string;
+        /**
+          * Link target.
+         */
+        "target"?: string;
+    }
+    /**
      * One destination in the panel: a leading icon, a label, and an optional badge for work that is
      * not shipped yet. While the panel is collapsed only the icon shows, and the label moves into a
      * tooltip — the same treatment the rail's items get.
@@ -128,11 +251,74 @@ export namespace Components {
         "label"?: string;
     }
 }
+export interface ArtMegaMenuItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtMegaMenuItemElement;
+}
 export interface ArtNavRailCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtNavRailElement;
 }
 declare global {
+    /**
+     * Mega Menu — a site navigation bar whose triggers open wide panels of named link groups. The
+     * groups flow in columns or rows with a cap on either; a panel can span the viewport, and its
+     * content can fill that width or sit in a centred container. An `aside` (a tutorial, a sales
+     * prompt) and a `footer` sit beside and below the groups. Panels live on the platform top layer
+     * and one is open at a time (the pattern of shadcn's full mega menu example).
+     * The width settings here apply to every panel; an `art-mega-menu-item` can opt in on its own.
+     */
+    interface HTMLArtMegaMenuElement extends Components.ArtMegaMenu, HTMLStencilElement {
+    }
+    var HTMLArtMegaMenuElement: {
+        prototype: HTMLArtMegaMenuElement;
+        new (): HTMLArtMegaMenuElement;
+    };
+    /**
+     * Mega Menu Group — a named set of `art-mega-menu-link`s in a panel. The name sits above the links
+     * and names their list for assistive technology. The links stack in one column unless `columns`
+     * spreads them out (a band of links across a wide panel).
+     */
+    interface HTMLArtMegaMenuGroupElement extends Components.ArtMegaMenuGroup, HTMLStencilElement {
+    }
+    var HTMLArtMegaMenuGroupElement: {
+        prototype: HTMLArtMegaMenuGroupElement;
+        new (): HTMLArtMegaMenuGroupElement;
+    };
+    interface HTMLArtMegaMenuItemElementEventMap {
+        "open-change": { open: boolean };
+        "mega-menu-open": void;
+    }
+    /**
+     * Mega Menu Item — one entry in the bar: a plain link (`href`), or a trigger (`label`) whose panel
+     * holds `art-mega-menu-group`s. The groups flow in columns or rows, capped by `max-columns` /
+     * `max-rows`; `aside` content sits beside them and `footer` content below. Below the `md`
+     * breakpoint the groups stack in one column and the aside moves under them.
+     */
+    interface HTMLArtMegaMenuItemElement extends Components.ArtMegaMenuItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtMegaMenuItemElementEventMap>(type: K, listener: (this: HTMLArtMegaMenuItemElement, ev: ArtMegaMenuItemCustomEvent<HTMLArtMegaMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtMegaMenuItemElementEventMap>(type: K, listener: (this: HTMLArtMegaMenuItemElement, ev: ArtMegaMenuItemCustomEvent<HTMLArtMegaMenuItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtMegaMenuItemElement: {
+        prototype: HTMLArtMegaMenuItemElement;
+        new (): HTMLArtMegaMenuItemElement;
+    };
+    /**
+     * Mega Menu Link — one destination in a group: an optional leading icon, a title and an optional
+     * line of description, tinted when `active`.
+     */
+    interface HTMLArtMegaMenuLinkElement extends Components.ArtMegaMenuLink, HTMLStencilElement {
+    }
+    var HTMLArtMegaMenuLinkElement: {
+        prototype: HTMLArtMegaMenuLinkElement;
+        new (): HTMLArtMegaMenuLinkElement;
+    };
     /**
      * One destination in the panel: a leading icon, a label, and an optional badge for work that is
      * not shipped yet. While the panel is collapsed only the icon shows, and the label moves into a
@@ -191,6 +377,10 @@ declare global {
         new (): HTMLArtNavSectionElement;
     };
     interface HTMLElementTagNameMap {
+        "art-mega-menu": HTMLArtMegaMenuElement;
+        "art-mega-menu-group": HTMLArtMegaMenuGroupElement;
+        "art-mega-menu-item": HTMLArtMegaMenuItemElement;
+        "art-mega-menu-link": HTMLArtMegaMenuLinkElement;
         "art-nav-link": HTMLArtNavLinkElement;
         "art-nav-rail": HTMLArtNavRailElement;
         "art-nav-rail-item": HTMLArtNavRailItemElement;
@@ -200,6 +390,133 @@ declare global {
 declare namespace LocalJSX {
     type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K]?: never };
 
+    /**
+     * Mega Menu — a site navigation bar whose triggers open wide panels of named link groups. The
+     * groups flow in columns or rows with a cap on either; a panel can span the viewport, and its
+     * content can fill that width or sit in a centred container. An `aside` (a tutorial, a sales
+     * prompt) and a `footer` sit beside and below the groups. Panels live on the platform top layer
+     * and one is open at a time (the pattern of shadcn's full mega menu example).
+     * The width settings here apply to every panel; an `art-mega-menu-item` can opt in on its own.
+     */
+    interface ArtMegaMenu {
+        /**
+          * Every panel spans the full width of the viewport, hanging from the bottom edge of this element.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Every panel's content fills its panel instead of sitting in a centred container (`--art-mega-menu-content-width`).
+          * @default false
+         */
+        "fullWidthContent"?: boolean;
+        /**
+          * Accessible name of the `<nav>`.
+          * @default 'Main'
+         */
+        "label"?: string;
+    }
+    /**
+     * Mega Menu Group — a named set of `art-mega-menu-link`s in a panel. The name sits above the links
+     * and names their list for assistive technology. The links stack in one column unless `columns`
+     * spreads them out (a band of links across a wide panel).
+     */
+    interface ArtMegaMenuGroup {
+        /**
+          * Columns the group's own links flow in.
+          * @default 1
+         */
+        "columns"?: number;
+        /**
+          * The group's name ("Core features", "Resources").
+         */
+        "label"?: string;
+    }
+    /**
+     * Mega Menu Item — one entry in the bar: a plain link (`href`), or a trigger (`label`) whose panel
+     * holds `art-mega-menu-group`s. The groups flow in columns or rows, capped by `max-columns` /
+     * `max-rows`; `aside` content sits beside them and `footer` content below. Below the `md`
+     * breakpoint the groups stack in one column and the aside moves under them.
+     */
+    interface ArtMegaMenuItem {
+        /**
+          * Marks the link as the current page (`aria-current="page"`).
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * The panel spans the full width of the viewport, hanging from the bottom edge of the bar. Also settable on `art-mega-menu` for every panel.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * The content fills the panel instead of sitting in a centred container (`--art-mega-menu-content-width`). Also settable on `art-mega-menu`.
+          * @default false
+         */
+        "fullWidthContent"?: boolean;
+        /**
+          * Leave the chevron off the trigger (a burger icon or a logo says "menu" on its own).
+          * @default false
+         */
+        "hideChevron"?: boolean;
+        /**
+          * Makes the entry a plain link instead of a trigger.
+         */
+        "href"?: string;
+        /**
+          * Trigger text. With a `trigger` slot it is the button's accessible name instead — required for an icon-only trigger.
+          * @default ''
+         */
+        "label"?: string;
+        /**
+          * How the groups flow. `columns`: side by side, starting a new line after `max-columns`. `rows`: stacked, starting a new column after `max-rows`.
+          * @default 'columns'
+         */
+        "layout"?: 'columns' | 'rows';
+        /**
+          * With `layout="columns"`, the most groups side by side. Unset: every group in one row.
+         */
+        "maxColumns"?: number;
+        /**
+          * With `layout="rows"`, the most groups stacked in a column. Unset: every group in one column.
+         */
+        "maxRows"?: number;
+        /**
+          * Internal: tells the bar to close the other panels.
+         */
+        "onMega-menu-open"?: (event: ArtMegaMenuItemCustomEvent<void>) => void;
+        /**
+          * Emitted when the panel opens or closes; `detail.open`.
+         */
+        "onOpen-change"?: (event: ArtMegaMenuItemCustomEvent<{ open: boolean }>) => void;
+        /**
+          * Whether the panel is open.
+          * @default false
+         */
+        "open"?: boolean;
+    }
+    /**
+     * Mega Menu Link — one destination in a group: an optional leading icon, a title and an optional
+     * line of description, tinted when `active`.
+     */
+    interface ArtMegaMenuLink {
+        /**
+          * Marks the current page (`aria-current="page"`).
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * Destination.
+         */
+        "href"?: string;
+        /**
+          * Link rel.
+         */
+        "rel"?: string;
+        /**
+          * Link target.
+         */
+        "target"?: string;
+    }
     /**
      * One destination in the panel: a leading icon, a label, and an optional badge for work that is
      * not shipped yet. While the panel is collapsed only the icon shows, and the label moves into a
@@ -326,6 +643,33 @@ declare namespace LocalJSX {
         "label"?: string;
     }
 
+    interface ArtMegaMenuAttributes {
+        "label": string;
+        "fullWidth": boolean;
+        "fullWidthContent": boolean;
+    }
+    interface ArtMegaMenuGroupAttributes {
+        "label": string;
+        "columns": number;
+    }
+    interface ArtMegaMenuItemAttributes {
+        "label": string;
+        "href": string;
+        "active": boolean;
+        "hideChevron": boolean;
+        "open": boolean;
+        "layout": 'columns' | 'rows';
+        "maxColumns": number;
+        "maxRows": number;
+        "fullWidth": boolean;
+        "fullWidthContent": boolean;
+    }
+    interface ArtMegaMenuLinkAttributes {
+        "href": string;
+        "target": string;
+        "rel": string;
+        "active": boolean;
+    }
     interface ArtNavLinkAttributes {
         "active": boolean;
         "href": string;
@@ -356,6 +700,10 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "art-mega-menu": Omit<ArtMegaMenu, keyof ArtMegaMenuAttributes> & { [K in keyof ArtMegaMenu & keyof ArtMegaMenuAttributes]?: ArtMegaMenu[K] } & { [K in keyof ArtMegaMenu & keyof ArtMegaMenuAttributes as `attr:${K}`]?: ArtMegaMenuAttributes[K] } & { [K in keyof ArtMegaMenu & keyof ArtMegaMenuAttributes as `prop:${K}`]?: ArtMegaMenu[K] };
+        "art-mega-menu-group": Omit<ArtMegaMenuGroup, keyof ArtMegaMenuGroupAttributes> & { [K in keyof ArtMegaMenuGroup & keyof ArtMegaMenuGroupAttributes]?: ArtMegaMenuGroup[K] } & { [K in keyof ArtMegaMenuGroup & keyof ArtMegaMenuGroupAttributes as `attr:${K}`]?: ArtMegaMenuGroupAttributes[K] } & { [K in keyof ArtMegaMenuGroup & keyof ArtMegaMenuGroupAttributes as `prop:${K}`]?: ArtMegaMenuGroup[K] };
+        "art-mega-menu-item": Omit<ArtMegaMenuItem, keyof ArtMegaMenuItemAttributes> & { [K in keyof ArtMegaMenuItem & keyof ArtMegaMenuItemAttributes]?: ArtMegaMenuItem[K] } & { [K in keyof ArtMegaMenuItem & keyof ArtMegaMenuItemAttributes as `attr:${K}`]?: ArtMegaMenuItemAttributes[K] } & { [K in keyof ArtMegaMenuItem & keyof ArtMegaMenuItemAttributes as `prop:${K}`]?: ArtMegaMenuItem[K] };
+        "art-mega-menu-link": Omit<ArtMegaMenuLink, keyof ArtMegaMenuLinkAttributes> & { [K in keyof ArtMegaMenuLink & keyof ArtMegaMenuLinkAttributes]?: ArtMegaMenuLink[K] } & { [K in keyof ArtMegaMenuLink & keyof ArtMegaMenuLinkAttributes as `attr:${K}`]?: ArtMegaMenuLinkAttributes[K] } & { [K in keyof ArtMegaMenuLink & keyof ArtMegaMenuLinkAttributes as `prop:${K}`]?: ArtMegaMenuLink[K] };
         "art-nav-link": Omit<ArtNavLink, keyof ArtNavLinkAttributes> & { [K in keyof ArtNavLink & keyof ArtNavLinkAttributes]?: ArtNavLink[K] } & { [K in keyof ArtNavLink & keyof ArtNavLinkAttributes as `attr:${K}`]?: ArtNavLinkAttributes[K] } & { [K in keyof ArtNavLink & keyof ArtNavLinkAttributes as `prop:${K}`]?: ArtNavLink[K] };
         "art-nav-rail": Omit<ArtNavRail, keyof ArtNavRailAttributes> & { [K in keyof ArtNavRail & keyof ArtNavRailAttributes]?: ArtNavRail[K] } & { [K in keyof ArtNavRail & keyof ArtNavRailAttributes as `attr:${K}`]?: ArtNavRailAttributes[K] } & { [K in keyof ArtNavRail & keyof ArtNavRailAttributes as `prop:${K}`]?: ArtNavRail[K] };
         "art-nav-rail-item": Omit<ArtNavRailItem, keyof ArtNavRailItemAttributes> & { [K in keyof ArtNavRailItem & keyof ArtNavRailItemAttributes]?: ArtNavRailItem[K] } & { [K in keyof ArtNavRailItem & keyof ArtNavRailItemAttributes as `attr:${K}`]?: ArtNavRailItemAttributes[K] } & { [K in keyof ArtNavRailItem & keyof ArtNavRailItemAttributes as `prop:${K}`]?: ArtNavRailItem[K] } & OneOf<"label", ArtNavRailItem["label"], ArtNavRailItemAttributes["label"]>;
@@ -366,6 +714,33 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Mega Menu — a site navigation bar whose triggers open wide panels of named link groups. The
+             * groups flow in columns or rows with a cap on either; a panel can span the viewport, and its
+             * content can fill that width or sit in a centred container. An `aside` (a tutorial, a sales
+             * prompt) and a `footer` sit beside and below the groups. Panels live on the platform top layer
+             * and one is open at a time (the pattern of shadcn's full mega menu example).
+             * The width settings here apply to every panel; an `art-mega-menu-item` can opt in on its own.
+             */
+            "art-mega-menu": LocalJSX.IntrinsicElements["art-mega-menu"] & JSXBase.HTMLAttributes<HTMLArtMegaMenuElement>;
+            /**
+             * Mega Menu Group — a named set of `art-mega-menu-link`s in a panel. The name sits above the links
+             * and names their list for assistive technology. The links stack in one column unless `columns`
+             * spreads them out (a band of links across a wide panel).
+             */
+            "art-mega-menu-group": LocalJSX.IntrinsicElements["art-mega-menu-group"] & JSXBase.HTMLAttributes<HTMLArtMegaMenuGroupElement>;
+            /**
+             * Mega Menu Item — one entry in the bar: a plain link (`href`), or a trigger (`label`) whose panel
+             * holds `art-mega-menu-group`s. The groups flow in columns or rows, capped by `max-columns` /
+             * `max-rows`; `aside` content sits beside them and `footer` content below. Below the `md`
+             * breakpoint the groups stack in one column and the aside moves under them.
+             */
+            "art-mega-menu-item": LocalJSX.IntrinsicElements["art-mega-menu-item"] & JSXBase.HTMLAttributes<HTMLArtMegaMenuItemElement>;
+            /**
+             * Mega Menu Link — one destination in a group: an optional leading icon, a title and an optional
+             * line of description, tinted when `active`.
+             */
+            "art-mega-menu-link": LocalJSX.IntrinsicElements["art-mega-menu-link"] & JSXBase.HTMLAttributes<HTMLArtMegaMenuLinkElement>;
             /**
              * One destination in the panel: a leading icon, a label, and an optional badge for work that is
              * not shipped yet. While the panel is collapsed only the icon shows, and the label moves into a

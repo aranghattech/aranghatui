@@ -33,6 +33,12 @@ export interface StoryExample {
   frame?: StoryFrame;
   /** Framework samples are hand-written (events, v-model, scripts); the generator only emits the HTML sample. */
   manual?: boolean;
+  /**
+   * Playwright selector clicked after load, before the example is screenshot and audited. For an
+   * overlay the docs page shows closed — several open top-layer panels would cover the page — but
+   * whose open state is what the visual and axe passes must see (a Mega Menu's panel).
+   */
+  click?: string;
 }
 
 /** Content for the generated nine-section docs page (apps/docs/scripts/gen-page.mjs). */
@@ -51,6 +57,8 @@ export interface StoryDocs {
   states: string;
   tokens: Array<[token: string, usedFor: string]>;
   dos: Array<[doThis: string, notThat: string]>;
+  /** The family's other elements whose API the page documents after the main one (an item, a group, a link). */
+  api?: string[];
 }
 
 export interface ComponentStories {

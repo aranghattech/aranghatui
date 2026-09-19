@@ -112,7 +112,7 @@ StyleDictionary.registerFormat({
     add('--default-transition-timing-function', v('ease.out'));
     // static lengths Tailwind needs at compile time (media queries cannot use var())
     for (const k of ['sm', 'md', 'lg', 'xl', '2xl']) add(`--breakpoint-${k}`, lit(`breakpoint.${k}`));
-    for (const k of ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']) add(`--container-${k}`, lit(`container.${k}`));
+    for (const k of ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl']) add(`--container-${k}`, lit(`container.${k}`));
     // functional motion only (loading indicators); duration from the motion tokens
     add('--animate-spin', `spin ${lit('duration.spin')} linear infinite`);
     lines.push('  @keyframes spin { to { transform: rotate(360deg); } }');
