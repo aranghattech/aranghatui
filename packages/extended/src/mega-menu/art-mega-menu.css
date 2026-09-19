@@ -1,0 +1,7 @@
+:host {
+  display: block;
+  color: var(--art-color-fg-default);
+}
+:host([hidden]) {
+  display: none;
+}

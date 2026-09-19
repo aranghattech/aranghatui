@@ -1,0 +1,46 @@
+import { Component } from '@angular/core';
+import { ArtMegaMenu, ArtMegaMenuGroup, ArtMegaMenuItem, ArtMegaMenuLink } from '@aranghat/extended-angular';
+
+@Component({
+  selector: 'sample-mega-menu-max-columns',
+  imports: [ArtMegaMenu, ArtMegaMenuGroup, ArtMegaMenuItem, ArtMegaMenuLink],
+  template: `
+    <art-mega-menu>
+      <art-mega-menu-item label="Products" [maxColumns]="3">
+        <art-mega-menu-group label="Build">
+          <art-mega-menu-link href="#editor">Editor</art-mega-menu-link>
+          <art-mega-menu-link href="#deploy">Deploy</art-mega-menu-link>
+          <art-mega-menu-link href="#functions">Functions</art-mega-menu-link>
+        </art-mega-menu-group>
+        <art-mega-menu-group label="Observe">
+          <art-mega-menu-link href="#analytics">Analytics</art-mega-menu-link>
+          <art-mega-menu-link href="#logs">Logs</art-mega-menu-link>
+          <art-mega-menu-link href="#alerts">Alerts</art-mega-menu-link>
+        </art-mega-menu-group>
+        <art-mega-menu-group label="Secure">
+          <art-mega-menu-link href="#firewall">Firewall</art-mega-menu-link>
+          <art-mega-menu-link href="#access">Access</art-mega-menu-link>
+          <art-mega-menu-link href="#audit-log">Audit log</art-mega-menu-link>
+        </art-mega-menu-group>
+        <art-mega-menu-group label="Store">
+          <art-mega-menu-link href="#postgres">Postgres</art-mega-menu-link>
+          <art-mega-menu-link href="#key-value">Key-value</art-mega-menu-link>
+          <art-mega-menu-link href="#blob">Blob</art-mega-menu-link>
+        </art-mega-menu-group>
+        <art-mega-menu-group label="AI">
+          <art-mega-menu-link href="#models">Models</art-mega-menu-link>
+          <art-mega-menu-link href="#agents">Agents</art-mega-menu-link>
+          <art-mega-menu-link href="#evals">Evals</art-mega-menu-link>
+        </art-mega-menu-group>
+        <art-mega-menu-group label="Collaborate">
+          <art-mega-menu-link href="#comments">Comments</art-mega-menu-link>
+          <art-mega-menu-link href="#toolbar">Toolbar</art-mega-menu-link>
+          <art-mega-menu-link href="#flags">Flags</art-mega-menu-link>
+        </art-mega-menu-group>
+      </art-mega-menu-item>
+      <art-mega-menu-item label="Pricing" href="#pricing"></art-mega-menu-item>
+      <art-mega-menu-item label="Docs" href="#docs"></art-mega-menu-item>
+    </art-mega-menu>
+  `,
+})
+export class MegaMenuMaxColumns {}

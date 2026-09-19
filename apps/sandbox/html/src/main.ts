@@ -121,6 +121,10 @@ import { defineCustomElement as defineNavRail } from '@aranghat/extended/nav-rai
 import { defineCustomElement as defineNavRailItem } from '@aranghat/extended/nav-rail-item';
 import { defineCustomElement as defineNavSection } from '@aranghat/extended/nav-section';
 import { defineCustomElement as defineNavLink } from '@aranghat/extended/nav-link';
+import { defineCustomElement as defineMegaMenu } from '@aranghat/extended/mega-menu';
+import { defineCustomElement as defineMegaMenuItem } from '@aranghat/extended/mega-menu-item';
+import { defineCustomElement as defineMegaMenuGroup } from '@aranghat/extended/mega-menu-group';
+import { defineCustomElement as defineMegaMenuLink } from '@aranghat/extended/mega-menu-link';
 import './sandbox.css';
 
 defineButton();
@@ -243,6 +247,10 @@ defineNavRail();
 defineNavRailItem();
 defineNavSection();
 defineNavLink();
+defineMegaMenu();
+defineMegaMenuItem();
+defineMegaMenuGroup();
+defineMegaMenuLink();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

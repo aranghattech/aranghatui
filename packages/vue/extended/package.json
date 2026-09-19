@@ -13,6 +13,22 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./mega-menu": {
+      "types": "./dist/mega-menu.d.ts",
+      "import": "./dist/mega-menu.js"
+    },
+    "./mega-menu-group": {
+      "types": "./dist/mega-menu-group.d.ts",
+      "import": "./dist/mega-menu-group.js"
+    },
+    "./mega-menu-item": {
+      "types": "./dist/mega-menu-item.d.ts",
+      "import": "./dist/mega-menu-item.js"
+    },
+    "./mega-menu-link": {
+      "types": "./dist/mega-menu-link.d.ts",
+      "import": "./dist/mega-menu-link.js"
+    },
     "./nav-link": {
       "types": "./dist/nav-link.d.ts",
       "import": "./dist/nav-link.js"

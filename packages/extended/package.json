@@ -24,6 +24,26 @@
       "artui-ssr": "./dist/components-ssr/*",
       "default": "./dist/components/*"
     },
+    "./mega-menu": {
+      "types": "./dist/components/art-mega-menu.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-mega-menu.js",
+      "import": "./dist/components/art-mega-menu.js"
+    },
+    "./mega-menu-group": {
+      "types": "./dist/components/art-mega-menu-group.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-mega-menu-group.js",
+      "import": "./dist/components/art-mega-menu-group.js"
+    },
+    "./mega-menu-item": {
+      "types": "./dist/components/art-mega-menu-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-mega-menu-item.js",
+      "import": "./dist/components/art-mega-menu-item.js"
+    },
+    "./mega-menu-link": {
+      "types": "./dist/components/art-mega-menu-link.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-mega-menu-link.js",
+      "import": "./dist/components/art-mega-menu-link.js"
+    },
     "./nav-link": {
       "types": "./dist/components/art-nav-link.d.ts",
       "artui-ssr": "./dist/components-ssr/art-nav-link.js",
