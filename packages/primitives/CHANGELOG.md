@@ -1,5 +1,14 @@
 # @aranghat/primitives
 
+## 1.0.1
+
+### Patch Changes
+
+- 9421a7f: Mega Menu, in `@aranghat/extended`: a site navigation bar whose triggers open wide panels of named link groups (`art-mega-menu`, `art-mega-menu-item`, `art-mega-menu-group`, `art-mega-menu-link`). The groups flow in columns (`max-columns`) or rows (`max-rows`); `full-width` spans a panel across the viewport and `full-width-content` lets its content fill it instead of a centred container, each settable on the bar or on one item; `aside` and `footer` slots sit beside and below the groups, and a `trigger` slot (with `hide-chevron`) opens a menu from a burger icon or a logo. Tokens gain `container.5xl`, `6xl` and `7xl`; an overlay can anchor to a floating-ui virtual element.
+- e7a422d: Menus size themselves to their content. An open Dropdown or Context Menu is now as tall as its items and scrolls only when the viewport leaves no room, instead of clipping at a fixed height; `visible-items` caps it at a number of rows measured from a real item. The floating primitive publishes the room it has as `--art-available-height`, and a Context Menu written with `open` now opens at the corner of its area rather than staying shut.
+- Updated dependencies [9421a7f]
+  - @aranghat/tokens@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

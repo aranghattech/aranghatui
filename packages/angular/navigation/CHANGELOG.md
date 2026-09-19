@@ -1,5 +1,12 @@
 # @aranghat/navigation-angular
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [e7a422d]
+  - @aranghat/navigation@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

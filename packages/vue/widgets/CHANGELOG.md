@@ -1,5 +1,12 @@
 # @aranghat/widgets-vue
 
+## 1.0.1
+
+### Patch Changes
+
+- @aranghat/hydrate@1.0.1
+  - @aranghat/widgets@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

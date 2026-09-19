@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "artui meta-package \u2014 every tier in one import. The 'just get me started' option: it costs the bundle size of every tier you do not use; prefer the per-tier packages (CLAUDE.md \u00a72).",
   "license": "UNLICENSED",
   "type": "module",

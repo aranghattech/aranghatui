@@ -1,5 +1,12 @@
 # @aranghat/components-vue
 
+## 1.0.1
+
+### Patch Changes
+
+- @aranghat/hydrate@1.0.1
+  - @aranghat/components@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

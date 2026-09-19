@@ -1,5 +1,11 @@
 # @aranghat/components-angular
 
+## 1.0.1
+
+### Patch Changes
+
+- @aranghat/components@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
