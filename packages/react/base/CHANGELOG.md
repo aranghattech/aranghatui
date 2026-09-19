@@ -1,5 +1,12 @@
 # @aranghat/base-react
 
+## 1.1.0
+
+### Patch Changes
+
+- @aranghat/hydrate@1.1.0
+  - @aranghat/base@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

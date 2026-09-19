@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/extended",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "artui Tier 7 — extended compositions that go beyond the shadcn surface (two-level navigation rail).",
   "license": "UNLICENSED",
   "type": "module",

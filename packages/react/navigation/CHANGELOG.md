@@ -1,5 +1,13 @@
 # @aranghat/navigation-react
 
+## 1.1.0
+
+### Patch Changes
+
+- Updated dependencies [e7a422d]
+  - @aranghat/navigation@1.1.0
+  - @aranghat/hydrate@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

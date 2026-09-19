@@ -1,5 +1,11 @@
 # @aranghat/base-angular
 
+## 1.1.0
+
+### Patch Changes
+
+- @aranghat/base@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

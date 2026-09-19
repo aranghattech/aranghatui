@@ -1,5 +1,20 @@
 # @aranghat/ui
 
+## 1.1.0
+
+### Patch Changes
+
+- Updated dependencies [9421a7f]
+- Updated dependencies [e7a422d]
+  - @aranghat/extended@1.1.0
+  - @aranghat/tokens@1.1.0
+  - @aranghat/primitives@1.1.0
+  - @aranghat/navigation@1.1.0
+  - @aranghat/base@1.1.0
+  - @aranghat/components@1.1.0
+  - @aranghat/modals@1.1.0
+  - @aranghat/widgets@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

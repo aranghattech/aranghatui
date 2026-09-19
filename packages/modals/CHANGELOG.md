@@ -1,5 +1,15 @@
 # @aranghat/modals
 
+## 1.1.0
+
+### Patch Changes
+
+- Updated dependencies [9421a7f]
+- Updated dependencies [e7a422d]
+  - @aranghat/tokens@1.1.0
+  - @aranghat/primitives@1.1.0
+  - @aranghat/base@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @aranghat/modals-angular
 
+## 1.1.0
+
+### Patch Changes
+
+- @aranghat/modals@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
