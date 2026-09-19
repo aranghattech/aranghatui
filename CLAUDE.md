@@ -186,7 +186,7 @@ App Shell · Login · Signup · Forgot Password · Settings Page · Data Table P
 ### Tier 7 — Extended (`@aranghat/extended`, ADR-0024)
 Patterns with no shadcn counterpart that are not assemblies of one. Tiers 2–5 stay a literal mirror of shadcn so N2 remains checkable; this is where the house's own patterns live.
 
-Nav Rail (a permanent icon rail beside a collapsible secondary panel)
+Nav Rail (a permanent icon rail beside a collapsible secondary panel) · Mega Menu (a bar of wide panels of named link groups: columns / rows with a cap, full-width panel and content, custom triggers)
 
 ### Excluded
 Chart (N2). `Direction` (RTL) is implemented as a **util/context**, not a component.
