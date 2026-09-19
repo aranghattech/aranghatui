@@ -57,6 +57,8 @@ export interface StoryDocs {
   states: string;
   tokens: Array<[token: string, usedFor: string]>;
   dos: Array<[doThis: string, notThat: string]>;
+  /** The family's other elements whose API the page documents after the main one (an item, a group, a link). */
+  api?: string[];
 }
 
 export interface ComponentStories {
