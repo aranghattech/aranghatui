@@ -48,7 +48,9 @@ export function createHoverIntent(target: Element, options: HoverIntentOptions):
 
   const enter = (e: Event) => { if ((e as PointerEvent).pointerType === 'touch') return; scheduleOpen(openDelay); };
   const leave = (e: Event) => { if ((e as PointerEvent).pointerType === 'touch') return; scheduleClose(); };
-  const focusIn = (e: Event) => { if (focus && (e.target as Element).matches?.(':focus-visible')) scheduleOpen(0); };
+  // The focused element itself, not the (retargeted) event target: a delegates-focus host such as Button or
+  // Toggle matches `:focus` but never `:focus-visible`, so a tooltip on it would not open from the keyboard.
+  const focusIn = (e: Event) => { if (focus && (e.composedPath()[0] as Element).matches?.(':focus-visible')) scheduleOpen(0); };
   const focusOut = () => { if (focus) scheduleClose(); };
   const down = (e: Event) => {
     if (!touch || (e as PointerEvent).pointerType !== 'touch') return;
