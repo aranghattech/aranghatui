@@ -15,6 +15,20 @@ describe('art-toggle', () => {
     expect(btn.className).toContain('bg-accent');
     expect(spy.mock.calls[0]![0].detail).toEqual({ pressed: true });
   });
+  it('aria-description (from art-tooltip) and aria-keyshortcuts move from the host onto the native button', async () => {
+    const { root, waitForChanges } = await render(
+      <art-toggle aria-label="Bold" aria-keyshortcuts="Control+B">
+        B
+      </art-toggle>,
+    );
+    const btn = root.shadowRoot!.querySelector('button')!;
+    expect(btn.getAttribute('aria-keyshortcuts')).toBe('Control+B');
+    expect(root.hasAttribute('aria-keyshortcuts')).toBe(false);
+    root.setAttribute('aria-description', 'Bold Ctrl B');
+    await waitForChanges();
+    expect(btn.getAttribute('aria-description')).toBe('Bold Ctrl B');
+    expect(root.hasAttribute('aria-description')).toBe(false);
+  });
   it('outline variant and sizes', async () => {
     const { root } = await render(<art-toggle variant="outline" size="lg" icon></art-toggle>);
     const btn = root.shadowRoot!.querySelector('button')!;

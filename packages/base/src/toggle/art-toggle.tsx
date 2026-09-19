@@ -1,4 +1,4 @@
-import { AttachInternals, Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { AttachInternals, Component, Element, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { resolveAria } from '@aranghat/primitives/aria';
 
 /**
@@ -34,8 +34,27 @@ export class ArtToggle {
 
   @Prop({ attribute: 'aria-label' }) hostAriaLabel?: string | null;
   @Prop({ attribute: 'aria-labelledby' }) hostAriaLabelledby?: string | null;
+  /** Set on the host by `art-tooltip`; moves onto the native button, which is what gets focus. */
+  @Prop({ attribute: 'aria-description' }) hostAriaDescription?: string | null;
+  /** The shortcut that toggles (`Control+B`); announced with the focused native button. */
+  @Prop({ attribute: 'aria-keyshortcuts' }) hostAriaKeyshortcuts?: string | null;
   private directLabel?: string;
   private hostLabel?: string;
+  @State() private hostDescription?: string;
+  @State() private hostKeyshortcuts?: string;
+
+  @Watch('hostAriaDescription') @Watch('hostAriaKeyshortcuts')
+  adoptAria() {
+    const forwarded = [
+      ['aria-description', this.hostAriaDescription, 'hostDescription'],
+      ['aria-keyshortcuts', this.hostAriaKeyshortcuts, 'hostKeyshortcuts'],
+    ] as const;
+    for (const [attr, value, key] of forwarded) {
+      if (value == null) continue;
+      this[key] = value;
+      this.host.removeAttribute(attr);
+    }
+  }
 
   componentWillRender() {
     if (this.hostAriaLabel != null) { this.directLabel = this.hostAriaLabel; this.host.removeAttribute('aria-label'); }
@@ -43,7 +62,7 @@ export class ArtToggle {
   }
   @Watch('pressed') @Watch('value')
   syncForm() { this.internals?.setFormValue?.(this.pressed ? this.value : null); }
-  connectedCallback() { this.defaultPressed = this.pressed; this.host.addEventListener('click', this.onHostClick); }
+  connectedCallback() { this.defaultPressed = this.pressed; this.adoptAria(); this.host.addEventListener('click', this.onHostClick); }
   disconnectedCallback() { this.host.removeEventListener('click', this.onHostClick); }
   componentDidLoad() { this.syncForm(); }
   formResetCallback() { this.pressed = this.defaultPressed; }
@@ -67,6 +86,8 @@ export class ArtToggle {
           type="button"
           aria-pressed={this.pressed ? 'true' : 'false'}
           aria-label={this.hostLabel}
+          aria-description={this.hostDescription}
+          aria-keyshortcuts={this.hostKeyshortcuts}
           disabled={disabled}
           tabindex={this.tabbable === undefined ? undefined : this.tabbable ? 0 : -1}
           class={{
