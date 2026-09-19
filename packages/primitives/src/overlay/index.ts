@@ -1,4 +1,4 @@
-import { createFloating, type FloatingController, type Placement } from '../floating/index.js';
+import { createFloating, type FloatingController, type Placement, type VirtualElement } from '../floating/index.js';
 
 export interface OverlayOptions {
   /** Preferred side / alignment; flips and shifts to stay in view. @default 'bottom' */
@@ -40,8 +40,11 @@ const ORIGIN: Record<string, string> = { top: 'bottom center', bottom: 'top cent
  * Positioned by `createFloating` with the fixed strategy; `data-state="open|closed"` drives
  * the enter/exit animation and `--art-overlay-slide` its direction. Dismissal (Escape,
  * outside pointer) is the component's decision via `createDismissable`.
+ *
+ * The anchor may be a floating-ui virtual element: a panel that spans the viewport (the Mega
+ * Menu's full-width panel) anchors to a rectangle as wide as the viewport at the bar's height.
  */
-export function createOverlay(anchor: Element, panel: HTMLElement, options: OverlayOptions = {}): Overlay {
+export function createOverlay(anchor: Element | VirtualElement, panel: HTMLElement, options: OverlayOptions = {}): Overlay {
   const { placement = 'bottom', offset = 4, arrow = null, matchReferenceWidth = false, availableHeight = false } = options;
   const native = typeof (panel as HTMLElement & { showPopover?: () => void }).showPopover === 'function';
   if (native) panel.setAttribute('popover', 'manual');
