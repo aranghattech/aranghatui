@@ -27,4 +27,6 @@ export { ArtSidebarTrigger as SidebarTrigger } from './components/art-sidebar-tr
 export { ArtTopNav as TopNav } from './components/art-top-nav.js';
 export { ArtTreeItem as TreeItem } from './components/art-tree-item.js';
 export { ArtTreeView as TreeView } from './components/art-tree-view.js';
+export { ArtWorkspaceSwitcher as WorkspaceSwitcher } from './components/art-workspace-switcher.js';
+export { ArtWorkspaceSwitcherItem as WorkspaceSwitcherItem } from './components/art-workspace-switcher-item.js';
 export type { StencilReactComponent } from '@stencil/react-output-target/runtime';

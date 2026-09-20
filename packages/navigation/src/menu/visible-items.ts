@@ -13,13 +13,13 @@
 const ITEM = 'art-menu-item, [role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]';
 const NOOP = () => {};
 
-export function applyVisibleItems(panel: HTMLElement | undefined, host: Element, visibleItems?: number): () => void {
+export function applyVisibleItems(panel: HTMLElement | undefined, host: Element, visibleItems?: number, rowSelector: string = ITEM): () => void {
   if (!panel) return NOOP;
   if (!visibleItems || visibleItems < 1) {
     panel.style.removeProperty('--art-menu-max-height');
     return NOOP;
   }
-  const item = host.querySelector<HTMLElement>(ITEM);
+  const item = host.querySelector<HTMLElement>(rowSelector);
   const apply = () => {
     // `offsetHeight`, not a client rect: the panel plays a scale-in animation, and a rect measured
     // mid-animation is 5% short — which would cap the menu 5% short for the rest of its life.
@@ -48,8 +48,8 @@ export function applyVisibleItems(panel: HTMLElement | undefined, host: Element,
  *
  * So while the menu is open, its first enabled item is the tab stop; closing gives it back.
  */
-export function setRestingTabStop(host: Element, open: boolean): void {
-  const items = Array.from(host.querySelectorAll<HTMLElement>('art-menu-item')).filter(
+export function setRestingTabStop(host: Element, open: boolean, rowSelector: string = 'art-menu-item'): void {
+  const items = Array.from(host.querySelectorAll<HTMLElement>(rowSelector)).filter(
     (i) => !i.hasAttribute('disabled') && i.getAttribute('aria-disabled') !== 'true' && i.getAttribute('slot') !== 'trigger',
   );
   if (!items.length) return;

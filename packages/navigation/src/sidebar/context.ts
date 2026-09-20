@@ -47,7 +47,7 @@ export function watchState(source: Element | null, apply: () => void): () => voi
 /** Dispatched by `art-sidebar` on its slotted family members when it (re)applies its state — a member that
  *  connected before the sidebar existed (content slotted through a widget's shadow root) binds then. */
 export const REBIND_EVENT = 'sidebar-rebind';
-export const FAMILY = 'art-sidebar-group, art-sidebar-menu-item, art-sidebar-menu-button, art-sidebar-menu-sub';
+export const FAMILY = 'art-sidebar-group, art-sidebar-menu-item, art-sidebar-menu-button, art-sidebar-menu-sub, art-workspace-switcher';
 
 /** Binds a family member to the nearest `art-sidebar` in the flat tree, now and on every rebind; returns the unsubscribe. */
 export function bindSidebar(host: HTMLElement, apply: (sidebar: HTMLElement | null) => void): () => void {

@@ -62,14 +62,18 @@ function writeIfAbsent(file, content) {
 }
 
 const written = [];
+/** key → the Angular sample's class name, so the registry below cannot disagree with the files. */
+const ngClass = {};
 for (const [key, ex] of Object.entries(stories.examples)) {
   const html = ex.render();
   if (writeIfAbsent(join(S, 'html/src/samples', slug, `${key}.html`), html + '\n')) written.push(`html/${key}`);
-  if (ex.manual) continue;
   // The React sample's function must not shadow a component it imports (`function FieldGroup()`
   // rendering `<FieldGroup>` recurses forever — React builds an infinite tree until the tab OOMs).
+  // Computed before the `manual` bail-out: a hand-written sample is registered under the same name.
   const imported = artTags(html).map((t) => pascal(t.replace(/^art-/, '')));
   const cmp = imported.includes(pascal(key)) ? `${pascal(key)}Example` : pascal(key);
+  ngClass[key] = `${pascal(slug)}${cmp}`;
+  if (ex.manual) continue;
   if (writeIfAbsent(join(S, 'react/src/samples', slug, `${key}.tsx`), `${imports(html, 'react')}\n\nexport default function ${cmp}() {\n  return (\n    <>\n${indent(toReact(html), 6)}\n    </>\n  );\n}\n`)) written.push(`react/${key}`);
   if (writeIfAbsent(join(S, 'vue/src/samples', slug, `${key}.vue`), `<script setup lang="ts">\n${imports(html, 'vue')}\n</script>\n\n<template>\n${indent(toVue(html), 2)}\n</template>\n`)) written.push(`vue/${key}`);
   // the Angular template is a template literal: backticks and `${` in the sample must be escaped
@@ -83,7 +87,7 @@ for (const [key, ex] of Object.entries(stories.examples)) {
   const p = join(S, 'angular/src/app/samples/index.ts');
   let s = readFileSync(p, 'utf8');
   for (const key of Object.keys(stories.examples)) {
-    const cls = `${pascal(slug)}${pascal(key)}`;
+    const cls = ngClass[key];
     if (s.includes(`{ ${cls} }`)) continue;
     s = s.replace(/\n\/\*\* Static array/, `import { ${cls} } from './${slug}/${key}';\n\n/** Static array`);
     s = s.replace(/export const SAMPLE_COMPONENTS = \[([^\]]*)\];/, (_, list) => `export const SAMPLE_COMPONENTS = [${list.trim()}, ${cls}];`);

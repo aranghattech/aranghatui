@@ -27,3 +27,5 @@ export { ArtSidebarTrigger as SidebarTrigger } from './components/art-sidebar-tr
 export { ArtTopNav as TopNav } from './components/art-top-nav.server.js';
 export { ArtTreeItem as TreeItem } from './components/art-tree-item.server.js';
 export { ArtTreeView as TreeView } from './components/art-tree-view.server.js';
+export { ArtWorkspaceSwitcher as WorkspaceSwitcher } from './components/art-workspace-switcher.server.js';
+export { ArtWorkspaceSwitcherItem as WorkspaceSwitcherItem } from './components/art-workspace-switcher-item.server.js';
