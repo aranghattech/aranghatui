@@ -1,5 +1,12 @@
 # @aranghat/components-react
 
+## 1.0.2
+
+### Patch Changes
+
+- @aranghat/components@1.0.2
+  - @aranghat/hydrate@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

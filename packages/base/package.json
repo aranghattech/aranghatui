@@ -1,6 +1,6 @@
 {
   "name": "@aranghat/base",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "artui Tier 2 — base web components (native form controls and atoms).",
   "license": "UNLICENSED",
   "type": "module",

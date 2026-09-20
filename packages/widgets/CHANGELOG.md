@@ -1,5 +1,20 @@
 # @aranghat/widgets
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [f08b9b5]
+- Updated dependencies [5eadeca]
+- Updated dependencies [88272be]
+- Updated dependencies [53ce6c7]
+  - @aranghat/base@1.0.2
+  - @aranghat/primitives@1.0.2
+  - @aranghat/navigation@1.0.2
+  - @aranghat/components@1.0.2
+  - @aranghat/modals@1.0.2
+  - @aranghat/tokens@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @aranghat/extended-react
 
+## 1.0.2
+
+### Patch Changes
+
+- @aranghat/extended@1.0.2
+  - @aranghat/hydrate@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
