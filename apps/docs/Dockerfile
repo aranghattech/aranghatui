@@ -8,7 +8,10 @@
 # read as source rather than as build output.
 
 FROM node:24-bookworm-slim AS build
-ENV PNPM_HOME=/pnpm PATH=/pnpm:$PATH CI=true
+# VitePress renders every page against the real components, and Node sizes its default heap from
+# the container's memory rather than the host's — 2.2 GB on an 8 GB Docker VM, which the SSG pass
+# exhausts. Pinning the heap keeps the build independent of whatever the daemon was given.
+ENV PNPM_HOME=/pnpm PATH=/pnpm:$PATH CI=true NODE_OPTIONS=--max-old-space-size=4096
 RUN corepack enable
 WORKDIR /repo
 
