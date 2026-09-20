@@ -15,7 +15,8 @@
         {
           "tag": "art-button",
           "name": "Button",
-          "status": "done"
+          "status": "done",
+          "budgetKb": 3.25
         },
         {
           "tag": "art-label",

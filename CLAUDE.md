@@ -218,7 +218,7 @@ Two levers: **tier packages** (don't install what you don't need) and **tree-sha
 - Every component is independently importable within its tier: `import { Button } from '@aranghat/base-react/button'`.
 - Side-effect free. `"sideEffects": ["**/*.css"]` in every package.json.
 - **Budgets (gzip, per component, excluding shared primitives):**
-    - Tier 2 atom: ≤ 3 kB
+    - Tier 2 atom: ≤ 3 kB — except Button at 3.25 kB (two controls, inline spinner, five adopted ARIA attributes; ADR-0026)
     - Tier 3 composite: ≤ 8 kB
     - Data Table / Calendar / Command: ≤ 15 kB
     - Stencil runtime + primitives total: ≤ 20 kB
@@ -422,6 +422,7 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Overlays on the top layer | Tooltip, Popover, Hover Card (and later menus, selects, dialogs) show their panel with the Popover API (`popover="manual"`) and position it with floating-ui's fixed strategy — no portal, no DOM moves, styles stay in the shadow root | 0022 |
 | Light-DOM prose and tables | `art-table` and `art-typography` render in the light DOM (`shadow: false`) with tag-scoped stylesheets, because `::slotted()` cannot reach nested rows, cells or list items; the Tailwind plugin skips the shadow reset for them (`/* light-dom */` marker) | 0021 |
 | Extended tier | `@aranghat/extended` (Tier 7) holds patterns with no shadcn counterpart, peering only on tokens / primitives / base, so tiers 2–5 stay a literal mirror of shadcn and N2 stays checkable | 0024 |
+| Button's size budget | 3.25 kB, not the 3 kB tier-2 atom budget: Button renders both `<button>` and `<a>`, carries the loading spinner inline and adopts five ARIA attributes off the host. Recorded as `budgetKb` on its catalog entry, so `.size-limit.json` stays generated | 0026 |
 | Server-side rendering | One Node hydrate app compiled from every tier's sources (`@aranghat/hydrate`) — a per-tier app cannot reach elements inside another tier's shadow root; the client that adopts server-rendered shadow roots is a second build published under the `artui-ssr` export condition, so the default client stays lean | 0023 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).
