@@ -51,9 +51,12 @@ export class ArtButton {
   @Prop({ attribute: 'aria-expanded' }) hostAriaExpanded?: string | null;
   @Prop({ attribute: 'aria-haspopup' }) hostAriaHaspopup?: string | null;
   @Prop({ attribute: 'aria-description' }) hostAriaDescription?: string | null;
+  /** The shortcut that activates the button (`Control+B`); announced with the focused native button. */
+  @Prop({ attribute: 'aria-keyshortcuts' }) hostAriaKeyshortcuts?: string | null;
   @State() private hostExpanded?: string;
   @State() private hostHaspopup?: string;
   @State() private hostDescription?: string;
+  @State() private hostKeyshortcuts?: string;
   /** Which icon slots are filled — the padding on that side tightens (optical alignment, shadcn `has-[>svg]:px-3`). */
   @State() private hasStart = false;
   @State() private hasEnd = false;
@@ -64,12 +67,20 @@ export class ArtButton {
     this.hostLabel = value;
     this.host.removeAttribute('aria-label');
   }
-  @Watch('hostAriaExpanded') @Watch('hostAriaHaspopup') @Watch('hostAriaDescription')
+  @Watch('hostAriaExpanded') @Watch('hostAriaHaspopup') @Watch('hostAriaDescription') @Watch('hostAriaKeyshortcuts')
   adoptAria() {
-    for (const [attr, key] of [['aria-expanded', 'ariaExpanded'], ['aria-haspopup', 'ariaHaspopup'], ['aria-description', 'ariaDescription']] as const) {
-      const v = this.host.getAttribute(attr);
-      if (v == null) continue;
-      (this as unknown as Record<string, string>)[key] = v;
+    // Read the props (set from the attribute, or as properties by a framework) and keep the values in states,
+    // not in `ariaExpanded` & co.: in the custom-elements build the class is the element, so those names are
+    // its ARIA reflection and would write the attribute straight back onto the host.
+    const forwarded = [
+      ['aria-expanded', this.hostAriaExpanded, 'hostExpanded'],
+      ['aria-haspopup', this.hostAriaHaspopup, 'hostHaspopup'],
+      ['aria-description', this.hostAriaDescription, 'hostDescription'],
+      ['aria-keyshortcuts', this.hostAriaKeyshortcuts, 'hostKeyshortcuts'],
+    ] as const;
+    for (const [attr, value, key] of forwarded) {
+      if (value == null) continue;
+      this[key] = value;
       this.host.removeAttribute(attr);
     }
   }
@@ -137,11 +148,11 @@ export class ArtButton {
     return (
       <Host aria-busy={this.loading ? 'true' : undefined} onSlotchange={this.syncSlots}>
         {this.href ? (
-          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
+          <a part="button" class={cls} href={inactive ? undefined : this.href} target={this.target} rel={this.rel} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-keyshortcuts={this.hostKeyshortcuts} aria-disabled={inactive ? 'true' : undefined} tabindex={inactive ? -1 : undefined} onClick={this.onClick}>
             {content}
           </a>
         ) : (
-          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
+          <button part="button" class={cls} type="button" disabled={this.disabled} aria-label={this.hostLabel} aria-expanded={this.hostExpanded} aria-haspopup={this.hostHaspopup} aria-description={this.hostDescription} aria-keyshortcuts={this.hostKeyshortcuts} aria-disabled={this.loading ? 'true' : undefined} onClick={this.onClick}>
             {content}
           </button>
         )}

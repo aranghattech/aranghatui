@@ -1,5 +1,5 @@
 {
-  "$comment": "Single component catalogue. Drives docs sidebar, page scaffolding, size-limit entries and docs-parity. status: planned | in-progress | done.",
+  "$comment": "Single component catalogue. Drives docs sidebar, page scaffolding, size-limit entries and docs-parity. status: planned | in-progress | done. house: true marks a component with no shadcn counterpart, excluded from the N2 parity diff (ADR-0025).",
   "tiers": {
     "base": {
       "package": "@aranghat/base",
@@ -15,7 +15,8 @@
         {
           "tag": "art-button",
           "name": "Button",
-          "status": "done"
+          "status": "done",
+          "budgetKb": 3.25
         },
         {
           "tag": "art-label",
@@ -569,7 +570,8 @@
         {
           "tag": "art-top-nav",
           "name": "TopNav",
-          "status": "in-progress"
+          "status": "in-progress",
+          "house": true
         },
         {
           "tag": "art-tree-view",
@@ -581,6 +583,19 @@
           "name": "Tree Item",
           "status": "in-progress",
           "internal": true
+        },
+        {
+          "tag": "art-workspace-switcher",
+          "name": "Workspace Switcher",
+          "status": "in-progress",
+          "house": true
+        },
+        {
+          "tag": "art-workspace-switcher-item",
+          "name": "Workspace Switcher Item",
+          "status": "in-progress",
+          "internal": true,
+          "house": true
         }
       ]
     },

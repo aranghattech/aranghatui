@@ -67,16 +67,18 @@ export function createRovingTabindex(container: HTMLElement, options: RovingTabi
     const forward = rtl ? 'ArrowLeft' : 'ArrowRight';
     const backward = rtl ? 'ArrowRight' : 'ArrowLeft';
     let next: number | null = null;
+    // Direction in which disabled items are skipped: Home looks forward, End backward (to the last enabled item).
+    let direction: 1 | -1 = 1;
     if (horizontal && e.key === forward) next = active + 1;
-    else if (horizontal && e.key === backward) next = active - 1;
+    else if (horizontal && e.key === backward) { next = active - 1; direction = -1; }
     else if (vertical && e.key === 'ArrowDown') next = active + 1;
-    else if (vertical && e.key === 'ArrowUp') next = active - 1;
+    else if (vertical && e.key === 'ArrowUp') { next = active - 1; direction = -1; }
     else if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = items.length - 1;
+    else if (e.key === 'End') { next = items.length - 1; direction = -1; }
     if (next === null) return;
     if (!loop && (next < 0 || next >= items.length)) { e.preventDefault(); return; }
     e.preventDefault();
-    setActive(next, true, next >= active ? 1 : -1);
+    setActive(next, true, direction);
   };
   const onFocusin = (e: FocusEvent) => {
     const items = getItems();

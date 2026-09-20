@@ -35,6 +35,23 @@ describe('createHoverIntent', () => {
     h.destroy(); el.remove(); panel.remove();
   });
 
+  it('keyboard focus of a control inside a shadow host opens: the control is focus-visible, not the host', () => {
+    const host = document.createElement('div');
+    const control = document.createElement('button');
+    host.attachShadow({ mode: 'open' }).append(control);
+    document.body.append(host);
+    const onOpen = vi.fn(); const onClose = vi.fn();
+    const h = createHoverIntent(host, { onOpen, onClose, closeDelay: 150 });
+    // jsdom has no focus-visible heuristics: the control is the keyboard-focused element, the host never is.
+    control.matches = (selector: string) => selector === ':focus-visible';
+    host.matches = () => false;
+    control.dispatchEvent(new FocusEvent('focusin', { bubbles: true, composed: true }));
+    vi.advanceTimersByTime(0); expect(onOpen).toHaveBeenCalledTimes(1);
+    control.dispatchEvent(new FocusEvent('focusout', { bubbles: true, composed: true }));
+    vi.advanceTimersByTime(150); expect(onClose).toHaveBeenCalledTimes(1);
+    h.destroy(); host.remove();
+  });
+
   it('touch: press-and-hold opens, a quick tap does not; mouse-type enter is ignored for touch', () => {
     const el = document.createElement('button'); document.body.append(el);
     const onOpen = vi.fn(); const onClose = vi.fn();

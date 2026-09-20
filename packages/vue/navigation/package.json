@@ -125,6 +125,14 @@
       "types": "./dist/tree-view.d.ts",
       "import": "./dist/tree-view.js"
     },
+    "./workspace-switcher": {
+      "types": "./dist/workspace-switcher.d.ts",
+      "import": "./dist/workspace-switcher.js"
+    },
+    "./workspace-switcher-item": {
+      "types": "./dist/workspace-switcher-item.d.ts",
+      "import": "./dist/workspace-switcher-item.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

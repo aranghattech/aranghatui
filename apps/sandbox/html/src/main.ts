@@ -125,6 +125,8 @@ import { defineCustomElement as defineMegaMenu } from '@aranghat/extended/mega-m
 import { defineCustomElement as defineMegaMenuItem } from '@aranghat/extended/mega-menu-item';
 import { defineCustomElement as defineMegaMenuGroup } from '@aranghat/extended/mega-menu-group';
 import { defineCustomElement as defineMegaMenuLink } from '@aranghat/extended/mega-menu-link';
+import { defineCustomElement as defineWorkspaceSwitcher } from '@aranghat/navigation/workspace-switcher';
+import { defineCustomElement as defineWorkspaceSwitcherItem } from '@aranghat/navigation/workspace-switcher-item';
 import './sandbox.css';
 
 defineButton();
@@ -251,6 +253,8 @@ defineMegaMenu();
 defineMegaMenuItem();
 defineMegaMenuGroup();
 defineMegaMenuLink();
+defineWorkspaceSwitcher();
+defineWorkspaceSwitcherItem();
 
 // Every sample is a real file under src/samples/<component>/<example>.html — the
 // docs site embeds these files verbatim, and the smoke test asserts each renders.

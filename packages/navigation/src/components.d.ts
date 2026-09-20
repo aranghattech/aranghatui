@@ -544,6 +544,93 @@ export namespace Components {
          */
         "value": string;
     }
+    /**
+     * Workspace Switcher — the tenant control of a SaaS shell: the current workspace at the start of
+     * an `art-top-nav` or the top of an `art-sidebar`, and a menu to change it. Rows are
+     * `art-workspace-switcher-item`s (`role="menuitemradio"`); anything in `action` — an
+     * `art-menu-item` such as "Add workspace" — follows them after a separator and joins the same
+     * keyboard order.
+     * `display` decides how much of the trigger shows: `full` is the logo with the name (and `plan`)
+     * beside it, `icon` clips it to the logo square and names it with a tooltip, and `auto` — the
+     * default — is `full` everywhere except inside a sidebar collapsed to icons (ADR-0025).
+     */
+    interface ArtWorkspaceSwitcher {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * How much of the trigger shows; `auto` follows a collapsed sidebar.
+          * @default 'auto'
+         */
+        "display": 'auto' | 'full' | 'icon';
+        /**
+          * Accessible name of the menu, and the label above the rows.
+          * @default 'Workspaces'
+         */
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * Shown in the trigger when no item matches `value`.
+          * @default 'Select a workspace'
+         */
+        "placeholder": string;
+        /**
+          * Preferred side / alignment of the panel.
+          * @default 'bottom-start'
+         */
+        "placement": Placement;
+        /**
+          * The active workspace's `value`.
+          * @default ''
+         */
+        "value": string;
+        /**
+          * Show this many rows before the menu scrolls; measured from a real row.
+         */
+        "visibleItems"?: number;
+    }
+    /**
+     * Workspace Switcher Item — one workspace of an `art-workspace-switcher`. The default slot is the
+     * workspace's logo (any markup: an `svg`, an `img`, an avatar), and the switcher copies it into
+     * its trigger while this workspace is the active one.
+     */
+    interface ArtWorkspaceSwitcherItem {
+        /**
+          * The active workspace. Set by the switcher — do not set it by hand.
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Data object for this workspace; handed back as `detail.item` on the switcher's `value-change`.
+         */
+        "item"?: unknown;
+        /**
+          * The workspace's name: shown in the row, copied into the trigger, and used for type-ahead.
+          * @default ''
+         */
+        "name": string;
+        /**
+          * Secondary line — the plan, the role, the member count.
+         */
+        "plan"?: string;
+        /**
+          * Keyboard hint at the end of the row (`⌘1`). Display only: bind the accelerator yourself.
+         */
+        "shortcut"?: string;
+        /**
+          * The workspace's value — what the switcher's `value` becomes when this row is chosen.
+          * @default ''
+         */
+        "value": string;
+    }
 }
 export interface ArtContextMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -600,6 +687,10 @@ export interface ArtTreeItemCustomEvent<T> extends CustomEvent<T> {
 export interface ArtTreeViewCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLArtTreeViewElement;
+}
+export interface ArtWorkspaceSwitcherCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLArtWorkspaceSwitcherElement;
 }
 declare global {
     /**
@@ -1059,6 +1150,45 @@ declare global {
         prototype: HTMLArtTreeViewElement;
         new (): HTMLArtTreeViewElement;
     };
+    interface HTMLArtWorkspaceSwitcherElementEventMap {
+        "value-change": { value: string; item?: unknown; element: HTMLElement };
+        "open-change": { open: boolean };
+    }
+    /**
+     * Workspace Switcher — the tenant control of a SaaS shell: the current workspace at the start of
+     * an `art-top-nav` or the top of an `art-sidebar`, and a menu to change it. Rows are
+     * `art-workspace-switcher-item`s (`role="menuitemradio"`); anything in `action` — an
+     * `art-menu-item` such as "Add workspace" — follows them after a separator and joins the same
+     * keyboard order.
+     * `display` decides how much of the trigger shows: `full` is the logo with the name (and `plan`)
+     * beside it, `icon` clips it to the logo square and names it with a tooltip, and `auto` — the
+     * default — is `full` everywhere except inside a sidebar collapsed to icons (ADR-0025).
+     */
+    interface HTMLArtWorkspaceSwitcherElement extends Components.ArtWorkspaceSwitcher, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLArtWorkspaceSwitcherElementEventMap>(type: K, listener: (this: HTMLArtWorkspaceSwitcherElement, ev: ArtWorkspaceSwitcherCustomEvent<HTMLArtWorkspaceSwitcherElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLArtWorkspaceSwitcherElementEventMap>(type: K, listener: (this: HTMLArtWorkspaceSwitcherElement, ev: ArtWorkspaceSwitcherCustomEvent<HTMLArtWorkspaceSwitcherElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLArtWorkspaceSwitcherElement: {
+        prototype: HTMLArtWorkspaceSwitcherElement;
+        new (): HTMLArtWorkspaceSwitcherElement;
+    };
+    /**
+     * Workspace Switcher Item — one workspace of an `art-workspace-switcher`. The default slot is the
+     * workspace's logo (any markup: an `svg`, an `img`, an avatar), and the switcher copies it into
+     * its trigger while this workspace is the active one.
+     */
+    interface HTMLArtWorkspaceSwitcherItemElement extends Components.ArtWorkspaceSwitcherItem, HTMLStencilElement {
+    }
+    var HTMLArtWorkspaceSwitcherItemElement: {
+        prototype: HTMLArtWorkspaceSwitcherItemElement;
+        new (): HTMLArtWorkspaceSwitcherItemElement;
+    };
     interface HTMLElementTagNameMap {
         "art-breadcrumb": HTMLArtBreadcrumbElement;
         "art-breadcrumb-item": HTMLArtBreadcrumbItemElement;
@@ -1088,6 +1218,8 @@ declare global {
         "art-top-nav": HTMLArtTopNavElement;
         "art-tree-item": HTMLArtTreeItemElement;
         "art-tree-view": HTMLArtTreeViewElement;
+        "art-workspace-switcher": HTMLArtWorkspaceSwitcherElement;
+        "art-workspace-switcher-item": HTMLArtWorkspaceSwitcherItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -1672,6 +1804,98 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    /**
+     * Workspace Switcher — the tenant control of a SaaS shell: the current workspace at the start of
+     * an `art-top-nav` or the top of an `art-sidebar`, and a menu to change it. Rows are
+     * `art-workspace-switcher-item`s (`role="menuitemradio"`); anything in `action` — an
+     * `art-menu-item` such as "Add workspace" — follows them after a separator and joins the same
+     * keyboard order.
+     * `display` decides how much of the trigger shows: `full` is the logo with the name (and `plan`)
+     * beside it, `icon` clips it to the logo square and names it with a tooltip, and `auto` — the
+     * default — is `full` everywhere except inside a sidebar collapsed to icons (ADR-0025).
+     */
+    interface ArtWorkspaceSwitcher {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * How much of the trigger shows; `auto` follows a collapsed sidebar.
+          * @default 'auto'
+         */
+        "display"?: 'auto' | 'full' | 'icon';
+        /**
+          * Accessible name of the menu, and the label above the rows.
+          * @default 'Workspaces'
+         */
+        "label"?: string;
+        "onOpen-change"?: (event: ArtWorkspaceSwitcherCustomEvent<{ open: boolean }>) => void;
+        /**
+          * The user chose a workspace; `detail.value`, `detail.item` (the row's data object) and `detail.element`.
+         */
+        "onValue-change"?: (event: ArtWorkspaceSwitcherCustomEvent<{ value: string; item?: unknown; element: HTMLElement }>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * Shown in the trigger when no item matches `value`.
+          * @default 'Select a workspace'
+         */
+        "placeholder"?: string;
+        /**
+          * Preferred side / alignment of the panel.
+          * @default 'bottom-start'
+         */
+        "placement"?: Placement;
+        /**
+          * The active workspace's `value`.
+          * @default ''
+         */
+        "value"?: string;
+        /**
+          * Show this many rows before the menu scrolls; measured from a real row.
+         */
+        "visibleItems"?: number;
+    }
+    /**
+     * Workspace Switcher Item — one workspace of an `art-workspace-switcher`. The default slot is the
+     * workspace's logo (any markup: an `svg`, an `img`, an avatar), and the switcher copies it into
+     * its trigger while this workspace is the active one.
+     */
+    interface ArtWorkspaceSwitcherItem {
+        /**
+          * The active workspace. Set by the switcher — do not set it by hand.
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Data object for this workspace; handed back as `detail.item` on the switcher's `value-change`.
+         */
+        "item"?: unknown;
+        /**
+          * The workspace's name: shown in the row, copied into the trigger, and used for type-ahead.
+          * @default ''
+         */
+        "name"?: string;
+        /**
+          * Secondary line — the plan, the role, the member count.
+         */
+        "plan"?: string;
+        /**
+          * Keyboard hint at the end of the row (`⌘1`). Display only: bind the accelerator yourself.
+         */
+        "shortcut"?: string;
+        /**
+          * The workspace's value — what the switcher's `value` becomes when this row is chosen.
+          * @default ''
+         */
+        "value"?: string;
+    }
 
     interface ArtBreadcrumbAttributes {
         "separator": 'chevron' | 'slash';
@@ -1797,6 +2021,24 @@ declare namespace LocalJSX {
         "label": string;
         "value": string;
     }
+    interface ArtWorkspaceSwitcherAttributes {
+        "value": string;
+        "display": 'auto' | 'full' | 'icon';
+        "label": string;
+        "placeholder": string;
+        "open": boolean;
+        "placement": Placement;
+        "visibleItems": number;
+        "disabled": boolean;
+    }
+    interface ArtWorkspaceSwitcherItemAttributes {
+        "value": string;
+        "name": string;
+        "plan": string;
+        "shortcut": string;
+        "disabled": boolean;
+        "active": boolean;
+    }
 
     interface IntrinsicElements {
         "art-breadcrumb": Omit<ArtBreadcrumb, keyof ArtBreadcrumbAttributes> & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes]?: ArtBreadcrumb[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `attr:${K}`]?: ArtBreadcrumbAttributes[K] } & { [K in keyof ArtBreadcrumb & keyof ArtBreadcrumbAttributes as `prop:${K}`]?: ArtBreadcrumb[K] };
@@ -1827,6 +2069,8 @@ declare namespace LocalJSX {
         "art-top-nav": Omit<ArtTopNav, keyof ArtTopNavAttributes> & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes]?: ArtTopNav[K] } & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes as `attr:${K}`]?: ArtTopNavAttributes[K] } & { [K in keyof ArtTopNav & keyof ArtTopNavAttributes as `prop:${K}`]?: ArtTopNav[K] };
         "art-tree-item": Omit<ArtTreeItem, keyof ArtTreeItemAttributes> & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes]?: ArtTreeItem[K] } & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes as `attr:${K}`]?: ArtTreeItemAttributes[K] } & { [K in keyof ArtTreeItem & keyof ArtTreeItemAttributes as `prop:${K}`]?: ArtTreeItem[K] };
         "art-tree-view": Omit<ArtTreeView, keyof ArtTreeViewAttributes> & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes]?: ArtTreeView[K] } & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes as `attr:${K}`]?: ArtTreeViewAttributes[K] } & { [K in keyof ArtTreeView & keyof ArtTreeViewAttributes as `prop:${K}`]?: ArtTreeView[K] };
+        "art-workspace-switcher": Omit<ArtWorkspaceSwitcher, keyof ArtWorkspaceSwitcherAttributes> & { [K in keyof ArtWorkspaceSwitcher & keyof ArtWorkspaceSwitcherAttributes]?: ArtWorkspaceSwitcher[K] } & { [K in keyof ArtWorkspaceSwitcher & keyof ArtWorkspaceSwitcherAttributes as `attr:${K}`]?: ArtWorkspaceSwitcherAttributes[K] } & { [K in keyof ArtWorkspaceSwitcher & keyof ArtWorkspaceSwitcherAttributes as `prop:${K}`]?: ArtWorkspaceSwitcher[K] };
+        "art-workspace-switcher-item": Omit<ArtWorkspaceSwitcherItem, keyof ArtWorkspaceSwitcherItemAttributes> & { [K in keyof ArtWorkspaceSwitcherItem & keyof ArtWorkspaceSwitcherItemAttributes]?: ArtWorkspaceSwitcherItem[K] } & { [K in keyof ArtWorkspaceSwitcherItem & keyof ArtWorkspaceSwitcherItemAttributes as `attr:${K}`]?: ArtWorkspaceSwitcherItemAttributes[K] } & { [K in keyof ArtWorkspaceSwitcherItem & keyof ArtWorkspaceSwitcherItemAttributes as `prop:${K}`]?: ArtWorkspaceSwitcherItem[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -1990,6 +2234,23 @@ declare module "@stencil/core" {
              * item's `value` is the tree's `value`.
              */
             "art-tree-view": LocalJSX.IntrinsicElements["art-tree-view"] & JSXBase.HTMLAttributes<HTMLArtTreeViewElement>;
+            /**
+             * Workspace Switcher — the tenant control of a SaaS shell: the current workspace at the start of
+             * an `art-top-nav` or the top of an `art-sidebar`, and a menu to change it. Rows are
+             * `art-workspace-switcher-item`s (`role="menuitemradio"`); anything in `action` — an
+             * `art-menu-item` such as "Add workspace" — follows them after a separator and joins the same
+             * keyboard order.
+             * `display` decides how much of the trigger shows: `full` is the logo with the name (and `plan`)
+             * beside it, `icon` clips it to the logo square and names it with a tooltip, and `auto` — the
+             * default — is `full` everywhere except inside a sidebar collapsed to icons (ADR-0025).
+             */
+            "art-workspace-switcher": LocalJSX.IntrinsicElements["art-workspace-switcher"] & JSXBase.HTMLAttributes<HTMLArtWorkspaceSwitcherElement>;
+            /**
+             * Workspace Switcher Item — one workspace of an `art-workspace-switcher`. The default slot is the
+             * workspace's logo (any markup: an `svg`, an `img`, an avatar), and the switcher copies it into
+             * its trigger while this workspace is the active one.
+             */
+            "art-workspace-switcher-item": LocalJSX.IntrinsicElements["art-workspace-switcher-item"] & JSXBase.HTMLAttributes<HTMLArtWorkspaceSwitcherItemElement>;
         }
     }
 }

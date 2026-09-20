@@ -1,0 +1,159 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+:host([hidden]) {
+  display: none;
+}
+
+/* ---- trigger ------------------------------------------------------------------------------ */
+/* One line by default (a top bar), two when the active workspace has a `plan` (a sidebar header).
+   Both heights come from the control scale, so the trigger lines up with the Buttons beside it. */
+.trigger {
+  height: var(--art-control-height-md);
+  cursor: pointer;
+  /* width and height animate as a sidebar collapses; the rest is the standard interactive set */
+  transition-property: width, height, padding, color, background-color, box-shadow;
+}
+:host([data-two-line]) .trigger {
+  height: var(--art-space-12);
+}
+.trigger:hover {
+  background: var(--art-color-bg-accent);
+}
+:host([data-sidebar]) .trigger:hover {
+  background: var(--art-color-bg-sidebar-accent);
+}
+.trigger[aria-expanded='true'] {
+  background: var(--art-color-bg-accent);
+}
+:host([data-sidebar]) .trigger[aria-expanded='true'] {
+  background: var(--art-color-bg-sidebar-accent);
+}
+.trigger:disabled {
+  pointer-events: none;
+  opacity: 50%;
+}
+
+/* The logo tile — the same recipe as the row's, so the trigger reads as the chosen row. */
+.logo {
+  width: var(--art-space-6);
+  height: var(--art-space-6);
+  border-radius: var(--art-radius-sm);
+  background: var(--art-color-bg-muted);
+  color: var(--art-color-fg-default);
+}
+:host([data-two-line]) .logo {
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+}
+.logo svg,
+.logo art-icon {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+  flex-shrink: 0;
+}
+:host([data-two-line]) .logo svg,
+:host([data-two-line]) .logo art-icon {
+  width: var(--art-size-icon-md);
+  height: var(--art-size-icon-md);
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-weight: var(--art-font-weight-medium);
+}
+.name[data-placeholder] {
+  font-weight: var(--art-font-weight-normal);
+  color: var(--art-color-fg-muted);
+}
+/* Smaller, not dimmer — as in shadcn's team switcher. Muted foreground on the open trigger's accent
+   wash is 4.34:1 at this size, under the 4.5:1 AA floor, and the open state is where axe reads it. */
+.plan {
+  font-size: var(--art-font-size-xs);
+  line-height: var(--art-font-line-height-xs);
+  font-weight: var(--art-font-weight-normal);
+}
+.chevron {
+  margin-inline-start: auto;
+  color: var(--art-color-fg-muted);
+}
+
+/* ---- icon only ---------------------------------------------------------------------------- */
+/* A square that clips the name and the chevron, sized to the collapsed sidebar's column. */
+:host([data-icon]) .trigger {
+  width: var(--art-space-8);
+  height: var(--art-space-8);
+  padding: var(--art-space-1);
+}
+:host([data-icon]) .text,
+:host([data-icon]) .chevron {
+  display: none;
+}
+
+/* ---- menu --------------------------------------------------------------------------------- */
+/* the top-layer panel and tooltip (ADR-0022) */
+@layer base {
+  [popover] {
+    inset: unset;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    width: auto;
+    height: auto;
+  }
+}
+/**
+ * @prop --art-menu-max-height: Height at which the menu starts to scroll. Unset, it is as tall as its rows and scrolls only when the viewport has no room for them.
+ */
+/* Precedence as in Dropdown Menu: an explicit cap, else the room the viewport actually has,
+   else the token — which applies before the first measurement and on a server-rendered page. */
+[part='content'] {
+  position: fixed;
+  max-height: var(--art-menu-max-height, var(--art-available-height, var(--art-space-72)));
+}
+[part='content']:not([data-state]),
+[part='content'][popover]:not(:popover-open) {
+  display: none;
+}
+[part='content'][data-state='open'] {
+  @apply animate-overlay-in;
+}
+[part='content'][data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}
+.menu-label {
+  color: var(--art-color-fg-muted);
+}
+.separator {
+  height: var(--art-border-width);
+  margin-block: var(--art-space-1);
+  margin-inline: calc(-1 * var(--art-space-1));
+  background: var(--art-color-border-default);
+}
+
+/* ---- icon-mode tooltip -------------------------------------------------------------------- */
+.tooltip {
+  position: fixed;
+  padding-inline: var(--art-space-3);
+  padding-block: var(--art-space-1-5);
+}
+.tooltip:not([data-state]),
+.tooltip[popover]:not(:popover-open) {
+  display: none;
+}
+.tooltip[data-state='open'] {
+  @apply animate-overlay-in;
+}
+.tooltip[data-state='closed'] {
+  @apply animate-overlay-out;
+  pointer-events: none;
+}

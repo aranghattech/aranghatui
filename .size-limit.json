@@ -28,7 +28,7 @@
       "embla-carousel",
       "./index*.js"
     ],
-    "limit": "3 kB",
+    "limit": "3.25 kB",
     "gzip": true
   },
   {
@@ -1369,6 +1369,32 @@
   {
     "name": "navigation/art-tree-item",
     "path": "packages/navigation/dist/components/art-tree-item.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-workspace-switcher",
+    "path": "packages/navigation/dist/components/art-workspace-switcher.js",
+    "import": "{ defineCustomElement }",
+    "ignore": [
+      "@aranghat/*",
+      "@floating-ui/dom",
+      "embla-carousel",
+      "./index*.js"
+    ],
+    "limit": "8 kB",
+    "gzip": true
+  },
+  {
+    "name": "navigation/art-workspace-switcher-item",
+    "path": "packages/navigation/dist/components/art-workspace-switcher-item.js",
     "import": "{ defineCustomElement }",
     "ignore": [
       "@aranghat/*",

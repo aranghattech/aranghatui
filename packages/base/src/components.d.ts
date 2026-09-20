@@ -59,6 +59,10 @@ export namespace Components {
         "hostAriaExpanded"?: string | null;
         "hostAriaHaspopup"?: string | null;
         /**
+          * The shortcut that activates the button (`Control+B`); announced with the focused native button.
+         */
+        "hostAriaKeyshortcuts"?: string | null;
+        /**
           * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
          */
         "hostAriaLabel"?: string | null;
@@ -719,6 +723,14 @@ export namespace Components {
           * @default false
          */
         "groupDisabled": boolean;
+        /**
+          * Set on the host by `art-tooltip`; moves onto the native button, which is what gets focus.
+         */
+        "hostAriaDescription"?: string | null;
+        /**
+          * The shortcut that toggles (`Control+B`); announced with the focused native button.
+         */
+        "hostAriaKeyshortcuts"?: string | null;
         "hostAriaLabel"?: string | null;
         "hostAriaLabelledby"?: string | null;
         /**
@@ -1415,6 +1427,10 @@ declare namespace LocalJSX {
          */
         "hostAriaExpanded"?: string | null;
         "hostAriaHaspopup"?: string | null;
+        /**
+          * The shortcut that activates the button (`Control+B`); announced with the focused native button.
+         */
+        "hostAriaKeyshortcuts"?: string | null;
         /**
           * `aria-label` set on the host moves onto the inner control: the focusable element lives in the shadow root and must carry the accessible name (axe `button-name`), and a generic host must not keep it (axe `aria-prohibited-attr`). Bound as a prop so framework re-renders that re-apply the attribute are picked up.
          */
@@ -2146,6 +2162,14 @@ declare namespace LocalJSX {
           * @default false
          */
         "groupDisabled"?: boolean;
+        /**
+          * Set on the host by `art-tooltip`; moves onto the native button, which is what gets focus.
+         */
+        "hostAriaDescription"?: string | null;
+        /**
+          * The shortcut that toggles (`Control+B`); announced with the focused native button.
+         */
+        "hostAriaKeyshortcuts"?: string | null;
         "hostAriaLabel"?: string | null;
         "hostAriaLabelledby"?: string | null;
         /**
@@ -2244,6 +2268,7 @@ declare namespace LocalJSX {
         "hostAriaExpanded": string | null;
         "hostAriaHaspopup": string | null;
         "hostAriaDescription": string | null;
+        "hostAriaKeyshortcuts": string | null;
     }
     interface ArtButtonGroupAttributes {
         "orientation": 'horizontal' | 'vertical';
@@ -2423,6 +2448,8 @@ declare namespace LocalJSX {
         "groupDisabled": boolean;
         "hostAriaLabel": string | null;
         "hostAriaLabelledby": string | null;
+        "hostAriaDescription": string | null;
+        "hostAriaKeyshortcuts": string | null;
     }
     interface ArtToggleGroupAttributes {
         "type": 'single' | 'multiple';

@@ -69,6 +69,30 @@ describe('art-button', () => {
     expect(plain.hasAttribute('rounded')).toBe(false);
   });
 
+  it('aria-expanded, -haspopup, -description and -keyshortcuts move from the host onto the native button', async () => {
+    const { root, waitForChanges } = await render(
+      <art-button aria-expanded="false" aria-haspopup="menu" aria-description="More actions" aria-keyshortcuts="Control+M">
+        Open
+      </art-button>,
+    );
+    const btn = root.shadowRoot!.querySelector('button')!;
+    expect(btn.getAttribute('aria-expanded')).toBe('false');
+    expect(btn.getAttribute('aria-haspopup')).toBe('menu');
+    expect(btn.getAttribute('aria-description')).toBe('More actions');
+    expect(btn.getAttribute('aria-keyshortcuts')).toBe('Control+M');
+    for (const attr of ['aria-expanded', 'aria-haspopup', 'aria-description', 'aria-keyshortcuts']) expect(root.hasAttribute(attr)).toBe(false);
+    // A popover trigger updates the host attribute later; the button follows.
+    root.setAttribute('aria-expanded', 'true');
+    await waitForChanges();
+    expect(btn.getAttribute('aria-expanded')).toBe('true');
+    expect(root.hasAttribute('aria-expanded')).toBe(false);
+  });
+
+  it('forwards the same attributes onto the anchor when href is set', async () => {
+    const { root } = await render(<art-button href="/k" aria-keyshortcuts="Control+K">Go</art-button>);
+    expect(root.shadowRoot!.querySelector('a')!.getAttribute('aria-keyshortcuts')).toBe('Control+K');
+  });
+
   it('href renders an anchor with target/rel and part="button"', async () => {
     const { root } = await render(<art-button href="/docs" target="_blank" rel="noreferrer">Docs</art-button>);
     const a = root.shadowRoot!.querySelector('a')!;

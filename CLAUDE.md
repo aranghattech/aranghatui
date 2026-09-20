@@ -175,7 +175,9 @@ Aspect Ratio · Badge · Button · Button Group · Card · Checkbox · Empty · 
 Accordion · Alert · Attachment · Avatar · Bubble · Calendar · Carousel · Collapsible · Combobox · Command · Data Table · Date Picker · Hover Card · Message · Message Scroller · Popover · Questionnaire · Resizable · Scroll Area · Select (advanced) · Tabs · Toast · Tooltip
 
 ### Tier 4 — Navigation
-Breadcrumb · Context Menu · Dropdown Menu · Menubar · Navigation Menu · Pagination · Sidebar (SideNav) · TopNav · Tree View
+Breadcrumb · Context Menu · Dropdown Menu · Menubar · Navigation Menu · Pagination · Sidebar (SideNav) · TopNav · Tree View · Workspace Switcher
+
+TopNav and Workspace Switcher have no shadcn counterpart. They are here, rather than in Tier 7, because they depend on this tier's internals — the Workspace Switcher reads the sidebar's collapse context and drives a menu level (ADR-0025). Both are marked `house: true` in `tooling/catalog.json` so the N2 diff against shadcn's index can exclude them mechanically.
 
 ### Tier 5 — Modals & overlays
 Dialog · Alert Dialog · Sheet · Drawer (Side Drawer) · Common Dialogs (`confirm`, `alert`, `prompt` imperative API)
@@ -218,7 +220,7 @@ Two levers: **tier packages** (don't install what you don't need) and **tree-sha
 - Every component is independently importable within its tier: `import { Button } from '@aranghat/base-react/button'`.
 - Side-effect free. `"sideEffects": ["**/*.css"]` in every package.json.
 - **Budgets (gzip, per component, excluding shared primitives):**
-    - Tier 2 atom: ≤ 3 kB
+    - Tier 2 atom: ≤ 3 kB — except Button at 3.25 kB (two controls, inline spinner, five adopted ARIA attributes; ADR-0026)
     - Tier 3 composite: ≤ 8 kB
     - Data Table / Calendar / Command: ≤ 15 kB
     - Stencil runtime + primitives total: ≤ 20 kB
@@ -422,6 +424,8 @@ First component after `art-hello`: **Button** — it establishes variant naming,
 | Overlays on the top layer | Tooltip, Popover, Hover Card (and later menus, selects, dialogs) show their panel with the Popover API (`popover="manual"`) and position it with floating-ui's fixed strategy — no portal, no DOM moves, styles stay in the shadow root | 0022 |
 | Light-DOM prose and tables | `art-table` and `art-typography` render in the light DOM (`shadow: false`) with tag-scoped stylesheets, because `::slotted()` cannot reach nested rows, cells or list items; the Tailwind plugin skips the shadow reset for them (`/* light-dom */` marker) | 0021 |
 | Extended tier | `@aranghat/extended` (Tier 7) holds patterns with no shadcn counterpart, peering only on tokens / primitives / base, so tiers 2–5 stay a literal mirror of shadcn and N2 stays checkable | 0024 |
+| Workspace Switcher's tier | `navigation` (Tier 4), not `extended`: it reads the sidebar's internal collapse context and reuses the tier's menu-list helpers, neither of which `extended` can peer on. Tier 4 admits a non-shadcn name when it depends on this tier's internals; `house: true` keeps the N2 diff mechanical | 0025 |
+| Button's size budget | 3.25 kB, not the 3 kB tier-2 atom budget: Button renders both `<button>` and `<a>`, carries the loading spinner inline and adopts five ARIA attributes off the host. Recorded as `budgetKb` on its catalog entry, so `.size-limit.json` stays generated | 0026 |
 | Server-side rendering | One Node hydrate app compiled from every tier's sources (`@aranghat/hydrate`) — a per-tier app cannot reach elements inside another tier's shadow root; the client that adopts server-rendered shadow roots is a second build published under the `artui-ssr` export condition, so the default client stays lean | 0023 |
 
 **Also resolved:** versioning is fixed/lockstep across all `@aranghat/*` packages (§2).

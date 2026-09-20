@@ -38,6 +38,20 @@ describe('createRovingTabindex', () => {
     r.destroy();
   });
 
+  it('skips disabled items toward the key: End lands on the last enabled item, Home on the first', () => {
+    document.body.innerHTML = `<div id="bar"><button disabled>0</button><button>1</button><button>2</button><button disabled>3</button></div>`;
+    const bar = document.getElementById('bar') as HTMLElement;
+    const items = () => Array.from(bar.querySelectorAll('button')) as HTMLButtonElement[];
+    const r = createRovingTabindex(bar, { getItems: items, isDisabled: (item) => (item as HTMLButtonElement).disabled, initialIndex: 1 });
+    key(bar, 'End');
+    expect(document.activeElement).toBe(items()[2]);
+    key(bar, 'Home');
+    expect(document.activeElement).toBe(items()[1]);
+    key(bar, 'ArrowLeft'); // wraps past the disabled first and last items
+    expect(document.activeElement).toBe(items()[2]);
+    r.destroy();
+  });
+
   it('adopts a clicked item as active', () => {
     const { bar, items } = toolbar();
     const r = createRovingTabindex(bar, { getItems: items });

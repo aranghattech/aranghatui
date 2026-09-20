@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  outline: none;
+}
+:host([hidden]) {
+  display: none;
+}
+.item {
+  box-sizing: border-box;
+  color: inherit;
+}
+/* Focus (on the host) is the highlight; pointer hover moves focus too — as in `art-menu-item`. */
+:host(:focus) .item {
+  background: var(--art-color-bg-accent);
+}
+:host([disabled]) .item {
+  pointer-events: none;
+  opacity: 50%;
+}
+/* The logo tile: one size, one radius, one border — the trigger's tile is the same recipe. */
+.logo {
+  width: var(--art-space-6);
+  height: var(--art-space-6);
+  border-radius: var(--art-radius-sm);
+  background: var(--art-color-bg-muted);
+  color: var(--art-color-fg-default);
+}
+::slotted(svg),
+::slotted(art-icon) {
+  width: var(--art-size-icon-sm);
+  height: var(--art-size-icon-sm);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+::slotted(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.plan {
+  font-size: var(--art-font-size-xs);
+  line-height: var(--art-font-line-height-xs);
+  color: var(--art-color-fg-muted);
+}
+.shortcut {
+  font-size: var(--art-font-size-xs);
+  letter-spacing: var(--art-font-tracking-wide);
+  color: var(--art-color-fg-muted);
+}
+.check {
+  color: var(--art-color-fg-muted);
+}

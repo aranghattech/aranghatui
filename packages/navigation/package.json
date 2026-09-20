@@ -169,6 +169,16 @@
       "artui-ssr": "./dist/components-ssr/art-tree-view.js",
       "import": "./dist/components/art-tree-view.js"
     },
+    "./workspace-switcher": {
+      "types": "./dist/components/art-workspace-switcher.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-workspace-switcher.js",
+      "import": "./dist/components/art-workspace-switcher.js"
+    },
+    "./workspace-switcher-item": {
+      "types": "./dist/components/art-workspace-switcher-item.d.ts",
+      "artui-ssr": "./dist/components-ssr/art-workspace-switcher-item.js",
+      "import": "./dist/components/art-workspace-switcher-item.js"
+    },
     "./docs.json": "./dist/docs.json",
     "./package.json": "./package.json"
   },
