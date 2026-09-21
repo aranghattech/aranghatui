@@ -1,5 +1,16 @@
 # @aranghat/base
 
+## 1.0.2
+
+### Patch Changes
+
+- f08b9b5: Button and Toggle move `aria-keyshortcuts` from the host onto their native button, so the shortcut is announced with the focused control. Toggle does the same for `aria-description`, which Tooltip sets on its trigger. Button's forwarding of `aria-expanded`, `aria-haspopup` and `aria-description` works again: the values were dropped, so popover and dropdown triggers built on Button lost their expanded state.
+- Updated dependencies [5eadeca]
+- Updated dependencies [88272be]
+  - @aranghat/primitives@1.0.2
+  - @aranghat/icons@1.0.2
+  - @aranghat/tokens@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @aranghat/primitives
 
+## 1.0.2
+
+### Patch Changes
+
+- 5eadeca: Roving tabindex skips disabled items toward the key pressed: `End` lands on the last enabled item and `Home` on the first. `End` used to search forward from a disabled last item and wrap around to the start.
+- 88272be: Hover intent opens on keyboard focus of a control inside a shadow host. It checked `:focus-visible` on the retargeted event target; a delegates-focus host such as Button or Toggle never matches it, so a Tooltip whose trigger is a Button or a Toggle did not open from the keyboard.
+- @aranghat/tokens@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

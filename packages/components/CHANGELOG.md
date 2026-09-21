@@ -1,5 +1,16 @@
 # @aranghat/components
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [f08b9b5]
+- Updated dependencies [5eadeca]
+- Updated dependencies [88272be]
+  - @aranghat/base@1.0.2
+  - @aranghat/primitives@1.0.2
+  - @aranghat/tokens@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @aranghat/base-angular
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [f08b9b5]
+  - @aranghat/base@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
